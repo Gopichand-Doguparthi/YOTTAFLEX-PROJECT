@@ -1,0 +1,114 @@
+/* ============================================================
+   Compensation Equity Dashboard – Custom Styles
+   ============================================================ */
+
+/* ── Global typography ── */
+html, body, [class*="css"] {
+    font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ── Sidebar ── */
+[data-testid="stSidebar"] {
+    background-color: #1a1f36;
+    color: #e2e8f0;
+}
+
+[data-testid="stSidebar"] .stButton > button {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    color: #cbd5e1;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    margin-bottom: 2px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: #2d3561;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* ── Metric cards ── */
+[data-testid="metric-container"] {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+[data-testid="metric-container"]:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* ── DataFrames / tables ── */
+[data-testid="stDataFrame"] {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+/* ── Expander headers ── */
+.streamlit-expanderHeader {
+    font-weight: 600;
+    color: #1e293b;
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    transition: background-color 0.15s ease;
+}
+
+.streamlit-expanderHeader:hover {
+    background-color: #e2e8f0;
+}
+
+/* ── Primary buttons ── */
+.stButton > button[kind="primary"] {
+    background-color: #4f46e5;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 1.1rem;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background-color: #4338ca;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+}
+
+/* ── Tabs ── */
+button[data-baseweb="tab"] {
+    border-radius: 6px 6px 0 0;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+button[data-baseweb="tab"]:hover {
+    color: #4f46e5;
+}
+
+/* ── Alert / info boxes ── */
+[data-testid="stAlert"] {
+    border-radius: 8px;
+}
+
+/* ── Scrollbar (webkit) ── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
