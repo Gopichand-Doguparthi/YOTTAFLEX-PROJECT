@@ -65,7 +65,7 @@ class SyntheticDataGenerator:
             self.employee_count = 5000
             self.anomalies_count = 25
         else:
-            self.employee_count = 5000
+            self.employee_count = 100
             self.anomalies_count = 3
 
     def generate_all(self) -> Dict[str, Any]:
@@ -87,11 +87,16 @@ class SyntheticDataGenerator:
         self.np_rng = np.random.default_rng(self.seed)
 
         # 1. Master records
+        
+        # 1. Master records
         locations = [dict(loc) for loc in LOCATIONS_SEED]
         levels = [dict(lvl) for lvl in LEVELS_SEED]
-        roles = [dict(r) for r in ROLES_SEED]
+        # Keep only IT‑industry roles (Engineering, Data & AI, Product, Design)
+        ALLOWED_JOB_FAMILIES = {"Engineering", "Data & AI", "Product", "Design"}
+        roles = [dict(r) for r in ROLES_SEED if r["job_family"] in ALLOWED_JOB_FAMILIES]
         exchange_rates = [dict(fx) for fx in EXCHANGE_RATES_SEED]
         role_rationales = [dict(rcr) for rcr in ROLE_COMPARABILITY_SEED]
+
 
         # 2. Compensation bands (2024, 2025, 2026)
         compensation_bands = self._generate_compensation_bands(roles, levels, locations)

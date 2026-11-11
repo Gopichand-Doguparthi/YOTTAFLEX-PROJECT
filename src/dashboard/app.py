@@ -4,6 +4,71 @@ Hosts 13 interactive sections covering executive overviews, analytical deep dive
 edge case diagnostics, proposal workflows, audit trails, and ground-truth evaluations.
 """
 import streamlit as st
+
+# Set page config for a professional look
+st.set_page_config(page_title="Compensation Equity Dashboard", layout="wide", initial_sidebar_state="expanded")
+
+# Load custom CSS for hover effects and styling
+def load_css():
+    with open("src/dashboard/static/custom.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css()
+
+# Main heading in the sidebar
+st.sidebar.title("Compensation Equity Dashboard")
+
+# Expandable sections (grouped)
+with st.sidebar.expander("Executive Overview", expanded=True):
+    st.sidebar.button("Overview")
+
+with st.sidebar.expander("Employee Views", expanded=False):
+    st.sidebar.button("Employee Analytics")
+    st.sidebar.button("Comparable Groups")
+
+with st.sidebar.expander("Compensation Views", expanded=False):
+    st.sidebar.button("Band Analysis")
+    st.sidebar.button("Comp‑aa‑Ratio")
+    st.sidebar.button("Within‑Band")
+
+with st.sidebar.expander("Disparity & Proposals", expanded=False):
+    st.sidebar.button("Disparity Detection")
+    st.sidebar.button("Proposals")
+    st.sidebar.button("Approval History")
+
+with st.sidebar.expander("Validation & Evaluation", expanded=False):
+    st.sidebar.button("Validation")
+    st.sidebar.button("Evaluation")
+
+# Main page placeholder – actual view rendering will be handled downstream
+st.title("Compensation Equity & Disparity Analysis System")
+
+# The rest of the app imports the view modules as before
+from src.dashboard import views
+
+# Simple routing based on a query param (for demo purposes)
+view = st.experimental_get_query_params().get("view", ["overview"])[0]
+if view == "overview":
+    views.executive_overview.render()
+elif view == "employee":
+    views.employee_analytics.render()
+elif view == "band":
+    views.band_analysis.render()
+elif view == "compa":
+    views.compaa_ratio_view.render()
+elif view == "within":
+    views.within_band_view.render()
+elif view == "disparity":
+    views.disparity_view.render()
+elif view == "proposals":
+    views.proposals_view.render()
+elif view == "validation":
+    views.validation_view.render()
+elif view == "evaluation":
+    views.evaluation_view.render()
+else:
+    st.write("Select a view from the sidebar.")
+
 import sys
 from pathlib import Path
 
