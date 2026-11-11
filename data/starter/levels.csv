@@ -1,0 +1,7 @@
+level_id,level_code,level_name,rank
+LVL-L1,L1,Associate,1
+LVL-L2,L2,Mid-Level,2
+LVL-L3,L3,Senior,3
+LVL-L4,L4,Staff / Lead,4
+LVL-L5,L5,Principal,5
+LVL-L6,L6,Director / Executive,6

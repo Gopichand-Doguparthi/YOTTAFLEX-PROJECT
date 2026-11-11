@@ -1,0 +1,58 @@
+[
+  {
+    "location_id": "LOC-NYC",
+    "location_name": "New York City, USA",
+    "country": "USA",
+    "currency": "USD",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 1.0
+  },
+  {
+    "location_id": "LOC-SFO",
+    "location_name": "San Francisco, USA",
+    "country": "USA",
+    "currency": "USD",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 1.15
+  },
+  {
+    "location_id": "LOC-LON",
+    "location_name": "London, UK",
+    "country": "GBR",
+    "currency": "GBP",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 0.95
+  },
+  {
+    "location_id": "LOC-BER",
+    "location_name": "Berlin, Germany",
+    "country": "DEU",
+    "currency": "EUR",
+    "geo_tier": "Tier-2",
+    "cost_of_living_index": 0.8
+  },
+  {
+    "location_id": "LOC-BLR",
+    "location_name": "Bengaluru, India",
+    "country": "IND",
+    "currency": "INR",
+    "geo_tier": "Tier-3",
+    "cost_of_living_index": 0.35
+  },
+  {
+    "location_id": "LOC-TYO",
+    "location_name": "Tokyo, Japan",
+    "country": "JPN",
+    "currency": "JPY",
+    "geo_tier": "Tier-2",
+    "cost_of_living_index": 0.85
+  },
+  {
+    "location_id": "LOC-SIN",
+    "location_name": "Singapore",
+    "country": "SGP",
+    "currency": "SGD",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 1.05
+  }
+]

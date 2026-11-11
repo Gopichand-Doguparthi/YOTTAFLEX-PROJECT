@@ -1,0 +1,38 @@
+[
+  {
+    "mapping_id": "RCR-SWE-FSE",
+    "role_id_a": "ROLE-SWE",
+    "role_id_b": "ROLE-FSE",
+    "is_comparable": true,
+    "documented_rationale": "Equivalent core software engineering competencies, architecture design requirements, and market salary bands.",
+    "approved_by": "Compensation Committee",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "mapping_id": "RCR-DS-MLE",
+    "role_id_a": "ROLE-DS",
+    "role_id_b": "ROLE-MLE",
+    "is_comparable": true,
+    "documented_rationale": "Overlapping machine learning foundations, algorithms, and computational data science requirements.",
+    "approved_by": "Compensation Committee",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "mapping_id": "RCR-PM-TPM",
+    "role_id_a": "ROLE-PM",
+    "role_id_b": "ROLE-TPM",
+    "is_comparable": true,
+    "documented_rationale": "Shared technical leadership, roadmap execution, and product lifecycle responsibilities.",
+    "approved_by": "Compensation Committee",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "mapping_id": "RCR-SWE-FAC",
+    "role_id_a": "ROLE-SWE",
+    "role_id_b": "ROLE-FAC",
+    "is_comparable": false,
+    "documented_rationale": "Incomparable roles: Software Engineering and Facilities Coordinator require fundamentally distinct skills and labor markets.",
+    "approved_by": "HR Compliance",
+    "effective_date": "2024-01-01"
+  }
+]

@@ -1,0 +1,212 @@
+[
+  {
+    "role_id": "ROLE-SWE",
+    "role_title": "Software Engineer",
+    "job_family": "Engineering",
+    "job_function": "Backend & Core Systems"
+  },
+  {
+    "role_id": "ROLE-FSE",
+    "role_title": "Full Stack Engineer",
+    "job_family": "Engineering",
+    "job_function": "Web Applications"
+  },
+  {
+    "role_id": "ROLE-DEV",
+    "role_title": "DevOps Engineer",
+    "job_family": "Engineering",
+    "job_function": "Cloud Infrastructure"
+  },
+  {
+    "role_id": "ROLE-QAE",
+    "role_title": "QA Automation Engineer",
+    "job_family": "Engineering",
+    "job_function": "Quality Assurance"
+  },
+  {
+    "role_id": "ROLE-SEC",
+    "role_title": "Security Engineer",
+    "job_family": "Engineering",
+    "job_function": "Cybersecurity"
+  },
+  {
+    "role_id": "ROLE-SYS",
+    "role_title": "Systems Architect",
+    "job_family": "Engineering",
+    "job_function": "Enterprise Architecture"
+  },
+  {
+    "role_id": "ROLE-DS",
+    "role_title": "Data Scientist",
+    "job_family": "Data & AI",
+    "job_function": "Statistical Modeling"
+  },
+  {
+    "role_id": "ROLE-MLE",
+    "role_title": "Machine Learning Engineer",
+    "job_family": "Data & AI",
+    "job_function": "ML Platforms"
+  },
+  {
+    "role_id": "ROLE-DE",
+    "role_title": "Data Engineer",
+    "job_family": "Data & AI",
+    "job_function": "Data Pipelines"
+  },
+  {
+    "role_id": "ROLE-BI",
+    "role_title": "Business Intelligence Analyst",
+    "job_family": "Data & AI",
+    "job_function": "Analytics & BI"
+  },
+  {
+    "role_id": "ROLE-RES",
+    "role_title": "AI Research Scientist",
+    "job_family": "Data & AI",
+    "job_function": "Deep Learning Research"
+  },
+  {
+    "role_id": "ROLE-PM",
+    "role_title": "Product Manager",
+    "job_family": "Product",
+    "job_function": "Product Strategy"
+  },
+  {
+    "role_id": "ROLE-TPM",
+    "role_title": "Technical Program Manager",
+    "job_family": "Product",
+    "job_function": "Program Execution"
+  },
+  {
+    "role_id": "ROLE-PO",
+    "role_title": "Product Owner",
+    "job_family": "Product",
+    "job_function": "Agile Delivery"
+  },
+  {
+    "role_id": "ROLE-GPM",
+    "role_title": "Growth Product Manager",
+    "job_family": "Product",
+    "job_function": "User Acquisition"
+  },
+  {
+    "role_id": "ROLE-PD",
+    "role_title": "Product Designer",
+    "job_family": "Design",
+    "job_function": "UI/UX Design"
+  },
+  {
+    "role_id": "ROLE-UXR",
+    "role_title": "UX Researcher",
+    "job_family": "Design",
+    "job_function": "User Insights"
+  },
+  {
+    "role_id": "ROLE-CD",
+    "role_title": "Content Designer",
+    "job_family": "Design",
+    "job_function": "UX Writing"
+  },
+  {
+    "role_id": "ROLE-VIS",
+    "role_title": "Visual Designer",
+    "job_family": "Design",
+    "job_function": "Brand & Graphic"
+  },
+  {
+    "role_id": "ROLE-OPS",
+    "role_title": "Operations Analyst",
+    "job_family": "Operations",
+    "job_function": "Business Operations"
+  },
+  {
+    "role_id": "ROLE-CSM",
+    "role_title": "Customer Success Manager",
+    "job_family": "Operations",
+    "job_function": "Client Retention"
+  },
+  {
+    "role_id": "ROLE-SUP",
+    "role_title": "Technical Support Specialist",
+    "job_family": "Operations",
+    "job_function": "Tier-2 Support"
+  },
+  {
+    "role_id": "ROLE-LOG",
+    "role_title": "Logistics Coordinator",
+    "job_family": "Operations",
+    "job_function": "Supply Chain"
+  },
+  {
+    "role_id": "ROLE-FAC",
+    "role_title": "Facilities Coordinator",
+    "job_family": "Operations",
+    "job_function": "Workplace Facilities"
+  },
+  {
+    "role_id": "ROLE-FIN",
+    "role_title": "Financial Analyst",
+    "job_family": "Finance",
+    "job_function": "Corporate FP&A"
+  },
+  {
+    "role_id": "ROLE-ACC",
+    "role_title": "Senior Accountant",
+    "job_family": "Finance",
+    "job_function": "General Ledger"
+  },
+  {
+    "role_id": "ROLE-TRX",
+    "role_title": "Treasury Analyst",
+    "job_family": "Finance",
+    "job_function": "Cash Management"
+  },
+  {
+    "role_id": "ROLE-TAX",
+    "role_title": "Tax Specialist",
+    "job_family": "Finance",
+    "job_function": "Corporate Tax"
+  },
+  {
+    "role_id": "ROLE-AUD",
+    "role_title": "Internal Auditor",
+    "job_family": "Finance",
+    "job_function": "Financial Audit"
+  },
+  {
+    "role_id": "ROLE-REC",
+    "role_title": "Talent Acquisition Partner",
+    "job_family": "Human Resources",
+    "job_function": "Recruiting"
+  },
+  {
+    "role_id": "ROLE-HRP",
+    "role_title": "HR Business Partner",
+    "job_family": "Human Resources",
+    "job_function": "Talent Strategy"
+  },
+  {
+    "role_id": "ROLE-CMP",
+    "role_title": "Compensation & Benefits Analyst",
+    "job_family": "Human Resources",
+    "job_function": "Total Rewards"
+  },
+  {
+    "role_id": "ROLE-LND",
+    "role_title": "Learning & Development Specialist",
+    "job_family": "Human Resources",
+    "job_function": "People Development"
+  },
+  {
+    "role_id": "ROLE-PEO",
+    "role_title": "People Operations Generalist",
+    "job_family": "Human Resources",
+    "job_function": "Employee Services"
+  },
+  {
+    "role_id": "ROLE-ER",
+    "role_title": "Employee Relations Specialist",
+    "job_family": "Human Resources",
+    "job_function": "Workplace Policy"
+  }
+]

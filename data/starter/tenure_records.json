@@ -1,0 +1,902 @@
+[
+  {
+    "tenure_id": "TEN-EMP-000001",
+    "employee_id": "EMP-000001",
+    "company_start_date": "2024-03-27",
+    "role_start_date": "2024-03-27",
+    "years_of_experience_total": 6.77,
+    "tenure_in_company_years": 1.77,
+    "tenure_in_role_years": 1.22
+  },
+  {
+    "tenure_id": "TEN-EMP-000002",
+    "employee_id": "EMP-000002",
+    "company_start_date": "2018-06-17",
+    "role_start_date": "2018-06-17",
+    "years_of_experience_total": 22.54,
+    "tenure_in_company_years": 7.54,
+    "tenure_in_role_years": 6.77
+  },
+  {
+    "tenure_id": "TEN-EMP-000003",
+    "employee_id": "EMP-000003",
+    "company_start_date": "2020-09-12",
+    "role_start_date": "2020-09-12",
+    "years_of_experience_total": 15.3,
+    "tenure_in_company_years": 5.3,
+    "tenure_in_role_years": 5.01
+  },
+  {
+    "tenure_id": "TEN-EMP-000004",
+    "employee_id": "EMP-000004",
+    "company_start_date": "2021-07-23",
+    "role_start_date": "2021-07-23",
+    "years_of_experience_total": 18.44,
+    "tenure_in_company_years": 4.44,
+    "tenure_in_role_years": 2.99
+  },
+  {
+    "tenure_id": "TEN-EMP-000005",
+    "employee_id": "EMP-000005",
+    "company_start_date": "2016-03-19",
+    "role_start_date": "2016-03-19",
+    "years_of_experience_total": 10.79,
+    "tenure_in_company_years": 9.79,
+    "tenure_in_role_years": 7.09
+  },
+  {
+    "tenure_id": "TEN-EMP-000006",
+    "employee_id": "EMP-000006",
+    "company_start_date": "2021-11-25",
+    "role_start_date": "2021-11-25",
+    "years_of_experience_total": 15.1,
+    "tenure_in_company_years": 4.1,
+    "tenure_in_role_years": 2.54
+  },
+  {
+    "tenure_id": "TEN-EMP-000007",
+    "employee_id": "EMP-000007",
+    "company_start_date": "2016-05-31",
+    "role_start_date": "2016-05-31",
+    "years_of_experience_total": 19.59,
+    "tenure_in_company_years": 9.59,
+    "tenure_in_role_years": 6.68
+  },
+  {
+    "tenure_id": "TEN-EMP-000008",
+    "employee_id": "EMP-000008",
+    "company_start_date": "2018-05-03",
+    "role_start_date": "2018-05-03",
+    "years_of_experience_total": 13.67,
+    "tenure_in_company_years": 7.67,
+    "tenure_in_role_years": 5.17
+  },
+  {
+    "tenure_id": "TEN-EMP-000009",
+    "employee_id": "EMP-000009",
+    "company_start_date": "2020-06-15",
+    "role_start_date": "2020-06-15",
+    "years_of_experience_total": 5.55,
+    "tenure_in_company_years": 5.55,
+    "tenure_in_role_years": 5.26
+  },
+  {
+    "tenure_id": "TEN-EMP-000010",
+    "employee_id": "EMP-000010",
+    "company_start_date": "2015-06-19",
+    "role_start_date": "2015-06-19",
+    "years_of_experience_total": 20.54,
+    "tenure_in_company_years": 10.54,
+    "tenure_in_role_years": 7.24
+  },
+  {
+    "tenure_id": "TEN-EMP-000011",
+    "employee_id": "EMP-000011",
+    "company_start_date": "2024-12-03",
+    "role_start_date": "2024-12-03",
+    "years_of_experience_total": 6.08,
+    "tenure_in_company_years": 1.08,
+    "tenure_in_role_years": 1.0
+  },
+  {
+    "tenure_id": "TEN-EMP-000012",
+    "employee_id": "EMP-000012",
+    "company_start_date": "2019-02-23",
+    "role_start_date": "2019-02-23",
+    "years_of_experience_total": 21.86,
+    "tenure_in_company_years": 6.86,
+    "tenure_in_role_years": 4.53
+  },
+  {
+    "tenure_id": "TEN-EMP-000013",
+    "employee_id": "EMP-000013",
+    "company_start_date": "2018-04-13",
+    "role_start_date": "2018-04-13",
+    "years_of_experience_total": 17.72,
+    "tenure_in_company_years": 7.72,
+    "tenure_in_role_years": 7.15
+  },
+  {
+    "tenure_id": "TEN-EMP-000014",
+    "employee_id": "EMP-000014",
+    "company_start_date": "2018-02-24",
+    "role_start_date": "2018-02-24",
+    "years_of_experience_total": 18.85,
+    "tenure_in_company_years": 7.85,
+    "tenure_in_role_years": 7.69
+  },
+  {
+    "tenure_id": "TEN-EMP-000015",
+    "employee_id": "EMP-000015",
+    "company_start_date": "2018-07-19",
+    "role_start_date": "2018-07-19",
+    "years_of_experience_total": 14.46,
+    "tenure_in_company_years": 7.46,
+    "tenure_in_role_years": 4.88
+  },
+  {
+    "tenure_id": "TEN-EMP-000016",
+    "employee_id": "EMP-000016",
+    "company_start_date": "2018-02-21",
+    "role_start_date": "2018-02-21",
+    "years_of_experience_total": 21.86,
+    "tenure_in_company_years": 7.86,
+    "tenure_in_role_years": 7.09
+  },
+  {
+    "tenure_id": "TEN-EMP-000017",
+    "employee_id": "EMP-000017",
+    "company_start_date": "2021-03-23",
+    "role_start_date": "2021-03-23",
+    "years_of_experience_total": 17.78,
+    "tenure_in_company_years": 4.78,
+    "tenure_in_role_years": 2.98
+  },
+  {
+    "tenure_id": "TEN-EMP-000018",
+    "employee_id": "EMP-000018",
+    "company_start_date": "2020-03-23",
+    "role_start_date": "2020-03-23",
+    "years_of_experience_total": 11.78,
+    "tenure_in_company_years": 5.78,
+    "tenure_in_role_years": 5.49
+  },
+  {
+    "tenure_id": "TEN-EMP-000019",
+    "employee_id": "EMP-000019",
+    "company_start_date": "2024-08-21",
+    "role_start_date": "2024-08-21",
+    "years_of_experience_total": 6.36,
+    "tenure_in_company_years": 1.36,
+    "tenure_in_role_years": 1.24
+  },
+  {
+    "tenure_id": "TEN-EMP-000020",
+    "employee_id": "EMP-000020",
+    "company_start_date": "2024-05-10",
+    "role_start_date": "2024-05-10",
+    "years_of_experience_total": 11.65,
+    "tenure_in_company_years": 1.65,
+    "tenure_in_role_years": 1.21
+  },
+  {
+    "tenure_id": "TEN-EMP-000021",
+    "employee_id": "EMP-000021",
+    "company_start_date": "2021-04-18",
+    "role_start_date": "2021-04-18",
+    "years_of_experience_total": 13.71,
+    "tenure_in_company_years": 4.71,
+    "tenure_in_role_years": 3.96
+  },
+  {
+    "tenure_id": "TEN-EMP-000022",
+    "employee_id": "EMP-000022",
+    "company_start_date": "2019-03-02",
+    "role_start_date": "2019-03-02",
+    "years_of_experience_total": 7.84,
+    "tenure_in_company_years": 6.84,
+    "tenure_in_role_years": 5.01
+  },
+  {
+    "tenure_id": "TEN-EMP-000023",
+    "employee_id": "EMP-000023",
+    "company_start_date": "2021-10-23",
+    "role_start_date": "2021-10-23",
+    "years_of_experience_total": 12.19,
+    "tenure_in_company_years": 4.19,
+    "tenure_in_role_years": 3.15
+  },
+  {
+    "tenure_id": "TEN-EMP-000024",
+    "employee_id": "EMP-000024",
+    "company_start_date": "2020-12-16",
+    "role_start_date": "2020-12-16",
+    "years_of_experience_total": 20.04,
+    "tenure_in_company_years": 5.04,
+    "tenure_in_role_years": 4.05
+  },
+  {
+    "tenure_id": "TEN-EMP-000025",
+    "employee_id": "EMP-000025",
+    "company_start_date": "2017-04-06",
+    "role_start_date": "2017-04-06",
+    "years_of_experience_total": 13.74,
+    "tenure_in_company_years": 8.74,
+    "tenure_in_role_years": 7.12
+  },
+  {
+    "tenure_id": "TEN-EMP-000026",
+    "employee_id": "EMP-000026",
+    "company_start_date": "2024-11-29",
+    "role_start_date": "2024-11-29",
+    "years_of_experience_total": 14.09,
+    "tenure_in_company_years": 1.09,
+    "tenure_in_role_years": 0.85
+  },
+  {
+    "tenure_id": "TEN-EMP-000027",
+    "employee_id": "EMP-000027",
+    "company_start_date": "2021-10-21",
+    "role_start_date": "2021-10-21",
+    "years_of_experience_total": 12.2,
+    "tenure_in_company_years": 4.2,
+    "tenure_in_role_years": 3.7
+  },
+  {
+    "tenure_id": "TEN-EMP-000028",
+    "employee_id": "EMP-000028",
+    "company_start_date": "2020-10-17",
+    "role_start_date": "2020-10-17",
+    "years_of_experience_total": 20.21,
+    "tenure_in_company_years": 5.21,
+    "tenure_in_role_years": 3.56
+  },
+  {
+    "tenure_id": "TEN-EMP-000029",
+    "employee_id": "EMP-000029",
+    "company_start_date": "2020-05-11",
+    "role_start_date": "2020-05-11",
+    "years_of_experience_total": 10.64,
+    "tenure_in_company_years": 5.64,
+    "tenure_in_role_years": 4.35
+  },
+  {
+    "tenure_id": "TEN-EMP-000030",
+    "employee_id": "EMP-000030",
+    "company_start_date": "2021-02-22",
+    "role_start_date": "2021-02-22",
+    "years_of_experience_total": 5.86,
+    "tenure_in_company_years": 4.86,
+    "tenure_in_role_years": 3.59
+  },
+  {
+    "tenure_id": "TEN-EMP-000031",
+    "employee_id": "EMP-000031",
+    "company_start_date": "2019-06-30",
+    "role_start_date": "2019-06-30",
+    "years_of_experience_total": 15.51,
+    "tenure_in_company_years": 6.51,
+    "tenure_in_role_years": 4.75
+  },
+  {
+    "tenure_id": "TEN-EMP-000032",
+    "employee_id": "EMP-000032",
+    "company_start_date": "2015-11-08",
+    "role_start_date": "2015-11-08",
+    "years_of_experience_total": 24.15,
+    "tenure_in_company_years": 10.15,
+    "tenure_in_role_years": 7.54
+  },
+  {
+    "tenure_id": "TEN-EMP-000033",
+    "employee_id": "EMP-000033",
+    "company_start_date": "2022-05-28",
+    "role_start_date": "2022-05-28",
+    "years_of_experience_total": 18.6,
+    "tenure_in_company_years": 3.6,
+    "tenure_in_role_years": 3.19
+  },
+  {
+    "tenure_id": "TEN-EMP-000034",
+    "employee_id": "EMP-000034",
+    "company_start_date": "2018-01-25",
+    "role_start_date": "2018-01-25",
+    "years_of_experience_total": 9.93,
+    "tenure_in_company_years": 7.93,
+    "tenure_in_role_years": 7.01
+  },
+  {
+    "tenure_id": "TEN-EMP-000035",
+    "employee_id": "EMP-000035",
+    "company_start_date": "2017-09-15",
+    "role_start_date": "2017-09-15",
+    "years_of_experience_total": 23.3,
+    "tenure_in_company_years": 8.3,
+    "tenure_in_role_years": 7.74
+  },
+  {
+    "tenure_id": "TEN-EMP-000036",
+    "employee_id": "EMP-000036",
+    "company_start_date": "2022-09-24",
+    "role_start_date": "2022-09-24",
+    "years_of_experience_total": 9.27,
+    "tenure_in_company_years": 3.27,
+    "tenure_in_role_years": 2.95
+  },
+  {
+    "tenure_id": "TEN-EMP-000037",
+    "employee_id": "EMP-000037",
+    "company_start_date": "2022-11-02",
+    "role_start_date": "2022-11-02",
+    "years_of_experience_total": 7.16,
+    "tenure_in_company_years": 3.16,
+    "tenure_in_role_years": 2.36
+  },
+  {
+    "tenure_id": "TEN-EMP-000038",
+    "employee_id": "EMP-000038",
+    "company_start_date": "2022-09-01",
+    "role_start_date": "2022-09-01",
+    "years_of_experience_total": 12.33,
+    "tenure_in_company_years": 3.33,
+    "tenure_in_role_years": 2.07
+  },
+  {
+    "tenure_id": "TEN-EMP-000039",
+    "employee_id": "EMP-000039",
+    "company_start_date": "2024-03-28",
+    "role_start_date": "2024-03-28",
+    "years_of_experience_total": 9.76,
+    "tenure_in_company_years": 1.76,
+    "tenure_in_role_years": 1.71
+  },
+  {
+    "tenure_id": "TEN-EMP-000040",
+    "employee_id": "EMP-000040",
+    "company_start_date": "2021-09-15",
+    "role_start_date": "2021-09-15",
+    "years_of_experience_total": 14.3,
+    "tenure_in_company_years": 4.3,
+    "tenure_in_role_years": 3.23
+  },
+  {
+    "tenure_id": "TEN-EMP-000041",
+    "employee_id": "EMP-000041",
+    "company_start_date": "2023-11-08",
+    "role_start_date": "2023-11-08",
+    "years_of_experience_total": 15.15,
+    "tenure_in_company_years": 2.15,
+    "tenure_in_role_years": 1.42
+  },
+  {
+    "tenure_id": "TEN-EMP-000042",
+    "employee_id": "EMP-000042",
+    "company_start_date": "2023-01-08",
+    "role_start_date": "2023-01-08",
+    "years_of_experience_total": 13.98,
+    "tenure_in_company_years": 2.98,
+    "tenure_in_role_years": 1.95
+  },
+  {
+    "tenure_id": "TEN-EMP-000043",
+    "employee_id": "EMP-000043",
+    "company_start_date": "2021-09-25",
+    "role_start_date": "2021-09-25",
+    "years_of_experience_total": 12.27,
+    "tenure_in_company_years": 4.27,
+    "tenure_in_role_years": 2.91
+  },
+  {
+    "tenure_id": "TEN-EMP-000044",
+    "employee_id": "EMP-000044",
+    "company_start_date": "2017-11-28",
+    "role_start_date": "2017-11-28",
+    "years_of_experience_total": 13.09,
+    "tenure_in_company_years": 8.09,
+    "tenure_in_role_years": 7.6
+  },
+  {
+    "tenure_id": "TEN-EMP-000045",
+    "employee_id": "EMP-000045",
+    "company_start_date": "2023-10-26",
+    "role_start_date": "2023-10-26",
+    "years_of_experience_total": 6.18,
+    "tenure_in_company_years": 2.18,
+    "tenure_in_role_years": 1.49
+  },
+  {
+    "tenure_id": "TEN-EMP-000046",
+    "employee_id": "EMP-000046",
+    "company_start_date": "2018-05-11",
+    "role_start_date": "2018-05-11",
+    "years_of_experience_total": 16.64,
+    "tenure_in_company_years": 7.64,
+    "tenure_in_role_years": 7.6
+  },
+  {
+    "tenure_id": "TEN-EMP-000047",
+    "employee_id": "EMP-000047",
+    "company_start_date": "2024-11-08",
+    "role_start_date": "2024-11-08",
+    "years_of_experience_total": 7.15,
+    "tenure_in_company_years": 1.15,
+    "tenure_in_role_years": 0.9
+  },
+  {
+    "tenure_id": "TEN-EMP-000048",
+    "employee_id": "EMP-000048",
+    "company_start_date": "2019-02-03",
+    "role_start_date": "2019-02-03",
+    "years_of_experience_total": 7.91,
+    "tenure_in_company_years": 6.91,
+    "tenure_in_role_years": 6.62
+  },
+  {
+    "tenure_id": "TEN-EMP-000049",
+    "employee_id": "EMP-000049",
+    "company_start_date": "2018-02-10",
+    "role_start_date": "2018-02-10",
+    "years_of_experience_total": 21.89,
+    "tenure_in_company_years": 7.89,
+    "tenure_in_role_years": 7.59
+  },
+  {
+    "tenure_id": "TEN-EMP-000050",
+    "employee_id": "EMP-000050",
+    "company_start_date": "2016-01-18",
+    "role_start_date": "2016-01-18",
+    "years_of_experience_total": 21.95,
+    "tenure_in_company_years": 9.95,
+    "tenure_in_role_years": 6.73
+  },
+  {
+    "tenure_id": "TEN-EMP-000051",
+    "employee_id": "EMP-000051",
+    "company_start_date": "2024-11-06",
+    "role_start_date": "2024-11-06",
+    "years_of_experience_total": 16.15,
+    "tenure_in_company_years": 1.15,
+    "tenure_in_role_years": 0.84
+  },
+  {
+    "tenure_id": "TEN-EMP-000052",
+    "employee_id": "EMP-000052",
+    "company_start_date": "2018-09-27",
+    "role_start_date": "2018-09-27",
+    "years_of_experience_total": 11.26,
+    "tenure_in_company_years": 7.26,
+    "tenure_in_role_years": 7.18
+  },
+  {
+    "tenure_id": "TEN-EMP-000053",
+    "employee_id": "EMP-000053",
+    "company_start_date": "2017-07-20",
+    "role_start_date": "2017-07-20",
+    "years_of_experience_total": 9.45,
+    "tenure_in_company_years": 8.45,
+    "tenure_in_role_years": 5.36
+  },
+  {
+    "tenure_id": "TEN-EMP-000054",
+    "employee_id": "EMP-000054",
+    "company_start_date": "2018-06-22",
+    "role_start_date": "2018-06-22",
+    "years_of_experience_total": 9.53,
+    "tenure_in_company_years": 7.53,
+    "tenure_in_role_years": 4.53
+  },
+  {
+    "tenure_id": "TEN-EMP-000055",
+    "employee_id": "EMP-000055",
+    "company_start_date": "2016-05-10",
+    "role_start_date": "2016-05-10",
+    "years_of_experience_total": 22.65,
+    "tenure_in_company_years": 9.65,
+    "tenure_in_role_years": 8.25
+  },
+  {
+    "tenure_id": "TEN-EMP-000056",
+    "employee_id": "EMP-000056",
+    "company_start_date": "2017-07-14",
+    "role_start_date": "2017-07-14",
+    "years_of_experience_total": 23.47,
+    "tenure_in_company_years": 8.47,
+    "tenure_in_role_years": 7.19
+  },
+  {
+    "tenure_id": "TEN-EMP-000057",
+    "employee_id": "EMP-000057",
+    "company_start_date": "2021-05-24",
+    "role_start_date": "2021-05-24",
+    "years_of_experience_total": 13.61,
+    "tenure_in_company_years": 4.61,
+    "tenure_in_role_years": 3.17
+  },
+  {
+    "tenure_id": "TEN-EMP-000058",
+    "employee_id": "EMP-000058",
+    "company_start_date": "2022-10-06",
+    "role_start_date": "2022-10-06",
+    "years_of_experience_total": 4.24,
+    "tenure_in_company_years": 3.24,
+    "tenure_in_role_years": 2.91
+  },
+  {
+    "tenure_id": "TEN-EMP-000059",
+    "employee_id": "EMP-000059",
+    "company_start_date": "2019-03-22",
+    "role_start_date": "2019-03-22",
+    "years_of_experience_total": 21.78,
+    "tenure_in_company_years": 6.78,
+    "tenure_in_role_years": 4.13
+  },
+  {
+    "tenure_id": "TEN-EMP-000060",
+    "employee_id": "EMP-000060",
+    "company_start_date": "2016-09-21",
+    "role_start_date": "2016-09-21",
+    "years_of_experience_total": 22.28,
+    "tenure_in_company_years": 9.28,
+    "tenure_in_role_years": 7.91
+  },
+  {
+    "tenure_id": "TEN-EMP-000061",
+    "employee_id": "EMP-000061",
+    "company_start_date": "2022-07-26",
+    "role_start_date": "2022-07-26",
+    "years_of_experience_total": 13.44,
+    "tenure_in_company_years": 3.44,
+    "tenure_in_role_years": 2.24
+  },
+  {
+    "tenure_id": "TEN-EMP-000062",
+    "employee_id": "EMP-000062",
+    "company_start_date": "2019-02-01",
+    "role_start_date": "2019-02-01",
+    "years_of_experience_total": 10.92,
+    "tenure_in_company_years": 6.92,
+    "tenure_in_role_years": 4.23
+  },
+  {
+    "tenure_id": "TEN-EMP-000063",
+    "employee_id": "EMP-000063",
+    "company_start_date": "2021-11-22",
+    "role_start_date": "2021-11-22",
+    "years_of_experience_total": 9.11,
+    "tenure_in_company_years": 4.11,
+    "tenure_in_role_years": 2.77
+  },
+  {
+    "tenure_id": "TEN-EMP-000064",
+    "employee_id": "EMP-000064",
+    "company_start_date": "2018-03-24",
+    "role_start_date": "2018-03-24",
+    "years_of_experience_total": 20.78,
+    "tenure_in_company_years": 7.78,
+    "tenure_in_role_years": 6.66
+  },
+  {
+    "tenure_id": "TEN-EMP-000065",
+    "employee_id": "EMP-000065",
+    "company_start_date": "2016-07-19",
+    "role_start_date": "2016-07-19",
+    "years_of_experience_total": 13.45,
+    "tenure_in_company_years": 9.45,
+    "tenure_in_role_years": 9.35
+  },
+  {
+    "tenure_id": "TEN-EMP-000066",
+    "employee_id": "EMP-000066",
+    "company_start_date": "2020-09-28",
+    "role_start_date": "2020-09-28",
+    "years_of_experience_total": 9.26,
+    "tenure_in_company_years": 5.26,
+    "tenure_in_role_years": 4.63
+  },
+  {
+    "tenure_id": "TEN-EMP-000067",
+    "employee_id": "EMP-000067",
+    "company_start_date": "2020-08-08",
+    "role_start_date": "2020-08-08",
+    "years_of_experience_total": 16.4,
+    "tenure_in_company_years": 5.4,
+    "tenure_in_role_years": 4.62
+  },
+  {
+    "tenure_id": "TEN-EMP-000068",
+    "employee_id": "EMP-000068",
+    "company_start_date": "2020-06-19",
+    "role_start_date": "2020-06-19",
+    "years_of_experience_total": 20.54,
+    "tenure_in_company_years": 5.54,
+    "tenure_in_role_years": 3.46
+  },
+  {
+    "tenure_id": "TEN-EMP-000069",
+    "employee_id": "EMP-000069",
+    "company_start_date": "2018-07-24",
+    "role_start_date": "2018-07-24",
+    "years_of_experience_total": 13.44,
+    "tenure_in_company_years": 7.44,
+    "tenure_in_role_years": 6.64
+  },
+  {
+    "tenure_id": "TEN-EMP-000070",
+    "employee_id": "EMP-000070",
+    "company_start_date": "2017-07-11",
+    "role_start_date": "2017-07-11",
+    "years_of_experience_total": 20.48,
+    "tenure_in_company_years": 8.48,
+    "tenure_in_role_years": 7.24
+  },
+  {
+    "tenure_id": "TEN-EMP-000071",
+    "employee_id": "EMP-000071",
+    "company_start_date": "2019-06-25",
+    "role_start_date": "2019-06-25",
+    "years_of_experience_total": 10.52,
+    "tenure_in_company_years": 6.52,
+    "tenure_in_role_years": 4.5
+  },
+  {
+    "tenure_id": "TEN-EMP-000072",
+    "employee_id": "EMP-000072",
+    "company_start_date": "2024-11-19",
+    "role_start_date": "2024-11-19",
+    "years_of_experience_total": 3.12,
+    "tenure_in_company_years": 1.12,
+    "tenure_in_role_years": 0.89
+  },
+  {
+    "tenure_id": "TEN-EMP-000073",
+    "employee_id": "EMP-000073",
+    "company_start_date": "2023-05-09",
+    "role_start_date": "2023-05-09",
+    "years_of_experience_total": 14.65,
+    "tenure_in_company_years": 2.65,
+    "tenure_in_role_years": 1.93
+  },
+  {
+    "tenure_id": "TEN-EMP-000074",
+    "employee_id": "EMP-000074",
+    "company_start_date": "2020-11-19",
+    "role_start_date": "2020-11-19",
+    "years_of_experience_total": 18.12,
+    "tenure_in_company_years": 5.12,
+    "tenure_in_role_years": 4.28
+  },
+  {
+    "tenure_id": "TEN-EMP-000075",
+    "employee_id": "EMP-000075",
+    "company_start_date": "2023-11-16",
+    "role_start_date": "2023-11-16",
+    "years_of_experience_total": 7.13,
+    "tenure_in_company_years": 2.13,
+    "tenure_in_role_years": 1.9
+  },
+  {
+    "tenure_id": "TEN-EMP-000076",
+    "employee_id": "EMP-000076",
+    "company_start_date": "2019-07-16",
+    "role_start_date": "2019-07-16",
+    "years_of_experience_total": 13.46,
+    "tenure_in_company_years": 6.46,
+    "tenure_in_role_years": 5.22
+  },
+  {
+    "tenure_id": "TEN-EMP-000077",
+    "employee_id": "EMP-000077",
+    "company_start_date": "2016-11-19",
+    "role_start_date": "2016-11-19",
+    "years_of_experience_total": 24.12,
+    "tenure_in_company_years": 9.12,
+    "tenure_in_role_years": 8.79
+  },
+  {
+    "tenure_id": "TEN-EMP-000078",
+    "employee_id": "EMP-000078",
+    "company_start_date": "2023-08-01",
+    "role_start_date": "2023-08-01",
+    "years_of_experience_total": 3.42,
+    "tenure_in_company_years": 2.42,
+    "tenure_in_role_years": 1.54
+  },
+  {
+    "tenure_id": "TEN-EMP-000079",
+    "employee_id": "EMP-000079",
+    "company_start_date": "2017-06-23",
+    "role_start_date": "2017-06-23",
+    "years_of_experience_total": 17.53,
+    "tenure_in_company_years": 8.53,
+    "tenure_in_role_years": 8.32
+  },
+  {
+    "tenure_id": "TEN-EMP-000080",
+    "employee_id": "EMP-000080",
+    "company_start_date": "2019-03-14",
+    "role_start_date": "2019-03-14",
+    "years_of_experience_total": 9.8,
+    "tenure_in_company_years": 6.8,
+    "tenure_in_role_years": 5.1
+  },
+  {
+    "tenure_id": "TEN-EMP-000081",
+    "employee_id": "EMP-000081",
+    "company_start_date": "2018-01-01",
+    "role_start_date": "2018-01-01",
+    "years_of_experience_total": 10.0,
+    "tenure_in_company_years": 8.0,
+    "tenure_in_role_years": 6.48
+  },
+  {
+    "tenure_id": "TEN-EMP-000082",
+    "employee_id": "EMP-000082",
+    "company_start_date": "2024-12-09",
+    "role_start_date": "2024-12-09",
+    "years_of_experience_total": 5.06,
+    "tenure_in_company_years": 1.06,
+    "tenure_in_role_years": 1.02
+  },
+  {
+    "tenure_id": "TEN-EMP-000083",
+    "employee_id": "EMP-000083",
+    "company_start_date": "2023-06-25",
+    "role_start_date": "2023-06-25",
+    "years_of_experience_total": 8.52,
+    "tenure_in_company_years": 2.52,
+    "tenure_in_role_years": 1.94
+  },
+  {
+    "tenure_id": "TEN-EMP-000084",
+    "employee_id": "EMP-000084",
+    "company_start_date": "2022-09-04",
+    "role_start_date": "2022-09-04",
+    "years_of_experience_total": 5.33,
+    "tenure_in_company_years": 3.33,
+    "tenure_in_role_years": 2.39
+  },
+  {
+    "tenure_id": "TEN-EMP-000085",
+    "employee_id": "EMP-000085",
+    "company_start_date": "2023-07-28",
+    "role_start_date": "2023-07-28",
+    "years_of_experience_total": 13.43,
+    "tenure_in_company_years": 2.43,
+    "tenure_in_role_years": 2.36
+  },
+  {
+    "tenure_id": "TEN-EMP-000086",
+    "employee_id": "EMP-000086",
+    "company_start_date": "2024-04-29",
+    "role_start_date": "2024-04-29",
+    "years_of_experience_total": 8.68,
+    "tenure_in_company_years": 1.68,
+    "tenure_in_role_years": 1.32
+  },
+  {
+    "tenure_id": "TEN-EMP-000087",
+    "employee_id": "EMP-000087",
+    "company_start_date": "2022-09-21",
+    "role_start_date": "2022-09-21",
+    "years_of_experience_total": 12.28,
+    "tenure_in_company_years": 3.28,
+    "tenure_in_role_years": 2.63
+  },
+  {
+    "tenure_id": "TEN-EMP-000088",
+    "employee_id": "EMP-000088",
+    "company_start_date": "2019-01-09",
+    "role_start_date": "2019-01-09",
+    "years_of_experience_total": 17.98,
+    "tenure_in_company_years": 6.98,
+    "tenure_in_role_years": 4.46
+  },
+  {
+    "tenure_id": "TEN-EMP-000089",
+    "employee_id": "EMP-000089",
+    "company_start_date": "2018-10-06",
+    "role_start_date": "2018-10-06",
+    "years_of_experience_total": 10.24,
+    "tenure_in_company_years": 7.24,
+    "tenure_in_role_years": 6.94
+  },
+  {
+    "tenure_id": "TEN-EMP-000090",
+    "employee_id": "EMP-000090",
+    "company_start_date": "2018-04-23",
+    "role_start_date": "2018-04-23",
+    "years_of_experience_total": 11.69,
+    "tenure_in_company_years": 7.69,
+    "tenure_in_role_years": 6.29
+  },
+  {
+    "tenure_id": "TEN-EMP-000091",
+    "employee_id": "EMP-000091",
+    "company_start_date": "2019-05-05",
+    "role_start_date": "2019-05-05",
+    "years_of_experience_total": 8.66,
+    "tenure_in_company_years": 6.66,
+    "tenure_in_role_years": 4.63
+  },
+  {
+    "tenure_id": "TEN-EMP-000092",
+    "employee_id": "EMP-000092",
+    "company_start_date": "2017-03-05",
+    "role_start_date": "2017-03-05",
+    "years_of_experience_total": 22.83,
+    "tenure_in_company_years": 8.83,
+    "tenure_in_role_years": 8.69
+  },
+  {
+    "tenure_id": "TEN-EMP-000093",
+    "employee_id": "EMP-000093",
+    "company_start_date": "2016-06-07",
+    "role_start_date": "2016-06-07",
+    "years_of_experience_total": 21.57,
+    "tenure_in_company_years": 9.57,
+    "tenure_in_role_years": 8.4
+  },
+  {
+    "tenure_id": "TEN-EMP-000094",
+    "employee_id": "EMP-000094",
+    "company_start_date": "2017-07-17",
+    "role_start_date": "2017-07-17",
+    "years_of_experience_total": 21.46,
+    "tenure_in_company_years": 8.46,
+    "tenure_in_role_years": 6.29
+  },
+  {
+    "tenure_id": "TEN-EMP-000095",
+    "employee_id": "EMP-000095",
+    "company_start_date": "2019-03-26",
+    "role_start_date": "2019-03-26",
+    "years_of_experience_total": 12.77,
+    "tenure_in_company_years": 6.77,
+    "tenure_in_role_years": 4.15
+  },
+  {
+    "tenure_id": "TEN-EMP-000096",
+    "employee_id": "EMP-000096",
+    "company_start_date": "2017-11-29",
+    "role_start_date": "2017-11-29",
+    "years_of_experience_total": 23.09,
+    "tenure_in_company_years": 8.09,
+    "tenure_in_role_years": 8.0
+  },
+  {
+    "tenure_id": "TEN-EMP-000097",
+    "employee_id": "EMP-000097",
+    "company_start_date": "2016-12-23",
+    "role_start_date": "2016-12-23",
+    "years_of_experience_total": 18.02,
+    "tenure_in_company_years": 9.02,
+    "tenure_in_role_years": 8.18
+  },
+  {
+    "tenure_id": "TEN-EMP-000098",
+    "employee_id": "EMP-000098",
+    "company_start_date": "2019-09-10",
+    "role_start_date": "2019-09-10",
+    "years_of_experience_total": 9.31,
+    "tenure_in_company_years": 6.31,
+    "tenure_in_role_years": 5.8
+  },
+  {
+    "tenure_id": "TEN-EMP-000099",
+    "employee_id": "EMP-000099",
+    "company_start_date": "2015-06-23",
+    "role_start_date": "2015-06-23",
+    "years_of_experience_total": 15.53,
+    "tenure_in_company_years": 10.53,
+    "tenure_in_role_years": 8.64
+  },
+  {
+    "tenure_id": "TEN-EMP-000100",
+    "employee_id": "EMP-000100",
+    "company_start_date": "2021-12-31",
+    "role_start_date": "2021-12-31",
+    "years_of_experience_total": 19.0,
+    "tenure_in_company_years": 4.0,
+    "tenure_in_role_years": 3.44
+  }
+]

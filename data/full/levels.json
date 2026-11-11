@@ -1,0 +1,38 @@
+[
+  {
+    "level_id": "LVL-L1",
+    "level_code": "L1",
+    "level_name": "Associate",
+    "rank": 1
+  },
+  {
+    "level_id": "LVL-L2",
+    "level_code": "L2",
+    "level_name": "Mid-Level",
+    "rank": 2
+  },
+  {
+    "level_id": "LVL-L3",
+    "level_code": "L3",
+    "level_name": "Senior",
+    "rank": 3
+  },
+  {
+    "level_id": "LVL-L4",
+    "level_code": "L4",
+    "level_name": "Staff / Lead",
+    "rank": 4
+  },
+  {
+    "level_id": "LVL-L5",
+    "level_code": "L5",
+    "level_name": "Principal",
+    "rank": 5
+  },
+  {
+    "level_id": "LVL-L6",
+    "level_code": "L6",
+    "level_name": "Director / Executive",
+    "rank": 6
+  }
+]

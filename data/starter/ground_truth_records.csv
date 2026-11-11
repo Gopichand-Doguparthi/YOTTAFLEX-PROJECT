@@ -1,0 +1,115 @@
+ground_truth_id,record_type,record_id,issue_type,is_anomaly,expected_detection,root_cause_explanation,injected_at
+GT-000001,SALARY_RECORD,SAL-EMP-000001-2026-01,EXPIRED_BAND_COMPARISON,True,EXCEPTION_FLAGGED,Salary SAL-EMP-000001-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-VIS-LVL-L4-LOC-NYC-2024 (expired 2024-12-31).,2026-01-01T00:00:00
+GT-000002,SALARY_RECORD,SAL-EMP-000002-2026-01,EXPIRED_BAND_COMPARISON,True,EXCEPTION_FLAGGED,Salary SAL-EMP-000002-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L1-LOC-NYC-2024 (expired 2024-12-31).,2026-01-01T00:00:00
+GT-000003,SALARY_RECORD,SAL-EMP-000003-2026-01,EXPIRED_BAND_COMPARISON,True,EXCEPTION_FLAGGED,Salary SAL-EMP-000003-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-DS-LVL-L3-LOC-BLR-2024 (expired 2024-12-31).,2026-01-01T00:00:00
+GT-000004,SALARY_RECORD,SAL-EMP-000011-2026-01,FTE_IGNORED_IN_NORMALIZATION,True,EXCEPTION_FLAGGED,Part-time employee EMP-000011 (FTE 0.8) salary not divided by FTE; normalized salary left as 123800.0 USD instead of 154750.0 USD.,2026-01-01T00:00:00
+GT-000005,SALARY_RECORD,SAL-EMP-000022-2026-01,FTE_IGNORED_IN_NORMALIZATION,True,EXCEPTION_FLAGGED,Part-time employee EMP-000022 (FTE 0.6) salary not divided by FTE; normalized salary left as 114444.0 USD instead of 190740.0 USD.,2026-01-01T00:00:00
+GT-000006,SALARY_RECORD,SAL-EMP-000050-2026-01,FTE_IGNORED_IN_NORMALIZATION,True,EXCEPTION_FLAGGED,Part-time employee EMP-000050 (FTE 0.8) salary not divided by FTE; normalized salary left as 76900.0 USD instead of 96125.0 USD.,2026-01-01T00:00:00
+GT-000007,SALARY_RECORD,SAL-EMP-000003-2024-01,MISSING_CURRENCY_CONVERSION,True,EXCEPTION_FLAGGED,"Salary SAL-EMP-000003-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5754800.0 USD.",2026-01-01T00:00:00
+GT-000008,SALARY_RECORD,SAL-EMP-000003-2025-01,MISSING_CURRENCY_CONVERSION,True,EXCEPTION_FLAGGED,"Salary SAL-EMP-000003-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5024600.0 USD.",2026-01-01T00:00:00
+GT-000009,SALARY_RECORD,SAL-EMP-000003-2026-01,MISSING_CURRENCY_CONVERSION,True,EXCEPTION_FLAGGED,"Salary SAL-EMP-000003-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 6006600.0 USD.",2026-01-01T00:00:00
+GT-000010,SALARY_RECORD,SAL-EMP-000031-2026-99,UNAPPROVED_ADJUSTMENT_APPLIED,True,EXCEPTION_FLAGGED,Salary record SAL-EMP-000031-2026-99 applied equity correction of 55798.74 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.,2026-01-01T00:00:00
+GT-000011,SALARY_RECORD,SAL-EMP-000033-2026-99,UNAPPROVED_ADJUSTMENT_APPLIED,True,EXCEPTION_FLAGGED,Salary record SAL-EMP-000033-2026-99 applied equity correction of 209888.0 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.,2026-01-01T00:00:00
+GT-000012,COMPARABLE_GROUP,GRP-ROLE-SWE-ROLE-FAC,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-SWE and ROLE-FAC grouped together without documented comparability rationale.,2026-01-01T00:00:00
+GT-000013,COMPARABLE_GROUP,GRP-ROLE-DS-ROLE-LOG,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-DS and ROLE-LOG grouped together without documented comparability rationale.,2026-01-01T00:00:00
+GT-000014,COMPARABLE_GROUP,GRP-ROLE-PM-ROLE-REC,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-PM and ROLE-REC grouped together without documented comparability rationale.,2026-01-01T00:00:00
+GT-BASE-EMP-000001,EMPLOYEE,EMP-000001,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000002,EMPLOYEE,EMP-000002,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000003,EMPLOYEE,EMP-000003,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000004,EMPLOYEE,EMP-000004,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000005,EMPLOYEE,EMP-000005,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000006,EMPLOYEE,EMP-000006,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000007,EMPLOYEE,EMP-000007,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000008,EMPLOYEE,EMP-000008,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000009,EMPLOYEE,EMP-000009,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000010,EMPLOYEE,EMP-000010,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000011,EMPLOYEE,EMP-000011,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000012,EMPLOYEE,EMP-000012,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000013,EMPLOYEE,EMP-000013,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000014,EMPLOYEE,EMP-000014,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000015,EMPLOYEE,EMP-000015,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000016,EMPLOYEE,EMP-000016,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000017,EMPLOYEE,EMP-000017,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000018,EMPLOYEE,EMP-000018,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000019,EMPLOYEE,EMP-000019,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000020,EMPLOYEE,EMP-000020,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000021,EMPLOYEE,EMP-000021,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000022,EMPLOYEE,EMP-000022,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000023,EMPLOYEE,EMP-000023,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000024,EMPLOYEE,EMP-000024,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000025,EMPLOYEE,EMP-000025,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000026,EMPLOYEE,EMP-000026,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000027,EMPLOYEE,EMP-000027,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000028,EMPLOYEE,EMP-000028,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000029,EMPLOYEE,EMP-000029,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000030,EMPLOYEE,EMP-000030,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000031,EMPLOYEE,EMP-000031,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000032,EMPLOYEE,EMP-000032,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000033,EMPLOYEE,EMP-000033,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000034,EMPLOYEE,EMP-000034,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000035,EMPLOYEE,EMP-000035,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000036,EMPLOYEE,EMP-000036,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000037,EMPLOYEE,EMP-000037,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000038,EMPLOYEE,EMP-000038,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000039,EMPLOYEE,EMP-000039,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000040,EMPLOYEE,EMP-000040,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000041,EMPLOYEE,EMP-000041,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000042,EMPLOYEE,EMP-000042,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000043,EMPLOYEE,EMP-000043,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000044,EMPLOYEE,EMP-000044,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000045,EMPLOYEE,EMP-000045,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000046,EMPLOYEE,EMP-000046,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000047,EMPLOYEE,EMP-000047,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000048,EMPLOYEE,EMP-000048,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000049,EMPLOYEE,EMP-000049,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000050,EMPLOYEE,EMP-000050,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000051,EMPLOYEE,EMP-000051,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000052,EMPLOYEE,EMP-000052,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000053,EMPLOYEE,EMP-000053,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000054,EMPLOYEE,EMP-000054,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000055,EMPLOYEE,EMP-000055,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000056,EMPLOYEE,EMP-000056,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000057,EMPLOYEE,EMP-000057,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000058,EMPLOYEE,EMP-000058,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000059,EMPLOYEE,EMP-000059,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000060,EMPLOYEE,EMP-000060,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000061,EMPLOYEE,EMP-000061,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000062,EMPLOYEE,EMP-000062,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000063,EMPLOYEE,EMP-000063,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000064,EMPLOYEE,EMP-000064,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000065,EMPLOYEE,EMP-000065,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000066,EMPLOYEE,EMP-000066,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000067,EMPLOYEE,EMP-000067,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000068,EMPLOYEE,EMP-000068,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000069,EMPLOYEE,EMP-000069,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000070,EMPLOYEE,EMP-000070,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000071,EMPLOYEE,EMP-000071,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000072,EMPLOYEE,EMP-000072,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000073,EMPLOYEE,EMP-000073,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000074,EMPLOYEE,EMP-000074,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000075,EMPLOYEE,EMP-000075,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000076,EMPLOYEE,EMP-000076,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000077,EMPLOYEE,EMP-000077,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000078,EMPLOYEE,EMP-000078,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000079,EMPLOYEE,EMP-000079,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000080,EMPLOYEE,EMP-000080,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000081,EMPLOYEE,EMP-000081,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000082,EMPLOYEE,EMP-000082,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000083,EMPLOYEE,EMP-000083,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000084,EMPLOYEE,EMP-000084,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000085,EMPLOYEE,EMP-000085,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000086,EMPLOYEE,EMP-000086,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000087,EMPLOYEE,EMP-000087,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000088,EMPLOYEE,EMP-000088,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000089,EMPLOYEE,EMP-000089,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000090,EMPLOYEE,EMP-000090,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000091,EMPLOYEE,EMP-000091,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000092,EMPLOYEE,EMP-000092,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000093,EMPLOYEE,EMP-000093,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000094,EMPLOYEE,EMP-000094,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000095,EMPLOYEE,EMP-000095,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000096,EMPLOYEE,EMP-000096,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000097,EMPLOYEE,EMP-000097,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000098,EMPLOYEE,EMP-000098,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000099,EMPLOYEE,EMP-000099,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000100,EMPLOYEE,EMP-000100,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00

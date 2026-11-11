@@ -1,0 +1,36 @@
+role_id,role_title,job_family,job_function
+ROLE-SWE,Software Engineer,Engineering,Backend & Core Systems
+ROLE-FSE,Full Stack Engineer,Engineering,Web Applications
+ROLE-DEV,DevOps Engineer,Engineering,Cloud Infrastructure
+ROLE-QAE,QA Automation Engineer,Engineering,Quality Assurance
+ROLE-SEC,Security Engineer,Engineering,Cybersecurity
+ROLE-SYS,Systems Architect,Engineering,Enterprise Architecture
+ROLE-DS,Data Scientist,Data & AI,Statistical Modeling
+ROLE-MLE,Machine Learning Engineer,Data & AI,ML Platforms
+ROLE-DE,Data Engineer,Data & AI,Data Pipelines
+ROLE-BI,Business Intelligence Analyst,Data & AI,Analytics & BI
+ROLE-RES,AI Research Scientist,Data & AI,Deep Learning Research
+ROLE-PM,Product Manager,Product,Product Strategy
+ROLE-TPM,Technical Program Manager,Product,Program Execution
+ROLE-PO,Product Owner,Product,Agile Delivery
+ROLE-GPM,Growth Product Manager,Product,User Acquisition
+ROLE-PD,Product Designer,Design,UI/UX Design
+ROLE-UXR,UX Researcher,Design,User Insights
+ROLE-CD,Content Designer,Design,UX Writing
+ROLE-VIS,Visual Designer,Design,Brand & Graphic
+ROLE-OPS,Operations Analyst,Operations,Business Operations
+ROLE-CSM,Customer Success Manager,Operations,Client Retention
+ROLE-SUP,Technical Support Specialist,Operations,Tier-2 Support
+ROLE-LOG,Logistics Coordinator,Operations,Supply Chain
+ROLE-FAC,Facilities Coordinator,Operations,Workplace Facilities
+ROLE-FIN,Financial Analyst,Finance,Corporate FP&A
+ROLE-ACC,Senior Accountant,Finance,General Ledger
+ROLE-TRX,Treasury Analyst,Finance,Cash Management
+ROLE-TAX,Tax Specialist,Finance,Corporate Tax
+ROLE-AUD,Internal Auditor,Finance,Financial Audit
+ROLE-REC,Talent Acquisition Partner,Human Resources,Recruiting
+ROLE-HRP,HR Business Partner,Human Resources,Talent Strategy
+ROLE-CMP,Compensation & Benefits Analyst,Human Resources,Total Rewards
+ROLE-LND,Learning & Development Specialist,Human Resources,People Development
+ROLE-PEO,People Operations Generalist,Human Resources,Employee Services
+ROLE-ER,Employee Relations Specialist,Human Resources,Workplace Policy

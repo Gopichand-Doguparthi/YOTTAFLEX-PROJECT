@@ -1,0 +1,1142 @@
+[
+  {
+    "ground_truth_id": "GT-000001",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000001-2026-01",
+    "issue_type": "EXPIRED_BAND_COMPARISON",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000001-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-VIS-LVL-L4-LOC-NYC-2024 (expired 2024-12-31).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000002",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000002-2026-01",
+    "issue_type": "EXPIRED_BAND_COMPARISON",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000002-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L1-LOC-NYC-2024 (expired 2024-12-31).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000003",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000003-2026-01",
+    "issue_type": "EXPIRED_BAND_COMPARISON",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000003-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-DS-LVL-L3-LOC-BLR-2024 (expired 2024-12-31).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000004",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000011-2026-01",
+    "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Part-time employee EMP-000011 (FTE 0.8) salary not divided by FTE; normalized salary left as 123800.0 USD instead of 154750.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000005",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000022-2026-01",
+    "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Part-time employee EMP-000022 (FTE 0.6) salary not divided by FTE; normalized salary left as 114444.0 USD instead of 190740.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000006",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000050-2026-01",
+    "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Part-time employee EMP-000050 (FTE 0.8) salary not divided by FTE; normalized salary left as 76900.0 USD instead of 96125.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000007",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000003-2024-01",
+    "issue_type": "MISSING_CURRENCY_CONVERSION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000003-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5754800.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000008",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000003-2025-01",
+    "issue_type": "MISSING_CURRENCY_CONVERSION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000003-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5024600.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000009",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000003-2026-01",
+    "issue_type": "MISSING_CURRENCY_CONVERSION",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary SAL-EMP-000003-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 6006600.0 USD.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000010",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000031-2026-99",
+    "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary record SAL-EMP-000031-2026-99 applied equity correction of 55798.74 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000011",
+    "record_type": "SALARY_RECORD",
+    "record_id": "SAL-EMP-000033-2026-99",
+    "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Salary record SAL-EMP-000033-2026-99 applied equity correction of 209888.0 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000012",
+    "record_type": "COMPARABLE_GROUP",
+    "record_id": "GRP-ROLE-SWE-ROLE-FAC",
+    "issue_type": "INCOMPARABLE_ROLE_GROUPING",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Roles ROLE-SWE and ROLE-FAC grouped together without documented comparability rationale.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000013",
+    "record_type": "COMPARABLE_GROUP",
+    "record_id": "GRP-ROLE-DS-ROLE-LOG",
+    "issue_type": "INCOMPARABLE_ROLE_GROUPING",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Roles ROLE-DS and ROLE-LOG grouped together without documented comparability rationale.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000014",
+    "record_type": "COMPARABLE_GROUP",
+    "record_id": "GRP-ROLE-PM-ROLE-REC",
+    "issue_type": "INCOMPARABLE_ROLE_GROUPING",
+    "is_anomaly": true,
+    "expected_detection": "EXCEPTION_FLAGGED",
+    "root_cause_explanation": "Roles ROLE-PM and ROLE-REC grouped together without documented comparability rationale.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000001",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000001",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000002",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000002",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000003",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000003",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000004",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000004",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000005",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000005",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000006",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000006",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000007",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000007",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000008",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000008",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000009",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000009",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000010",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000010",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000011",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000011",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000012",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000012",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000013",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000013",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000014",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000014",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000015",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000015",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000016",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000016",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000017",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000017",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000018",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000018",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000019",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000019",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000020",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000020",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000021",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000021",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000022",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000022",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000023",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000023",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000024",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000024",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000025",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000025",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000026",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000026",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000027",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000027",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000028",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000028",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000029",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000029",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000030",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000030",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000031",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000031",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000032",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000032",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000033",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000033",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000034",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000034",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000035",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000035",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000036",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000036",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000037",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000037",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000038",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000038",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000039",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000039",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000040",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000040",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000041",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000041",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000042",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000042",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000043",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000043",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000044",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000044",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000045",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000045",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000046",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000046",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000047",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000047",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000048",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000048",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000049",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000049",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000050",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000050",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000051",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000051",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000052",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000052",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000053",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000053",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000054",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000054",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000055",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000055",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000056",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000056",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000057",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000057",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000058",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000058",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000059",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000059",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000060",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000060",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000061",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000061",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000062",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000062",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000063",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000063",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000064",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000064",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000065",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000065",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000066",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000066",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000067",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000067",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000068",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000068",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000069",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000069",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000070",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000070",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000071",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000071",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000072",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000072",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000073",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000073",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000074",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000074",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000075",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000075",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000076",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000076",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000077",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000077",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000078",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000078",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000079",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000079",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000080",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000080",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000081",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000081",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000082",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000082",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000083",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000083",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000084",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000084",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000085",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000085",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000086",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000086",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000087",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000087",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000088",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000088",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000089",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000089",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000090",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000090",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000091",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000091",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000092",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000092",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000093",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000093",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000094",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000094",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000095",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000095",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000096",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000096",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000097",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000097",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000098",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000098",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000099",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000099",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000100",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000100",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  }
+]

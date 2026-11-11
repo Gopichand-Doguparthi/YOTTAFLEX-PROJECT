@@ -1,0 +1,8 @@
+location_id,location_name,country,currency,geo_tier,cost_of_living_index
+LOC-NYC,"New York City, USA",USA,USD,Tier-1,1.0
+LOC-SFO,"San Francisco, USA",USA,USD,Tier-1,1.15
+LOC-LON,"London, UK",GBR,GBP,Tier-1,0.95
+LOC-BER,"Berlin, Germany",DEU,EUR,Tier-2,0.8
+LOC-BLR,"Bengaluru, India",IND,INR,Tier-3,0.35
+LOC-TYO,"Tokyo, Japan",JPN,JPY,Tier-2,0.85
+LOC-SIN,Singapore,SGP,SGD,Tier-1,1.05
