@@ -91,9 +91,8 @@ class SyntheticDataGenerator:
         # 1. Master records
         locations = [dict(loc) for loc in LOCATIONS_SEED]
         levels = [dict(lvl) for lvl in LEVELS_SEED]
-        # Keep only IT‑industry roles (Engineering, Data & AI, Product, Design)
-        ALLOWED_JOB_FAMILIES = {"Engineering", "Data & AI", "Product", "Design"}
-        roles = [dict(r) for r in ROLES_SEED if r["job_family"] in ALLOWED_JOB_FAMILIES]
+        # Use all job families so the dashboard shows all 35 roles
+        roles = [dict(r) for r in ROLES_SEED]
         exchange_rates = [dict(fx) for fx in EXCHANGE_RATES_SEED]
         role_rationales = [dict(rcr) for rcr in ROLE_COMPARABILITY_SEED]
 
