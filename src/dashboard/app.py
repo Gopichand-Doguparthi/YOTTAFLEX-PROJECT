@@ -138,21 +138,21 @@ def main():
         # Role filter — show human-readable titles
         all_roles = db.query(Role.role_id, Role.role_title).order_by(Role.role_title).all()
         role_options = ["All"] + [f"{r.role_title}" for r in all_roles]
-        role_id_map  = {"All": "All"} | {r.role_title: r.role_id for r in all_roles}
+        role_id_map  = {**{"All": "All"}, **{r.role_title: r.role_id for r in all_roles}}
         selected_role_label = st.sidebar.selectbox("Filter Role:", role_options, index=0)
         selected_role = role_id_map[selected_role_label]
 
         # Level filter
         levels = db.query(Level.level_id, Level.level_name).order_by(Level.rank).all()
         level_options = ["All"] + [f"{l.level_name} ({l.level_id})" for l in levels]
-        level_id_map  = {"All": "All"} | {f"{l.level_name} ({l.level_id})": l.level_id for l in levels}
+        level_id_map  = {**{"All": "All"}, **{f"{l.level_name} ({l.level_id})": l.level_id for l in levels}}
         selected_level_label = st.sidebar.selectbox("Filter Career Level:", level_options, index=0)
         selected_level = level_id_map[selected_level_label]
 
         # Location filter — show full city names
         locs = db.query(Location.location_id, Location.location_name).order_by(Location.location_name).all()
         loc_options = ["All"] + [f"{loc.location_name}" for loc in locs]
-        loc_id_map  = {"All": "All"} | {loc.location_name: loc.location_id for loc in locs}
+        loc_id_map  = {**{"All": "All"}, **{loc.location_name: loc.location_id for loc in locs}}
         selected_loc_label = st.sidebar.selectbox("Filter Location:", loc_options, index=0)
         selected_location = loc_id_map[selected_loc_label]
 
