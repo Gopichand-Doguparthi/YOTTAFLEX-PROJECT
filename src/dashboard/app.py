@@ -3,98 +3,17 @@ Main Streamlit Application for Compensation Equity and Disparity Analysis System
 Hosts 13 interactive sections covering executive overviews, analytical deep dives,
 edge case diagnostics, proposal workflows, audit trails, and ground-truth evaluations.
 """
-import streamlit as st
-
-# Set page config for a professional look
-st.set_page_config(page_title="Compensation Equity Dashboard", layout="wide", initial_sidebar_state="expanded")
-
-# Load custom CSS for hover effects and styling
-def load_css():
-    with open("src/dashboard/static/custom.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-load_css()
-
-# Main heading in the sidebar
-st.sidebar.title("Compensation Equity Dashboard")
-
-# Expandable sections (grouped)
-with st.sidebar.expander("Executive Overview", expanded=True):
-    st.sidebar.button("Overview")
-
-with st.sidebar.expander("Employee Views", expanded=False):
-    st.sidebar.button("Employee Analytics")
-    st.sidebar.button("Comparable Groups")
-
-with st.sidebar.expander("Compensation Views", expanded=False):
-    st.sidebar.button("Band Analysis")
-    st.sidebar.button("Comp‑aa‑Ratio")
-    st.sidebar.button("Within‑Band")
-
-with st.sidebar.expander("Disparity & Proposals", expanded=False):
-    st.sidebar.button("Disparity Detection")
-    st.sidebar.button("Proposals")
-    st.sidebar.button("Approval History")
-
-with st.sidebar.expander("Validation & Evaluation", expanded=False):
-    st.sidebar.button("Validation")
-    st.sidebar.button("Evaluation")
-
-# Main page placeholder – actual view rendering will be handled downstream
-st.title("Compensation Equity & Disparity Analysis System")
-
-# The rest of the app imports the view modules as before
-from src.dashboard import views
-
-# Simple routing based on a query param (for demo purposes)
-view = st.experimental_get_query_params().get("view", ["overview"])[0]
-if view == "overview":
-    views.executive_overview.render()
-elif view == "employee":
-    views.employee_analytics.render()
-elif view == "band":
-    views.band_analysis.render()
-elif view == "compa":
-    views.compaa_ratio_view.render()
-elif view == "within":
-    views.within_band_view.render()
-elif view == "disparity":
-    views.disparity_view.render()
-elif view == "proposals":
-    views.proposals_view.render()
-elif view == "validation":
-    views.validation_view.render()
-elif view == "evaluation":
-    views.evaluation_view.render()
-else:
-    st.write("Select a view from the sidebar.")
-
 import sys
 from pathlib import Path
 
-# Add project root to sys.path
+# ── Ensure project root is on sys.path before any src.* imports ──────────────
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.database.session import SessionLocal
-from src.database.models import Role, Level, Location
-from src.dashboard.views import (
-    executive_overview,
-    employee_analytics,
-    band_analysis,
-    compa_ratio_view,
-    within_band_view,
-    disparity_view,
-    comparable_groups_view,
-    exceptions_view,
-    proposals_view,
-    approval_history_view,
-    audit_trail_view,
-    validation_view,
-    evaluation_view
-)
+import streamlit as st
 
-# Set Streamlit Page Configuration
+# Set page config (must be the first Streamlit call)
 st.set_page_config(
     page_title="Compensation Equity & Disparity System",
     page_icon="⚖️",
@@ -102,7 +21,15 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling
+# ── Custom CSS ────────────────────────────────────────────────────────────────
+def load_css():
+    css_path = Path(__file__).parent / "static" / "custom.css"
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css()
+
+# Inline fallback styles
 st.markdown("""
 <style>
     .main .block-container {
@@ -118,7 +45,27 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ── View imports ──────────────────────────────────────────────────────────────
+from src.database.session import SessionLocal
+from src.database.models import Role, Level, Location
+from src.dashboard.views import (
+    executive_overview,
+    employee_analytics,
+    band_analysis,
+    compa_ratio_view,
+    within_band_view,
+    disparity_view,
+    comparable_groups_view,
+    exceptions_view,
+    proposals_view,
+    approval_history_view,
+    audit_trail_view,
+    validation_view,
+    evaluation_view,
+)
 
+
+# ── Main app ──────────────────────────────────────────────────────────────────
 def main():
     db = SessionLocal()
     try:
@@ -127,7 +74,7 @@ def main():
         st.sidebar.markdown("**Disparity Analysis & Remediation**")
         st.sidebar.markdown("---")
 
-        # Global Filters in Sidebar
+        # Global Filters
         st.sidebar.subheader("Navigation & Filters")
 
         roles = [r.role_id for r in db.query(Role.role_id).order_by(Role.role_id).all()]
@@ -141,7 +88,7 @@ def main():
         st.sidebar.markdown("---")
 
         # 13 Required Views
-        views = [
+        view_options = [
             "1. Executive Overview",
             "2. Employee & Salary Analytics",
             "3. Compensation Band Analysis",
@@ -154,10 +101,10 @@ def main():
             "10. Approval History",
             "11. Audit Trail Ledger",
             "12. Data Quality & Validation",
-            "13. Ground-Truth Evaluation"
+            "13. Ground-Truth Evaluation",
         ]
 
-        choice = st.sidebar.radio("Select View:", views, index=0)
+        choice = st.sidebar.radio("Select View:", view_options, index=0)
 
         # Route to views
         if choice.startswith("1."):
