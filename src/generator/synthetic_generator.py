@@ -501,13 +501,6 @@ class SyntheticDataGenerator:
         sample_employees = self.rng.sample(employees, proposal_count)
 
         statuses = ["APPROVED", "APPROVED", "PENDING_REVIEW", "REJECTED", "DRAFT"]
-        reason_templates = [
-            ("INTERNAL_EQUITY", "Proactive parity adjustment to align with peer cohort median for {role}."),
-            ("MARKET_PARITY", "Market band alignment adjustment to restore target compa-ratio for {role}."),
-            ("DISPARITY_CORRECTION", "Remediation adjustment for flagged unexplained pay disparity in {role}."),
-            ("PROMOTION_CATCHUP", "Post-promotion band catch-up adjustment for {role}."),
-            ("RETENTION", "Critical talent retention adjustment based on strong performance in {role}."),
-        ]
 
         for i, emp in enumerate(sample_employees, 1):
             prop_id = f"ADJ-2026-{i:06d}"
@@ -521,7 +514,6 @@ class SyntheticDataGenerator:
             adj_pct = round((adj_amt / curr_sal) * 100.0, 2)
 
             status = statuses[i % len(statuses)]
-            reason_code, note_tpl = reason_templates[(i + (i // len(statuses))) % len(reason_templates)]
             created_dt = "2026-02-15T09:30:00"
             rev_dt = "2026-02-28T14:15:00" if status in ["APPROVED", "REJECTED"] else None
             reviewer = "jane.doe.vp@company.org" if status in ["APPROVED", "REJECTED"] else None
@@ -533,8 +525,8 @@ class SyntheticDataGenerator:
                 "proposed_salary": prop_sal,
                 "adjustment_amount": adj_amt,
                 "adjustment_percentage": adj_pct,
-                "reason_code": reason_code,
-                "justification_notes": note_tpl.format(role=emp["current_role_id"]),
+                "reason_code": "INTERNAL_EQUITY",
+                "justification_notes": f"Proactive parity adjustment to align with cohort benchmark for {emp['current_role_id']}.",
                 "evidence_summary": json.dumps({"performance_rating": 4.2, "tenure_years": 3.5}),
                 "related_disparity_findings": json.dumps({"compa_ratio": 0.82, "cohort_deviation": -16.5}),
                 "proposed_effective_date": "2026-04-01",
