@@ -190,6 +190,7 @@ def delete_employee(employee_id: str, db: Session = Depends(get_db)):
         actor_id="HR_API",
         actor_role="HR_PARTNER",
         old_state=old_state,
+        new_state={"deleted": True},
         notes=f"Employee {employee_id} permanently deleted.",
     )
     db.commit()

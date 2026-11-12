@@ -443,6 +443,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                         st.error(f"Employee '{manage_id.strip()}' not found.")
                     else:
                         eid_del = target_emp.employee_id
+                        old_del_state = {
+                            "name": f"{target_emp.first_name} {target_emp.last_name}",
+                            "department": target_emp.department,
+                        }
                         db.delete(target_emp)
                         AuditLogger.log_event(
                             session=db,
@@ -451,6 +455,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                             event_type="EMPLOYEE_DELETED",
                             actor_id="HR_DASHBOARD",
                             actor_role="HR_PARTNER",
+                            old_state=old_del_state,
+                            new_state={"deleted": True},
                             notes=f"Employee {eid_del} deleted via dashboard.",
                         )
                         db.commit()

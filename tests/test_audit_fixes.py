@@ -284,6 +284,11 @@ def test_employee_and_band_crud_api_and_validation(db_session, sample_master_dat
         assert r_upd.status_code == 200
         assert r_upd.json()["is_active"] is False
 
+        # Delete employee (must log AuditEvent with new_state without TypeError)
+        r_del = client.delete("/employees/EMP-777001")
+        assert r_del.status_code == 200
+        assert r_del.json()["status"] == "deleted"
+
         # Invalid band spread -> 400
         r_bad_band = client.post("/bands", json={
             "band_id": "BAND-BAD-2027",
