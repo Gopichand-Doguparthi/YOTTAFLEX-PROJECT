@@ -16,7 +16,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000002-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L1-LOC-NYC-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000002-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L1-LOC-LON-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -26,7 +26,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000003-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-DS-LVL-L3-LOC-BLR-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000003-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-DS-LVL-L3-LOC-TOR-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -36,7 +36,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000004-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L3-LOC-SFO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000004-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L3-LOC-BLR-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -56,7 +56,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000006-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SUP-LVL-L1-LOC-NYC-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000006-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SUP-LVL-L1-LOC-SFO-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -66,7 +66,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000007-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-REC-LVL-L3-LOC-BLR-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000007-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-REC-LVL-L3-LOC-DXB-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -76,7 +76,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000008-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-QAE-LVL-L4-LOC-SFO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000008-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-QAE-LVL-L4-LOC-BLR-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -86,7 +86,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000009-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SEC-LVL-L2-LOC-BER-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000009-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SEC-LVL-L2-LOC-AMS-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -116,7 +116,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000012-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-PEO-LVL-L2-LOC-LON-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000012-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-PEO-LVL-L2-LOC-SIN-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -126,7 +126,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000013-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L4-LOC-NYC-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000013-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L4-LOC-SFO-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -136,7 +136,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000014-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L3-LOC-SFO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000014-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L3-LOC-TYO-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -146,7 +146,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000015-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SUP-LVL-L3-LOC-BER-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000015-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SUP-LVL-L3-LOC-SYD-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -156,7 +156,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000016-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L3-LOC-TYO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000016-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L3-LOC-WAR-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -166,7 +166,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000017-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L5-LOC-BLR-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000017-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LND-LVL-L5-LOC-DXB-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -176,7 +176,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000018-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LOG-LVL-L1-LOC-LON-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000018-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-LOG-LVL-L1-LOC-SIN-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -186,7 +186,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000019-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L1-LOC-BER-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000019-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-SWE-LVL-L1-LOC-SYD-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -196,7 +196,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000020-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L3-LOC-LON-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000020-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-ER-LVL-L3-LOC-SIN-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -206,7 +206,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000021-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-CMP-LVL-L2-LOC-TYO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000021-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-CMP-LVL-L2-LOC-WAR-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -216,7 +216,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000022-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-FSE-LVL-L3-LOC-LON-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000022-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-FSE-LVL-L3-LOC-SIN-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -226,7 +226,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000023-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-QAE-LVL-L2-LOC-TYO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000023-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-QAE-LVL-L2-LOC-SAO-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -236,7 +236,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000024-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-CD-LVL-L3-LOC-SFO-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000024-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-CD-LVL-L3-LOC-TYO-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -246,7 +246,7 @@
     "issue_type": "EXPIRED_BAND_COMPARISON",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000025-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-FSE-LVL-L1-LOC-LON-2024 (expired 2024-12-31).",
+    "root_cause_explanation": "Salary SAL-EMP-000025-2026-01 (effective 2026-01-01) benchmarked against expired band BAND-ROLE-FSE-LVL-L1-LOC-SIN-2024 (expired 2024-12-31).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -266,7 +266,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000022 (FTE 0.6) salary not divided by FTE; normalized salary left as 114444.0 USD instead of 190740.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000022 (FTE 0.6) salary not divided by FTE; normalized salary left as 126388.0 USD instead of 210646.67 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -276,7 +276,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000050 (FTE 0.8) salary not divided by FTE; normalized salary left as 76900.0 USD instead of 96125.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000050 (FTE 0.8) salary not divided by FTE; normalized salary left as 72996.0 USD instead of 91245.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -286,7 +286,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000055 (FTE 0.5) salary not divided by FTE; normalized salary left as 13237.65 USD instead of 26475.3 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000055 (FTE 0.5) salary not divided by FTE; normalized salary left as 33283.8 USD instead of 66567.6 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -296,7 +296,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000066 (FTE 0.5) salary not divided by FTE; normalized salary left as 63300.0 USD instead of 126600.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000066 (FTE 0.5) salary not divided by FTE; normalized salary left as 44036.0 USD instead of 88072.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -306,7 +306,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000068 (FTE 0.8) salary not divided by FTE; normalized salary left as 56300.0 USD instead of 70375.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000068 (FTE 0.8) salary not divided by FTE; normalized salary left as 64700.0 USD instead of 80875.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -316,7 +316,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000080 (FTE 0.5) salary not divided by FTE; normalized salary left as 83385.0 USD instead of 166770.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000080 (FTE 0.5) salary not divided by FTE; normalized salary left as 93730.0 USD instead of 187460.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -336,7 +336,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000097 (FTE 0.8) salary not divided by FTE; normalized salary left as 140300.0 USD instead of 175375.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000097 (FTE 0.8) salary not divided by FTE; normalized salary left as 42711.0 USD instead of 53388.75 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -346,7 +346,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000102 (FTE 0.6) salary not divided by FTE; normalized salary left as 37552.1 USD instead of 62586.83 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000102 (FTE 0.6) salary not divided by FTE; normalized salary left as 94464.0 USD instead of 157440.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -356,7 +356,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000104 (FTE 0.8) salary not divided by FTE; normalized salary left as 93413.0 USD instead of 116766.25 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000104 (FTE 0.8) salary not divided by FTE; normalized salary left as 105040.0 USD instead of 131300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -366,7 +366,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000106 (FTE 0.8) salary not divided by FTE; normalized salary left as 29040.95 USD instead of 36301.19 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000106 (FTE 0.8) salary not divided by FTE; normalized salary left as 73062.0 USD instead of 91327.5 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -376,7 +376,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000116 (FTE 0.5) salary not divided by FTE; normalized salary left as 183540.0 USD instead of 367080.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000116 (FTE 0.5) salary not divided by FTE; normalized salary left as 136351.73 USD instead of 272703.46 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -386,7 +386,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000157 (FTE 0.8) salary not divided by FTE; normalized salary left as 64637.0 USD instead of 80796.25 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000157 (FTE 0.8) salary not divided by FTE; normalized salary left as 70995.6 USD instead of 88744.5 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -396,7 +396,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000175 (FTE 0.5) salary not divided by FTE; normalized salary left as 68600.0 USD instead of 137200.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000175 (FTE 0.5) salary not divided by FTE; normalized salary left as 47742.0 USD instead of 95484.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -406,7 +406,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000178 (FTE 0.8) salary not divided by FTE; normalized salary left as 157700.0 USD instead of 197125.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000178 (FTE 0.8) salary not divided by FTE; normalized salary left as 48009.05 USD instead of 60011.31 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -416,7 +416,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000179 (FTE 0.5) salary not divided by FTE; normalized salary left as 73100.0 USD instead of 146200.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000179 (FTE 0.5) salary not divided by FTE; normalized salary left as 84100.0 USD instead of 168200.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -426,7 +426,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000185 (FTE 0.8) salary not divided by FTE; normalized salary left as 202300.0 USD instead of 252875.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000185 (FTE 0.8) salary not divided by FTE; normalized salary left as 232600.0 USD instead of 290750.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -446,7 +446,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000209 (FTE 0.6) salary not divided by FTE; normalized salary left as 33463.0 USD instead of 55771.67 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000209 (FTE 0.6) salary not divided by FTE; normalized salary left as 38477.0 USD instead of 64128.33 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -466,7 +466,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000225 (FTE 0.6) salary not divided by FTE; normalized salary left as 87912.0 USD instead of 146520.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000225 (FTE 0.6) salary not divided by FTE; normalized salary left as 78613.26 USD instead of 131022.1 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -476,7 +476,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000238 (FTE 0.8) salary not divided by FTE; normalized salary left as 55300.0 USD instead of 69125.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000238 (FTE 0.8) salary not divided by FTE; normalized salary left as 52536.0 USD instead of 65670.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -486,7 +486,7 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000264 (FTE 0.6) salary not divided by FTE; normalized salary left as 68932.0 USD instead of 114886.67 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000264 (FTE 0.6) salary not divided by FTE; normalized salary left as 51205.39 USD instead of 85342.32 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -496,257 +496,257 @@
     "issue_type": "FTE_IGNORED_IN_NORMALIZATION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Part-time employee EMP-000277 (FTE 0.5) salary not divided by FTE; normalized salary left as 80224.0 USD instead of 160448.0 USD.",
+    "root_cause_explanation": "Part-time employee EMP-000277 (FTE 0.5) salary not divided by FTE; normalized salary left as 90220.0 USD instead of 180440.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000051",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000003-2024-01",
+    "record_id": "SAL-EMP-000004-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000003-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5754800.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000004-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5586000.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000052",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000003-2025-01",
+    "record_id": "SAL-EMP-000004-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000003-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5024600.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000004-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5059200.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000053",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000003-2026-01",
+    "record_id": "SAL-EMP-000004-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000003-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 6006600.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000004-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5221300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000054",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000007-2024-01",
+    "record_id": "SAL-EMP-000008-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000007-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 4001900.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000008-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 7588800.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000055",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000007-2025-01",
+    "record_id": "SAL-EMP-000008-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000007-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3805100.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000008-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 6860300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000056",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000007-2026-01",
+    "record_id": "SAL-EMP-000008-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000007-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3958600.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000008-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 7781300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000057",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000016-2024-01",
+    "record_id": "SAL-EMP-000014-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000016-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 14311500.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000014-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 15801700.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000058",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000016-2025-01",
+    "record_id": "SAL-EMP-000014-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000016-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 17082300.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000014-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 15198700.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000059",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000016-2026-01",
+    "record_id": "SAL-EMP-000014-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000016-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 19145800.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000014-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 17694300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000060",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000017-2024-01",
+    "record_id": "SAL-EMP-000024-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000017-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5246600.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000024-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 19884400.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000061",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000017-2025-01",
+    "record_id": "SAL-EMP-000024-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000017-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 5816400.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000024-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 17965000.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000062",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000017-2026-01",
+    "record_id": "SAL-EMP-000024-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000017-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 6185900.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000024-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 20674900.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000063",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000021-2024-01",
+    "record_id": "SAL-EMP-000027-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000021-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 10853000.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000027-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 26452600.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000064",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000021-2025-01",
+    "record_id": "SAL-EMP-000027-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000021-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 14000500.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000027-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 28662200.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000065",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000021-2026-01",
+    "record_id": "SAL-EMP-000027-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000021-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 12982800.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000027-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 26650000.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000066",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000023-2024-01",
+    "record_id": "SAL-EMP-000039-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000023-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 16039500.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000039-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3052700.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000067",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000023-2025-01",
+    "record_id": "SAL-EMP-000039-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000023-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 16763100.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000039-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3858500.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000068",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000023-2026-01",
+    "record_id": "SAL-EMP-000039-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000023-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 18020800.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000039-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3909300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000069",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000026-2024-01",
+    "record_id": "SAL-EMP-000054-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000026-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 13325000.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000054-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 31184900.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000070",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000026-2025-01",
+    "record_id": "SAL-EMP-000054-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000026-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 15680900.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000054-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 34021000.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000071",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000026-2026-01",
+    "record_id": "SAL-EMP-000054-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000026-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 18023900.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000054-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 29384900.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000072",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000029-2024-01",
+    "record_id": "SAL-EMP-000079-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000029-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3877900.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000079-2024-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 13191500.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000073",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000029-2025-01",
+    "record_id": "SAL-EMP-000079-2025-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000029-2025-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 4165400.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000079-2025-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 15651200.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000074",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000029-2026-01",
+    "record_id": "SAL-EMP-000079-2026-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000029-2026-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 4961500.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000079-2026-01 paid in JPY was treated 1:1 without FX conversion, yielding incorrect normalized salary of 13717000.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000075",
     "record_type": "SALARY_RECORD",
-    "record_id": "SAL-EMP-000031-2024-01",
+    "record_id": "SAL-EMP-000097-2024-01",
     "issue_type": "MISSING_CURRENCY_CONVERSION",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary SAL-EMP-000031-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3970600.0 USD.",
+    "root_cause_explanation": "Salary SAL-EMP-000097-2024-01 paid in INR was treated 1:1 without FX conversion, yielding incorrect normalized salary of 3137300.0 USD.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -756,7 +756,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001263-2026-99 applied equity correction of 89036.86 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001263-2026-99 applied equity correction of 223832.45 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -766,7 +766,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001252-2026-99 applied equity correction of 150944.64 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001252-2026-99 applied equity correction of 166750.08 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -776,7 +776,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003267-2026-99 applied equity correction of 142426.84 despite proposal ADJ-2026-000008 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003267-2026-99 applied equity correction of 75397.95 despite proposal ADJ-2026-000008 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -786,7 +786,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004813-2026-99 applied equity correction of 173264.0 despite proposal ADJ-2026-000009 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004813-2026-99 applied equity correction of 164693.76 despite proposal ADJ-2026-000009 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -796,7 +796,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002001-2026-99 applied equity correction of 128306.08 despite proposal ADJ-2026-000013 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002001-2026-99 applied equity correction of 147594.72 despite proposal ADJ-2026-000013 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -806,7 +806,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003283-2026-99 applied equity correction of 295111.04 despite proposal ADJ-2026-000014 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003283-2026-99 applied equity correction of 219198.8 despite proposal ADJ-2026-000014 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -816,7 +816,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004455-2026-99 applied equity correction of 160291.04 despite proposal ADJ-2026-000018 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004455-2026-99 applied equity correction of 184340.8 despite proposal ADJ-2026-000018 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -826,7 +826,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002768-2026-99 applied equity correction of 124656.0 despite proposal ADJ-2026-000019 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002768-2026-99 applied equity correction of 118419.84 despite proposal ADJ-2026-000019 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -836,7 +836,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001377-2026-99 applied equity correction of 160496.0 despite proposal ADJ-2026-000023 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001377-2026-99 applied equity correction of 152423.04 despite proposal ADJ-2026-000023 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -846,7 +846,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004396-2026-99 applied equity correction of 53911.82 despite proposal ADJ-2026-000024 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004396-2026-99 applied equity correction of 126303.74 despite proposal ADJ-2026-000024 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -856,7 +856,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001559-2026-99 applied equity correction of 106888.32 despite proposal ADJ-2026-000028 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001559-2026-99 applied equity correction of 118146.56 despite proposal ADJ-2026-000028 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -866,7 +866,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000274-2026-99 applied equity correction of 98165.76 despite proposal ADJ-2026-000029 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000274-2026-99 applied equity correction of 87794.78 despite proposal ADJ-2026-000029 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -876,7 +876,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000282-2026-99 applied equity correction of 149761.92 despite proposal ADJ-2026-000033 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000282-2026-99 applied equity correction of 134063.53 despite proposal ADJ-2026-000033 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -886,7 +886,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002552-2026-99 applied equity correction of 144439.68 despite proposal ADJ-2026-000034 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002552-2026-99 applied equity correction of 129254.29 despite proposal ADJ-2026-000034 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -896,7 +896,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003579-2026-99 applied equity correction of 206416.0 despite proposal ADJ-2026-000038 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003579-2026-99 applied equity correction of 143566.08 despite proposal ADJ-2026-000038 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -916,7 +916,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000691-2026-99 applied equity correction of 118608.0 despite proposal ADJ-2026-000043 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000691-2026-99 applied equity correction of 112506.24 despite proposal ADJ-2026-000043 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -926,7 +926,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000955-2026-99 applied equity correction of 108958.08 despite proposal ADJ-2026-000044 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000955-2026-99 applied equity correction of 120359.68 despite proposal ADJ-2026-000044 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -936,7 +936,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003144-2026-99 applied equity correction of 128184.0 despite proposal ADJ-2026-000048 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003144-2026-99 applied equity correction of 144235.0 despite proposal ADJ-2026-000048 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -946,7 +946,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000863-2026-99 applied equity correction of 106198.4 despite proposal ADJ-2026-000049 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000863-2026-99 applied equity correction of 117465.6 despite proposal ADJ-2026-000049 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -956,7 +956,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004944-2026-99 applied equity correction of 123946.67 despite proposal ADJ-2026-000053 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004944-2026-99 applied equity correction of 102256.0 despite proposal ADJ-2026-000053 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -966,7 +966,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000236-2026-99 applied equity correction of 42084.11 despite proposal ADJ-2026-000054 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000236-2026-99 applied equity correction of 98611.97 despite proposal ADJ-2026-000054 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -976,7 +976,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004616-2026-99 applied equity correction of 95088.0 despite proposal ADJ-2026-000058 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004616-2026-99 applied equity correction of 66167.36 despite proposal ADJ-2026-000058 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -986,7 +986,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001292-2026-99 applied equity correction of 150752.0 despite proposal ADJ-2026-000059 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001292-2026-99 applied equity correction of 104866.72 despite proposal ADJ-2026-000059 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -996,7 +996,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003224-2026-99 applied equity correction of 238022.4 despite proposal ADJ-2026-000063 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003224-2026-99 applied equity correction of 262935.68 despite proposal ADJ-2026-000063 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -1046,7 +1046,7 @@
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000002 has outstanding rating (4.8) but salary depressed to 53235.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000002 has outstanding rating (4.8) but salary depressed to 50536.2 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -1056,71 +1056,51 @@
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000003 has outstanding rating (4.8) but salary depressed to 3904290.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000003 has outstanding rating (4.8) but salary depressed to 112873.41 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000107",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000004",
+    "record_id": "EMP-000006",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000004 has outstanding rating (4.8) but salary depressed to 128245.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000006 has outstanding rating (4.8) but salary depressed to 56485.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000108",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000005",
+    "record_id": "EMP-000007",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000005 has outstanding rating (4.8) but salary depressed to 81510.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000007 has outstanding rating (4.8) but salary depressed to 69340.96 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000109",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000006",
+    "record_id": "EMP-000008",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000006 has outstanding rating (4.8) but salary depressed to 49140.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000008 has outstanding rating (4.8) but salary depressed to 5057845.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-000110",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000007",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000007 has outstanding rating (4.8) but salary depressed to 2573090.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000111",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000008",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000008 has outstanding rating (4.8) but salary depressed to 191100.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000112",
-    "record_type": "EMPLOYEE",
     "record_id": "EMP-000009",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000009 has outstanding rating (4.8) but salary depressed to 82469.4 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000009 has outstanding rating (4.8) but salary depressed to 94797.3 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000113",
+    "ground_truth_id": "GT-000111",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000010",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
@@ -1130,177 +1110,107 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000114",
+    "ground_truth_id": "GT-000112",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000012",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000012 has outstanding rating (4.8) but salary depressed to 63148.8 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000012 has outstanding rating (4.8) but salary depressed to 69752.8 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000115",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000013",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000013 has outstanding rating (4.8) but salary depressed to 161850.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000116",
+    "ground_truth_id": "GT-000113",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000014",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000014 has outstanding rating (4.8) but salary depressed to 102700.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000014 has outstanding rating (4.8) but salary depressed to 11501295.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000117",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000015",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000015 has outstanding rating (4.8) but salary depressed to 65677.95 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000118",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000019",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000019 has outstanding rating (4.8) but salary depressed to 56042.35 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000119",
+    "ground_truth_id": "GT-000114",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000020",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000020 has outstanding rating (4.8) but salary depressed to 72157.8 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000020 has outstanding rating (4.8) but salary depressed to 79781.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000120",
+    "ground_truth_id": "GT-000115",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000021",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000021 has outstanding rating (4.8) but salary depressed to 8438820.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000021 has outstanding rating (4.8) but salary depressed to 36034.05 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000121",
+    "ground_truth_id": "GT-000116",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000024",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000024 has outstanding rating (4.8) but salary depressed to 119990.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000024 has outstanding rating (4.8) but salary depressed to 13438685.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000122",
+    "ground_truth_id": "GT-000117",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000025",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000025 has outstanding rating (4.8) but salary depressed to 63577.8 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000025 has outstanding rating (4.8) but salary depressed to 70246.8 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000123",
+    "ground_truth_id": "GT-000118",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000026",
+    "record_id": "EMP-000030",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000026 has outstanding rating (4.8) but salary depressed to 11715535.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000030 has outstanding rating (4.8) but salary depressed to 113572.55 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000124",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000028",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000028 has outstanding rating (4.8) but salary depressed to 53420.9 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000125",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000029",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000029 has outstanding rating (4.8) but salary depressed to 3224975.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000126",
+    "ground_truth_id": "GT-000119",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000033",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000033 has outstanding rating (4.8) but salary depressed to 121810.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000033 has outstanding rating (4.8) but salary depressed to 115744.2 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000127",
+    "ground_truth_id": "GT-000120",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000034",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000034 has outstanding rating (4.8) but salary depressed to 58630.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000034 has outstanding rating (4.8) but salary depressed to 67405.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000128",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000035",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000035 has outstanding rating (4.8) but salary depressed to 62634.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000129",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000036",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000036 has outstanding rating (4.8) but salary depressed to 72998.64 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000130",
+    "ground_truth_id": "GT-000121",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000037",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000037 has outstanding rating (4.8) but salary depressed to 30981.63 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000037 has outstanding rating (4.8) but salary depressed to 72576.4 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000131",
+    "ground_truth_id": "GT-000122",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000038",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
@@ -1310,27 +1220,17 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000132",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000039",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000039 has outstanding rating (4.8) but salary depressed to 96005.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000133",
+    "ground_truth_id": "GT-000123",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000040",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000040 has outstanding rating (4.8) but salary depressed to 58167.85 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000040 has outstanding rating (4.8) but salary depressed to 66953.25 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000134",
+    "ground_truth_id": "GT-000124",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000041",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
@@ -1340,199 +1240,339 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000135",
+    "ground_truth_id": "GT-000125",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000043",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000043 has outstanding rating (4.8) but salary depressed to 58522.1 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000126",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000044",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000044 has outstanding rating (4.8) but salary depressed to 114335.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000044 has outstanding rating (4.8) but salary depressed to 79493.7 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000136",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000046",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000046 has outstanding rating (4.8) but salary depressed to 17290.42 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000137",
+    "ground_truth_id": "GT-000127",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000047",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000047 has outstanding rating (4.8) but salary depressed to 17378.63 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000047 has outstanding rating (4.8) but salary depressed to 40717.04 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000138",
+    "ground_truth_id": "GT-000128",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000048",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000048 has outstanding rating (4.8) but salary depressed to 108187.95 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000048 has outstanding rating (4.8) but salary depressed to 121764.5 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000139",
+    "ground_truth_id": "GT-000129",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000049",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000049 has outstanding rating (4.8) but salary depressed to 62348.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000049 has outstanding rating (4.8) but salary depressed to 71700.2 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000140",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000052",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000052 has outstanding rating (4.8) but salary depressed to 109525.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000141",
+    "ground_truth_id": "GT-000130",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000057",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000057 has outstanding rating (4.8) but salary depressed to 95745.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000057 has outstanding rating (4.8) but salary depressed to 66599.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000142",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000058",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000058 has outstanding rating (4.8) but salary depressed to 51295.4 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000143",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000059",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000059 has outstanding rating (4.8) but salary depressed to 56456.4 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000144",
+    "ground_truth_id": "GT-000131",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000060",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000060 has outstanding rating (4.8) but salary depressed to 52145.6 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000060 has outstanding rating (4.8) but salary depressed to 59939.1 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000145",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000061",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000061 has outstanding rating (4.8) but salary depressed to 50709.95 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000146",
+    "ground_truth_id": "GT-000132",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000063",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000063 has outstanding rating (4.8) but salary depressed to 116155.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000063 has outstanding rating (4.8) but salary depressed to 96010.2 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000147",
+    "ground_truth_id": "GT-000133",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000064",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000064 has outstanding rating (4.8) but salary depressed to 104780.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000064 has outstanding rating (4.8) but salary depressed to 120445.0 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000148",
+    "ground_truth_id": "GT-000134",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000065",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000065 has outstanding rating (4.8) but salary depressed to 100880.0 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000065 has outstanding rating (4.8) but salary depressed to 83311.8 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000149",
+    "ground_truth_id": "GT-000135",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000067",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000067 has outstanding rating (4.8) but salary depressed to 63339.9 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000067 has outstanding rating (4.8) but salary depressed to 72904.65 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000150",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000070",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000070 has outstanding rating (4.8) but salary depressed to 35566.7 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000151",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000071",
-    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
-    "is_anomaly": true,
-    "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000071 has outstanding rating (4.8) but salary depressed to 67470.0 USD (>25% below cohort median).",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-000152",
+    "ground_truth_id": "GT-000136",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000072",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000072 has outstanding rating (4.8) but salary depressed to 66103.05 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000072 has outstanding rating (4.8) but salary depressed to 76092.9 USD (>25% below cohort median).",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-000153",
+    "ground_truth_id": "GT-000137",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000073",
     "issue_type": "UNEXPLAINED_DISPARITY_LOW",
     "is_anomaly": true,
     "expected_detection": "DISPARITY_DETECTED",
-    "root_cause_explanation": "Employee EMP-000073 has outstanding rating (4.8) but salary depressed to 65465.4 USD (>25% below cohort median).",
+    "root_cause_explanation": "Employee EMP-000073 has outstanding rating (4.8) but salary depressed to 75242.7 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000138",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000074",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000074 has outstanding rating (4.8) but salary depressed to 83461.3 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000139",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000075",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000075 has outstanding rating (4.8) but salary depressed to 130780.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000140",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000078",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000078 has outstanding rating (4.8) but salary depressed to 69645.55 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000141",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000083",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000083 has outstanding rating (4.8) but salary depressed to 62595.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000142",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000084",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000084 has outstanding rating (4.8) but salary depressed to 127257.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000143",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000088",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000088 has outstanding rating (4.8) but salary depressed to 69433.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000144",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000089",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000089 has outstanding rating (4.8) but salary depressed to 70699.2 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000145",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000099",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000099 has outstanding rating (4.8) but salary depressed to 108680.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000146",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000101",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000101 has outstanding rating (4.8) but salary depressed to 76018.8 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000147",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000105",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000105 has outstanding rating (4.8) but salary depressed to 75788.71 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000148",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000108",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000108 has outstanding rating (4.8) but salary depressed to 100722.96 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000149",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000109",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000109 has outstanding rating (4.8) but salary depressed to 109720.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000150",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000113",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000113 has outstanding rating (4.8) but salary depressed to 92235.0 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000151",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000114",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000114 has outstanding rating (4.8) but salary depressed to 96583.5 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000152",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000115",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000115 has outstanding rating (4.8) but salary depressed to 108581.2 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-000153",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000117",
+    "issue_type": "UNEXPLAINED_DISPARITY_LOW",
+    "is_anomaly": true,
+    "expected_detection": "DISPARITY_DETECTED",
+    "root_cause_explanation": "Employee EMP-000117 has outstanding rating (4.8) but salary depressed to 106380.56 USD (>25% below cohort median).",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000004",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000004",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000005",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000005",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
     "ground_truth_id": "GT-BASE-EMP-000011",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000011",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000013",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000013",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000015",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000015",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1570,6 +1610,16 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
+    "ground_truth_id": "GT-BASE-EMP-000019",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000019",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
     "ground_truth_id": "GT-BASE-EMP-000022",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000022",
@@ -1590,6 +1640,16 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
+    "ground_truth_id": "GT-BASE-EMP-000026",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000026",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
     "ground_truth_id": "GT-BASE-EMP-000027",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000027",
@@ -1600,9 +1660,19 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000030",
+    "ground_truth_id": "GT-BASE-EMP-000028",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000030",
+    "record_id": "EMP-000028",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000029",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000029",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1630,6 +1700,36 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
+    "ground_truth_id": "GT-BASE-EMP-000035",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000035",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000036",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000036",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000039",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000039",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
     "ground_truth_id": "GT-BASE-EMP-000042",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000042",
@@ -1640,9 +1740,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000043",
+    "ground_truth_id": "GT-BASE-EMP-000045",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000043",
+    "record_id": "EMP-000045",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1650,9 +1750,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000045",
+    "ground_truth_id": "GT-BASE-EMP-000046",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000045",
+    "record_id": "EMP-000046",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1673,6 +1773,16 @@
     "ground_truth_id": "GT-BASE-EMP-000051",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000051",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000052",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000052",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1720,6 +1830,36 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
+    "ground_truth_id": "GT-BASE-EMP-000058",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000058",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000059",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000059",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
+    "ground_truth_id": "GT-BASE-EMP-000061",
+    "record_type": "EMPLOYEE",
+    "record_id": "EMP-000061",
+    "issue_type": "VALID_BASELINE",
+    "is_anomaly": false,
+    "expected_detection": "VALID",
+    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
+    "injected_at": "2026-01-01T00:00:00"
+  },
+  {
     "ground_truth_id": "GT-BASE-EMP-000062",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000062",
@@ -1760,9 +1900,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000074",
+    "ground_truth_id": "GT-BASE-EMP-000070",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000074",
+    "record_id": "EMP-000070",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1770,9 +1910,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000075",
+    "ground_truth_id": "GT-BASE-EMP-000071",
     "record_type": "EMPLOYEE",
-    "record_id": "EMP-000075",
+    "record_id": "EMP-000071",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1793,16 +1933,6 @@
     "ground_truth_id": "GT-BASE-EMP-000077",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000077",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000078",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000078",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -1850,26 +1980,6 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000083",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000083",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000084",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000084",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
     "ground_truth_id": "GT-BASE-EMP-000085",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000085",
@@ -1893,26 +2003,6 @@
     "ground_truth_id": "GT-BASE-EMP-000087",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000087",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000088",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000088",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000089",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000089",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -2010,29 +2100,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000099",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000099",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
     "ground_truth_id": "GT-BASE-EMP-000100",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000100",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000101",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000101",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -2070,16 +2140,6 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000105",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000105",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
     "ground_truth_id": "GT-BASE-EMP-000106",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000106",
@@ -2093,26 +2153,6 @@
     "ground_truth_id": "GT-BASE-EMP-000107",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000107",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000108",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000108",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000109",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000109",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",
@@ -2150,49 +2190,9 @@
     "injected_at": "2026-01-01T00:00:00"
   },
   {
-    "ground_truth_id": "GT-BASE-EMP-000113",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000113",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000114",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000114",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000115",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000115",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
     "ground_truth_id": "GT-BASE-EMP-000116",
     "record_type": "EMPLOYEE",
     "record_id": "EMP-000116",
-    "issue_type": "VALID_BASELINE",
-    "is_anomaly": false,
-    "expected_detection": "VALID",
-    "root_cause_explanation": "Valid baseline employee record conforming to compensation guidelines.",
-    "injected_at": "2026-01-01T00:00:00"
-  },
-  {
-    "ground_truth_id": "GT-BASE-EMP-000117",
-    "record_type": "EMPLOYEE",
-    "record_id": "EMP-000117",
     "issue_type": "VALID_BASELINE",
     "is_anomaly": false,
     "expected_detection": "VALID",

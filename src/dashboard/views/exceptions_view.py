@@ -13,6 +13,7 @@ from src.database.models import (
 from src.engine.currency_normalizer import CurrencyNormalizer
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.engine.exception_detector import ExceptionDetector
+from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, PLOTLY_CONFIG
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -79,10 +80,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     "severity": "CRITICAL",
                     "record_id": sal.salary_id,
                     "employee_id": sal.employee_id,
-                    "description": f"Foreign currency salary ({sal.currency}) normalized 1:1 without exchange rate.",
+                    "description": f"Foreign currency salary ({sal.currency}) was normalized 1:1 without applying an exchange rate.",
                     "detected_value": sal.normalized_salary,
                     "expected_value": round(sal.base_salary * fx_rate, 2),
-                    "recommendation": f"Apply effective-dated {sal.currency}->USD FX multiplier."
+                    "recommendation": f"Apply the effective-dated {sal.currency}-to-USD exchange rate multiplier."
                 })
 
         # Check 4: Unapproved adjustment applied
@@ -133,7 +134,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     st.markdown("---")
 
-    # Issue breakdown chart
     if not df_exc.empty:
         col_bar, col_sev = st.columns(2)
         with col_bar:
@@ -146,7 +146,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 color="Issue Type",
                 title="Exception Incidents by Issue Type"
             )
-            st.plotly_chart(fig_bar, use_container_width=True)
+            fig_bar.update_layout(xaxis_tickangle=-30)
+            st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
 
         with col_sev:
             sev_summary = df_exc["severity"].value_counts().reset_index()
@@ -159,9 +160,26 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 color="Severity",
                 color_discrete_map={"CRITICAL": "#e74c3c", "HIGH": "#e67e22", "MEDIUM": "#f1c40f"}
             )
-            st.plotly_chart(fig_sev, use_container_width=True)
+            st.plotly_chart(fig_sev, use_container_width=True, config=PLOTLY_CONFIG)
 
+        # ── Detailed Exception Diagnostic Logs — identification FIRST ──
         st.subheader("Detailed Exception Diagnostic Logs")
-        st.dataframe(df_exc, use_container_width=True)
+
+        # Reorder columns: identifiers first
+        id_cols = ["employee_id", "record_id", "issue_type", "severity", "description",
+                   "detected_value", "expected_value", "recommendation"]
+        present_cols = [c for c in id_cols if c in df_exc.columns]
+        rest_cols = [c for c in df_exc.columns if c not in present_cols]
+        df_display = df_exc[present_cols + rest_cols].rename(columns={
+            "employee_id": "Employee ID",
+            "record_id": "Record ID",
+            "issue_type": "Issue Type",
+            "severity": "Severity",
+            "description": "Description",
+            "detected_value": "Detected Value",
+            "expected_value": "Expected Value",
+            "recommendation": "Recommendation"
+        })
+        st.dataframe(df_display, use_container_width=True)
     else:
         st.success("No exceptions detected across the database.")

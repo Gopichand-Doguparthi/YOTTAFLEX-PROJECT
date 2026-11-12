@@ -9,11 +9,16 @@ import numpy as np
 from sqlalchemy.orm import Session
 from src.database.models import Employee, SalaryRecord, CompensationBand, PerformanceEvidence, Tenure
 from src.engine.disparity_detector import DisparityDetector
+from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, PLOTLY_CONFIG
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Multi-Factor Disparity Detection & Evidence Analysis")
     st.markdown("Identifies unexplained compensation disparities benchmarked against peer cohort medians, documented performance ratings, and tenure.")
+
+    role_map = get_role_map(db)
+    level_map = get_level_map(db)
+    loc_map = get_location_map(db)
 
     status_filter = st.selectbox(
         "Filter by Disparity Outcome Status:",
@@ -23,7 +28,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     detector = DisparityDetector()
 
-    # Query active data
     emp_query = db.query(Employee)
     if selected_role != "All":
         emp_query = emp_query.filter(Employee.current_role_id == selected_role)
@@ -39,7 +43,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     bands = db.query(CompensationBand).filter(CompensationBand.status == "ACTIVE").all()
     band_lookup = {(b.role_id, b.level_id, b.location_id): b for b in bands}
 
-    # Group cohorts for median
     cohort_salaries = {}
     for emp in employees:
         sal = latest_sals.get(emp.employee_id)
@@ -96,9 +99,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Employee ID": emp.employee_id,
             "Name": f"{emp.first_name} {emp.last_name}",
             "Department": emp.department,
-            "Role": emp.current_role_id,
-            "Level": emp.current_level_id,
-            "Location": emp.current_location_id,
+            "Role": role_map.get(emp.current_role_id, emp.current_role_id),
+            "Level": level_map.get(emp.current_level_id, emp.current_level_id),
+            "Location": loc_map.get(emp.current_location_id, emp.current_location_id),
             "Salary (USD)": sal.normalized_salary,
             "Cohort Median": med_sal,
             "Deviation (%)": res.deviation_from_cohort_median_pct,
@@ -115,7 +118,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.info("No employee records available for disparity evaluation.")
         return
 
-    # Counts
     unexplained_count = len(df[df["Status"] == "UNEXPLAINED_DISPARITY"])
     review_count = len(df[df["Status"] == "MANUAL_REVIEW_REQUIRED"])
     explained_count = len(df[df["Status"] == "EXPLAINED_VARIATION"])
@@ -123,13 +125,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Unexplained Disparities", f"{unexplained_count}", delta=f"{unexplained_count} flagged", delta_color="inverse")
-    col2.metric("Manual Review Required", f"{review_count}", "Mixed signals")
-    col3.metric("Explained Variations", f"{explained_count}", "Supported by merit/tenure")
-    col4.metric("Insufficient Evidence", f"{insufficient_count}", "Small cohort size")
+    col2.metric("Manual Review Required", f"{review_count}", "Mixed signals detected")
+    col3.metric("Explained Variations", f"{explained_count}", "Supported by merit or tenure")
+    col4.metric("Insufficient Evidence", f"{insufficient_count}", "Cohort too small to conclude")
 
     st.markdown("---")
 
-    # Pie chart of outcomes
     col_pie, col_scatter = st.columns(2)
     with col_pie:
         status_dist = df["Status"].value_counts().reset_index()
@@ -147,7 +148,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 "INSUFFICIENT_EVIDENCE": "#95a5a6"
             }
         )
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 
     with col_scatter:
         fig_disp = px.scatter(
@@ -165,10 +166,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             }
         )
         fig_disp.add_hline(y=-15.0, line_dash="dash", line_color="red", annotation_text="Disparity Threshold (-15%)")
-        fig_disp.add_vline(x=3.5, line_dash="dash", line_color="blue", annotation_text="High Performer (3.5)")
-        st.plotly_chart(fig_disp, use_container_width=True)
+        fig_disp.add_vline(x=3.5, line_dash="dash", line_color="blue", annotation_text="High Performer (3.5+)")
+        st.plotly_chart(fig_disp, use_container_width=True, config=PLOTLY_CONFIG)
 
-    # Filtered Table
     st.subheader("Disparity Evaluation Findings")
     filtered_df = df if status_filter == "All Outcomes" else df[df["Status"] == status_filter]
     st.dataframe(filtered_df, use_container_width=True)

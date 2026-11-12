@@ -40,48 +40,49 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* ── Sidebar nav buttons ── */
+    /* ── Sidebar nav buttons — left-aligned, icon + text ── */
     div[data-testid="stSidebar"] .stButton > button {
         width: 100%;
         text-align: left !important;
+        justify-content: flex-start !important;
+        display: flex !important;
+        align-items: center !important;
         background: transparent;
         color: #cbd5e1;
         border: none;
         border-radius: 6px;
-        padding: 0.42rem 0.9rem;
+        padding: 0.40rem 0.75rem;
         margin: 1px 0;
-        font-size: 0.88rem;
+        font-size: 0.875rem;
         font-weight: 400;
         letter-spacing: 0.01em;
         transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
         cursor: pointer;
+        gap: 0.5rem;
+    }
+    div[data-testid="stSidebar"] .stButton > button p {
+        text-align: left !important;
+        margin: 0 !important;
     }
     div[data-testid="stSidebar"] .stButton > button:hover {
-        background: rgba(99, 102, 241, 0.18) !important;
+        background: rgba(99, 102, 241, 0.20) !important;
         color: #ffffff !important;
-        padding-left: 1.2rem !important;
+        padding-left: 1.0rem !important;
     }
     div[data-testid="stSidebar"] .stButton > button:focus {
         box-shadow: none;
         outline: none;
     }
-    /* Active nav item highlight (injected via markdown) */
-    .nav-active button {
-        background: rgba(99, 102, 241, 0.35) !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
-        border-left: 3px solid #818cf8 !important;
-    }
 
     /* ── Section dividers in sidebar ── */
     .nav-section-label {
-        font-size: 0.70rem;
+        font-size: 0.68rem;
         font-weight: 700;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.09em;
         text-transform: uppercase;
-        color: #64748b;
-        padding: 0.6rem 0.9rem 0.2rem 0.9rem;
-        margin-top: 4px;
+        color: #475569;
+        padding: 0.65rem 0.75rem 0.15rem 0.75rem;
+        margin-top: 6px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -108,19 +109,19 @@ from src.dashboard.views import (
 # ── Nav items definition ──────────────────────────────────────────────────────
 NAV_ITEMS = [
     # (key, label, icon, section)
-    ("overview",     "Executive Overview",         "🏠", "Overview"),
-    ("employee",     "Employee & Salary Analytics","👥", "Analytics"),
-    ("band",         "Compensation Band Analysis", "📊", "Analytics"),
-    ("compa",        "Compa-Ratio Analysis",       "📐", "Analytics"),
-    ("within",       "Within-Band Position",       "🎯", "Analytics"),
-    ("disparity",    "Disparity Detection",        "⚠️", "Disparity & Proposals"),
-    ("comparable",   "Comparable Employee Groups", "🔗", "Disparity & Proposals"),
-    ("exceptions",   "Exceptions & Edge Cases",    "🚨", "Disparity & Proposals"),
-    ("proposals",    "Adjustment Proposals",       "📝", "Disparity & Proposals"),
-    ("approvals",    "Approval History",           "✅", "Disparity & Proposals"),
-    ("audit",        "Audit Trail Ledger",         "📋", "Governance"),
-    ("validation",   "Data Quality & Validation",  "🔍", "Governance"),
-    ("evaluation",   "Ground-Truth Evaluation",    "🏆", "Governance"),
+    ("overview",     "Executive Overview",          "▣", "Overview"),
+    ("employee",     "Employee & Salary Analytics", "◈", "Analytics"),
+    ("band",         "Compensation Band Analysis",  "▤", "Analytics"),
+    ("compa",        "Compa-Ratio Analysis",        "◎", "Analytics"),
+    ("within",       "Within-Band Position",        "◉", "Analytics"),
+    ("disparity",    "Disparity Detection",         "◆", "Disparity & Proposals"),
+    ("comparable",   "Comparable Employee Groups",  "◇", "Disparity & Proposals"),
+    ("exceptions",   "Exceptions & Edge Cases",     "▲", "Disparity & Proposals"),
+    ("proposals",    "Adjustment Proposals",        "▶", "Disparity & Proposals"),
+    ("approvals",    "Approval History",            "✔", "Disparity & Proposals"),
+    ("audit",        "Audit Trail Ledger",          "▦", "Governance"),
+    ("validation",   "Data Quality & Validation",   "◐", "Governance"),
+    ("evaluation",   "Ground-Truth Evaluation",     "★", "Governance"),
 ]
 
 # ── Main app ──────────────────────────────────────────────────────────────────
@@ -128,7 +129,7 @@ def main():
     db = SessionLocal()
     try:
         # ── Sidebar ──
-        st.sidebar.title("⚖️ CompEquity AI")
+        st.sidebar.title("CompEquity AI")
         st.sidebar.markdown("**Disparity Analysis & Remediation**")
         st.sidebar.markdown("---")
 

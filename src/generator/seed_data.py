@@ -3,7 +3,7 @@ Master Seed Definitions and Reference Catalogs for Synthetic Data Generation.
 Provides standardized Roles, Levels, Locations, Currencies, and Exchange Rates.
 """
 
-# 7 Global Locations with realistic Cost-of-Living indices and primary currencies
+# 14 Global Locations with realistic Cost-of-Living indices and primary currencies
 LOCATIONS_SEED = [
     {
         "location_id": "LOC-NYC",
@@ -23,7 +23,7 @@ LOCATIONS_SEED = [
     },
     {
         "location_id": "LOC-LON",
-        "location_name": "London, UK",
+        "location_name": "London, United Kingdom",
         "country": "GBR",
         "currency": "GBP",
         "geo_tier": "Tier-1",
@@ -60,6 +60,62 @@ LOCATIONS_SEED = [
         "currency": "SGD",
         "geo_tier": "Tier-1",
         "cost_of_living_index": 1.05
+    },
+    {
+        "location_id": "LOC-AMS",
+        "location_name": "Amsterdam, Netherlands",
+        "country": "NLD",
+        "currency": "EUR",
+        "geo_tier": "Tier-1",
+        "cost_of_living_index": 0.92
+    },
+    {
+        "location_id": "LOC-SYD",
+        "location_name": "Sydney, Australia",
+        "country": "AUS",
+        "currency": "AUD",
+        "geo_tier": "Tier-1",
+        "cost_of_living_index": 0.90
+    },
+    {
+        "location_id": "LOC-TOR",
+        "location_name": "Toronto, Canada",
+        "country": "CAN",
+        "currency": "CAD",
+        "geo_tier": "Tier-1",
+        "cost_of_living_index": 0.88
+    },
+    {
+        "location_id": "LOC-DXB",
+        "location_name": "Dubai, United Arab Emirates",
+        "country": "ARE",
+        "currency": "AED",
+        "geo_tier": "Tier-2",
+        "cost_of_living_index": 0.82
+    },
+    {
+        "location_id": "LOC-SAO",
+        "location_name": "São Paulo, Brazil",
+        "country": "BRA",
+        "currency": "BRL",
+        "geo_tier": "Tier-3",
+        "cost_of_living_index": 0.45
+    },
+    {
+        "location_id": "LOC-WAR",
+        "location_name": "Warsaw, Poland",
+        "country": "POL",
+        "currency": "PLN",
+        "geo_tier": "Tier-3",
+        "cost_of_living_index": 0.55
+    },
+    {
+        "location_id": "LOC-SEO",
+        "location_name": "Seoul, South Korea",
+        "country": "KOR",
+        "currency": "KRW",
+        "geo_tier": "Tier-2",
+        "cost_of_living_index": 0.78
     }
 ]
 
@@ -150,28 +206,46 @@ LEVEL_RANK_MULTIPLIERS = {
 # Effective-dated Annual Exchange Rates (2024 to 2026) -> Multiplier to convert local to USD: USD = local * rate
 EXCHANGE_RATES_SEED = [
     # 2024
-    {"exchange_rate_id": "FX-USD-USD-2024", "from_currency": "USD", "to_currency": "USD", "rate": 1.00, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
-    {"exchange_rate_id": "FX-GBP-USD-2024", "from_currency": "GBP", "to_currency": "USD", "rate": 1.28, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
-    {"exchange_rate_id": "FX-EUR-USD-2024", "from_currency": "EUR", "to_currency": "USD", "rate": 1.08, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
-    {"exchange_rate_id": "FX-INR-USD-2024", "from_currency": "INR", "to_currency": "USD", "rate": 0.0120, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
-    {"exchange_rate_id": "FX-JPY-USD-2024", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0068, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
-    {"exchange_rate_id": "FX-SGD-USD-2024", "from_currency": "SGD", "to_currency": "USD", "rate": 0.74, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-USD-USD-2024", "from_currency": "USD", "to_currency": "USD", "rate": 1.00,    "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-GBP-USD-2024", "from_currency": "GBP", "to_currency": "USD", "rate": 1.28,    "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-EUR-USD-2024", "from_currency": "EUR", "to_currency": "USD", "rate": 1.08,    "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-INR-USD-2024", "from_currency": "INR", "to_currency": "USD", "rate": 0.0120,  "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-JPY-USD-2024", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0068,  "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-SGD-USD-2024", "from_currency": "SGD", "to_currency": "USD", "rate": 0.74,    "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-AUD-USD-2024", "from_currency": "AUD", "to_currency": "USD", "rate": 0.655,   "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-CAD-USD-2024", "from_currency": "CAD", "to_currency": "USD", "rate": 0.740,   "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-AED-USD-2024", "from_currency": "AED", "to_currency": "USD", "rate": 0.272,   "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-BRL-USD-2024", "from_currency": "BRL", "to_currency": "USD", "rate": 0.200,   "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-PLN-USD-2024", "from_currency": "PLN", "to_currency": "USD", "rate": 0.248,   "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
+    {"exchange_rate_id": "FX-KRW-USD-2024", "from_currency": "KRW", "to_currency": "USD", "rate": 0.00075, "effective_start_date": "2024-01-01", "effective_end_date": "2024-12-31"},
 
     # 2025
-    {"exchange_rate_id": "FX-USD-USD-2025", "from_currency": "USD", "to_currency": "USD", "rate": 1.00, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
-    {"exchange_rate_id": "FX-GBP-USD-2025", "from_currency": "GBP", "to_currency": "USD", "rate": 1.30, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
-    {"exchange_rate_id": "FX-EUR-USD-2025", "from_currency": "EUR", "to_currency": "USD", "rate": 1.10, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
-    {"exchange_rate_id": "FX-INR-USD-2025", "from_currency": "INR", "to_currency": "USD", "rate": 0.0118, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
-    {"exchange_rate_id": "FX-JPY-USD-2025", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0065, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
-    {"exchange_rate_id": "FX-SGD-USD-2025", "from_currency": "SGD", "to_currency": "USD", "rate": 0.75, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-USD-USD-2025", "from_currency": "USD", "to_currency": "USD", "rate": 1.00,    "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-GBP-USD-2025", "from_currency": "GBP", "to_currency": "USD", "rate": 1.30,    "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-EUR-USD-2025", "from_currency": "EUR", "to_currency": "USD", "rate": 1.10,    "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-INR-USD-2025", "from_currency": "INR", "to_currency": "USD", "rate": 0.0118,  "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-JPY-USD-2025", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0065,  "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-SGD-USD-2025", "from_currency": "SGD", "to_currency": "USD", "rate": 0.75,    "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-AUD-USD-2025", "from_currency": "AUD", "to_currency": "USD", "rate": 0.645,   "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-CAD-USD-2025", "from_currency": "CAD", "to_currency": "USD", "rate": 0.735,   "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-AED-USD-2025", "from_currency": "AED", "to_currency": "USD", "rate": 0.272,   "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-BRL-USD-2025", "from_currency": "BRL", "to_currency": "USD", "rate": 0.185,   "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-PLN-USD-2025", "from_currency": "PLN", "to_currency": "USD", "rate": 0.252,   "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
+    {"exchange_rate_id": "FX-KRW-USD-2025", "from_currency": "KRW", "to_currency": "USD", "rate": 0.00073, "effective_start_date": "2025-01-01", "effective_end_date": "2025-12-31"},
 
     # 2026
-    {"exchange_rate_id": "FX-USD-USD-2026", "from_currency": "USD", "to_currency": "USD", "rate": 1.00, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
-    {"exchange_rate_id": "FX-GBP-USD-2026", "from_currency": "GBP", "to_currency": "USD", "rate": 1.32, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
-    {"exchange_rate_id": "FX-EUR-USD-2026", "from_currency": "EUR", "to_currency": "USD", "rate": 1.09, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
-    {"exchange_rate_id": "FX-INR-USD-2026", "from_currency": "INR", "to_currency": "USD", "rate": 0.0115, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
-    {"exchange_rate_id": "FX-JPY-USD-2026", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0066, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
-    {"exchange_rate_id": "FX-SGD-USD-2026", "from_currency": "SGD", "to_currency": "USD", "rate": 0.76, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"}
+    {"exchange_rate_id": "FX-USD-USD-2026", "from_currency": "USD", "to_currency": "USD", "rate": 1.00,    "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-GBP-USD-2026", "from_currency": "GBP", "to_currency": "USD", "rate": 1.32,    "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-EUR-USD-2026", "from_currency": "EUR", "to_currency": "USD", "rate": 1.09,    "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-INR-USD-2026", "from_currency": "INR", "to_currency": "USD", "rate": 0.0115,  "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-JPY-USD-2026", "from_currency": "JPY", "to_currency": "USD", "rate": 0.0066,  "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-SGD-USD-2026", "from_currency": "SGD", "to_currency": "USD", "rate": 0.76,    "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-AUD-USD-2026", "from_currency": "AUD", "to_currency": "USD", "rate": 0.650,   "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-CAD-USD-2026", "from_currency": "CAD", "to_currency": "USD", "rate": 0.738,   "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-AED-USD-2026", "from_currency": "AED", "to_currency": "USD", "rate": 0.272,   "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-BRL-USD-2026", "from_currency": "BRL", "to_currency": "USD", "rate": 0.178,   "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-PLN-USD-2026", "from_currency": "PLN", "to_currency": "USD", "rate": 0.255,   "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
+    {"exchange_rate_id": "FX-KRW-USD-2026", "from_currency": "KRW", "to_currency": "USD", "rate": 0.00072, "effective_start_date": "2026-01-01", "effective_end_date": "2026-12-31"},
 ]
 
 # Documented Role Comparability Rationales (Approved pairings)

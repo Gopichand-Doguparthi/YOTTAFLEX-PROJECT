@@ -7,7 +7,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 144256.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 43901.48}",
     "notes": "Initial proposal drafted for EMP-004874.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -43,7 +43,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 94386.97}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 61061.28}",
     "notes": "Initial proposal drafted for EMP-000682.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -67,7 +67,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 89036.86}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 223832.45}",
     "notes": "Initial proposal drafted for EMP-001263.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -103,7 +103,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 150944.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 166750.08}",
     "notes": "Initial proposal drafted for EMP-001252.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -115,7 +115,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 318304.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 366016.0}",
     "notes": "Initial proposal drafted for EMP-001637.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -151,7 +151,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 142936.15}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 92477.28}",
     "notes": "Initial proposal drafted for EMP-000997.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -211,7 +211,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 142426.84}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 75397.95}",
     "notes": "Initial proposal drafted for EMP-003267.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -247,7 +247,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 173264.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164693.76}",
     "notes": "Initial proposal drafted for EMP-004813.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -259,7 +259,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 130256.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123889.92}",
     "notes": "Initial proposal drafted for EMP-000932.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -295,7 +295,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 174940.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 201065.76}",
     "notes": "Initial proposal drafted for EMP-004511.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -331,7 +331,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 157605.28}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 177413.6}",
     "notes": "Initial proposal drafted for EMP-004936.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -355,7 +355,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128306.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 147594.72}",
     "notes": "Initial proposal drafted for EMP-002001.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -391,7 +391,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 295111.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 219198.8}",
     "notes": "Initial proposal drafted for EMP-003283.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -403,7 +403,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 191665.6}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 215633.6}",
     "notes": "Initial proposal drafted for EMP-004852.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -439,7 +439,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 69740.05}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 163378.43}",
     "notes": "Initial proposal drafted for EMP-000781.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -475,7 +475,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 136604.16}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151002.88}",
     "notes": "Initial proposal drafted for EMP-001989.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -499,7 +499,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 160291.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 184340.8}",
     "notes": "Initial proposal drafted for EMP-004455.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -535,7 +535,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 124656.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 118419.84}",
     "notes": "Initial proposal drafted for EMP-002768.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -547,7 +547,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 163215.36}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 180369.28}",
     "notes": "Initial proposal drafted for EMP-000879.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -583,7 +583,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 140354.86}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 90820.8}",
     "notes": "Initial proposal drafted for EMP-003747.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -619,7 +619,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 78820.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 90580.0}",
     "notes": "Initial proposal drafted for EMP-000068.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -643,7 +643,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 160496.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 152423.04}",
     "notes": "Initial proposal drafted for EMP-001377.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -679,7 +679,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 53911.82}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 126303.74}",
     "notes": "Initial proposal drafted for EMP-004396.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -691,7 +691,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 170352.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 161884.8}",
     "notes": "Initial proposal drafted for EMP-002371.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -727,7 +727,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 111703.2}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128387.47}",
     "notes": "Initial proposal drafted for EMP-002983.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -763,7 +763,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 147156.98}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95219.04}",
     "notes": "Initial proposal drafted for EMP-002451.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -787,7 +787,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106888.32}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 118146.56}",
     "notes": "Initial proposal drafted for EMP-001559.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -823,7 +823,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 98165.76}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 87794.78}",
     "notes": "Initial proposal drafted for EMP-000274.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -835,7 +835,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85089.76}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97786.08}",
     "notes": "Initial proposal drafted for EMP-003980.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -871,7 +871,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146608.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139413.12}",
     "notes": "Initial proposal drafted for EMP-004360.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -907,7 +907,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 77024.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 68938.53}",
     "notes": "Initial proposal drafted for EMP-001254.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -931,7 +931,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 149761.92}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 134063.53}",
     "notes": "Initial proposal drafted for EMP-000282.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -967,7 +967,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 144439.68}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 129254.29}",
     "notes": "Initial proposal drafted for EMP-002552.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -979,7 +979,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 114688.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108810.24}",
     "notes": "Initial proposal drafted for EMP-003855.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1015,7 +1015,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 358068.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 395637.76}",
     "notes": "Initial proposal drafted for EMP-003921.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1051,7 +1051,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85800.96}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 63733.17}",
     "notes": "Initial proposal drafted for EMP-000994.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1075,7 +1075,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 206416.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 143566.08}",
     "notes": "Initial proposal drafted for EMP-003579.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1159,7 +1159,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 194243.84}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101759.28}",
     "notes": "Initial proposal drafted for EMP-001384.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1195,7 +1195,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164528.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 114388.96}",
     "notes": "Initial proposal drafted for EMP-004532.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1219,7 +1219,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 118608.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 112506.24}",
     "notes": "Initial proposal drafted for EMP-000691.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1255,7 +1255,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108958.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120359.68}",
     "notes": "Initial proposal drafted for EMP-000955.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1267,7 +1267,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 73980.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 83283.2}",
     "notes": "Initial proposal drafted for EMP-002328.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1303,7 +1303,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164528.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 156266.88}",
     "notes": "Initial proposal drafted for EMP-002204.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1339,7 +1339,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 124333.44}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 137383.68}",
     "notes": "Initial proposal drafted for EMP-003489.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1363,7 +1363,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128184.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 144235.0}",
     "notes": "Initial proposal drafted for EMP-003144.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1399,7 +1399,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106198.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 117465.6}",
     "notes": "Initial proposal drafted for EMP-000863.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1411,7 +1411,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 43209.82}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101231.87}",
     "notes": "Initial proposal drafted for EMP-002437.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1447,7 +1447,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 50447.1}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 126794.3}",
     "notes": "Initial proposal drafted for EMP-000840.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1483,7 +1483,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105837.11}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 247976.96}",
     "notes": "Initial proposal drafted for EMP-000806.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1507,7 +1507,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123946.67}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 102256.0}",
     "notes": "Initial proposal drafted for EMP-004944.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1543,7 +1543,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 42084.11}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 98611.97}",
     "notes": "Initial proposal drafted for EMP-000236.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1591,7 +1591,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 126719.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 142469.6}",
     "notes": "Initial proposal drafted for EMP-003990.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1627,7 +1627,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 140694.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 155627.73}",
     "notes": "Initial proposal drafted for EMP-000330.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1651,7 +1651,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95088.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 66167.36}",
     "notes": "Initial proposal drafted for EMP-004616.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1687,7 +1687,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 150752.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 104866.72}",
     "notes": "Initial proposal drafted for EMP-001292.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1699,7 +1699,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101082.24}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 113713.6}",
     "notes": "Initial proposal drafted for EMP-003129.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1795,7 +1795,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 238022.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 262935.68}",
     "notes": "Initial proposal drafted for EMP-003224.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1831,7 +1831,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 104988.8}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120615.04}",
     "notes": "Initial proposal drafted for EMP-004082.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1843,7 +1843,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 372046.01}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 196967.68}",
     "notes": "Initial proposal drafted for EMP-000856.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1879,7 +1879,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 280336.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 207186.67}",
     "notes": "Initial proposal drafted for EMP-003166.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1939,7 +1939,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 354032.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 246357.44}",
     "notes": "Initial proposal drafted for EMP-003970.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1975,7 +1975,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 208544.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 198105.6}",
     "notes": "Initial proposal drafted for EMP-001965.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1987,7 +1987,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 200175.36}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 221226.88}",
     "notes": "Initial proposal drafted for EMP-004123.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2023,7 +2023,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 93147.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 107064.16}",
     "notes": "Initial proposal drafted for EMP-001284.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2059,7 +2059,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 36407.9}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 91582.85}",
     "notes": "Initial proposal drafted for EMP-001731.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2119,7 +2119,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 56745.42}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 132944.9}",
     "notes": "Initial proposal drafted for EMP-002275.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2131,7 +2131,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 82199.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 73537.09}",
     "notes": "Initial proposal drafted for EMP-004903.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2167,7 +2167,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 145918.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 130584.12}",
     "notes": "Initial proposal drafted for EMP-000612.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2203,7 +2203,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 150080.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 104378.4}",
     "notes": "Initial proposal drafted for EMP-002642.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2227,7 +2227,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 143848.32}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 158919.04}",
     "notes": "Initial proposal drafted for EMP-002426.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2263,7 +2263,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85578.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 98396.48}",
     "notes": "Initial proposal drafted for EMP-002149.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2275,7 +2275,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164319.68}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 188979.84}",
     "notes": "Initial proposal drafted for EMP-002584.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2311,7 +2311,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 107552.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123789.12}",
     "notes": "Initial proposal drafted for EMP-002134.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2347,7 +2347,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105721.28}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 121713.76}",
     "notes": "Initial proposal drafted for EMP-004302.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2371,7 +2371,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 69707.68}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 80084.48}",
     "notes": "Initial proposal drafted for EMP-003486.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2407,7 +2407,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 69951.84}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 78842.4}",
     "notes": "Initial proposal drafted for EMP-001919.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2419,7 +2419,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 232736.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 161878.08}",
     "notes": "Initial proposal drafted for EMP-004160.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2455,7 +2455,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 40095.44}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 100757.66}",
     "notes": "Initial proposal drafted for EMP-004650.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2491,7 +2491,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 324352.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 308246.4}",
     "notes": "Initial proposal drafted for EMP-001968.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2515,7 +2515,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151092.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 135247.73}",
     "notes": "Initial proposal drafted for EMP-004152.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2551,7 +2551,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 155063.46}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 100331.28}",
     "notes": "Initial proposal drafted for EMP-000538.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2563,7 +2563,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 41469.74}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97149.7}",
     "notes": "Initial proposal drafted for EMP-004561.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2599,7 +2599,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 40345.31}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 94529.79}",
     "notes": "Initial proposal drafted for EMP-003220.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2659,7 +2659,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 174832.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 129211.42}",
     "notes": "Initial proposal drafted for EMP-002052.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2695,7 +2695,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 217728.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151501.28}",
     "notes": "Initial proposal drafted for EMP-001027.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2707,7 +2707,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 137200.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 113245.44}",
     "notes": "Initial proposal drafted for EMP-001913.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2743,7 +2743,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123667.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139120.8}",
     "notes": "Initial proposal drafted for EMP-001345.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2779,7 +2779,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 179946.67}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 207013.33}",
     "notes": "Initial proposal drafted for EMP-001054.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2803,7 +2803,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97870.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108102.4}",
     "notes": "Initial proposal drafted for EMP-003382.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2839,7 +2839,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 112000.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 34093.36}",
     "notes": "Initial proposal drafted for EMP-003036.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2851,7 +2851,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 175943.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 130709.94}",
     "notes": "Initial proposal drafted for EMP-003690.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2887,7 +2887,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95504.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85450.04}",
     "notes": "Initial proposal drafted for EMP-002655.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2923,7 +2923,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 204032.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106842.96}",
     "notes": "Initial proposal drafted for EMP-001959.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2947,7 +2947,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 150492.16}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 111748.49}",
     "notes": "Initial proposal drafted for EMP-002854.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2983,7 +2983,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 195328.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 185687.04}",
     "notes": "Initial proposal drafted for EMP-002322.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2995,7 +2995,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 168622.72}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 125252.55}",
     "notes": "Initial proposal drafted for EMP-003033.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3031,7 +3031,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 109312.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 80804.17}",
     "notes": "Initial proposal drafted for EMP-001883.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3067,7 +3067,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 98152.32}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 112924.0}",
     "notes": "Initial proposal drafted for EMP-000608.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3091,7 +3091,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 188052.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 207692.8}",
     "notes": "Initial proposal drafted for EMP-003340.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3127,7 +3127,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 133552.18}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 86394.0}",
     "notes": "Initial proposal drafted for EMP-002839.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3139,7 +3139,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 264096.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 303744.0}",
     "notes": "Initial proposal drafted for EMP-001415.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3175,7 +3175,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146832.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 168784.0}",
     "notes": "Initial proposal drafted for EMP-002929.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3235,7 +3235,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 100900.8}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 111720.0}",
     "notes": "Initial proposal drafted for EMP-003712.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3271,7 +3271,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 75767.89}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 190522.08}",
     "notes": "Initial proposal drafted for EMP-004042.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3283,7 +3283,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 74954.88}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 72515.52}",
     "notes": "Initial proposal drafted for EMP-002500.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3319,7 +3319,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 144480.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 166096.0}",
     "notes": "Initial proposal drafted for EMP-004009.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3355,7 +3355,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 208390.56}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 234561.6}",
     "notes": "Initial proposal drafted for EMP-004078.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3415,7 +3415,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120586.67}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 114329.6}",
     "notes": "Initial proposal drafted for EMP-002804.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3427,7 +3427,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 154000.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146361.6}",
     "notes": "Initial proposal drafted for EMP-003940.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3463,7 +3463,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 90182.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 99675.52}",
     "notes": "Initial proposal drafted for EMP-003099.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3499,7 +3499,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 225725.92}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 253926.4}",
     "notes": "Initial proposal drafted for EMP-001325.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3523,7 +3523,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 202097.28}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 180781.71}",
     "notes": "Initial proposal drafted for EMP-000936.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3559,7 +3559,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106999.2}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 69229.44}",
     "notes": "Initial proposal drafted for EMP-002231.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3571,7 +3571,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 159413.33}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 183306.67}",
     "notes": "Initial proposal drafted for EMP-003653.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3607,7 +3607,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106314.88}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 55692.0}",
     "notes": "Initial proposal drafted for EMP-002544.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3643,7 +3643,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 175772.8}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 130589.78}",
     "notes": "Initial proposal drafted for EMP-000105.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3667,7 +3667,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 118714.78}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 76797.84}",
     "notes": "Initial proposal drafted for EMP-001551.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3703,7 +3703,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 142912.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164416.0}",
     "notes": "Initial proposal drafted for EMP-004951.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3715,7 +3715,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 115365.6}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 129802.4}",
     "notes": "Initial proposal drafted for EMP-000989.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3751,7 +3751,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 141525.75}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 91563.36}",
     "notes": "Initial proposal drafted for EMP-000016.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3787,7 +3787,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 252705.6}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 290550.4}",
     "notes": "Initial proposal drafted for EMP-000737.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3811,7 +3811,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 124320.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 102748.8}",
     "notes": "Initial proposal drafted for EMP-003714.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3847,7 +3847,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106444.8}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 117635.84}",
     "notes": "Initial proposal drafted for EMP-001443.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3859,7 +3859,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151501.28}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 170497.6}",
     "notes": "Initial proposal drafted for EMP-001364.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3895,7 +3895,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139426.56}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 103602.97}",
     "notes": "Initial proposal drafted for EMP-004281.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3931,7 +3931,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 141778.56}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 156620.8}",
     "notes": "Initial proposal drafted for EMP-004700.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3955,7 +3955,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 127451.52}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146618.08}",
     "notes": "Initial proposal drafted for EMP-000258.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3991,7 +3991,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 393008.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 119632.02}",
     "notes": "Initial proposal drafted for EMP-001387.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4003,7 +4003,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 84784.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97440.0}",
     "notes": "Initial proposal drafted for EMP-002625.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4075,7 +4075,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 42609.62}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 107122.18}",
     "notes": "Initial proposal drafted for EMP-002290.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4099,7 +4099,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 122855.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 135681.28}",
     "notes": "Initial proposal drafted for EMP-003755.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4135,7 +4135,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 81751.94}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105122.53}",
     "notes": "Initial proposal drafted for EMP-003825.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4147,7 +4147,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139813.33}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 160720.0}",
     "notes": "Initial proposal drafted for EMP-003524.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4183,7 +4183,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123338.88}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 91600.19}",
     "notes": "Initial proposal drafted for EMP-003598.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4219,7 +4219,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105056.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120848.0}",
     "notes": "Initial proposal drafted for EMP-003160.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4243,7 +4243,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 54913.88}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128672.32}",
     "notes": "Initial proposal drafted for EMP-003245.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4279,7 +4279,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 346864.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 256420.35}",
     "notes": "Initial proposal drafted for EMP-002959.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4291,7 +4291,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 123312.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 141792.0}",
     "notes": "Initial proposal drafted for EMP-004949.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4327,7 +4327,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 70114.86}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 176222.59}",
     "notes": "Initial proposal drafted for EMP-002141.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4363,7 +4363,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 291736.37}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 188753.04}",
     "notes": "Initial proposal drafted for EMP-000610.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4387,7 +4387,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 256490.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 288506.4}",
     "notes": "Initial proposal drafted for EMP-000167.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4423,7 +4423,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128800.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 89606.72}",
     "notes": "Initial proposal drafted for EMP-004310.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4435,7 +4435,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 316305.92}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 234978.26}",
     "notes": "Initial proposal drafted for EMP-002832.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4471,7 +4471,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164102.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146744.75}",
     "notes": "Initial proposal drafted for EMP-000225.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4507,7 +4507,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 104378.4}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 119882.56}",
     "notes": "Initial proposal drafted for EMP-001236.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4531,7 +4531,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 403648.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 280784.0}",
     "notes": "Initial proposal drafted for EMP-004356.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4567,7 +4567,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139440.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97053.6}",
     "notes": "Initial proposal drafted for EMP-002998.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4579,7 +4579,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 162512.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 134238.72}",
     "notes": "Initial proposal drafted for EMP-003064.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4615,7 +4615,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 99680.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 30354.3}",
     "notes": "Initial proposal drafted for EMP-001775.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4651,7 +4651,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 145074.65}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 93848.16}",
     "notes": "Initial proposal drafted for EMP-001046.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4675,7 +4675,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 278545.87}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 313404.0}",
     "notes": "Initial proposal drafted for EMP-001866.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4711,7 +4711,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 155260.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 178500.0}",
     "notes": "Initial proposal drafted for EMP-003892.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4723,7 +4723,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 82236.65}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 192684.8}",
     "notes": "Initial proposal drafted for EMP-003210.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4759,7 +4759,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 220416.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 162966.25}",
     "notes": "Initial proposal drafted for EMP-003138.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4795,7 +4795,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 88695.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 65905.46}",
     "notes": "Initial proposal drafted for EMP-000194.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4819,7 +4819,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 252672.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 290640.0}",
     "notes": "Initial proposal drafted for EMP-001563.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4855,7 +4855,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 98486.57}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 63717.36}",
     "notes": "Initial proposal drafted for EMP-001225.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4867,7 +4867,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 328384.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 228411.68}",
     "notes": "Initial proposal drafted for EMP-003731.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4903,7 +4903,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 203840.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 193670.4}",
     "notes": "Initial proposal drafted for EMP-001209.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4939,7 +4939,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 130137.28}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 149792.16}",
     "notes": "Initial proposal drafted for EMP-002991.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4963,7 +4963,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 140112.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 161168.0}",
     "notes": "Initial proposal drafted for EMP-001378.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4999,7 +4999,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 56758.3}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 132975.36}",
     "notes": "Initial proposal drafted for EMP-000166.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5011,7 +5011,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 136604.16}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 150917.76}",
     "notes": "Initial proposal drafted for EMP-003452.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5047,7 +5047,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 103635.84}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 114656.64}",
     "notes": "Initial proposal drafted for EMP-004865.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5083,7 +5083,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 234640.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 269920.0}",
     "notes": "Initial proposal drafted for EMP-004604.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5107,7 +5107,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 165728.64}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 183263.36}",
     "notes": "Initial proposal drafted for EMP-004376.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5155,7 +5155,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 114507.99}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 60605.44}",
     "notes": "Initial proposal drafted for EMP-001464.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5191,7 +5191,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 290174.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 215557.5}",
     "notes": "Initial proposal drafted for EMP-001474.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5227,7 +5227,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95466.56}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 109627.84}",
     "notes": "Initial proposal drafted for EMP-000603.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5299,7 +5299,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 100908.19}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 53428.48}",
     "notes": "Initial proposal drafted for EMP-004402.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5335,7 +5335,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 139781.6}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 160657.28}",
     "notes": "Initial proposal drafted for EMP-003443.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5371,7 +5371,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 126794.24}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 67124.51}",
     "notes": "Initial proposal drafted for EMP-004247.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5395,7 +5395,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 110687.07}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 58591.9}",
     "notes": "Initial proposal drafted for EMP-003860.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5431,7 +5431,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 88462.42}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 207277.06}",
     "notes": "Initial proposal drafted for EMP-000636.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5443,7 +5443,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85341.59}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 199965.7}",
     "notes": "Initial proposal drafted for EMP-001806.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5479,7 +5479,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 168241.92}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 185987.2}",
     "notes": "Initial proposal drafted for EMP-000825.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5515,7 +5515,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 85290.24}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 63403.68}",
     "notes": "Initial proposal drafted for EMP-002740.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5539,7 +5539,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 116704.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 134176.0}",
     "notes": "Initial proposal drafted for EMP-000170.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5575,7 +5575,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 58239.5}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146383.78}",
     "notes": "Initial proposal drafted for EMP-004134.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5587,7 +5587,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 61053.78}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 143058.94}",
     "notes": "Initial proposal drafted for EMP-002161.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5623,7 +5623,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 50961.01}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 119418.88}",
     "notes": "Initial proposal drafted for EMP-000590.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5659,7 +5659,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 167502.72}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 185221.12}",
     "notes": "Initial proposal drafted for EMP-001715.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5683,7 +5683,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 148579.2}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 143901.8}",
     "notes": "Initial proposal drafted for EMP-002830.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5719,7 +5719,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 193966.08}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 214247.04}",
     "notes": "Initial proposal drafted for EMP-000376.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5731,7 +5731,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 134176.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 127585.92}",
     "notes": "Initial proposal drafted for EMP-003853.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5767,7 +5767,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 202160.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 149425.58}",
     "notes": "Initial proposal drafted for EMP-003455.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5803,7 +5803,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 177520.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 204064.0}",
     "notes": "Initial proposal drafted for EMP-003685.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5827,7 +5827,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108810.24}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97391.08}",
     "notes": "Initial proposal drafted for EMP-001781.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5863,7 +5863,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 109424.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 80904.7}",
     "notes": "Initial proposal drafted for EMP-003470.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5875,7 +5875,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 40557.83}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95017.22}",
     "notes": "Initial proposal drafted for EMP-001836.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5911,7 +5911,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 132168.96}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 146151.04}",
     "notes": "Initial proposal drafted for EMP-003674.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5947,7 +5947,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 249984.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 287392.0}",
     "notes": "Initial proposal drafted for EMP-002935.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5971,7 +5971,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 138634.74}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 73384.42}",
     "notes": "Initial proposal drafted for EMP-002265.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6019,7 +6019,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 90583.36}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 104256.32}",
     "notes": "Initial proposal drafted for EMP-002905.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6055,7 +6055,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 195552.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 59514.62}",
     "notes": "Initial proposal drafted for EMP-003193.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6091,7 +6091,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 53767.56}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 125968.64}",
     "notes": "Initial proposal drafted for EMP-001224.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6115,7 +6115,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 39787.61}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 93219.84}",
     "notes": "Initial proposal drafted for EMP-003252.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6151,7 +6151,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105645.72}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 68372.64}",
     "notes": "Initial proposal drafted for EMP-001459.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6163,7 +6163,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 131281.92}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 117517.28}",
     "notes": "Initial proposal drafted for EMP-000386.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6199,7 +6199,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 70232.06}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 164566.53}",
     "notes": "Initial proposal drafted for EMP-003156.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6235,7 +6235,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 116787.44}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 75541.2}",
     "notes": "Initial proposal drafted for EMP-002520.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6295,7 +6295,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 171584.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 197344.0}",
     "notes": "Initial proposal drafted for EMP-003377.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6307,7 +6307,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 116666.46}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 75484.08}",
     "notes": "Initial proposal drafted for EMP-000961.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6379,7 +6379,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 51462.04}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120576.51}",
     "notes": "Initial proposal drafted for EMP-001502.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6403,7 +6403,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 66167.36}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 76055.84}",
     "notes": "Initial proposal drafted for EMP-003577.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6439,7 +6439,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 236208.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 71902.6}",
     "notes": "Initial proposal drafted for EMP-001596.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6451,7 +6451,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 118783.84}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 133588.0}",
     "notes": "Initial proposal drafted for EMP-002283.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6487,7 +6487,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 74346.52}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 48123.6}",
     "notes": "Initial proposal drafted for EMP-003608.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6523,7 +6523,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 157360.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 109505.76}",
     "notes": "Initial proposal drafted for EMP-001255.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6547,7 +6547,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 79674.39}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 186652.93}",
     "notes": "Initial proposal drafted for EMP-000017.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6595,7 +6595,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 94123.68}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108162.88}",
     "notes": "Initial proposal drafted for EMP-002395.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6631,7 +6631,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 73095.79}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 47295.36}",
     "notes": "Initial proposal drafted for EMP-004094.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6667,7 +6667,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 302516.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 224718.2}",
     "notes": "Initial proposal drafted for EMP-004274.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6691,7 +6691,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 97821.29}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 51793.73}",
     "notes": "Initial proposal drafted for EMP-003025.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6727,7 +6727,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 226240.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 157483.2}",
     "notes": "Initial proposal drafted for EMP-003658.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6739,7 +6739,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 50176.62}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 117560.58}",
     "notes": "Initial proposal drafted for EMP-003636.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6775,7 +6775,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 84143.88}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 44556.96}",
     "notes": "Initial proposal drafted for EMP-001828.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6811,7 +6811,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 219968.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 209045.76}",
     "notes": "Initial proposal drafted for EMP-004410.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6835,7 +6835,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 188832.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 217056.0}",
     "notes": "Initial proposal drafted for EMP-000318.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6871,7 +6871,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 51284.3}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120150.02}",
     "notes": "Initial proposal drafted for EMP-003157.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6883,7 +6883,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 184352.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 175190.4}",
     "notes": "Initial proposal drafted for EMP-001958.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6919,7 +6919,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 243824.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 280448.0}",
     "notes": "Initial proposal drafted for EMP-000774.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6955,7 +6955,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 119110.99}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 77054.88}",
     "notes": "Initial proposal drafted for EMP-003723.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6979,7 +6979,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128464.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 147728.0}",
     "notes": "Initial proposal drafted for EMP-004075.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7027,7 +7027,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 120736.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 36746.64}",
     "notes": "Initial proposal drafted for EMP-002826.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7063,7 +7063,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 270547.2}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 299111.68}",
     "notes": "Initial proposal drafted for EMP-004756.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7099,7 +7099,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 147168.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 108759.97}",
     "notes": "Initial proposal drafted for EMP-002192.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7123,7 +7123,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 112560.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 78253.28}",
     "notes": "Initial proposal drafted for EMP-002062.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7159,7 +7159,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 106740.48}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 95432.2}",
     "notes": "Initial proposal drafted for EMP-002438.",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -7171,7 +7171,7 @@
     "actor_id": "hr.partner@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 197344.0}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 60042.7}",
     "notes": "Initial proposal drafted for EMP-002107.",
     "timestamp": "2026-02-15T09:30:00"
   },

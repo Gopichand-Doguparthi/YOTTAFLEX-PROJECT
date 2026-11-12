@@ -8,11 +8,16 @@ import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import AdjustmentProposal, Employee, SalaryRecord
 from src.workflow.proposal_manager import ProposalManager
+from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Compensation Adjustment Proposals")
     st.markdown("Manages equity adjustment proposals, approval workflows, and remediation actions.")
+
+    role_map = get_role_map(db)
+    level_map = get_level_map(db)
+    loc_map = get_location_map(db)
 
     # Proposal creation form
     with st.expander("Initiate New Compensation Adjustment Proposal"):
@@ -59,7 +64,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     st.markdown("---")
 
-    # Proposals Table
+    # Proposals Table — count is dynamic from DB
     proposals = db.query(AdjustmentProposal).order_by(AdjustmentProposal.created_at.desc()).all()
     if not proposals:
         st.info("No adjustment proposals currently recorded.")
@@ -82,5 +87,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         for p in proposals
     ]
 
-    st.subheader(f"Active Adjustment Proposals Registry ({len(prop_data)} Total)")
+    # Title uses actual count from DB — never hardcoded
+    st.subheader(f"Active Adjustment Proposals Registry ({len(prop_data):,} Total)")
     st.dataframe(pd.DataFrame(prop_data), use_container_width=True)

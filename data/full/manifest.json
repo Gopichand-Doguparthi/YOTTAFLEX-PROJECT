@@ -1,14 +1,14 @@
 {
   "files": {
     "locations.csv": {
-      "rows": 7,
-      "sha256": "0d8617e23ce42ab995f7b0875a355eb4e4072edff6fab000cbe908e221435f93",
-      "size_bytes": 392
+      "rows": 14,
+      "sha256": "ed92603ddcb128a978fdbef108495e3ccdbed06a4748ffb0cb989d98843f63da",
+      "size_bytes": 758
     },
     "locations.json": {
-      "rows": 7,
-      "sha256": "06970641f1a64ab64b61989ff7487016cb784f3acf8bff969917f9b26963d4cb",
-      "size_bytes": 1331
+      "rows": 14,
+      "sha256": "609fc7e0927b060fb647fb28917d94260506be1de4d6b19953ce20f1eb4eac0c",
+      "size_bytes": 2709
     },
     "levels.csv": {
       "rows": 6,
@@ -31,44 +31,44 @@
       "size_bytes": 5398
     },
     "compensation_bands.csv": {
-      "rows": 4410,
-      "sha256": "73a4ed63122d8b98c365924b61163a4338510d64abd053ba954b5dad21f69b69",
-      "size_bytes": 529725
+      "rows": 8820,
+      "sha256": "38ab016903c8dea5e8a816ab4dac7cd5529cfe65c2933f0a50629d86251e1461",
+      "size_bytes": 1060404
     },
     "compensation_bands.json": {
-      "rows": 4410,
-      "sha256": "8a235af289f3ac8282e479c59413d77e50dae73e43912296ddaf4e2525b08aa1",
-      "size_bytes": 1632101
+      "rows": 8820,
+      "sha256": "fd70f76d28eaac5c0f98ec61493c68cf61a9f1b5e0ac654da8f98cc7d5425826",
+      "size_bytes": 3265280
     },
     "employees.csv": {
       "rows": 5000,
-      "sha256": "e88cdbc607828a0576e049c551ede254a1702062a6d17d692e13941fca414dfe",
+      "sha256": "279f404d073df20c18d2419140de4a586901805f9103df536249e14ce362edfe",
       "size_bytes": 817637
     },
     "employees.json": {
       "rows": 5000,
-      "sha256": "1b6fa0160f9385ea08037dd6552a035deed3c0f06f57539326ee24a8bd5c4794",
+      "sha256": "adcf13f7af799a805bac2689a259e9a8f86dc9ab018bdd020930835f6af80b84",
       "size_bytes": 2437474
     },
     "salary_records.csv": {
       "rows": 15025,
-      "sha256": "561107fb7068dbb495f29af96a3afabe12838a63fd0f71e10f7185acf5e04862",
-      "size_bytes": 1892145
+      "sha256": "c2d33e6a21fc3e95db5fd7b65713b5bee633ec41f49de7354aa1a6155d98ceea",
+      "size_bytes": 1894715
     },
     "salary_records.json": {
       "rows": 15025,
-      "sha256": "f91c764a5518ce1d4b2ddffd7ca4fa60e26dd6c4d14c4cb09eaf29e4325a2a1f",
-      "size_bytes": 6140631
+      "sha256": "6a38e95389451c4394d9cffaa08d2eef21ab884493c4afbc1fc553e74f97a939",
+      "size_bytes": 6143201
     },
     "performance_evidence.csv": {
       "rows": 19721,
-      "sha256": "49d5b61ea1b6e2decd508a58ed05a68d649cbaeb03c2d8cce1413c66f706e244",
-      "size_bytes": 1717028
+      "sha256": "f4d33b2b20b297a10dc5d153878f4e3b21582cddf3ad9d94a4a5e77f88e1e1cf",
+      "size_bytes": 1717006
     },
     "performance_evidence.json": {
       "rows": 19721,
-      "sha256": "88c7c6a42a5956d1f6a661beb6a1d0bb3654d81424b122357b93c7fe86c93bee",
-      "size_bytes": 6528814
+      "sha256": "7f8e1e0e7dedaa1f246455bb8453abf410f46c8afa7c1f3bd57297c3deaf6eff",
+      "size_bytes": 6528792
     },
     "tenure_records.csv": {
       "rows": 5000,
@@ -92,33 +92,33 @@
     },
     "adjustment_proposals.csv": {
       "rows": 250,
-      "sha256": "a68146af31db18a5b1dbcfcff1cfd2feda471a6ff7417bb68071bc25022ff0ca",
-      "size_bytes": 96181
+      "sha256": "540b84bf190208ef32d68e9e59a86ee62f4063cd15b92a98dcde92536ea4cc57",
+      "size_bytes": 96213
     },
     "adjustment_proposals.json": {
       "rows": 250,
-      "sha256": "89b7a08e3c760176ea2e288e49ce50163117cea4189da0c3244fc021f68b9830",
-      "size_bytes": 210013
+      "sha256": "4d99ae674e3038fd60697fffefd576e205a138fc27163196bad69210b393a40e",
+      "size_bytes": 210045
     },
     "approval_events.csv": {
       "rows": 600,
-      "sha256": "85096ffc17e4d62587c401e7332d7a442e5e3193e7f121bdf9abf10871e4d63d",
-      "size_bytes": 140819
+      "sha256": "b49fbc66ff5e968ec7b175d65fbf813c2dd59beac62ac36f8b971203f353fd8c",
+      "size_bytes": 140834
     },
     "approval_events.json": {
       "rows": 600,
-      "sha256": "cddf8609859d3a991eed41859f3422948d993716da8766dcd45f949b1ade983a",
-      "size_bytes": 269523
+      "sha256": "d4fd04fbec19cf3fc494a74cd4778a41498c0c973a2b8582e815bbad2f5ad2d9",
+      "size_bytes": 269538
     },
     "exchange_rates.csv": {
-      "rows": 18,
-      "sha256": "52ea6fc032628540ac564251050f39f1b7b285e1323b33ce39b412b75e000390",
-      "size_bytes": 1031
+      "rows": 36,
+      "sha256": "10f48bfbbe4e39b2ad65d1d8bd441ae720e20a187e85009a4a0e9ef303da0da9",
+      "size_bytes": 1987
     },
     "exchange_rates.json": {
-      "rows": 18,
-      "sha256": "a79b3c1676ece026f293bb07fe9e12f194673d600c77917cbda179ceed1a94f6",
-      "size_bytes": 3843
+      "rows": 36,
+      "sha256": "fee9b8d976113a3c282fea9f1c36af0dadcf25707ef1e9b8cb8e7971311b5cca",
+      "size_bytes": 7697
     },
     "role_comparability_rationales.csv": {
       "rows": 4,
@@ -132,24 +132,24 @@
     },
     "ground_truth_records.csv": {
       "rows": 5103,
-      "sha256": "92830f84a129334c143475f5905c5bde1910c69032002f8acd33ab8d44e6049e",
-      "size_bytes": 814610
+      "sha256": "1799c0daf5aef9afd81a2dc96efa880bbd6b8ef09c820d063f338526fc10ecc3",
+      "size_bytes": 814614
     },
     "ground_truth_records.json": {
       "rows": 5103,
-      "sha256": "3914f647963fbfab225531e08d4379c2ef67a912bd17da13100a47725fe29d75",
-      "size_bytes": 1880975
+      "sha256": "85cb4dc4495f055d12ca15aa03cefea7b05ac68f289e4cbcf2cc436ba2427d52",
+      "size_bytes": 1880979
     },
     "seed_data.sql": {
-      "sha256": "e76177802b064442435c6254584e6d9f6b566cfaeff0d7234dcb597ad1855fc6",
-      "size_bytes": 18399049
+      "sha256": "70667330136c2274d9aa148c12e4365ba06f36611e845bb76d3087e2f1d9ac6f",
+      "size_bytes": 19841221
     }
   },
   "row_counts": {
-    "locations": 7,
+    "locations": 14,
     "levels": 6,
     "roles": 35,
-    "compensation_bands": 4410,
+    "compensation_bands": 8820,
     "employees": 5000,
     "salary_records": 15025,
     "performance_evidence": 19721,
@@ -157,7 +157,7 @@
     "promotions": 516,
     "adjustment_proposals": 250,
     "approval_events": 600,
-    "exchange_rates": 18,
+    "exchange_rates": 36,
     "role_comparability_rationales": 4,
     "ground_truth_records": 5103
   }

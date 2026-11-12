@@ -252,8 +252,8 @@ class SyntheticDataGenerator:
             level_weights = [0.20, 0.35, 0.25, 0.12, 0.06, 0.02]
             level = self.rng.choices(levels, weights=level_weights, k=1)[0]
 
-            # Location distribution: NYC/SFO 40%, LON/BER 30%, BLR/TYO/SIN 30%
-            loc_weights = [0.25, 0.15, 0.15, 0.15, 0.15, 0.08, 0.07]
+            # Location distribution: auto-weighted by cost_of_living_index (higher CoL = more employees)
+            loc_weights = [loc.get("cost_of_living_index", 0.5) for loc in locations]
             location = self.rng.choices(locations, weights=loc_weights, k=1)[0]
 
             # Hire date between 2015 and 2025

@@ -48,6 +48,54 @@
     "effective_end_date": "2024-12-31"
   },
   {
+    "exchange_rate_id": "FX-AUD-USD-2024",
+    "from_currency": "AUD",
+    "to_currency": "USD",
+    "rate": 0.655,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-CAD-USD-2024",
+    "from_currency": "CAD",
+    "to_currency": "USD",
+    "rate": 0.74,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-AED-USD-2024",
+    "from_currency": "AED",
+    "to_currency": "USD",
+    "rate": 0.272,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-BRL-USD-2024",
+    "from_currency": "BRL",
+    "to_currency": "USD",
+    "rate": 0.2,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-PLN-USD-2024",
+    "from_currency": "PLN",
+    "to_currency": "USD",
+    "rate": 0.248,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-KRW-USD-2024",
+    "from_currency": "KRW",
+    "to_currency": "USD",
+    "rate": 0.00075,
+    "effective_start_date": "2024-01-01",
+    "effective_end_date": "2024-12-31"
+  },
+  {
     "exchange_rate_id": "FX-USD-USD-2025",
     "from_currency": "USD",
     "to_currency": "USD",
@@ -96,6 +144,54 @@
     "effective_end_date": "2025-12-31"
   },
   {
+    "exchange_rate_id": "FX-AUD-USD-2025",
+    "from_currency": "AUD",
+    "to_currency": "USD",
+    "rate": 0.645,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-CAD-USD-2025",
+    "from_currency": "CAD",
+    "to_currency": "USD",
+    "rate": 0.735,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-AED-USD-2025",
+    "from_currency": "AED",
+    "to_currency": "USD",
+    "rate": 0.272,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-BRL-USD-2025",
+    "from_currency": "BRL",
+    "to_currency": "USD",
+    "rate": 0.185,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-PLN-USD-2025",
+    "from_currency": "PLN",
+    "to_currency": "USD",
+    "rate": 0.252,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-KRW-USD-2025",
+    "from_currency": "KRW",
+    "to_currency": "USD",
+    "rate": 0.00073,
+    "effective_start_date": "2025-01-01",
+    "effective_end_date": "2025-12-31"
+  },
+  {
     "exchange_rate_id": "FX-USD-USD-2026",
     "from_currency": "USD",
     "to_currency": "USD",
@@ -140,6 +236,54 @@
     "from_currency": "SGD",
     "to_currency": "USD",
     "rate": 0.76,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-AUD-USD-2026",
+    "from_currency": "AUD",
+    "to_currency": "USD",
+    "rate": 0.65,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-CAD-USD-2026",
+    "from_currency": "CAD",
+    "to_currency": "USD",
+    "rate": 0.738,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-AED-USD-2026",
+    "from_currency": "AED",
+    "to_currency": "USD",
+    "rate": 0.272,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-BRL-USD-2026",
+    "from_currency": "BRL",
+    "to_currency": "USD",
+    "rate": 0.178,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-PLN-USD-2026",
+    "from_currency": "PLN",
+    "to_currency": "USD",
+    "rate": 0.255,
+    "effective_start_date": "2026-01-01",
+    "effective_end_date": "2026-12-31"
+  },
+  {
+    "exchange_rate_id": "FX-KRW-USD-2026",
+    "from_currency": "KRW",
+    "to_currency": "USD",
+    "rate": 0.00072,
     "effective_start_date": "2026-01-01",
     "effective_end_date": "2026-12-31"
   }

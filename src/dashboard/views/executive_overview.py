@@ -8,22 +8,26 @@ import plotly.graph_objects as go
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import Employee, SalaryRecord, CompensationBand, AdjustmentProposal
+from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, map_col, PLOTLY_CONFIG
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Executive Overview & Equity Scorecard")
     st.markdown("High-level visibility into enterprise compensation structure, detected disparities, and remediation proposals.")
 
-    # Query KPIs
+    role_map = get_role_map(db)
+    level_map = get_level_map(db)
+    loc_map = get_location_map(db)
+
+    # KPIs
     total_employees = db.query(Employee).count()
     total_salary_records = db.query(SalaryRecord).count()
-    total_bands = db.query(CompensationBand).count()
     total_proposals = db.query(AdjustmentProposal).count()
     pending_proposals = db.query(AdjustmentProposal).filter_by(approval_status="PENDING_REVIEW").count()
     approved_proposals = db.query(AdjustmentProposal).filter_by(approval_status="APPROVED").count()
     rejected_proposals = db.query(AdjustmentProposal).filter_by(approval_status="REJECTED").count()
 
-    # Query latest 2026 salaries
+    # Latest 2026 salaries
     salaries = db.query(
         Employee.employee_id,
         Employee.department,
@@ -37,7 +41,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     df_sal = pd.DataFrame(salaries, columns=["employee_id", "department", "location_id", "role_id", "level_id", "normalized_salary"])
 
-    # Apply filters if set
     if selected_role != "All":
         df_sal = df_sal[df_sal["role_id"] == selected_role]
     if selected_level != "All":
@@ -58,7 +61,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     st.markdown("---")
 
-    # Visualizations
+    # Resolve IDs to names for display
+    df_sal["Location"] = df_sal["location_id"].map(lambda x: loc_map.get(x, x))
+    df_sal["Role"] = df_sal["role_id"].map(lambda x: role_map.get(x, x))
+
     col_chart1, col_chart2 = st.columns(2)
 
     with col_chart1:
@@ -74,7 +80,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 title="Normalized Compensation Spread by Department"
             )
             fig_dept.update_layout(showlegend=False)
-            st.plotly_chart(fig_dept, use_container_width=True)
+            st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
         else:
             st.info("No records match the current filter selection.")
 
@@ -101,12 +107,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             },
             title="Remediation Proposal Status Breakdown"
         )
-        st.plotly_chart(fig_donut, use_container_width=True)
+        st.plotly_chart(fig_donut, use_container_width=True, config=PLOTLY_CONFIG)
 
-    # Location Spend
+    # Location Spend — use full names
     st.subheader("Location Benchmarks & Workforce Distribution")
     if not df_sal.empty:
-        loc_summary = df_sal.groupby("location_id").agg(
+        loc_summary = df_sal.groupby("Location").agg(
             headcount=("employee_id", "count"),
             avg_salary=("normalized_salary", "mean"),
             median_salary=("normalized_salary", "median")
@@ -114,12 +120,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
         fig_bar = px.bar(
             loc_summary,
-            x="location_id",
+            x="Location",
             y="headcount",
             color="avg_salary",
             text="headcount",
-            labels={"location_id": "Location", "headcount": "Employee Count", "avg_salary": "Avg Salary (USD)"},
+            labels={"Location": "City", "headcount": "Employee Count", "avg_salary": "Avg Salary (USD)"},
             title="Workforce Count and Average Normalized Salary by Geographic Hub",
             color_continuous_scale="Viridis"
         )
-        st.plotly_chart(fig_bar, use_container_width=True)
+        fig_bar.update_layout(xaxis_tickangle=-30)
+        st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
