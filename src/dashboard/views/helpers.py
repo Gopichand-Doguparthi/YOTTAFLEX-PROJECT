@@ -235,9 +235,9 @@ def apply_clean_layout(
 
 def build_table_column_config(df, overrides: dict = None) -> dict:
     """
-    Assigns compact, content-proportional column widths based on actual header
-    and cell text lengths so short columns never get wasted whitespace and long
-    columns stay readable.
+    Lets Streamlit auto-size columns tightly to their exact cell contents (width=None)
+    and only expands genuinely long multi-sentence text columns (> 55 chars) so
+    short/medium columns never have wasted whitespace.
     """
     cfg = {}
     for col in df.columns:
@@ -245,11 +245,6 @@ def build_table_column_config(df, overrides: dict = None) -> dict:
             cfg[col] = overrides[col]
             continue
         max_cell = int(df[col].astype(str).str.len().max()) if not df.empty else 0
-        eff_len = max(len(str(col)), max_cell)
-        if eff_len > 32:
+        if max_cell > 55:
             cfg[col] = st.column_config.TextColumn(col, width="large")
-        elif eff_len >= 15:
-            cfg[col] = st.column_config.TextColumn(col, width="medium")
-        else:
-            cfg[col] = st.column_config.TextColumn(col, width="small")
     return cfg
