@@ -10,6 +10,9 @@ from src.database.models import Employee, SalaryRecord, CompensationBand
 from src.api.schemas import EmployeeSchema, EmployeeDetailSchema
 from src.engine.compa_ratio import CompaRatioCalculator
 from src.engine.within_band import WithinBandCalculator
+from src.engine.currency_normalizer import (
+    CurrencyNormalizer, MissingCurrencyConversionException, select_effective_band
+)
 
 router = APIRouter(prefix="/employees", tags=["Employees"])
 
@@ -43,21 +46,32 @@ def get_employee_detail(employee_id: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail=f"Employee '{employee_id}' not found.")
 
     sals = db.query(SalaryRecord).filter(SalaryRecord.employee_id == employee_id).order_by(SalaryRecord.effective_date.desc()).all()
-    latest_sal = sals[0].normalized_salary if sals else None
+    latest_sal_rec = sals[0] if sals else None
+    latest_sal = latest_sal_rec.normalized_salary if latest_sal_rec else None
 
-    # Benchmark against active band
-    band = db.query(CompensationBand).filter(
+    # Benchmark against effective-dated band converted to USD reporting currency
+    candidate_bands = db.query(CompensationBand).filter(
         CompensationBand.role_id == emp.current_role_id,
         CompensationBand.level_id == emp.current_level_id,
         CompensationBand.location_id == emp.current_location_id,
-        CompensationBand.status == "ACTIVE"
-    ).first()
+    ).all()
+    ref_date = latest_sal_rec.effective_date if latest_sal_rec else None
+    band = select_effective_band(
+        candidate_bands, emp.current_role_id, emp.current_level_id, emp.current_location_id, on_date=ref_date
+    )
 
     cr = None
     wbp = None
     if latest_sal and band:
-        cr = CompaRatioCalculator.calculate(latest_sal, band.mid_salary)
-        wbp = WithinBandCalculator.calculate(latest_sal, band.min_salary, band.max_salary)
+        curr_norm = CurrencyNormalizer()
+        curr_norm.load_from_db(db)
+        try:
+            b_min, b_mid, b_max = curr_norm.convert_band_to_reporting(band, to_currency="USD", on_date=ref_date)
+            cr = CompaRatioCalculator.calculate(latest_sal, b_mid)
+            wbp = WithinBandCalculator.calculate(latest_sal, b_min, b_max)
+        except MissingCurrencyConversionException:
+            cr = None
+            wbp = None
 
     return EmployeeDetailSchema(
         employee_id=emp.employee_id,

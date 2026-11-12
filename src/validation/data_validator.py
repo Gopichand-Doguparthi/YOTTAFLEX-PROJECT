@@ -37,7 +37,8 @@ class DataValidator:
             cls.check_salary_normalization_arithmetic(session),
             cls.check_proposal_arithmetic(session),
             cls.check_lifecycle_statuses(session),
-            cls.check_exchange_rate_coverage(session)
+            cls.check_exchange_rate_coverage(session),
+            cls.check_duplicate_records(session),
         ]
 
         for check in checks:
@@ -63,8 +64,14 @@ class DataValidator:
             (Location, "location_id"),
             (CompensationBand, "band_id"),
             (SalaryRecord, "salary_id"),
+            (PerformanceEvidence, "evidence_id"),
+            (Tenure, "tenure_id"),
+            (Promotion, "promotion_id"),
             (AdjustmentProposal, "proposal_id"),
-            (ApprovalEvent, "event_id")
+            (ApprovalEvent, "event_id"),
+            (ExchangeRate, "exchange_rate_id"),
+            (RoleComparabilityRationale, "mapping_id"),
+            (GroundTruthRecord, "ground_truth_id"),
         ]
         violations = []
         for model, pk_name in models_to_check:
@@ -178,24 +185,65 @@ class DataValidator:
         if invalid_fx_dates > 0:
             violations.append(f"{invalid_fx_dates} exchange rates have start_date > end_date.")
 
+        # Salary effective_date <= end_date
+        invalid_sal_end = session.query(SalaryRecord).filter(
+            SalaryRecord.end_date.isnot(None),
+            SalaryRecord.effective_date > SalaryRecord.end_date
+        ).count()
+        if invalid_sal_end > 0:
+            violations.append(f"{invalid_sal_end} salary records have effective_date > end_date.")
+
+        # Salary effective_date >= employee hire_date
+        invalid_hire_sal = session.query(SalaryRecord).join(
+            Employee, SalaryRecord.employee_id == Employee.employee_id
+        ).filter(SalaryRecord.effective_date < Employee.hire_date).count()
+        if invalid_hire_sal > 0:
+            violations.append(f"{invalid_hire_sal} salary records precede employee hire_date.")
+
         return {
             "check_name": "date_ordering",
             "passed": len(violations) == 0,
             "violations_count": len(violations),
-            "description": "Validates logical ordering of start and end dates.",
+            "description": "Validates logical ordering of start, end, hire, and effective dates.",
             "details": violations
         }
 
     @staticmethod
     def check_salary_normalization_arithmetic(session: Session) -> Dict[str, Any]:
-        """Verifies that all normalized salaries are positive non-zero numbers."""
-        invalid_salaries = session.query(SalaryRecord).filter(SalaryRecord.normalized_salary <= 0).count()
+        """Verifies normalized salaries are positive and reconcile with (annual_base * fx_rate) / fte."""
+        from src.engine.currency_normalizer import CurrencyNormalizer, MissingCurrencyConversionException
+
+        non_positive = session.query(SalaryRecord).filter(SalaryRecord.normalized_salary <= 0).count()
+        curr_norm = CurrencyNormalizer()
+        curr_norm.load_from_db(session)
+
+        reconciliation_mismatches = 0
+        for sal in session.query(SalaryRecord).all():
+            if sal.fte <= 0:
+                continue
+            annual_base = sal.base_salary * 12.0 if sal.pay_frequency == "MONTHLY" else sal.base_salary
+            try:
+                fx_rate = curr_norm.get_rate(sal.currency, "USD", sal.effective_date)
+                expected_norm = round((annual_base * fx_rate) / sal.fte, 2)
+                if abs(expected_norm - sal.normalized_salary) > max(1.0, expected_norm * 0.005):
+                    reconciliation_mismatches += 1
+            except MissingCurrencyConversionException:
+                # Missing FX is tracked separately by exchange_rate_coverage / exception detector
+                continue
+
+        details = []
+        if non_positive > 0:
+            details.append(f"{non_positive} salary records have non-positive normalized salary.")
+        if reconciliation_mismatches > 0:
+            details.append(f"{reconciliation_mismatches} salary records fail (annual_base * fx_rate) / fte reconciliation.")
+
+        total_violations = non_positive + reconciliation_mismatches
         return {
-            "check_name": "salary_normalization_positivity",
-            "passed": invalid_salaries == 0,
-            "violations_count": invalid_salaries,
-            "description": "Checks that all normalized salaries are strictly positive.",
-            "details": [f"{invalid_salaries} salary records have non-positive normalized salary."] if invalid_salaries > 0 else []
+            "check_name": "salary_normalization_arithmetic",
+            "passed": total_violations == 0,
+            "violations_count": total_violations,
+            "description": "Checks that normalized salaries are positive and reconcile with base_salary, FX rate, and FTE.",
+            "details": details
         }
 
     @staticmethod
@@ -256,4 +304,33 @@ class DataValidator:
             "violations_count": len(missing),
             "description": "Verifies that exchange rates exist for all operating currencies.",
             "details": [f"Missing exchange rates for currencies: {missing}"] if missing else []
+        }
+
+    @staticmethod
+    def check_duplicate_records(session: Session) -> Dict[str, Any]:
+        """Detects duplicate logical records (same employee+effective_date in salaries or employee+review_cycle in performance)."""
+        from sqlalchemy import func
+        dup_sal = (
+            session.query(SalaryRecord.employee_id, SalaryRecord.effective_date)
+            .group_by(SalaryRecord.employee_id, SalaryRecord.effective_date)
+            .having(func.count(SalaryRecord.salary_id) > 1)
+            .count()
+        )
+        dup_perf = (
+            session.query(PerformanceEvidence.employee_id, PerformanceEvidence.review_cycle)
+            .group_by(PerformanceEvidence.employee_id, PerformanceEvidence.review_cycle)
+            .having(func.count(PerformanceEvidence.evidence_id) > 1)
+            .count()
+        )
+        violations = []
+        if dup_sal > 0:
+            violations.append(f"{dup_sal} duplicate (employee_id, effective_date) salary record groups found.")
+        if dup_perf > 0:
+            violations.append(f"{dup_perf} duplicate (employee_id, review_cycle) performance evidence groups found.")
+        return {
+            "check_name": "duplicate_logical_records",
+            "passed": len(violations) == 0,
+            "violations_count": dup_sal + dup_perf,
+            "description": "Ensures no duplicate salary effective dates or review cycles exist per employee.",
+            "details": violations
         }

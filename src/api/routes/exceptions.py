@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from src.database.session import get_db
 from src.database.models import (
     SalaryRecord, CompensationBand, Employee, AdjustmentProposal,
-    ApprovalEvent, GroundTruthRecord
+    ApprovalEvent, RoleComparabilityRationale
 )
 from src.engine.currency_normalizer import CurrencyNormalizer
 from src.engine.comparable_groups import ComparableGroupEngine
@@ -112,18 +112,14 @@ def list_detected_exceptions(
                 exc_unapp["employee_id"] = sal.employee_id
                 exceptions.append(exc_unapp)
 
-    # Check 5: Incomparable roles grouped
-    group_records = db.query(GroundTruthRecord).filter_by(issue_type="INCOMPARABLE_ROLE_GROUPING").all()
-    for gtr in group_records:
-        parts = gtr.record_id.replace("GRP-", "").split("-")
-        if len(parts) >= 4:
-            role_a = f"{parts[0]}-{parts[1]}"
-            role_b = f"{parts[2]}-{parts[3]}"
-            exc_grp = detector.check_incomparable_roles_grouped(role_a, role_b)
-            if exc_grp:
-                exc_grp["record_id"] = gtr.record_id
-                exc_grp["employee_id"] = "N/A (Cohort Level)"
-                exceptions.append(exc_grp)
+    # Check 5: Incomparable roles flagged in operational comparability rationales (no ground-truth leakage)
+    incomp_rationales = db.query(RoleComparabilityRationale).filter_by(is_comparable=False).all()
+    for rcr in incomp_rationales:
+        exc_grp = detector.check_incomparable_roles_grouped(rcr.role_id_a, rcr.role_id_b)
+        if exc_grp:
+            exc_grp["record_id"] = f"GRP-{rcr.role_id_a}-{rcr.role_id_b}"
+            exc_grp["employee_id"] = "N/A (Cohort Level)"
+            exceptions.append(exc_grp)
 
     # Apply filter if requested
     if issue_type:

@@ -16,10 +16,27 @@ class InvalidLifecycleTransitionException(Exception):
     pass
 
 
+class UnauthorizedApprovalException(PermissionError):
+    """Raised when an unauthorized actor or the proposal creator attempts to review/approve."""
+    pass
+
+
 class ProposalManager:
     """Manages creation, review, approval, and application of salary adjustment proposals."""
 
+    ALLOWED_APPROVER_ROLES = {"MANAGER", "HR_PARTNER", "SYSTEM_ADMIN", "COMP_COMMITTEE"}
     _proposal_counter = 0
+
+    @classmethod
+    def _validate_reviewer_authorization(cls, proposal: AdjustmentProposal, reviewed_by: str, actor_role: str) -> None:
+        if actor_role not in cls.ALLOWED_APPROVER_ROLES:
+            raise UnauthorizedApprovalException(
+                f"Actor role '{actor_role}' is not authorized to review/approve salary adjustments."
+            )
+        if reviewed_by.strip().lower() == (proposal.created_by or "").strip().lower():
+            raise UnauthorizedApprovalException(
+                f"Self-approval is prohibited: creator '{proposal.created_by}' cannot review proposal '{proposal.proposal_id}'."
+            )
 
     @classmethod
     def generate_proposal_id(cls, year: int = 2026) -> str:
@@ -164,6 +181,8 @@ class ProposalManager:
                 f"Cannot approve proposal '{proposal_id}' from status '{proposal.approval_status}'. Must be in PENDING_REVIEW."
             )
 
+        cls._validate_reviewer_authorization(proposal, reviewed_by, actor_role)
+
         old_status = proposal.approval_status
         now = datetime.utcnow()
         proposal.approval_status = "APPROVED"
@@ -242,6 +261,8 @@ class ProposalManager:
             raise InvalidLifecycleTransitionException(
                 f"Cannot reject proposal '{proposal_id}' from status '{proposal.approval_status}'. Must be in PENDING_REVIEW."
             )
+
+        cls._validate_reviewer_authorization(proposal, reviewed_by, actor_role)
 
         old_status = proposal.approval_status
         now = datetime.utcnow()

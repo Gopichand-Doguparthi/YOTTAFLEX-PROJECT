@@ -117,6 +117,7 @@ class ProposalCreateRequest(BaseModel):
 class ProposalReviewRequest(BaseModel):
     reviewed_by: str
     decision: str = Field(..., pattern="^(APPROVED|REJECTED)$")
+    actor_role: str = "MANAGER"
     review_notes: Optional[str] = None
 
 

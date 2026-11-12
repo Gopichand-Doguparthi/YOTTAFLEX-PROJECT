@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from src.database.session import SessionLocal
 from src.database.models import (
     SalaryRecord, CompensationBand, Employee, AdjustmentProposal,
-    ApprovalEvent, GroundTruthRecord
+    ApprovalEvent, RoleComparabilityRationale
 )
 from src.engine.currency_normalizer import CurrencyNormalizer
 from src.engine.comparable_groups import ComparableGroupEngine
@@ -140,22 +140,18 @@ def _scan_all_exceptions() -> list:
                 if exc_unapp:
                     exceptions.append(_attach_meta(exc_unapp))
 
-        group_records = db.query(GroundTruthRecord).filter_by(issue_type="INCOMPARABLE_ROLE_GROUPING").all()
-        for gtr in group_records:
-            parts = gtr.record_id.replace("GRP-", "").split("-")
-            if len(parts) >= 4:
-                role_a = f"{parts[0]}-{parts[1]}"
-                role_b = f"{parts[2]}-{parts[3]}"
-                exc_grp = detector.check_incomparable_roles_grouped(role_a, role_b)
-                if exc_grp:
-                    exc_grp["record_id"] = gtr.record_id
-                    exc_grp["employee_id"] = "Group Mapping"
-                    exc_grp["employee_name"] = "—"
-                    exc_grp["location_name"] = "Global"
-                    exc_grp["_role_id"] = None
-                    exc_grp["_level_id"] = None
-                    exc_grp["_location_id"] = None
-                    exceptions.append(exc_grp)
+        incomp_rationales = db.query(RoleComparabilityRationale).filter_by(is_comparable=False).all()
+        for rcr in incomp_rationales:
+            exc_grp = detector.check_incomparable_roles_grouped(rcr.role_id_a, rcr.role_id_b)
+            if exc_grp:
+                exc_grp["record_id"] = f"GRP-{rcr.role_id_a}-{rcr.role_id_b}"
+                exc_grp["employee_id"] = "Group Mapping"
+                exc_grp["employee_name"] = "—"
+                exc_grp["location_name"] = "Global"
+                exc_grp["_role_id"] = None
+                exc_grp["_level_id"] = None
+                exc_grp["_location_id"] = None
+                exceptions.append(exc_grp)
 
         return exceptions
     finally:

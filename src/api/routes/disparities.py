@@ -11,6 +11,9 @@ from src.database.models import (
     Employee, SalaryRecord, CompensationBand, PerformanceEvidence, Tenure
 )
 from src.engine.disparity_detector import DisparityDetector
+from src.engine.currency_normalizer import (
+    CurrencyNormalizer, MissingCurrencyConversionException, select_effective_band
+)
 from src.api.schemas import DisparityResultSchema
 
 router = APIRouter(prefix="/disparities", tags=["Disparity Analysis"])
@@ -36,10 +39,18 @@ def get_detected_disparities(
     employees = emp_query.all()
 
     salaries = db.query(SalaryRecord).filter(SalaryRecord.effective_date >= "2026-01-01").all()
-    latest_sals = {s.employee_id: s for s in salaries}
+    latest_sals = {}
+    for s in salaries:
+        if s.employee_id not in latest_sals or s.effective_date > latest_sals[s.employee_id].effective_date:
+            latest_sals[s.employee_id] = s
 
-    bands = db.query(CompensationBand).filter(CompensationBand.status == "ACTIVE").all()
-    band_lookup = {(b.role_id, b.level_id, b.location_id): b for b in bands}
+    all_bands = db.query(CompensationBand).all()
+    bands_by_key = {}
+    for b in all_bands:
+        bands_by_key.setdefault((b.role_id, b.level_id, b.location_id), []).append(b)
+
+    curr_norm = CurrencyNormalizer()
+    curr_norm.load_from_db(db)
 
     # Group cohorts for median
     cohort_salaries = {}
@@ -70,10 +81,23 @@ def get_detected_disparities(
         med_sal = cohort_medians.get(cohort_key, sal.normalized_salary)
         size = cohort_sizes.get(cohort_key, 1)
 
-        band = band_lookup.get((emp.current_role_id, emp.current_level_id, emp.current_location_id))
-        b_min = band.min_salary if band else (med_sal * 0.8)
-        b_mid = band.mid_salary if band else med_sal
-        b_max = band.max_salary if band else (med_sal * 1.2)
+        key_tuple = (emp.current_role_id, emp.current_level_id, emp.current_location_id)
+        band = select_effective_band(
+            bands_by_key.get(key_tuple, []),
+            emp.current_role_id,
+            emp.current_level_id,
+            emp.current_location_id,
+            on_date=sal.effective_date,
+        )
+        if band:
+            try:
+                b_min, b_mid, b_max = curr_norm.convert_band_to_reporting(
+                    band, to_currency="USD", on_date=sal.effective_date
+                )
+            except MissingCurrencyConversionException:
+                b_min, b_mid, b_max = med_sal * 0.8, med_sal, med_sal * 1.2
+        else:
+            b_min, b_mid, b_max = med_sal * 0.8, med_sal, med_sal * 1.2
 
         perf = latest_perf.get(emp.employee_id)
         rating = perf.rating_score if perf else None

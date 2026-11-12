@@ -6,12 +6,15 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import AdjustmentProposal, Employee
+from src.workflow.proposal_manager import (
+    ProposalManager, InvalidLifecycleTransitionException, UnauthorizedApprovalException
+)
 from src.dashboard.views.helpers import format_actor_name, fmt_usd, fmt_pct, build_table_column_config
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Executive Approval & Decision History")
-    st.markdown("Detailed audit of approved and rejected compensation adjustments, executive rationale, and review timestamps.")
+    st.markdown("Submit draft proposals, render authorized approval/rejection decisions, and audit historical outcomes.")
 
     emp_lookup = {
         e[0]: (f"{e[1]} {e[2]}", e[3], e[4], e[5])
@@ -28,6 +31,95 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     proposals = db.query(AdjustmentProposal).filter(
         AdjustmentProposal.approval_status.in_(["APPROVED", "REJECTED"])
     ).order_by(AdjustmentProposal.reviewed_at.desc()).all()
+
+    # Interactive Workflow Actions (Submit DRAFT / Review PENDING_REVIEW)
+    draft_props = db.query(AdjustmentProposal).filter(
+        AdjustmentProposal.approval_status == "DRAFT"
+    ).order_by(AdjustmentProposal.created_at.desc()).all()
+    pending_props = db.query(AdjustmentProposal).filter(
+        AdjustmentProposal.approval_status == "PENDING_REVIEW"
+    ).order_by(AdjustmentProposal.created_at.desc()).all()
+
+    act_col1, act_col2 = st.columns(2)
+    with act_col1:
+        with st.expander(f"Submit Draft Proposals for Review ({len(draft_props)})", expanded=False):
+            if not draft_props:
+                st.info("No DRAFT proposals awaiting submission.")
+            else:
+                draft_map = {
+                    f"{p.proposal_id} | {p.employee_id} ({fmt_usd(p.adjustment_amount)})": p
+                    for p in draft_props
+                }
+                sel_draft_lbl = st.selectbox("Select Draft Proposal:", list(draft_map.keys()), key="ah_draft_sel")
+                sub_actor = st.text_input("Submitted By:", value="hr.partner@company.org", key="ah_sub_actor")
+                sub_notes = st.text_input("Submission Notes:", value="Submitted for compensation committee review.", key="ah_sub_notes")
+                if st.button("Submit for Review", key="ah_sub_btn", type="primary"):
+                    try:
+                        ProposalManager.submit_for_review(
+                            session=db,
+                            proposal_id=draft_map[sel_draft_lbl].proposal_id,
+                            submitted_by=sub_actor,
+                            notes=sub_notes,
+                        )
+                        db.commit()
+                        st.cache_data.clear()
+                        st.success(f"Proposal {draft_map[sel_draft_lbl].proposal_id} moved to PENDING_REVIEW.")
+                        st.rerun()
+                    except Exception as exc:
+                        db.rollback()
+                        st.error(f"Submission failed: {exc}")
+
+    with act_col2:
+        with st.expander(f"Pending Approval Queue ({len(pending_props)})", expanded=len(pending_props) > 0):
+            if not pending_props:
+                st.info("No PENDING_REVIEW proposals in queue.")
+            else:
+                pend_map = {
+                    f"{p.proposal_id} | {p.employee_id} ({fmt_usd(p.current_salary)} -> {fmt_usd(p.proposed_salary)})": p
+                    for p in pending_props
+                }
+                sel_pend_lbl = st.selectbox("Select Pending Proposal:", list(pend_map.keys()), key="ah_pend_sel")
+                sel_pend = pend_map[sel_pend_lbl]
+                st.caption(f"Created by: {sel_pend.created_by} | Reason: {sel_pend.reason_code}")
+                rev_actor = st.text_input("Reviewer Email:", value="manager.lead@company.org", key="ah_rev_actor")
+                rev_role = st.selectbox("Reviewer Role:", ["MANAGER", "HR_PARTNER", "SYSTEM_ADMIN", "COMP_COMMITTEE", "EMPLOYEE"], index=0, key="ah_rev_role")
+                rev_notes = st.text_input("Decision Notes:", value="Verified against peer cohort & performance evidence.", key="ah_rev_notes")
+                b1, b2 = st.columns(2)
+                if b1.button("Approve Adjustment", key="ah_app_btn", type="primary"):
+                    try:
+                        ProposalManager.approve_proposal(
+                            session=db,
+                            proposal_id=sel_pend.proposal_id,
+                            reviewed_by=rev_actor,
+                            actor_role=rev_role,
+                            review_notes=rev_notes,
+                            apply_salary_update=True,
+                        )
+                        db.commit()
+                        st.cache_data.clear()
+                        st.success(f"Approved {sel_pend.proposal_id} and recorded audit event.")
+                        st.rerun()
+                    except (UnauthorizedApprovalException, InvalidLifecycleTransitionException, Exception) as exc:
+                        db.rollback()
+                        st.error(f"Approval blocked: {exc}")
+                if b2.button("Reject Adjustment", key="ah_rej_btn"):
+                    try:
+                        ProposalManager.reject_proposal(
+                            session=db,
+                            proposal_id=sel_pend.proposal_id,
+                            reviewed_by=rev_actor,
+                            actor_role=rev_role,
+                            review_notes=rev_notes,
+                        )
+                        db.commit()
+                        st.cache_data.clear()
+                        st.warning(f"Rejected {sel_pend.proposal_id} and recorded audit event.")
+                        st.rerun()
+                    except (UnauthorizedApprovalException, InvalidLifecycleTransitionException, Exception) as exc:
+                        db.rollback()
+                        st.error(f"Rejection blocked: {exc}")
+
+    st.markdown("---")
 
     filtered_props = []
     for p in proposals:

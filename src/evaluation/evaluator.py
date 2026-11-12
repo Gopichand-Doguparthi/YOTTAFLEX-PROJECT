@@ -13,7 +13,9 @@ from src.database.models import (
     Tenure, Promotion, AdjustmentProposal, ApprovalEvent, ExchangeRate,
     RoleComparabilityRationale, GroundTruthRecord
 )
-from src.engine.currency_normalizer import CurrencyNormalizer
+from src.engine.currency_normalizer import (
+    CurrencyNormalizer, MissingCurrencyConversionException, select_effective_band
+)
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.engine.exception_detector import ExceptionDetector
 from src.engine.disparity_detector import DisparityDetector
@@ -47,7 +49,9 @@ class EvaluationEngine:
         salaries = session.query(SalaryRecord).all()
         bands = session.query(CompensationBand).all()
         band_by_id = {b.band_id: b for b in bands}
-        active_bands = {(b.role_id, b.level_id, b.location_id): b for b in bands if b.status == "ACTIVE"}
+        bands_by_key = {}
+        for b in bands:
+            bands_by_key.setdefault((b.role_id, b.level_id, b.location_id), []).append(b)
 
         # Store set of detected issue types per record_id: record_id -> Set[issue_type]
         detected_exceptions: Dict[str, Set[str]] = {}
@@ -115,16 +119,13 @@ class EvaluationEngine:
                 if exc_unapproved:
                     detected_exceptions.setdefault(sal.salary_id, set()).add(exc_unapproved["issue_type"])
 
-        # Check 5: Incomparable roles grouped
-        group_records = session.query(GroundTruthRecord).filter_by(issue_type="INCOMPARABLE_ROLE_GROUPING").all()
-        for gtr in group_records:
-            parts = gtr.record_id.replace("GRP-", "").split("-")
-            if len(parts) >= 4:
-                role_a = f"{parts[0]}-{parts[1]}"
-                role_b = f"{parts[2]}-{parts[3]}"
-                exc_grp = exc_detector.check_incomparable_roles_grouped(role_a, role_b)
-                if exc_grp:
-                    detected_exceptions.setdefault(gtr.record_id, set()).add(exc_grp["issue_type"])
+        # Check 5: Incomparable roles flagged in operational comparability rationales (no ground-truth leakage)
+        incomparable_rationales = session.query(RoleComparabilityRationale).filter_by(is_comparable=False).all()
+        for rcr in incomparable_rationales:
+            exc_grp = exc_detector.check_incomparable_roles_grouped(rcr.role_id_a, rcr.role_id_b)
+            if exc_grp:
+                grp_id = f"GRP-{rcr.role_id_a}-{rcr.role_id_b}"
+                detected_exceptions.setdefault(grp_id, set()).add(exc_grp["issue_type"])
 
         # Step 2: Detect Disparities on Employees
         employees = session.query(Employee).all()
@@ -164,10 +165,22 @@ class EvaluationEngine:
             median_sal = cohort_medians.get(cohort_key, sal.normalized_salary)
             size = cohort_sizes.get(cohort_key, 1)
 
-            band = active_bands.get((emp.current_role_id, emp.current_level_id, emp.current_location_id))
-            b_min = band.min_salary if band else (median_sal * 0.8)
-            b_mid = band.mid_salary if band else median_sal
-            b_max = band.max_salary if band else (median_sal * 1.2)
+            band = select_effective_band(
+                bands_by_key.get((emp.current_role_id, emp.current_level_id, emp.current_location_id), []),
+                emp.current_role_id,
+                emp.current_level_id,
+                emp.current_location_id,
+                on_date=sal.effective_date,
+            )
+            if band:
+                try:
+                    b_min, b_mid, b_max = curr_norm.convert_band_to_reporting(
+                        band, to_currency="USD", on_date=sal.effective_date
+                    )
+                except MissingCurrencyConversionException:
+                    b_min, b_mid, b_max = median_sal * 0.8, median_sal, median_sal * 1.2
+            else:
+                b_min, b_mid, b_max = median_sal * 0.8, median_sal, median_sal * 1.2
 
             perf = latest_perf.get(emp.employee_id)
             rating = perf.rating_score if perf else None

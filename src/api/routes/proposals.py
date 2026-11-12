@@ -10,7 +10,7 @@ from src.database.models import AdjustmentProposal, Employee, SalaryRecord, Appr
 from src.api.schemas import (
     AdjustmentProposalSchema, ProposalCreateRequest, ProposalReviewRequest
 )
-from src.workflow.proposal_manager import ProposalManager
+from src.workflow.proposal_manager import ProposalManager, UnauthorizedApprovalException
 
 router = APIRouter(prefix="/proposals", tags=["Adjustment Proposals"])
 
@@ -84,6 +84,7 @@ def review_proposal(proposal_id: str, req: ProposalReviewRequest, db: Session = 
                 session=db,
                 proposal_id=proposal_id,
                 reviewed_by=req.reviewed_by,
+                actor_role=req.actor_role,
                 review_notes=req.review_notes,
                 apply_salary_update=True
             )
@@ -92,11 +93,15 @@ def review_proposal(proposal_id: str, req: ProposalReviewRequest, db: Session = 
                 session=db,
                 proposal_id=proposal_id,
                 reviewed_by=req.reviewed_by,
+                actor_role=req.actor_role,
                 review_notes=req.review_notes
             )
         db.commit()
         db.refresh(prop)
         return prop
+    except UnauthorizedApprovalException as e:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(e))
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=400, detail=str(e))

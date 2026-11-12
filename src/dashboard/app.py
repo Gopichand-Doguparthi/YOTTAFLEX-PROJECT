@@ -12,6 +12,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Set page config (must be the first Streamlit call)
 st.set_page_config(
@@ -45,6 +46,9 @@ from src.dashboard.views import (
     audit_trail_view,
     validation_view,
     evaluation_view,
+    data_management_view,
+    reports_exports_view,
+    settings_view,
 )
 
 # Nav items definition (clean left-aligned text, no icons)
@@ -58,10 +62,13 @@ NAV_ITEMS = [
     ("comparable",   "Comparable Employee Groups",  "Disparity & Proposals"),
     ("exceptions",   "Exceptions & Edge Cases",     "Disparity & Proposals"),
     ("proposals",    "Adjustment Proposals",        "Disparity & Proposals"),
-    ("approvals",    "Approval History",            "Disparity & Proposals"),
+    ("approvals",    "Approvals & Review Queue",    "Disparity & Proposals"),
     ("audit",        "Audit Trail Ledger",          "Governance"),
+    ("data_mgmt",    "Data Management",             "Governance"),
+    ("reports",      "Reports & Exports",           "Governance"),
     ("validation",   "Data Quality & Validation",   "Governance"),
     ("evaluation",   "Ground-Truth Evaluation",     "Governance"),
+    ("settings",     "Settings",                    "Governance"),
 ]
 
 
@@ -110,7 +117,30 @@ def main():
         btn_type = "primary" if st.session_state.active_view == key else "secondary"
         if st.sidebar.button(label, key=f"nav_{key}", type=btn_type, use_container_width=True):
             st.session_state.active_view = key
+            st.session_state["scroll_to_top"] = True
             st.rerun()
+
+    if st.session_state.pop("scroll_to_top", False):
+        components.html(
+            """
+            <script>
+                (function() {
+                    const targets = [
+                        window.parent.document.querySelector('section.main'),
+                        window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
+                        window.parent.document.documentElement,
+                        window.parent
+                    ];
+                    targets.forEach(function(el) {
+                        if (el && typeof el.scrollTo === 'function') {
+                            el.scrollTo({ top: 0, behavior: 'instant' });
+                        }
+                    });
+                })();
+            </script>
+            """,
+            height=0,
+        )
 
     # Route to active view
     db = SessionLocal()
@@ -128,8 +158,11 @@ def main():
             "proposals":   lambda: proposals_view.render(db, selected_role, selected_level, selected_location),
             "approvals":   lambda: approval_history_view.render(db, selected_role, selected_level, selected_location),
             "audit":       lambda: audit_trail_view.render(db, selected_role, selected_level, selected_location),
+            "data_mgmt":   lambda: data_management_view.render(db, selected_role, selected_level, selected_location),
+            "reports":     lambda: reports_exports_view.render(db, selected_role, selected_level, selected_location),
             "validation":  lambda: validation_view.render(db, selected_role, selected_level, selected_location),
             "evaluation":  lambda: evaluation_view.render(db, selected_role, selected_level, selected_location),
+            "settings":    lambda: settings_view.render(db, selected_role, selected_level, selected_location),
         }
         dispatch.get(view, dispatch["overview"])()
     finally:

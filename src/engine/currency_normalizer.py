@@ -80,3 +80,42 @@ class CurrencyNormalizer:
         """Normalizes a raw local amount to reporting currency."""
         rate = self.get_rate(from_currency, to_currency, on_date)
         return round(amount * rate, 2)
+
+    def convert_band_to_reporting(
+        self,
+        band,
+        to_currency: str = "USD",
+        on_date: Optional[date] = None,
+    ) -> Tuple[float, float, float]:
+        """Converts a CompensationBand's min/mid/max salaries from local currency to reporting currency."""
+        band_currency = getattr(band, "currency", to_currency) or to_currency
+        ref_date = on_date or getattr(band, "effective_start_date", None) or date.today()
+        rate = self.get_rate(band_currency, to_currency, ref_date)
+        return (
+            round(float(band.min_salary) * rate, 2),
+            round(float(band.mid_salary) * rate, 2),
+            round(float(band.max_salary) * rate, 2),
+        )
+
+
+def select_effective_band(bands: List, role_id: str, level_id: str, location_id: str, on_date: Optional[date] = None):
+    """Selects the effective CompensationBand for (role, level, location) on a given date, falling back to latest ACTIVE."""
+    candidates = [
+        b for b in bands
+        if b.role_id == role_id and b.level_id == level_id and b.location_id == location_id
+    ]
+    if not candidates:
+        return None
+    if on_date is not None:
+        in_window = [
+            b for b in candidates
+            if b.effective_start_date <= on_date and (b.effective_end_date is None or on_date <= b.effective_end_date)
+        ]
+        if in_window:
+            # Prefer ACTIVE if multiple overlap
+            active_in_window = [b for b in in_window if getattr(b, "status", None) == "ACTIVE"]
+            return active_in_window[0] if active_in_window else in_window[0]
+    active = [b for b in candidates if getattr(b, "status", None) == "ACTIVE"]
+    if active:
+        return sorted(active, key=lambda b: b.effective_start_date, reverse=True)[0]
+    return sorted(candidates, key=lambda b: b.effective_start_date, reverse=True)[0]
