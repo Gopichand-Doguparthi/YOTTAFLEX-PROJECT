@@ -37,7 +37,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.markdown("---")
 
     st.subheader("Data Validation Assertions Status")
-    val_status_filter = st.selectbox("Filter by Validation Status:", ["All Checks", "PASSED", "FAILED"], index=0)
+    vc1, vc2 = st.columns([2, 1.5])
+    with vc1:
+        val_search = st.text_input("Search Check Name or Description:", "", key="val_search", placeholder="e.g. arithmetic, fte, primary_key")
+    with vc2:
+        val_status_filter = st.selectbox("Filter by Validation Status:", ["All Checks", "PASSED", "FAILED"], index=0)
     detail_data = [
         {
             "Check Name": d["check_name"],
@@ -49,6 +53,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         for d in res["details"]
     ]
     df_val = pd.DataFrame(detail_data)
+    if val_search.strip():
+        vq = val_search.strip().lower()
+        df_val = df_val[
+            df_val["Check Name"].str.lower().str.contains(vq, na=False)
+            | df_val["Description"].str.lower().str.contains(vq, na=False)
+        ]
     if val_status_filter != "All Checks":
         df_val = df_val[df_val["Status"] == val_status_filter]
     st.dataframe(

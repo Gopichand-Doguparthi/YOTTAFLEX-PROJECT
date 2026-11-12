@@ -252,7 +252,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         )
     with f_col2:
         status_filter = st.selectbox(
-            "Disparity Outcome Status:",
+            "Analytical Disparity Classification:",
             ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
             index=0
         )
@@ -265,7 +265,21 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             value=(selected_flagged_label != "None (Use Search / Filters Below)"),
         )
 
+    from src.database.models import ReviewCase as _ReviewCase
+    _ReviewCase.__table__.create(bind=db.get_bind(), checkfirst=True)
+    _case_map = {c.employee_id: c.status for c in db.query(_ReviewCase).all()}
+    df["Review Case Status"] = df["Employee ID"].map(lambda eid: _case_map.get(eid, "OPEN"))
+
+    case_status_filter = st.selectbox(
+        "Filter by Human Review Case Status (Workflow State — distinct from Analytical Classification above):",
+        ["All Case Statuses", "OPEN", "IN_REVIEW", "ESCALATED", "RESOLVED", "REOPENED"],
+        index=0,
+        key="disp_case_status_filter",
+    )
+
     filtered = df.copy()
+    if case_status_filter != "All Case Statuses":
+        filtered = filtered[filtered["Review Case Status"] == case_status_filter]
     if dept_filter != "All Departments":
         filtered = filtered[filtered["Department"] == dept_filter]
 
@@ -331,6 +345,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         "Rating": filtered["Rating"],
         "Tenure (yrs)": filtered["Company Tenure (yrs)"],
         "Status": filtered["Status"],
+        "Review Case Status": filtered["Review Case Status"],
         "Is Disparity": filtered["Is Disparity"],
         "Primary Reason": filtered["Primary Reason"],
     })

@@ -350,7 +350,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     # Comprehensive Filters — always keep ALL standard reasons & statuses
     st.subheader("Filter Proposals")
-    fc0, fc1, fc2, fc3, fc4 = st.columns(5)
+    fc0, fc1, fc2, fc3, fc4, fc5 = st.columns(6)
     status_opts = ["All"] + sorted(set(_STANDARD_STATUSES) | {r["Status"] for r in all_rows})
     reason_opts = ["All"] + sorted(set(_STANDARD_REASONS) | {r["Reason"] for r in all_rows})
     reviewer_opts = ["All"] + sorted({"Pending"} | {r["Reviewed By"] for r in all_rows})
@@ -363,8 +363,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     with fc2:
         f_reason = st.selectbox("Reason:", reason_opts, index=0)
     with fc3:
-        f_date = st.selectbox("Effective Date:", date_opts, index=0)
+        f_dir = st.selectbox("Direction:", ["All", "Increment (+)", "Decrement (-)"], index=0, key="prop_dir")
     with fc4:
+        f_date = st.selectbox("Effective Date:", date_opts, index=0)
+    with fc5:
         f_reviewer = st.selectbox("Reviewed By:", reviewer_opts, index=0)
 
     q_emp = f_emp.strip().lower()
@@ -373,6 +375,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         if (not q_emp or q_emp in r["Employee ID"].lower() or q_emp in r["Employee Name"].lower() or q_emp in r["Proposal ID"].lower())
         and (f_status == "All" or r["Status"] == f_status)
         and (f_reason == "All" or r["Reason"] == f_reason)
+        and (f_dir == "All" or (f_dir == "Increment (+)" and not str(r["Adjustment (USD)"]).startswith("-") and str(r["Adjustment (USD)"]) != "$0") or (f_dir == "Decrement (-)" and str(r["Adjustment (USD)"]).startswith("-")))
         and (f_date == "All" or r["Proposed Effective"] == f_date)
         and (f_reviewer == "All" or r["Reviewed By"] == f_reviewer)
     ]

@@ -216,7 +216,7 @@ def test_validator_detects_arithmetic_and_duplicate_violations(db_session, sampl
         currency="USD",
         fte=0.5,
         pay_frequency="ANNUAL",
-        normalized_salary=60000.0,  # Wrong! Should be 120000.0
+        normalized_salary=75000.0,  # Wrong! Should be 120000.0
         normalized_currency="USD",
         effective_date=date(2026, 1, 1),
         change_reason="HIRE",

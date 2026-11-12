@@ -165,3 +165,32 @@ def update_employee(employee_id: str, req: EmployeeUpdateRequest, db: Session = 
     db.commit()
     db.refresh(emp)
     return emp
+
+
+@router.delete("/{employee_id}")
+def delete_employee(employee_id: str, db: Session = Depends(get_db)):
+    """Deletes an employee record and logs an immutable audit event."""
+    emp = db.query(Employee).filter(Employee.employee_id == employee_id).first()
+    if not emp:
+        raise HTTPException(status_code=404, detail=f"Employee '{employee_id}' not found.")
+
+    old_state = {
+        "name": f"{emp.first_name} {emp.last_name}",
+        "department": emp.department,
+        "role_id": emp.current_role_id,
+        "level_id": emp.current_level_id,
+        "location_id": emp.current_location_id,
+    }
+    db.delete(emp)
+    AuditLogger.log_event(
+        session=db,
+        entity_name="Employee",
+        entity_id=employee_id,
+        event_type="EMPLOYEE_DELETED",
+        actor_id="HR_API",
+        actor_role="HR_PARTNER",
+        old_state=old_state,
+        notes=f"Employee {employee_id} permanently deleted.",
+    )
+    db.commit()
+    return {"status": "deleted", "employee_id": employee_id}

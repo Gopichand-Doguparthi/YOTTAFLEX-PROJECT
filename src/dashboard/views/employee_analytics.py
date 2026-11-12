@@ -35,6 +35,7 @@ def _load_employee_directory() -> list:
             Employee.employment_type,
             Employee.fte,
             Employee.hire_date,
+            Employee.is_active,
         ).all()
 
         result = []
@@ -52,6 +53,7 @@ def _load_employee_directory() -> list:
                 "employment_type": r[8],
                 "fte": float(r[9]),
                 "hire_date": str(r[10]),
+                "is_active": bool(r[11]),
                 "company_tenure": round(c_ten, 1),
                 "total_exp": round(tot_exp, 1),
             })
@@ -77,8 +79,19 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         dept_opts = ["All Departments"] + sorted({e["department"] for e in all_rows})
         dept_filter = st.selectbox("Filter by Department:", dept_opts, index=0)
     with ec3:
-        type_opts = ["All Types", "Full Time", "Part Time"]
+        type_opts = ["All Types", "Full Time", "Part Time", "Contract"]
         type_filter = st.selectbox("Filter by Employment Type:", type_opts, index=0)
+
+    ec4, ec5, ec6, ec7 = st.columns(4)
+    with ec4:
+        status_filter = st.selectbox("Active Status:", ["All", "Active Only", "Inactive Only"], index=0, key="emp_status_filter")
+    with ec5:
+        hire_years = sorted({e["hire_date"][:4] for e in all_rows if e.get("hire_date")}, reverse=True)
+        hire_year_filter = st.selectbox("Hire Year:", ["All Years"] + hire_years, index=0, key="emp_hire_yr_filter")
+    with ec6:
+        fte_filter = st.selectbox("FTE Range:", ["All FTE", "Full-Time (1.0)", "Part-Time (< 1.0)"], index=0, key="emp_fte_filter")
+    with ec7:
+        sort_by = st.selectbox("Sort By:", ["Employee ID (Asc)", "Name (A-Z)", "Tenure (High-Low)", "Hire Date (Newest)"], index=0, key="emp_sort_by")
     term = search_query.strip().lower()
 
     emp_data = []
@@ -93,6 +106,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             continue
         emp_type_label = e["employment_type"].replace("_", " ").title()
         if type_filter != "All Types" and emp_type_label != type_filter:
+            continue
+        if status_filter == "Active Only" and not e.get("is_active", True):
+            continue
+        if status_filter == "Inactive Only" and e.get("is_active", True):
+            continue
+        if hire_year_filter != "All Years" and not str(e.get("hire_date", "")).startswith(hire_year_filter):
+            continue
+        if fte_filter == "Full-Time (1.0)" and e["fte"] < 1.0:
+            continue
+        if fte_filter == "Part-Time (< 1.0)" and e["fte"] >= 1.0:
             continue
         if term:
             if not (term in e["employee_id"].lower() or term in e["first_name"].lower()
@@ -111,37 +134,50 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Type": emp_type_label,
             "FTE": e["fte"],
             "Hire Date": e["hire_date"],
+            "Active": "Active" if e.get("is_active", True) else "Inactive",
         })
 
     if not emp_data:
         st.warning("No employees found matching the specified filters.")
-        return
+        df_emps = pd.DataFrame()
+    else:
+        df_emps = pd.DataFrame(emp_data)
+        if sort_by == "Name (A-Z)":
+            df_emps = df_emps.sort_values("Name")
+        elif sort_by == "Tenure (High-Low)":
+            df_emps = df_emps.sort_values("Tenure (yrs)", ascending=False)
+        elif sort_by == "Hire Date (Newest)":
+            df_emps = df_emps.sort_values("Hire Date", ascending=False)
+        else:
+            df_emps = df_emps.sort_values("Employee ID")
 
-    df_emps = pd.DataFrame(emp_data)
-    st.caption(f"Showing {len(df_emps):,} employee records")
-    st.dataframe(
-        df_emps,
-        use_container_width=True,
-        height=340,
-        hide_index=True,
-        column_config=build_table_column_config(
+    if not df_emps.empty:
+        st.caption(f"Showing {len(df_emps):,} employee records")
+        st.dataframe(
             df_emps,
-            overrides={
-                "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
-                "Total Exp (yrs)": st.column_config.NumberColumn("Total Exp (yrs)", format="%.1f"),
-                "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
-            },
-        ),
-    )
+            use_container_width=True,
+            height=340,
+            hide_index=True,
+            column_config=build_table_column_config(
+                df_emps,
+                overrides={
+                    "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+                    "Total Exp (yrs)": st.column_config.NumberColumn("Total Exp (yrs)", format="%.1f"),
+                    "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
+                },
+            ),
+        )
 
-    # Detailed Employee Drill-down
-    st.markdown("---")
-    st.subheader("Employee Profile & Career Trajectory Drill-Down")
+        # Detailed Employee Drill-down
+        st.markdown("---")
+        st.subheader("Employee Profile & Career Trajectory Drill-Down")
 
-    emp_options = [f"{row['Name']} ({row['Employee ID']})" for _, row in df_emps.iterrows()]
-    emp_id_lookup = {f"{row['Name']} ({row['Employee ID']})": row["Employee ID"] for _, row in df_emps.iterrows()}
-    selected_label = st.selectbox("Select an Employee to view comprehensive history:", emp_options)
-    selected_emp_id = emp_id_lookup[selected_label]
+        emp_options = [f"{row['Name']} ({row['Employee ID']})" for _, row in df_emps.iterrows()]
+        emp_id_lookup = {f"{row['Name']} ({row['Employee ID']})": row["Employee ID"] for _, row in df_emps.iterrows()}
+        selected_label = st.selectbox("Select an Employee to view comprehensive history:", emp_options)
+        selected_emp_id = emp_id_lookup[selected_label]
+    else:
+        selected_emp_id = None
 
     if selected_emp_id:
         emp = db.query(Employee).filter(Employee.employee_id == selected_emp_id).first()
@@ -251,59 +287,172 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             )
 
     st.markdown("---")
-    with st.expander("Create / Manage Employee", expanded=False):
+    with st.expander("Create / Manage / Delete Employee", expanded=False):
         from datetime import date as _date
         from src.workflow.audit_logger import AuditLogger
+        from src.engine.currency_normalizer import CurrencyNormalizer, MissingCurrencyConversionException
+        from src.engine.fte_normalizer import FTENormalizer
 
-        with st.form("create_employee_form"):
-            ce1, ce2, ce3 = st.columns(3)
-            with ce1:
-                new_emp_id = st.text_input("Employee ID:", placeholder="EMP-900001")
-                new_fname = st.text_input("First Name:")
-                new_lname = st.text_input("Last Name:")
-                new_email = st.text_input("Email:")
-            with ce2:
-                new_dept = st.text_input("Department:", "Engineering")
-                new_role = st.selectbox("Role ID:", sorted(role_map.keys()), key="ce_role")
-                new_lvl = st.selectbox("Level ID:", sorted(level_map.keys()), key="ce_lvl")
-            with ce3:
-                new_loc = st.selectbox("Location ID:", sorted(loc_map.keys()), key="ce_loc")
-                new_type = st.selectbox("Employment Type:", ["FULL_TIME", "PART_TIME", "CONTRACT"], key="ce_type")
-                new_fte = st.number_input("FTE:", min_value=0.1, max_value=1.0, value=1.0, step=0.1)
-                new_hire = st.date_input("Hire Date:", value=_date(2026, 1, 1))
+        tab_create, tab_manage = st.tabs(["Create New Employee", "Deactivate / Delete Employee"])
 
-            if st.form_submit_button("Create Employee"):
-                if not new_emp_id.strip() or not new_fname.strip() or not new_lname.strip() or "@" not in new_email:
-                    st.error("All required fields (Employee ID, First/Last Name, valid Email) must be provided.")
-                elif db.query(Employee).filter(Employee.employee_id == new_emp_id.strip()).first():
-                    st.error(f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
-                elif db.query(Employee).filter(Employee.email == new_email.strip()).first():
-                    st.error(f"Duplicate Email '{new_email.strip()}' already exists.")
+        with tab_create:
+            with st.form("create_employee_form"):
+                ce1, ce2, ce3 = st.columns(3)
+                with ce1:
+                    new_emp_id = st.text_input("Employee ID *:", placeholder="EMP-900001")
+                    new_fname = st.text_input("First Name *:")
+                    new_lname = st.text_input("Last Name *:")
+                    new_email = st.text_input("Email *:")
+                    new_dept = st.text_input("Department *:", "Engineering")
+                with ce2:
+                    new_role = st.selectbox("Role ID *:", sorted(role_map.keys()), key="ce_role")
+                    new_lvl = st.selectbox("Level ID *:", sorted(level_map.keys()), key="ce_lvl")
+                    new_loc = st.selectbox("Location ID *:", sorted(loc_map.keys()), key="ce_loc")
+                    new_type = st.selectbox("Employment Type *:", ["FULL_TIME", "PART_TIME", "CONTRACT"], key="ce_type")
+                    new_fte = st.number_input("FTE *:", min_value=0.1, max_value=1.0, value=1.0, step=0.1)
+                with ce3:
+                    new_hire = st.date_input("Hire Date *:", value=_date(2026, 1, 1))
+                    new_base_sal = st.number_input("Initial Base Salary (Local) *:", min_value=1000.0, value=120000.0, step=1000.0)
+                    new_curr = st.selectbox("Salary Currency *:", ["USD", "GBP", "EUR", "INR", "JPY", "SGD", "AUD", "CAD"], index=0, key="ce_curr")
+                    new_freq = st.selectbox("Pay Frequency *:", ["ANNUAL", "MONTHLY"], index=0, key="ce_freq")
+                    new_exp = st.number_input("Total Experience (yrs) *:", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
+                    new_rating = st.number_input("Initial Performance Rating (1.0-5.0) *:", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
+
+                if st.form_submit_button("Create Employee with Initial Compensation"):
+                    if (
+                        not new_emp_id.strip()
+                        or not new_fname.strip()
+                        or not new_lname.strip()
+                        or "@" not in new_email
+                        or not new_dept.strip()
+                    ):
+                        st.error("All required fields (*: Employee ID, First/Last Name, valid Email, Department) must be provided.")
+                    elif db.query(Employee).filter(Employee.employee_id == new_emp_id.strip()).first():
+                        st.error(f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
+                    elif db.query(Employee).filter(Employee.email == new_email.strip()).first():
+                        st.error(f"Duplicate Email '{new_email.strip()}' already exists.")
+                    else:
+                        curr_norm = CurrencyNormalizer()
+                        curr_norm.load_from_db(db)
+                        try:
+                            fx_rate = curr_norm.get_rate(new_curr, "USD", new_hire)
+                        except MissingCurrencyConversionException as exc:
+                            st.error(f"Cannot create salary record: {exc}")
+                            fx_rate = None
+
+                        if fx_rate is not None:
+                            norm_sal = FTENormalizer.normalize_salary(
+                                base_salary=float(new_base_sal),
+                                fte=float(new_fte),
+                                pay_frequency=new_freq,
+                                fx_rate=fx_rate,
+                            )
+                            eid = new_emp_id.strip()
+                            emp_obj = Employee(
+                                employee_id=eid,
+                                first_name=new_fname.strip(),
+                                last_name=new_lname.strip(),
+                                email=new_email.strip(),
+                                department=new_dept.strip(),
+                                current_role_id=new_role,
+                                current_level_id=new_lvl,
+                                current_location_id=new_loc,
+                                hire_date=new_hire,
+                                employment_type=new_type,
+                                fte=float(new_fte),
+                                is_active=True,
+                            )
+                            sal_obj = SalaryRecord(
+                                salary_id=f"SAL-{eid}-{new_hire.year}-01",
+                                employee_id=eid,
+                                base_salary=float(new_base_sal),
+                                currency=new_curr,
+                                fte=float(new_fte),
+                                pay_frequency=new_freq,
+                                normalized_salary=norm_sal,
+                                normalized_currency="USD",
+                                effective_date=new_hire,
+                                change_reason="HIRE",
+                            )
+                            ten_obj = Tenure(
+                                tenure_id=f"TEN-{eid}",
+                                employee_id=eid,
+                                company_start_date=new_hire,
+                                role_start_date=new_hire,
+                                years_of_experience_total=float(new_exp),
+                                tenure_in_company_years=0.5,
+                                tenure_in_role_years=0.5,
+                            )
+                            rating_lbl = "OUTSTANDING" if new_rating >= 4.5 else ("EXCEEDS_EXPECTATIONS" if new_rating >= 3.5 else "MEETS_EXPECTATIONS")
+                            perf_obj = PerformanceEvidence(
+                                evidence_id=f"PERF-{eid}-{new_hire.year}-H1",
+                                employee_id=eid,
+                                review_cycle=f"{new_hire.year}-H1",
+                                rating_score=float(new_rating),
+                                rating_label=rating_lbl,
+                                effective_date=new_hire,
+                            )
+                            db.add_all([emp_obj, sal_obj, ten_obj, perf_obj])
+                            AuditLogger.log_event(
+                                session=db,
+                                entity_name="Employee",
+                                entity_id=eid,
+                                event_type="EMPLOYEE_CREATED",
+                                actor_id="HR_DASHBOARD",
+                                actor_role="HR_PARTNER",
+                                new_state={
+                                    "role_id": new_role,
+                                    "level_id": new_lvl,
+                                    "fte": float(new_fte),
+                                    "normalized_salary_usd": norm_sal,
+                                },
+                            )
+                            db.commit()
+                            st.cache_data.clear()
+                            st.success(f"Created employee {eid} with initial salary (${norm_sal:,.2f} USD), tenure, and performance record.")
+
+        with tab_manage:
+            manage_id = st.text_input("Enter Employee ID to Deactivate or Delete:", placeholder="e.g. EMP-900001", key="del_emp_id")
+            confirm_del = st.checkbox("Confirm permanent deletion (cannot be undone)", value=False, key="del_emp_confirm")
+            mc1, mc2 = st.columns(2)
+            if mc1.button("Deactivate Employee", key="btn_deact_emp"):
+                target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
+                if not target_emp:
+                    st.error(f"Employee '{manage_id.strip()}' not found.")
                 else:
-                    emp_obj = Employee(
-                        employee_id=new_emp_id.strip(),
-                        first_name=new_fname.strip(),
-                        last_name=new_lname.strip(),
-                        email=new_email.strip(),
-                        department=new_dept.strip() or "Engineering",
-                        current_role_id=new_role,
-                        current_level_id=new_lvl,
-                        current_location_id=new_loc,
-                        hire_date=new_hire,
-                        employment_type=new_type,
-                        fte=float(new_fte),
-                        is_active=True,
-                    )
-                    db.add(emp_obj)
+                    target_emp.is_active = False
                     AuditLogger.log_event(
                         session=db,
                         entity_name="Employee",
-                        entity_id=emp_obj.employee_id,
-                        event_type="EMPLOYEE_CREATED",
+                        entity_id=target_emp.employee_id,
+                        event_type="EMPLOYEE_UPDATED",
                         actor_id="HR_DASHBOARD",
                         actor_role="HR_PARTNER",
-                        new_state={"role_id": new_role, "level_id": new_lvl, "fte": float(new_fte)},
+                        old_state={"is_active": True},
+                        new_state={"is_active": False},
                     )
                     db.commit()
                     st.cache_data.clear()
-                    st.success(f"Created employee {emp_obj.employee_id} and logged audit event.")
+                    st.warning(f"Employee {target_emp.employee_id} deactivated.")
+            if mc2.button("Delete Employee Permanently", key="btn_del_emp"):
+                if not confirm_del:
+                    st.error("Please check the permanent deletion confirmation box first.")
+                else:
+                    target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
+                    if not target_emp:
+                        st.error(f"Employee '{manage_id.strip()}' not found.")
+                    else:
+                        eid_del = target_emp.employee_id
+                        db.delete(target_emp)
+                        AuditLogger.log_event(
+                            session=db,
+                            entity_name="Employee",
+                            entity_id=eid_del,
+                            event_type="EMPLOYEE_DELETED",
+                            actor_id="HR_DASHBOARD",
+                            actor_role="HR_PARTNER",
+                            notes=f"Employee {eid_del} deleted via dashboard.",
+                        )
+                        db.commit()
+                        st.cache_data.clear()
+                        st.success(f"Employee {eid_del} permanently deleted and audit event logged.")

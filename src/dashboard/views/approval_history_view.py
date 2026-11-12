@@ -168,12 +168,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         })
 
     st.subheader("Historical Decision Ledger")
-    ah1, ah2, ah3 = st.columns([2, 1.5, 1.5])
+    st.caption("Note: All 250 seeded proposals in the benchmark dataset are positive equity increments. Any decrement proposals created via the Proposals form (`Proposed < Current`) also appear here.")
+    ah1, ah2, ah3, ah4 = st.columns([2, 1.3, 1.3, 1.4])
     with ah1:
         ah_search = st.text_input("Search by Proposal ID, Employee ID, or Name:", "", key="ah_search", placeholder="e.g. ADJ-2026 or EMP-")
     with ah2:
         ah_dec = st.selectbox("Filter by Decision:", ["All Decisions", "Approved", "Rejected"], index=0)
     with ah3:
+        ah_dir = st.selectbox("Adjustment Direction:", ["All Directions", "Increment (+)", "Decrement (-)"], index=0, key="ah_dir")
+    with ah4:
         reviewer_opts = ["All Reviewers"] + sorted({h["Reviewed By"] for h in hist_data})
         ah_rev = st.selectbox("Filter by Reviewed By:", reviewer_opts, index=0)
 
@@ -187,6 +190,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         ]
     if ah_dec != "All Decisions":
         df_hist = df_hist[df_hist["Decision"] == ah_dec]
+    if ah_dir == "Increment (+)":
+        df_hist = df_hist[~df_hist["Adjustment (USD)"].astype(str).str.startswith("-") & (df_hist["Adjustment (USD)"].astype(str) != "$0")]
+    elif ah_dir == "Decrement (-)":
+        df_hist = df_hist[df_hist["Adjustment (USD)"].astype(str).str.startswith("-")]
     if ah_rev != "All Reviewers":
         df_hist = df_hist[df_hist["Reviewed By"] == ah_rev]
 
