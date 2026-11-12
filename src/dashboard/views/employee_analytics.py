@@ -287,7 +287,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             )
 
     st.markdown("---")
-    with st.expander("Create / Manage / Delete Employee", expanded=False):
+    fb = st.session_state.pop("emp_manage_feedback", None)
+    if fb:
+        fb_level, fb_msg = fb
+        if fb_level == "success":
+            st.success(fb_msg)
+        elif fb_level == "warning":
+            st.warning(fb_msg)
+        else:
+            st.error(fb_msg)
+    with st.expander("Create / Manage / Delete Employee", expanded=st.session_state.get("emp_manage_open", False)):
         from datetime import date as _date
         from src.workflow.audit_logger import AuditLogger
         from src.engine.currency_normalizer import CurrencyNormalizer, MissingCurrencyConversionException
@@ -319,6 +328,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     new_rating = st.number_input("Initial Performance Rating (1.0-5.0) *:", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
 
                 if st.form_submit_button("Create Employee with Initial Compensation"):
+                    st.session_state["emp_manage_open"] = True
                     if (
                         not new_emp_id.strip()
                         or not new_fname.strip()
@@ -326,19 +336,23 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                         or "@" not in new_email
                         or not new_dept.strip()
                     ):
-                        st.error("All required fields (*: Employee ID, First/Last Name, valid Email, Department) must be provided.")
+                        st.session_state["emp_manage_feedback"] = ("error", "All required fields (*: Employee ID, First/Last Name, valid Email, Department) must be provided.")
+                        st.rerun()
                     elif db.query(Employee).filter(Employee.employee_id == new_emp_id.strip()).first():
-                        st.error(f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
+                        st.session_state["emp_manage_feedback"] = ("error", f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
+                        st.rerun()
                     elif db.query(Employee).filter(Employee.email == new_email.strip()).first():
-                        st.error(f"Duplicate Email '{new_email.strip()}' already exists.")
+                        st.session_state["emp_manage_feedback"] = ("error", f"Duplicate Email '{new_email.strip()}' already exists.")
+                        st.rerun()
                     else:
                         curr_norm = CurrencyNormalizer()
                         curr_norm.load_from_db(db)
                         try:
                             fx_rate = curr_norm.get_rate(new_curr, "USD", new_hire)
                         except MissingCurrencyConversionException as exc:
-                            st.error(f"Cannot create salary record: {exc}")
+                            st.session_state["emp_manage_feedback"] = ("error", f"Cannot create salary record: {exc}")
                             fx_rate = None
+                            st.rerun()
 
                         if fx_rate is not None:
                             norm_sal = FTENormalizer.normalize_salary(
@@ -409,16 +423,18 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                             )
                             db.commit()
                             st.cache_data.clear()
-                            st.success(f"Created employee {eid} with initial salary (${norm_sal:,.2f} USD), tenure, and performance record.")
+                            st.session_state["emp_manage_feedback"] = ("success", f"Created employee {eid} with initial salary (${norm_sal:,.2f} USD), tenure, and performance record.")
+                            st.rerun()
 
         with tab_manage:
             manage_id = st.text_input("Enter Employee ID to Deactivate or Delete:", placeholder="e.g. EMP-900001", key="del_emp_id")
             confirm_del = st.checkbox("Confirm permanent deletion (cannot be undone)", value=False, key="del_emp_confirm")
             mc1, mc2 = st.columns(2)
             if mc1.button("Deactivate Employee", key="btn_deact_emp"):
+                st.session_state["emp_manage_open"] = True
                 target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
                 if not target_emp:
-                    st.error(f"Employee '{manage_id.strip()}' not found.")
+                    st.session_state["emp_manage_feedback"] = ("error", f"Employee '{manage_id.strip()}' not found.")
                 else:
                     target_emp.is_active = False
                     AuditLogger.log_event(
@@ -433,14 +449,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     )
                     db.commit()
                     st.cache_data.clear()
-                    st.warning(f"Employee {target_emp.employee_id} deactivated.")
+                    st.session_state["emp_manage_feedback"] = ("warning", f"Employee {target_emp.employee_id} deactivated.")
+                st.rerun()
             if mc2.button("Delete Employee Permanently", key="btn_del_emp"):
+                st.session_state["emp_manage_open"] = True
                 if not confirm_del:
-                    st.error("Please check the permanent deletion confirmation box first.")
+                    st.session_state["emp_manage_feedback"] = ("error", "Please check the permanent deletion confirmation box first.")
                 else:
                     target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
                     if not target_emp:
-                        st.error(f"Employee '{manage_id.strip()}' not found.")
+                        st.session_state["emp_manage_feedback"] = ("error", f"Employee '{manage_id.strip()}' not found.")
                     else:
                         eid_del = target_emp.employee_id
                         old_del_state = {
@@ -461,4 +479,5 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                         )
                         db.commit()
                         st.cache_data.clear()
-                        st.success(f"Employee {eid_del} permanently deleted and audit event logged.")
+                        st.session_state["emp_manage_feedback"] = ("success", f"Employee {eid_del} permanently deleted and audit event logged.")
+                st.rerun()
