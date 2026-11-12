@@ -155,23 +155,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.header("Multi-Factor Disparity Detection & Evidence Analysis")
     st.markdown("Identifies unexplained compensation disparities benchmarked against peer cohort medians, documented performance ratings, and tenure.")
 
-    f_col1, f_col2, f_col3 = st.columns([2, 2, 1.5])
-    with f_col1:
-        emp_search = st.text_input(
-            "Filter by Employee ID or Name:",
-            "",
-            placeholder="e.g. EMP-000093 or Jane Smith",
-        )
-    with f_col2:
-        status_filter = st.selectbox(
-            "Filter by Disparity Outcome Status:",
-            ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
-            index=0
-        )
-    with f_col3:
-        flagged_only = st.checkbox("Flagged Only", value=False)
-        include_peers = st.checkbox("Include Cohort Peers", value=False)
-
     df = _load_disparity_findings()
     if not df.empty:
         if selected_role != "All":
@@ -182,7 +165,26 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             df = df[df["_location_id"] == selected_location]
 
     dept_opts = ["All Departments"] + (sorted(df["Department"].unique().tolist()) if not df.empty else [])
-    dept_filter = st.selectbox("Filter by Department:", dept_opts, index=0)
+
+    f_col1, f_col2, f_col3, f_col4 = st.columns([2, 1.8, 1.5, 1.3])
+    with f_col1:
+        emp_search = st.text_input(
+            "Filter by Employee ID or Name:",
+            "",
+            placeholder="e.g. EMP-000093 or Jane Smith",
+        )
+    with f_col2:
+        status_filter = st.selectbox(
+            "Disparity Outcome Status:",
+            ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
+            index=0
+        )
+    with f_col3:
+        dept_filter = st.selectbox("Department:", dept_opts, index=0)
+    with f_col4:
+        flagged_only = st.checkbox("Flagged Only", value=False)
+        include_peers = st.checkbox("Include Cohort Peers", value=False)
+
     if not df.empty and dept_filter != "All Departments":
         df = df[df["Department"] == dept_filter]
 
@@ -216,7 +218,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             color="Status",
             color_discrete_map=_STATUS_COLORS,
         )
-        fig_pie.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
+        fig_pie.update_traces(
+            textinfo="percent+value",
+            marker=dict(line=dict(color="#0f172a", width=2)),
+        )
         apply_clean_layout(fig_pie, legend_bottom=True, height=460, legend_position="bottom")
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 

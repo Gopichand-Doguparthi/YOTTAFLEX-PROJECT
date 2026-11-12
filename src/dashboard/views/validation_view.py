@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from src.database.session import SessionLocal
 from src.validation.data_validator import DataValidator
 from src.validation.reproducibility import ReproducibilityVerifier
+from src.dashboard.views.helpers import build_table_column_config
 
 
 @st.cache_data(ttl=120, show_spinner=False)
@@ -36,6 +37,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.markdown("---")
 
     st.subheader("Data Validation Assertions Status")
+    val_status_filter = st.selectbox("Filter by Validation Status:", ["All Checks", "PASSED", "FAILED"], index=0)
     detail_data = [
         {
             "Check Name": d["check_name"],
@@ -46,7 +48,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         }
         for d in res["details"]
     ]
-    st.dataframe(pd.DataFrame(detail_data), use_container_width=True, hide_index=True)
+    df_val = pd.DataFrame(detail_data)
+    if val_status_filter != "All Checks":
+        df_val = df_val[df_val["Status"] == val_status_filter]
+    st.dataframe(
+        df_val,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(df_val),
+    )
 
     st.markdown("---")
     st.subheader("Synthetic Generator Reproducibility Verification")

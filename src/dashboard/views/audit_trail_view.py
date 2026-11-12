@@ -9,7 +9,7 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import ApprovalEvent, AdjustmentProposal, Employee
-from src.dashboard.views.helpers import format_actor_name, fmt_usd
+from src.dashboard.views.helpers import format_actor_name, fmt_usd, build_table_column_config
 
 
 def _pdf_escape(text: str) -> str:
@@ -277,8 +277,31 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     df_audit = pd.DataFrame(combined_rows)
 
+    af1, af2 = st.columns([2, 1.5])
+    with af1:
+        audit_search = st.text_input("Search by Entity ID, Event ID, or Notes:", "", key="audit_search", placeholder="e.g. ADJ-2026 or EMP-")
+    with af2:
+        actor_opts = ["All Actors"] + sorted(df_audit["Actor"].unique().tolist())
+        actor_filter = st.selectbox("Filter by Actor:", actor_opts, index=0)
+
+    if audit_search.strip():
+        q = audit_search.strip().lower()
+        df_audit = df_audit[
+            df_audit["Event ID"].str.lower().str.contains(q, na=False)
+            | df_audit["Entity ID"].str.lower().str.contains(q, na=False)
+            | df_audit["Notes"].str.lower().str.contains(q, na=False)
+        ]
+    if actor_filter != "All Actors":
+        df_audit = df_audit[df_audit["Actor"] == actor_filter]
+
     st.subheader("Audit Trail & Pending Adjustments Ledger")
-    st.dataframe(df_audit, use_container_width=True, hide_index=True)
+    st.caption(f"Showing {len(df_audit):,} record(s)")
+    st.dataframe(
+        df_audit,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(df_audit),
+    )
 
     # Download options
     st.markdown("---")
@@ -291,7 +314,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             label="Download as CSV",
             data=csv_bytes,
             file_name="audit_trail.csv",
-            mime="text/csv"
+            mime="text/csv",
+            use_container_width=True,
         )
 
     with dl_col2:
@@ -302,7 +326,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             label="Download as Excel",
             data=excel_buf.getvalue(),
             file_name="audit_trail.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            use_container_width=True,
         )
 
     with dl_col3:
@@ -311,5 +336,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             label="Download as PDF",
             data=pdf_bytes,
             file_name="audit_trail.pdf",
-            mime="application/pdf"
+            mime="application/pdf",
+            use_container_width=True,
         )

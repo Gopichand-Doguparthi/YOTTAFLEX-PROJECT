@@ -1,6 +1,7 @@
 """
 View 3: Compensation Band Analysis.
-Visualizes salary band structures, minimum/midpoint/maximum spreads, and effective-dated validity.
+Visualizes salary band structures, minimum/midpoint/maximum progression by career level,
+and horizontal range spreads.
 """
 import streamlit as st
 import plotly.graph_objects as go
@@ -10,8 +11,8 @@ from src.database.session import SessionLocal
 from src.database.models import CompensationBand
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
-    get_currency_normalizer, get_band_usd_amounts,
-    fmt_usd, fmt_num, fmt_pct, PLOTLY_CONFIG, apply_clean_layout,
+    get_currency_normalizer, get_band_usd_amounts, load_reference_catalogs,
+    fmt_usd, fmt_num, fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -57,19 +58,31 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.header("Compensation Band Structure & Range Analysis")
     st.markdown("Audits effective-dated salary ranges establishing market minimum, midpoint, and maximum bounds (USD-normalized for cross-region comparison).")
 
-    role_map = get_role_map(db)
-    level_map = get_level_map(db)
-    loc_map = get_location_map(db)
+    catalog = load_reference_catalogs()
+    role_map = catalog["role_map"]
+    level_map = catalog["level_map"]
+    loc_map = catalog["loc_map"]
+    level_rank_map = {lid: rank for lid, _, _, rank in catalog["levels_list"]}
     curr_norm = get_currency_normalizer(db)
 
-    year_filter = st.selectbox("Effective Band Calendar Year:", [2026, 2025, 2024], index=0)
+    yf_col, bf1, bf2 = st.columns(3)
+    with yf_col:
+        year_filter = st.selectbox("Effective Band Calendar Year:", [2026, 2025, 2024], index=0)
 
     all_bands = _load_bands_for_year(year_filter)
+    with bf1:
+        curr_opts = ["All Currencies"] + sorted({b["currency"] for b in all_bands})
+        curr_filter = st.selectbox("Filter by Local Currency:", curr_opts, index=0)
+    with bf2:
+        band_status_filter = st.selectbox("Filter by Band Status:", ["All Statuses", "Active", "Expired"], index=0)
+
     bands = [
         b for b in all_bands
         if (selected_role == "All" or b["role_id"] == selected_role)
         and (selected_level == "All" or b["level_id"] == selected_level)
         and (selected_location == "All" or b["location_id"] == selected_location)
+        and (curr_filter == "All Currencies" or b["currency"] == curr_filter)
+        and (band_status_filter == "All Statuses" or b["status"].title() == band_status_filter)
     ]
 
     if not bands:
@@ -85,9 +98,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         role_name = role_map.get(b["role_id"], b["role_id"])
         level_name = level_map.get(b["level_id"], b["level_id"])
         loc_name = loc_map.get(b["location_id"], b["location_id"])
+        short_city = loc_name.split(",")[0]
 
         raw_rows.append({
-            "Band Label": f"{role_name} | {level_name} | {loc_name}",
+            "Level": level_name,
+            "Rank": level_rank_map.get(b["level_id"], 99),
+            "Short Label": f"{role_name} ({level_name.split('(')[-1].rstrip(')')} · {short_city})",
             "Min (USD)": min_usd,
             "Midpoint (USD)": mid_usd,
             "Max (USD)": max_usd,
@@ -119,40 +135,88 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     st.markdown("---")
 
-    st.subheader(f"Compensation Band Range Spreads — USD Normalized ({year_filter})")
-    sample_bands = raw_df.head(20)
+    col_left, col_right = st.columns(2)
 
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        name="Minimum (USD)",
-        x=sample_bands["Band Label"],
-        y=sample_bands["Min (USD)"],
-        marker_color="#3498db",
-        hovertemplate="%{x}<br>Min: $%{y:,.0f}<extra></extra>",
-    ))
-    fig.add_trace(go.Bar(
-        name="Midpoint (USD)",
-        x=sample_bands["Band Label"],
-        y=sample_bands["Midpoint (USD)"],
-        marker_color="#2ecc71",
-        hovertemplate="%{x}<br>Midpoint: $%{y:,.0f}<extra></extra>",
-    ))
-    fig.add_trace(go.Bar(
-        name="Maximum (USD)",
-        x=sample_bands["Band Label"],
-        y=sample_bands["Max (USD)"],
-        marker_color="#e67e22",
-        hovertemplate="%{x}<br>Max: $%{y:,.0f}<extra></extra>",
-    ))
+    with col_left:
+        # Chart 1: Career Level Progression (Min / Midpoint / Max USD)
+        lvl_summary = (
+            raw_df.groupby(["Rank", "Level"])[["Min (USD)", "Midpoint (USD)", "Max (USD)"]]
+            .mean()
+            .reset_index()
+            .sort_values("Rank")
+        )
+        max_lvl_val = float(lvl_summary["Max (USD)"].max()) if not lvl_summary.empty else 100000.0
 
-    fig.update_layout(
-        barmode="group",
-        title="Sample Compensation Bands: Minimum, Midpoint, and Maximum Salary Ranges (USD)",
-        yaxis_title="Annual Salary (USD)",
-        xaxis_title="Role | Career Level | Location",
-    )
-    apply_clean_layout(fig, legend_bottom=True, height=520, xaxis_tickangle=-35, extra_bottom_margin=70)
-    st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+        fig_lvl = go.Figure()
+        for col_name, color in [
+            ("Min (USD)", "#3b82f6"),
+            ("Midpoint (USD)", "#22c55e"),
+            ("Max (USD)", "#f97316"),
+        ]:
+            fig_lvl.add_trace(go.Bar(
+                name=col_name.replace(" (USD)", ""),
+                x=lvl_summary["Level"],
+                y=lvl_summary[col_name],
+                text=[f"${v/1000:,.0f}k" for v in lvl_summary[col_name]],
+                textposition="outside",
+                cliponaxis=False,
+                marker_color=color,
+                hovertemplate="%{x}<br>" + col_name + ": $%{y:,.0f}<extra></extra>",
+            ))
+        fig_lvl.update_layout(
+            barmode="group",
+            title=f"Salary Band Progression by Career Level ({year_filter})",
+            xaxis_title="Career Level",
+            yaxis_title="Average Annual Salary (USD)",
+            yaxis=dict(range=[0, max_lvl_val * 1.20]),
+        )
+        apply_clean_layout(fig_lvl, legend_bottom=True, height=470, xaxis_tickangle=-20)
+        st.plotly_chart(fig_lvl, use_container_width=True, config=PLOTLY_CONFIG)
+
+    with col_right:
+        # Chart 2: Horizontal Dumbbell Range Chart for top 10 matching bands
+        sample_bands = raw_df.sort_values(["Rank", "Midpoint (USD)"]).head(10).iloc[::-1]
+
+        fig_range = go.Figure()
+        for _, row in sample_bands.iterrows():
+            fig_range.add_trace(go.Scatter(
+                x=[row["Min (USD)"], row["Max (USD)"]],
+                y=[row["Short Label"], row["Short Label"]],
+                mode="lines",
+                line=dict(color="#64748b", width=4),
+                showlegend=False,
+                hoverinfo="skip",
+            ))
+
+        for col_name, color, label in [
+            ("Min (USD)", "#3b82f6", "Minimum"),
+            ("Midpoint (USD)", "#22c55e", "Midpoint"),
+            ("Max (USD)", "#f97316", "Maximum"),
+        ]:
+            fig_range.add_trace(go.Scatter(
+                name=label,
+                x=sample_bands[col_name],
+                y=sample_bands["Short Label"],
+                mode="markers+text" if col_name == "Midpoint (USD)" else "markers",
+                text=[f"${v/1000:,.0f}k" for v in sample_bands[col_name]] if col_name == "Midpoint (USD)" else None,
+                textposition="top center",
+                marker=dict(color=color, size=11, line=dict(color="#0f172a", width=1.5)),
+                hovertemplate="%{y}<br>" + label + ": $%{x:,.0f}<extra></extra>",
+            ))
+
+        fig_range.update_layout(
+            title=f"Band Range Span: Min – Midpoint – Max ({year_filter})",
+            xaxis_title="Annual Salary (USD)",
+            yaxis_title="",
+        )
+        apply_clean_layout(fig_range, legend_bottom=True, height=470)
+        st.plotly_chart(fig_range, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Compensation Bands Directory")
-    st.dataframe(pd.DataFrame(display_rows), use_container_width=True, hide_index=True)
+    band_disp_df = pd.DataFrame(display_rows)
+    st.dataframe(
+        band_disp_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(band_disp_df),
+    )

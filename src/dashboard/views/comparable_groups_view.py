@@ -11,7 +11,7 @@ from src.database.models import Employee, SalaryRecord, RoleComparabilityRationa
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
-    fmt_usd, PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -122,11 +122,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         x="Members",
         color="Status",
         nbins=20,
+        text_auto=True,
         labels={"Members": "Cohort Member Count", "Status": "Statistical Sufficiency"},
         title="Distribution of Cohort Member Sizes",
         color_discrete_map={
-            "Sufficient (N >= 3)": "#2ecc71",
-            "Insufficient (N < 3)": "#e74c3c",
+            "Sufficient (N >= 3)": "#22c55e",
+            "Insufficient (N < 3)": "#ef4444",
         },
     )
     fig_hist.add_vline(
@@ -137,10 +138,25 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.plotly_chart(fig_hist, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Peer Cohort Benchmarks & Metrics")
-    st.dataframe(cohort_df.drop(columns=["is_sufficient"]), use_container_width=True, hide_index=True)
+    cg_status_filter = st.selectbox(
+        "Filter by Statistical Sufficiency:",
+        ["All Cohorts", "Sufficient (N >= 3)", "Insufficient (N < 3)"],
+        index=0,
+    )
+    cohort_disp_df = cohort_df.drop(columns=["is_sufficient"])
+    if cg_status_filter != "All Cohorts":
+        cohort_disp_df = cohort_disp_df[cohort_disp_df["Status"] == cg_status_filter]
+    st.caption(f"Showing {len(cohort_disp_df):,} cohort(s)")
+    st.dataframe(
+        cohort_disp_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(cohort_disp_df),
+    )
 
     st.markdown("---")
     st.subheader("Approved Cross-Role Comparability Rationales")
+    rat_comp_filter = st.selectbox("Filter by Comparability:", ["All", "Yes", "No"], index=0)
     rat_df = pd.DataFrame([
         {
             "Mapping ID": r["mapping_id"],
@@ -153,4 +169,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         }
         for r in rationales
     ])
-    st.dataframe(rat_df, use_container_width=True, hide_index=True)
+    if rat_comp_filter != "All":
+        rat_df = rat_df[rat_df["Comparable"] == rat_comp_filter]
+    st.dataframe(
+        rat_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(rat_df),
+    )

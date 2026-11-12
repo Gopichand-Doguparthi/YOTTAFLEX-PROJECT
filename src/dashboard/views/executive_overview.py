@@ -154,17 +154,25 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 .reset_index()
                 .melt(id_vars="department", value_vars=["Average", "Median"], var_name="Metric", value_name="Salary (USD)")
             )
+            max_dept_val = float(dept_summary["Salary (USD)"].max()) if not dept_summary.empty else 100000.0
+            dept_summary["Label"] = dept_summary["Salary (USD)"].map(lambda v: f"${v/1000:,.0f}k")
             fig_dept = px.bar(
                 dept_summary,
                 x="department",
                 y="Salary (USD)",
                 color="Metric",
                 barmode="group",
+                text="Label",
                 labels={"department": "Department", "Salary (USD)": "Normalized Salary (USD)"},
                 title="Average vs. Median Annual Salary by Department",
-                color_discrete_map={"Average": "#6366f1", "Median": "#2ecc71"},
+                color_discrete_map={"Average": "#6366f1", "Median": "#22c55e"},
             )
-            fig_dept.update_traces(hovertemplate="%{x}<br>%{fullData.name}: $%{y:,.0f}<extra></extra>")
+            fig_dept.update_traces(
+                textposition="outside",
+                cliponaxis=False,
+                hovertemplate="%{x}<br>%{fullData.name}: $%{y:,.0f}<extra></extra>",
+            )
+            fig_dept.update_layout(yaxis=dict(range=[0, max_dept_val * 1.20]))
             apply_clean_layout(fig_dept, legend_bottom=True, height=450, xaxis_tickangle=-25)
             st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
         else:
@@ -194,7 +202,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 },
                 title="Remediation Proposal Status Breakdown"
             )
-            fig_donut.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
+            fig_donut.update_traces(
+                textinfo="percent+value",
+                marker=dict(line=dict(color="#0f172a", width=2)),
+            )
             apply_clean_layout(fig_donut, legend_bottom=True, height=450, legend_position="bottom")
             st.plotly_chart(fig_donut, use_container_width=True, config=PLOTLY_CONFIG)
         else:
@@ -218,8 +229,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             title="Workforce Count and Average Normalized Salary by Geographic Hub",
             color_continuous_scale="Viridis"
         )
+        max_hc = int(loc_summary["headcount"].max()) if not loc_summary.empty else 100
         fig_bar.update_traces(textposition="outside", cliponaxis=False)
-        apply_clean_layout(fig_bar, legend_bottom=False, height=500, xaxis_tickangle=-30, extra_bottom_margin=25)
+        fig_bar.update_layout(yaxis=dict(range=[0, max_hc * 1.16]))
+        apply_clean_layout(fig_bar, legend_bottom=False, height=500, xaxis_tickangle=-30, extra_bottom_margin=20)
         fig_bar.update_layout(
             coloraxis_colorbar=dict(
                 title="Avg Salary (USD)",

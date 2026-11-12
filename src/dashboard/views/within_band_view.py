@@ -168,7 +168,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             color_discrete_map=_ZONE_COLORS,
             category_orders={"Band Zone": list(_ZONE_COLORS.keys())},
         )
-        fig_pie.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
+        fig_pie.update_traces(
+            textinfo="percent+value",
+            marker=dict(line=dict(color="#0f172a", width=2)),
+        )
         apply_clean_layout(fig_pie, legend_bottom=True, height=470, legend_position="bottom")
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 

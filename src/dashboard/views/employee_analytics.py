@@ -10,7 +10,7 @@ from src.database.session import SessionLocal
 from src.database.models import Employee, SalaryRecord, PerformanceEvidence, Tenure, Promotion
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
-    fmt_usd, fmt_num, PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, fmt_num, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -68,10 +68,18 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     level_map = get_level_map(db)
     loc_map = get_location_map(db)
 
-    search_query = st.text_input("Search by Employee ID, Name, or Email:", "")
-    term = search_query.strip().lower()
-
     all_rows = _load_employee_directory()
+
+    ec1, ec2, ec3 = st.columns([2, 1.5, 1.5])
+    with ec1:
+        search_query = st.text_input("Search by Employee ID, Name, or Email:", "", placeholder="e.g. EMP-000001 or James")
+    with ec2:
+        dept_opts = ["All Departments"] + sorted({e["department"] for e in all_rows})
+        dept_filter = st.selectbox("Filter by Department:", dept_opts, index=0)
+    with ec3:
+        type_opts = ["All Types", "Full Time", "Part Time"]
+        type_filter = st.selectbox("Filter by Employment Type:", type_opts, index=0)
+    term = search_query.strip().lower()
 
     emp_data = []
     for e in all_rows:
@@ -80,6 +88,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         if selected_level != "All" and e["level_id"] != selected_level:
             continue
         if selected_location != "All" and e["location_id"] != selected_location:
+            continue
+        if dept_filter != "All Departments" and e["department"] != dept_filter:
+            continue
+        emp_type_label = e["employment_type"].replace("_", " ").title()
+        if type_filter != "All Types" and emp_type_label != type_filter:
             continue
         if term:
             if not (term in e["employee_id"].lower() or term in e["first_name"].lower()
@@ -95,7 +108,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Location": loc_map.get(e["location_id"], e["location_id"]),
             "Tenure (yrs)": e["company_tenure"],
             "Total Exp (yrs)": e["total_exp"],
-            "Type": e["employment_type"].replace("_", " ").title(),
+            "Type": emp_type_label,
             "FTE": e["fte"],
             "Hire Date": e["hire_date"],
         })
@@ -111,11 +124,14 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         use_container_width=True,
         height=340,
         hide_index=True,
-        column_config={
-            "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
-            "Total Exp (yrs)": st.column_config.NumberColumn("Total Exp (yrs)", format="%.1f"),
-            "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
-        },
+        column_config=build_table_column_config(
+            df_emps,
+            overrides={
+                "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+                "Total Exp (yrs)": st.column_config.NumberColumn("Total Exp (yrs)", format="%.1f"),
+                "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
+            },
+        ),
     )
 
     # Detailed Employee Drill-down
@@ -182,7 +198,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 for s in salaries
             ])
             st.write("Historical Compensation Records:")
-            st.dataframe(sal_table_df, use_container_width=True, hide_index=True)
+            st.dataframe(
+                sal_table_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config=build_table_column_config(sal_table_df),
+            )
 
         if perfs:
             st.write("Performance Evaluation Reviews:")
@@ -201,10 +222,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 perf_df,
                 use_container_width=True,
                 hide_index=True,
-                column_config={
-                    "Rating Score": st.column_config.NumberColumn("Rating Score", format="%.2f"),
-                    "Skills Score": st.column_config.NumberColumn("Skills Score", format="%.1f"),
-                },
+                column_config=build_table_column_config(
+                    perf_df,
+                    overrides={
+                        "Rating Score": st.column_config.NumberColumn("Rating Score", format="%.2f"),
+                        "Skills Score": st.column_config.NumberColumn("Skills Score", format="%.1f"),
+                    },
+                ),
             )
 
         if proms:
@@ -219,4 +243,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 }
                 for p in proms
             ])
-            st.dataframe(prom_df, use_container_width=True, hide_index=True)
+            st.dataframe(
+                prom_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config=build_table_column_config(prom_df),
+            )

@@ -207,8 +207,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             text="Count",
             title="Exception Incidents by Issue Type",
         )
+        max_exc_cnt = int(issue_summary["Count"].max()) if not issue_summary.empty else 100
         fig_bar.update_traces(textposition="outside", cliponaxis=False)
-        apply_clean_layout(fig_bar, legend_bottom=True, height=530, xaxis_tickangle=-15, extra_bottom_margin=20)
+        fig_bar.update_layout(yaxis=dict(range=[0, max_exc_cnt * 1.18]))
+        apply_clean_layout(fig_bar, legend_bottom=True, height=520, xaxis_tickangle=-15, extra_bottom_margin=15)
         st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
 
         st.subheader("Exception Incidents by Severity Level")
@@ -221,9 +223,14 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             hole=0.42,
             title="Exception Incidents by Severity Level",
             color="Severity",
-            color_discrete_map={"CRITICAL": "#ef4444", "HIGH": "#f97316", "MEDIUM": "#eab308"}
+            color_discrete_map={"CRITICAL": "#ef4444", "HIGH": "#facc15", "MEDIUM": "#fde047"}
         )
-        fig_sev.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
+        pulls = [0.06 if s != "CRITICAL" else 0.0 for s in sev_summary["Severity"]]
+        fig_sev.update_traces(
+            textinfo="label+value+percent",
+            pull=pulls,
+            marker=dict(line=dict(color="#0f172a", width=2)),
+        )
         apply_clean_layout(fig_sev, legend_bottom=True, height=420, legend_position="bottom")
         st.plotly_chart(fig_sev, use_container_width=True, config=PLOTLY_CONFIG)
 

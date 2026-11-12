@@ -9,7 +9,7 @@ import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.session import SessionLocal
 from src.evaluation.evaluator import EvaluationEngine
-from src.dashboard.views.helpers import fmt_pct, PLOTLY_CONFIG, apply_clean_layout
+from src.dashboard.views.helpers import fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config
 
 
 _ISSUE_LABELS = {
@@ -114,7 +114,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             y="Coverage (%)",
             color="Coverage (%)",
             text="Coverage (%)",
-            range_y=[0, 118],
+            range_y=[0, 125],
             title="Detection Recall Coverage Across Mandatory Edge Cases"
         )
         fig_bar.update_traces(texttemplate="%{text:.1f}%", textposition="outside", cliponaxis=False)
@@ -136,4 +136,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         "Detected": df_issue["Detected"],
         "Ground Truth Total": df_issue["Ground Truth Total"],
     })
-    st.dataframe(df_issue_table, use_container_width=True, hide_index=True)
+    st.dataframe(
+        df_issue_table,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(df_issue_table),
+    )

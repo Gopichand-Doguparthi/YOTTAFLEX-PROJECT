@@ -23,89 +23,11 @@ st.set_page_config(
 
 def load_css():
     css_path = Path(__file__).parent / "static" / "custom.css"
-    with open(css_path) as f:
+    with open(css_path, encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 load_css()
-
-# Sidebar navigation & layout styling
-st.markdown("""
-<style>
-    .main .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
-    .metric-card {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 15px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    /* Effective spacing between sidebar items */
-    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
-        gap: 0.45rem !important;
-    }
-
-    /* Sidebar nav buttons — full width, strictly left-aligned, comfortable spacing */
-    [data-testid="stSidebar"] .stButton,
-    [data-testid="stSidebar"] .stButton > button,
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: flex-start !important;
-        align-items: center !important;
-        text-align: left !important;
-        background: transparent;
-        color: #cbd5e1;
-        border: none;
-        border-radius: 6px;
-        padding: 0.55rem 0.85rem !important;
-        margin: 3px 0 !important;
-        font-size: 0.88rem;
-        font-weight: 400;
-        letter-spacing: 0.01em;
-        transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
-        cursor: pointer;
-    }
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] > div,
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] [data-testid="stMarkdownContainer"],
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] p {
-        width: 100% !important;
-        text-align: left !important;
-        justify-content: flex-start !important;
-        margin: 0 !important;
-    }
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"]:hover {
-        background: rgba(99, 102, 241, 0.22) !important;
-        color: #ffffff !important;
-        padding-left: 1.15rem !important;
-    }
-    [data-testid="stSidebar"] button[data-testid="stBaseButton-primary"] {
-        background: rgba(99, 102, 241, 0.36) !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
-        border-left: 3px solid #818cf8 !important;
-    }
-    [data-testid="stSidebar"] button[data-testid^="stBaseButton"]:focus {
-        box-shadow: none;
-        outline: none;
-    }
-
-    /* Highlighted, larger section headings in sidebar with clear top spacing */
-    .nav-section-label {
-        font-size: 0.84rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: #f1f5f9;
-        background: rgba(99, 102, 241, 0.24);
-        border-left: 3px solid #818cf8;
-        border-radius: 4px;
-        padding: 0.44rem 0.85rem;
-        margin: 18px 0 6px 0;
-        text-align: left;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 from src.database.session import SessionLocal
 from src.dashboard.views.helpers import load_reference_catalogs

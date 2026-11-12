@@ -6,7 +6,7 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import AdjustmentProposal, Employee
-from src.dashboard.views.helpers import format_actor_name, fmt_usd, fmt_pct
+from src.dashboard.views.helpers import format_actor_name, fmt_usd, fmt_pct, build_table_column_config
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -76,4 +76,32 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         })
 
     st.subheader("Historical Decision Ledger")
-    st.dataframe(pd.DataFrame(hist_data), use_container_width=True, hide_index=True)
+    ah1, ah2, ah3 = st.columns([2, 1.5, 1.5])
+    with ah1:
+        ah_search = st.text_input("Search by Proposal ID, Employee ID, or Name:", "", key="ah_search", placeholder="e.g. ADJ-2026 or EMP-")
+    with ah2:
+        ah_dec = st.selectbox("Filter by Decision:", ["All Decisions", "Approved", "Rejected"], index=0)
+    with ah3:
+        reviewer_opts = ["All Reviewers"] + sorted({h["Reviewed By"] for h in hist_data})
+        ah_rev = st.selectbox("Filter by Reviewed By:", reviewer_opts, index=0)
+
+    df_hist = pd.DataFrame(hist_data)
+    if ah_search.strip():
+        q = ah_search.strip().lower()
+        df_hist = df_hist[
+            df_hist["Proposal ID"].str.lower().str.contains(q, na=False)
+            | df_hist["Employee ID"].str.lower().str.contains(q, na=False)
+            | df_hist["Employee Name"].str.lower().str.contains(q, na=False)
+        ]
+    if ah_dec != "All Decisions":
+        df_hist = df_hist[df_hist["Decision"] == ah_dec]
+    if ah_rev != "All Reviewers":
+        df_hist = df_hist[df_hist["Reviewed By"] == ah_rev]
+
+    st.caption(f"Showing {len(df_hist):,} decision record(s)")
+    st.dataframe(
+        df_hist,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(df_hist),
+    )

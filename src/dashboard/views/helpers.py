@@ -166,16 +166,17 @@ PLOTLY_CONFIG = {
 def apply_clean_layout(
     fig,
     legend_bottom: bool = True,
-    height: int = 470,
+    height: int = 440,
     xaxis_tickangle: int = 0,
     extra_bottom_margin: int = 0,
     legend_position: str = "top",
 ):
     """
-    Applies smooth-zoom layout settings, reserves dedicated top space for ModeBar + Title + Legend
-    so nothing collides with X-axis labels or X-axis titles, and formats axes cleanly.
+    Applies smooth-zoom layout settings with balanced, non-overlapping spacing
+    for ModeBar, Title, Legend, and Axis labels.
     """
-    top_margin = 125 if legend_bottom and legend_position == "top" else 95
+    top_margin = 108 if legend_bottom and legend_position == "top" else 78
+    bottom_margin = (70 if legend_bottom and legend_position == "bottom" else 55) + extra_bottom_margin
     layout_kwargs = dict(
         uirevision="preserve",
         transition={"duration": 0},
@@ -184,7 +185,7 @@ def apply_clean_layout(
         title=dict(
             x=0.0,
             xanchor="left",
-            y=0.94,
+            y=0.95,
             yref="container",
             yanchor="top",
             font=dict(size=15),
@@ -197,15 +198,15 @@ def apply_clean_layout(
         ),
         xaxis=dict(
             automargin=True,
-            title_standoff=16,
+            title_standoff=14,
             tickfont=dict(size=12),
             tickangle=xaxis_tickangle,
         ),
         yaxis=dict(
             automargin=True,
-            title_standoff=12,
+            title_standoff=10,
         ),
-        margin=dict(t=top_margin, b=80 + extra_bottom_margin, l=65, r=40),
+        margin=dict(t=top_margin, b=bottom_margin, l=60, r=30),
     )
     if legend_bottom:
         if legend_position == "top":
@@ -223,7 +224,7 @@ def apply_clean_layout(
                 title_text="",
                 orientation="h",
                 yanchor="top",
-                y=-0.08,
+                y=-0.06,
                 xanchor="center",
                 x=0.5,
                 font=dict(size=12),
@@ -234,21 +235,21 @@ def apply_clean_layout(
 
 def build_table_column_config(df, overrides: dict = None) -> dict:
     """
-    Auto-assigns column widths based on column header and max cell text length
-    so values in st.dataframe tables are not cut off prematurely.
+    Assigns compact, content-proportional column widths based on actual header
+    and cell text lengths so short columns never get wasted whitespace and long
+    columns stay readable.
     """
     cfg = {}
-    large_keywords = ("description", "recommendation", "rationale", "reason", "notes", "details", "location", "role")
-    medium_keywords = ("name", "level", "department", "status", "zone", "issue", "classification", "actor", "entity", "decision")
-
     for col in df.columns:
         if overrides and col in overrides:
             cfg[col] = overrides[col]
             continue
-        col_lower = col.lower()
-        max_len = int(df[col].astype(str).str.len().max()) if not df.empty else len(col)
-        if any(k in col_lower for k in large_keywords) or max_len > 36:
+        max_cell = int(df[col].astype(str).str.len().max()) if not df.empty else 0
+        eff_len = max(len(str(col)), max_cell)
+        if eff_len > 32:
             cfg[col] = st.column_config.TextColumn(col, width="large")
-        elif any(k in col_lower for k in medium_keywords) or max_len > 16:
+        elif eff_len >= 15:
             cfg[col] = st.column_config.TextColumn(col, width="medium")
+        else:
+            cfg[col] = st.column_config.TextColumn(col, width="small")
     return cfg

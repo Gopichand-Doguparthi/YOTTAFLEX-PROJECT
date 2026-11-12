@@ -13,7 +13,7 @@ from src.engine.compa_ratio import CompaRatioCalculator
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts,
-    fmt_usd, PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -143,8 +143,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             df_chart,
             x="Compa-Ratio",
             color="Classification",
-            nbins=35,
+            nbins=20,
             barmode="stack",
+            text_auto=True,
             title="Workforce Compa-Ratio Distribution",
             color_discrete_map=_CLASS_COLORS,
             category_orders={"Classification": list(_CLASS_COLORS.keys())},
@@ -172,42 +173,76 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             .reset_index()
             .melt(id_vars="Department", value_vars=["Average", "Median"], var_name="Metric", value_name="Compa-Ratio")
         )
+        max_cr_val = float(dept_cr["Compa-Ratio"].max()) if not dept_cr.empty else 1.5
+        dept_cr["Label"] = dept_cr["Compa-Ratio"].map(lambda v: f"{v:.2f}")
         fig_dept = px.bar(
             dept_cr,
             x="Department",
             y="Compa-Ratio",
             color="Metric",
             barmode="group",
+            text="Label",
             title="Average vs. Median Compa-Ratio by Department",
-            color_discrete_map={"Average": "#6366f1", "Median": "#2ecc71"},
+            color_discrete_map={"Average": "#6366f1", "Median": "#22c55e"},
         )
-        fig_dept.add_hline(y=1.0, line_dash="dash", line_color="#2ecc71", annotation_text="Market Parity (1.00)", annotation_position="top right")
-        fig_dept.update_traces(hovertemplate="%{x}<br>%{fullData.name}: %{y:.3f}<extra></extra>")
+        fig_dept.add_hline(y=1.0, line_dash="dash", line_color="#22c55e", annotation_text="Market Parity (1.00)", annotation_position="top right")
+        fig_dept.update_traces(
+            textposition="outside",
+            cliponaxis=False,
+            hovertemplate="%{x}<br>%{fullData.name}: %{y:.3f}<extra></extra>",
+        )
+        fig_dept.update_layout(yaxis=dict(range=[0, max_cr_val * 1.22]))
         apply_clean_layout(fig_dept, legend_bottom=True, height=470, xaxis_tickangle=-25)
         st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
 
-    st.subheader("Below-Target Employees (Equity Review Priority)")
-    below_raw = df[df["_raw_class"] == "BELOW_TARGET"].copy()
-    if below_raw.empty:
-        st.success("No employees are below the 0.80 target Compa-Ratio threshold.")
+    st.subheader("Compa-Ratio Employees Directory")
+    cf1, cf2, cf3 = st.columns([2, 1.5, 1.5])
+    with cf1:
+        cr_search = st.text_input("Search by Employee ID or Name:", "", key="cr_search", placeholder="e.g. EMP-000010 or Smith")
+    with cf2:
+        cr_class_filter = st.selectbox(
+            "Filter by Classification:",
+            ["Below Target (< 0.80)", "All Classifications", "Target Range (0.80 – 1.20)", "Above Target (> 1.20)"],
+            index=0,
+        )
+    with cf3:
+        cr_dept_opts = ["All Departments"] + sorted(df["Department"].unique().tolist())
+        cr_dept_filter = st.selectbox("Filter by Department:", cr_dept_opts, index=0, key="cr_dept")
+
+    table_raw = df.copy()
+    if cr_class_filter != "All Classifications":
+        table_raw = table_raw[table_raw["Classification"] == cr_class_filter]
+    if cr_dept_filter != "All Departments":
+        table_raw = table_raw[table_raw["Department"] == cr_dept_filter]
+    if cr_search.strip():
+        q = cr_search.strip().lower()
+        table_raw = table_raw[
+            table_raw["Employee ID"].str.lower().str.contains(q, na=False)
+            | table_raw["Name"].str.lower().str.contains(q, na=False)
+        ]
+
+    if table_raw.empty:
+        st.info("No employee records match the selected filters.")
     else:
-        below_disp = pd.DataFrame({
-            "Employee ID": below_raw["Employee ID"],
-            "Name": below_raw["Name"],
-            "Department": below_raw["Department"],
-            "Role": below_raw["Role"],
-            "Level": below_raw["Level"],
-            "Location": below_raw["Location"],
-            "Salary (USD)": below_raw["Salary (USD)"].map(fmt_usd),
-            "Band Midpoint (USD)": below_raw["Band Midpoint (USD)"].map(fmt_usd),
-            "Compa-Ratio": below_raw["Compa-Ratio"],
-            "Classification": below_raw["Classification"],
+        st.caption(f"Showing {len(table_raw):,} employee record(s)")
+        cr_disp = pd.DataFrame({
+            "Employee ID": table_raw["Employee ID"],
+            "Name": table_raw["Name"],
+            "Department": table_raw["Department"],
+            "Role": table_raw["Role"],
+            "Level": table_raw["Level"],
+            "Location": table_raw["Location"],
+            "Salary (USD)": table_raw["Salary (USD)"].map(fmt_usd),
+            "Band Midpoint (USD)": table_raw["Band Midpoint (USD)"].map(fmt_usd),
+            "Compa-Ratio": table_raw["Compa-Ratio"],
+            "Classification": table_raw["Classification"],
         })
         st.dataframe(
-            below_disp,
+            cr_disp,
             use_container_width=True,
             hide_index=True,
-            column_config={
-                "Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f"),
-            },
+            column_config=build_table_column_config(
+                cr_disp,
+                overrides={"Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f")},
+            ),
         )

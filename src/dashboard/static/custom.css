@@ -1,114 +1,354 @@
 /* ============================================================
-   Compensation Equity Dashboard – Custom Styles
+   CompEquity AI — Unified UI Design System
+   Dark-mode first, responsive, compact, and visually balanced.
    ============================================================ */
 
-/* ── Global typography ── */
+:root {
+    --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --bg-sidebar: #14192d;
+    --surface-card: rgba(30, 41, 59, 0.55);
+    --surface-elevated: rgba(30, 41, 59, 0.85);
+    --border-subtle: rgba(148, 163, 184, 0.18);
+    --border-strong: rgba(148, 163, 184, 0.30);
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-soft: rgba(99, 102, 241, 0.22);
+    --accent-active: rgba(99, 102, 241, 0.36);
+    --accent-border: #818cf8;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --space-1: 0.25rem;
+    --space-2: 0.50rem;
+    --space-3: 0.75rem;
+    --space-4: 1.00rem;
+    --space-5: 1.25rem;
+}
+
+/* ── Global Typography & Base ── */
 html, body, [class*="css"] {
-    font-family: "Inter", "Segoe UI", sans-serif;
+    font-family: var(--font-sans);
+    line-height: 1.5;
 }
 
-/* ── Sidebar ── */
+.stApp {
+    overflow-x: hidden;
+}
+
+.main .block-container {
+    padding: 1.25rem 1.75rem 1.75rem 1.75rem !important;
+    max-width: 100%;
+}
+
+/* Consistent vertical rhythm in main content */
+.main [data-testid="stVerticalBlock"] {
+    gap: 0.65rem;
+}
+
+/* Headings hierarchy */
+.main h1 {
+    font-size: 1.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-1) 0 !important;
+    line-height: 1.25;
+}
+
+.main h2 {
+    font-size: 1.40rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.015em;
+    margin: 0 0 var(--space-1) 0 !important;
+    line-height: 1.3;
+}
+
+.main h3 {
+    font-size: 1.08rem !important;
+    font-weight: 600 !important;
+    margin: var(--space-2) 0 var(--space-1) 0 !important;
+    line-height: 1.35;
+}
+
+.main p {
+    margin-bottom: var(--space-2);
+}
+
+.main [data-testid="stCaptionContainer"] p {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    margin-bottom: var(--space-1);
+}
+
+/* Clean compact horizontal dividers */
+.main hr,
+[data-testid="stSidebar"] hr {
+    margin: 0.75rem 0 !important;
+    border-color: var(--border-subtle) !important;
+}
+
+/* ── Sidebar & Navigation ── */
 [data-testid="stSidebar"] {
-    background-color: #1a1f36;
-    color: #e2e8f0;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-subtle);
 }
 
-[data-testid="stSidebar"] .stButton > button {
-    width: 100%;
-    text-align: left;
-    background-color: transparent;
-    color: #cbd5e1;
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+    gap: 0.22rem !important;
+}
+
+[data-testid="stSidebar"] h1 {
+    font-size: 1.30rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem !important;
+}
+
+[data-testid="stSidebar"] .stButton,
+[data-testid="stSidebar"] .stButton > button,
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"] {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    text-align: left !important;
+    background: transparent;
+    color: var(--text-secondary);
     border: none;
-    border-radius: 6px;
-    padding: 0.4rem 0.75rem;
-    margin-bottom: 2px;
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-[data-testid="stSidebar"] .stButton > button:hover {
-    background-color: #2d3561;
-    color: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 0.44rem 0.80rem !important;
+    margin: 1px 0 !important;
+    min-height: 2.15rem !important;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
     cursor: pointer;
 }
 
-/* ── Metric cards ── */
-[data-testid="metric-container"] {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"] > div,
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"] [data-testid="stMarkdownContainer"],
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"] p {
+    width: 100% !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
 }
 
-[data-testid="metric-container"]:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"]:hover {
+    background: var(--accent-soft) !important;
+    color: #ffffff !important;
+    padding-left: 1.05rem !important;
 }
 
-/* ── DataFrames / tables ── */
+[data-testid="stSidebar"] button[data-testid="stBaseButton-primary"] {
+    background: var(--accent-active) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-left: 3px solid var(--accent-border) !important;
+}
+
+[data-testid="stSidebar"] button[data-testid^="stBaseButton"]:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.nav-section-label {
+    font-size: 0.80rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent-border);
+    border-radius: 4px;
+    padding: 0.34rem 0.80rem;
+    margin: 12px 0 4px 0;
+    text-align: left;
+}
+
+/* ── Metric Cards ── */
+[data-testid="stMetric"] {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 0.80rem 1.00rem;
+    height: 100%;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+[data-testid="stMetricLabel"] p {
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 0.15rem !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 1.55rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+}
+
+/* ── Columns & Alignment ── */
+[data-testid="stHorizontalBlock"] {
+    gap: 0.85rem;
+    align-items: stretch;
+}
+
+/* ── Tables / DataFrames ── */
 [data-testid="stDataFrame"] {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-subtle);
+    max-width: 100%;
 }
 
-/* ── Expander headers ── */
-.streamlit-expanderHeader {
-    font-weight: 600;
-    color: #1e293b;
-    background-color: #f1f5f9;
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-    transition: background-color 0.15s ease;
+/* ── Forms, Inputs & Selectboxes ── */
+[data-testid="stForm"] {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
 }
 
-.streamlit-expanderHeader:hover {
-    background-color: #e2e8f0;
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input,
+.stSelectbox [data-baseweb="select"] > div {
+    min-height: 2.35rem;
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.90rem;
 }
 
-/* ── Primary buttons ── */
-.stButton > button[kind="primary"] {
-    background-color: #4f46e5;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 0.45rem 1.1rem;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+.stTextArea textarea {
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.90rem;
 }
 
-.stButton > button[kind="primary"]:hover {
-    background-color: #4338ca;
-    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+.stCheckbox {
+    padding-top: 0.25rem;
 }
 
-/* ── Tabs ── */
-button[data-baseweb="tab"] {
-    border-radius: 6px 6px 0 0;
+/* ── Main Content Buttons (Primary, Secondary, Download) ── */
+.main .stButton > button,
+.main .stDownloadButton > button,
+.main [data-testid="stFormSubmitButton"] > button {
+    min-height: 2.35rem;
+    padding: 0.42rem 1.05rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
     font-weight: 500;
-    transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-button[data-baseweb="tab"]:hover {
-    color: #4f46e5;
+.main .stButton > button[kind="primary"],
+.main [data-testid="stFormSubmitButton"] > button[kind="primary"] {
+    background-color: var(--accent);
+    color: #ffffff;
+    border: 1px solid var(--accent);
 }
 
-/* ── Alert / info boxes ── */
+.main .stButton > button[kind="primary"]:hover,
+.main [data-testid="stFormSubmitButton"] > button[kind="primary"]:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.35);
+}
+
+.main .stButton > button[kind="secondary"],
+.main .stDownloadButton > button {
+    background-color: var(--surface-elevated);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+}
+
+.main .stButton > button[kind="secondary"]:hover,
+.main .stDownloadButton > button:hover {
+    border-color: var(--accent-border);
+    color: #ffffff;
+}
+
+/* ── Expanders ── */
+[data-testid="stExpander"] {
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    background-color: var(--surface-card);
+}
+
+[data-testid="stExpander"] summary {
+    padding: 0.55rem 0.90rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+/* ── Alerts ── */
 [data-testid="stAlert"] {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
+    padding: 0.65rem 1.00rem;
 }
 
-/* ── Scrollbar (webkit) ── */
+/* ── Scrollbars ── */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: rgba(15, 23, 42, 0.45);
 }
 ::-webkit-scrollbar-thumb {
-    background: #94a3b8;
+    background: #475569;
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #64748b;
+}
+
+/* ── Responsive Breakpoints (Tablet & Mobile) ── */
+@media (max-width: 1024px) {
+    .main .block-container {
+        padding: 1.00rem 1.15rem 1.40rem 1.15rem !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 1.35rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 0.85rem 0.75rem 1.25rem 0.75rem !important;
+    }
+    .main h1 {
+        font-size: 1.35rem !important;
+    }
+    .main h2 {
+        font-size: 1.20rem !important;
+    }
+    .main h3 {
+        font-size: 1.00rem !important;
+    }
+    [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+        gap: 0.60rem;
+    }
+    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+    [data-testid="stMetric"] {
+        padding: 0.65rem 0.85rem;
+    }
+    .main .stButton > button,
+    .main .stDownloadButton > button {
+        width: 100%;
+    }
 }
