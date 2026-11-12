@@ -52,23 +52,23 @@
     },
     "salary_records.csv": {
       "rows": 15025,
-      "sha256": "1aa1bd20d34bb1a5ae75c17ab745c77d0980f6fb87cd0e5161e76b260542dede",
-      "size_bytes": 1894721
+      "sha256": "6329c64a789787f2b0083326cc02715f87836f49651888e41fe3956b0495ab94",
+      "size_bytes": 1894710
     },
     "salary_records.json": {
       "rows": 15025,
-      "sha256": "d9a383b42be08e73a3f5b7d919be23c352e52c4829359cbf8b1e4892363b1f3d",
-      "size_bytes": 6143207
+      "sha256": "631a8235e1d629d9583548bfc75ee63899f8f86093f4064f23de0789baaa2672",
+      "size_bytes": 6143196
     },
     "performance_evidence.csv": {
       "rows": 19721,
-      "sha256": "f4d33b2b20b297a10dc5d153878f4e3b21582cddf3ad9d94a4a5e77f88e1e1cf",
-      "size_bytes": 1717006
+      "sha256": "4ae7e995621d0b5d7027b488619d24cf7d11d64ef8f362f5f83848453457d45c",
+      "size_bytes": 1717062
     },
     "performance_evidence.json": {
       "rows": 19721,
-      "sha256": "7f8e1e0e7dedaa1f246455bb8453abf410f46c8afa7c1f3bd57297c3deaf6eff",
-      "size_bytes": 6528792
+      "sha256": "c4eba2d0a034a0396803c766b8356432bb5861ffee49ec9433bb1fb2eaba4bf4",
+      "size_bytes": 6528848
     },
     "tenure_records.csv": {
       "rows": 5000,
@@ -121,28 +121,28 @@
       "size_bytes": 7697
     },
     "role_comparability_rationales.csv": {
-      "rows": 4,
-      "sha256": "9494449c6d0fb5e246ae63137dff293fb90e73f18bc033a422aae042da38e45f",
-      "size_bytes": 790
+      "rows": 6,
+      "sha256": "acb2506119440f5e767fe56642d1ff5af1c8a2540f2ca8e1552c4a7317ae97bc",
+      "size_bytes": 1146
     },
     "role_comparability_rationales.json": {
-      "rows": 4,
-      "sha256": "e4023e0afff0f6c828145167293ead3c4fc717d00d90fec0d315e6326ea296b4",
-      "size_bytes": 1401
+      "rows": 6,
+      "sha256": "7ee2ea2d98acc027e22470d7eadcb8e49ed8d53a7217ace9a5d6138a25a01622",
+      "size_bytes": 2111
     },
     "ground_truth_records.csv": {
       "rows": 5103,
-      "sha256": "56d5a3c07fc38d81e5e820866836fa91e138d3653aa459473f8b5beecf8f53ea",
-      "size_bytes": 814617
+      "sha256": "66e37df78068d130bef3636620856f3ac1293e805b5e580920ca5beba61a2a91",
+      "size_bytes": 814609
     },
     "ground_truth_records.json": {
       "rows": 5103,
-      "sha256": "f19babd7223a012d3f08f9e80da9633483e5da7babc18f32e812595f69477a64",
-      "size_bytes": 1880982
+      "sha256": "6e56ed2b4a91738d0e13da9c2174cf8918cb27227ca7e5197ad9c2673b218eeb",
+      "size_bytes": 1880974
     },
     "seed_data.sql": {
-      "sha256": "07bfb9fef91d9b8a9814d057523be26f70ad6bb0463ea741d73f7a21ccdd9533",
-      "size_bytes": 19898151
+      "sha256": "0d849c39dacf3e734cccc92f8eb9c6a86de4b92c9c13b93459bbdbb9989ba347",
+      "size_bytes": 19898886
     }
   },
   "row_counts": {
@@ -158,7 +158,7 @@
     "adjustment_proposals": 250,
     "approval_events": 600,
     "exchange_rates": 36,
-    "role_comparability_rationales": 4,
+    "role_comparability_rationales": 6,
     "ground_truth_records": 5103
   }
 }

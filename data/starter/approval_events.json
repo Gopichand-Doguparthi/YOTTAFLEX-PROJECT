@@ -1,146 +1,146 @@
 [
   {
-    "event_id": "EVT-20260215-000001",
+    "event_id": "EVT-20251112-000001",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000001",
     "event_type": "PROPOSAL_CREATED",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 214480.0}",
-    "notes": "Initial proposal drafted for EMP-000001.",
-    "timestamp": "2026-02-15T09:30:00"
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 210745.75, \"reason\": \"INTERNAL_EQUITY\"}",
+    "notes": "Initial Internal Equity proposal drafted for EMP-000001 (Visual Designer).",
+    "timestamp": "2025-11-12T09:30:00"
   },
   {
-    "event_id": "EVT-20260216-000002",
+    "event_id": "EVT-20251114-000002",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000001",
     "event_type": "SUBMITTED_FOR_REVIEW",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": "{\"status\": \"DRAFT\"}",
     "new_state": "{\"status\": \"PENDING_REVIEW\"}",
-    "notes": "Submitted for executive compensation committee approval.",
-    "timestamp": "2026-02-16T11:00:00"
+    "notes": "Submitted for Design executive compensation review.",
+    "timestamp": "2025-11-14T11:00:00"
   },
   {
-    "event_id": "EVT-20260228-000003",
+    "event_id": "EVT-20251128-000003",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000001",
     "event_type": "PROPOSAL_APPROVED",
-    "actor_id": "jane.doe.vp@company.org",
+    "actor_id": "laura.ward.000054@company.org",
     "actor_role": "MANAGER",
     "old_state": "{\"status\": \"PENDING_REVIEW\"}",
     "new_state": "{\"status\": \"APPROVED\"}",
-    "notes": "Adjustment proposal formally approved.",
-    "timestamp": "2026-02-28T14:15:00"
+    "notes": "Approved by Design L6 leadership for 2026-01-01 payroll cycle after cohort and budget validation.",
+    "timestamp": "2025-11-28T14:15:00"
   },
   {
     "event_id": "EVT-20260215-000004",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000002",
     "event_type": "PROPOSAL_CREATED",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 128128.0}",
-    "notes": "Initial proposal drafted for EMP-000089.",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101404.41, \"reason\": \"MARKET_PARITY\"}",
+    "notes": "Initial Market Parity proposal drafted for EMP-000089 (Product Designer).",
     "timestamp": "2026-02-15T09:30:00"
   },
   {
-    "event_id": "EVT-20260216-000005",
+    "event_id": "EVT-20260217-000005",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000002",
     "event_type": "SUBMITTED_FOR_REVIEW",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": "{\"status\": \"DRAFT\"}",
     "new_state": "{\"status\": \"PENDING_REVIEW\"}",
-    "notes": "Submitted for executive compensation committee approval.",
-    "timestamp": "2026-02-16T11:00:00"
+    "notes": "Submitted for Design executive compensation review.",
+    "timestamp": "2026-02-17T11:00:00"
   },
   {
-    "event_id": "EVT-20260215-000006",
+    "event_id": "EVT-20260514-000006",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000003",
     "event_type": "PROPOSAL_CREATED",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 55798.74}",
-    "notes": "Initial proposal drafted for EMP-000031.",
-    "timestamp": "2026-02-15T09:30:00"
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151814.23, \"reason\": \"DISPARITY_CORRECTION\"}",
+    "notes": "Initial Disparity Correction proposal drafted for EMP-000031 (Learning & Development Specialist).",
+    "timestamp": "2026-05-14T09:30:00"
   },
   {
-    "event_id": "EVT-20260216-000007",
+    "event_id": "EVT-20260516-000007",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000003",
     "event_type": "SUBMITTED_FOR_REVIEW",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": "{\"status\": \"DRAFT\"}",
     "new_state": "{\"status\": \"PENDING_REVIEW\"}",
-    "notes": "Submitted for executive compensation committee approval.",
-    "timestamp": "2026-02-16T11:00:00"
+    "notes": "Submitted for Human Resources executive compensation review.",
+    "timestamp": "2026-05-16T11:00:00"
   },
   {
-    "event_id": "EVT-20260228-000008",
+    "event_id": "EVT-20260529-000008",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000003",
     "event_type": "PROPOSAL_REJECTED",
-    "actor_id": "jane.doe.vp@company.org",
+    "actor_id": "laura.ward.000054@company.org",
     "actor_role": "MANAGER",
     "old_state": "{\"status\": \"PENDING_REVIEW\"}",
     "new_state": "{\"status\": \"REJECTED\"}",
-    "notes": "Adjustment proposal formally rejected.",
-    "timestamp": "2026-02-28T14:15:00"
+    "notes": "Deferred by Human Resources L6 leadership pending next performance cycle and regional budget allocation.",
+    "timestamp": "2026-05-29T14:15:00"
   },
   {
-    "event_id": "EVT-20260215-000009",
+    "event_id": "EVT-20260819-000009",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000004",
     "event_type": "PROPOSAL_CREATED",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 209888.0}",
-    "notes": "Initial proposal drafted for EMP-000033.",
-    "timestamp": "2026-02-15T09:30:00"
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 198937.57, \"reason\": \"PROMOTION_CATCHUP\"}",
+    "notes": "Initial Promotion Catchup proposal drafted for EMP-000033 (DevOps Engineer).",
+    "timestamp": "2026-08-19T09:30:00"
   },
   {
-    "event_id": "EVT-20260215-000010",
+    "event_id": "EVT-20250818-000010",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000005",
     "event_type": "PROPOSAL_CREATED",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 195888.0}",
-    "notes": "Initial proposal drafted for EMP-000075.",
-    "timestamp": "2026-02-15T09:30:00"
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 228583.32, \"reason\": \"RETENTION\"}",
+    "notes": "Initial Retention proposal drafted for EMP-000075 (Full Stack Engineer).",
+    "timestamp": "2025-08-18T09:30:00"
   },
   {
-    "event_id": "EVT-20260216-000011",
+    "event_id": "EVT-20250820-000011",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000005",
     "event_type": "SUBMITTED_FOR_REVIEW",
-    "actor_id": "hr.partner@company.org",
+    "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": "{\"status\": \"DRAFT\"}",
     "new_state": "{\"status\": \"PENDING_REVIEW\"}",
-    "notes": "Submitted for executive compensation committee approval.",
-    "timestamp": "2026-02-16T11:00:00"
+    "notes": "Submitted for Engineering executive compensation review.",
+    "timestamp": "2025-08-20T11:00:00"
   },
   {
-    "event_id": "EVT-20260228-000012",
+    "event_id": "EVT-20250902-000012",
     "entity_name": "AdjustmentProposal",
     "entity_id": "ADJ-2026-000005",
     "event_type": "PROPOSAL_APPROVED",
-    "actor_id": "jane.doe.vp@company.org",
+    "actor_id": "nancy.miller.000062@company.org",
     "actor_role": "MANAGER",
     "old_state": "{\"status\": \"PENDING_REVIEW\"}",
     "new_state": "{\"status\": \"APPROVED\"}",
-    "notes": "Adjustment proposal formally approved.",
-    "timestamp": "2026-02-28T14:15:00"
+    "notes": "Approved by Engineering L6 leadership for 2025-10-01 payroll cycle after cohort and budget validation.",
+    "timestamp": "2025-09-02T14:15:00"
   }
 ]

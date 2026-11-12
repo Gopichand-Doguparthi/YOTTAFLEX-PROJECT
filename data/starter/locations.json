@@ -17,7 +17,7 @@
   },
   {
     "location_id": "LOC-LON",
-    "location_name": "London, UK",
+    "location_name": "London, United Kingdom",
     "country": "GBR",
     "currency": "GBP",
     "geo_tier": "Tier-1",
@@ -54,5 +54,61 @@
     "currency": "SGD",
     "geo_tier": "Tier-1",
     "cost_of_living_index": 1.05
+  },
+  {
+    "location_id": "LOC-AMS",
+    "location_name": "Amsterdam, Netherlands",
+    "country": "NLD",
+    "currency": "EUR",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 0.92
+  },
+  {
+    "location_id": "LOC-SYD",
+    "location_name": "Sydney, Australia",
+    "country": "AUS",
+    "currency": "AUD",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 0.9
+  },
+  {
+    "location_id": "LOC-TOR",
+    "location_name": "Toronto, Canada",
+    "country": "CAN",
+    "currency": "CAD",
+    "geo_tier": "Tier-1",
+    "cost_of_living_index": 0.88
+  },
+  {
+    "location_id": "LOC-DXB",
+    "location_name": "Dubai, United Arab Emirates",
+    "country": "ARE",
+    "currency": "AED",
+    "geo_tier": "Tier-2",
+    "cost_of_living_index": 0.82
+  },
+  {
+    "location_id": "LOC-SAO",
+    "location_name": "S\u00e3o Paulo, Brazil",
+    "country": "BRA",
+    "currency": "BRL",
+    "geo_tier": "Tier-3",
+    "cost_of_living_index": 0.45
+  },
+  {
+    "location_id": "LOC-WAR",
+    "location_name": "Warsaw, Poland",
+    "country": "POL",
+    "currency": "PLN",
+    "geo_tier": "Tier-3",
+    "cost_of_living_index": 0.55
+  },
+  {
+    "location_id": "LOC-SEO",
+    "location_name": "Seoul, South Korea",
+    "country": "KOR",
+    "currency": "KRW",
+    "geo_tier": "Tier-2",
+    "cost_of_living_index": 0.78
   }
 ]

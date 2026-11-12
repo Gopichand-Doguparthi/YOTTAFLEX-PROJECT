@@ -29,6 +29,7 @@ class EdgeCaseInjector:
     ]:
         ground_truth: List[Dict[str, Any]] = []
         gt_counter = 0
+        anomaly_emp_ids = set()
 
         emp_lookup = {e["employee_id"]: e for e in employees}
 
@@ -71,6 +72,7 @@ class EdgeCaseInjector:
                         explanation=f"Salary {sal['salary_id']} (effective {sal['effective_date']}) benchmarked against expired band {expired_band_id} (expired 2024-12-31)."
                     )
                     count_ec1 += 1
+                    anomaly_emp_ids.add(sal["employee_id"])
 
         # -------------------------------------------------------------
         # 2. MANDATORY EDGE CASE 2: FTE ignored during normalization
@@ -96,6 +98,7 @@ class EdgeCaseInjector:
                         explanation=f"Part-time employee {emp_id} (FTE {emp['fte']}) salary not divided by FTE; normalized salary left as {unadjusted_usd} USD instead of {round(unadjusted_usd/emp['fte'], 2)} USD."
                     )
                     count_ec2 += 1
+                    anomaly_emp_ids.add(emp_id)
 
         # -------------------------------------------------------------
         # 3. MANDATORY EDGE CASE 3: Currency conversion missing
@@ -112,6 +115,7 @@ class EdgeCaseInjector:
                     explanation=f"Salary {sal['salary_id']} paid in {sal['currency']} was treated 1:1 without FX conversion, yielding incorrect normalized salary of {sal['normalized_salary']} USD."
                 )
                 count_ec3 += 1
+                anomaly_emp_ids.add(sal["employee_id"])
 
         # -------------------------------------------------------------
         # 4. MANDATORY EDGE CASE 4: Adjustment applied without approval
@@ -145,6 +149,7 @@ class EdgeCaseInjector:
                     explanation=f"Salary record {rogue_sal_id} applied equity correction of {prop['proposed_salary']} despite proposal {prop['proposal_id']} having status {prop['approval_status']} with no approval event."
                 )
                 count_ec4 += 1
+                anomaly_emp_ids.add(emp_id)
 
         # -------------------------------------------------------------
         # 5. MANDATORY EDGE CASE 5: Incomparable roles grouped without rationale
@@ -174,7 +179,12 @@ class EdgeCaseInjector:
         count_disp = 0
         for emp in employees:
             key = f"{emp['current_role_id']}::{emp['current_level_id']}::{emp['current_location_id']}"
-            if emp["employment_type"] == "FULL_TIME" and cohort_counts.get(key, 0) >= 4 and count_disp < (num_anomalies_each * 2):
+            if (
+                emp["employee_id"] not in anomaly_emp_ids
+                and emp["employment_type"] == "FULL_TIME"
+                and cohort_counts.get(key, 0) >= 4
+                and count_disp < (num_anomalies_each * 2)
+            ):
                 emp_id = emp["employee_id"]
                 emp_sals = [s for s in salary_records if s["employee_id"] == emp_id and s["effective_date"].startswith("2026")]
                 emp_perfs = [p for p in performances if p["employee_id"] == emp_id]

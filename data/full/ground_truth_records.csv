@@ -102,67 +102,81 @@ GT-000100,SALARY_RECORD,SAL-EMP-003224-2026-99,UNAPPROVED_ADJUSTMENT_APPLIED,Tru
 GT-000101,COMPARABLE_GROUP,GRP-ROLE-SWE-ROLE-FAC,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-SWE and ROLE-FAC grouped together without documented comparability rationale.,2026-01-01T00:00:00
 GT-000102,COMPARABLE_GROUP,GRP-ROLE-DS-ROLE-LOG,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-DS and ROLE-LOG grouped together without documented comparability rationale.,2026-01-01T00:00:00
 GT-000103,COMPARABLE_GROUP,GRP-ROLE-PM-ROLE-REC,INCOMPARABLE_ROLE_GROUPING,True,EXCEPTION_FLAGGED,Roles ROLE-PM and ROLE-REC grouped together without documented comparability rationale.,2026-01-01T00:00:00
-GT-000104,EMPLOYEE,EMP-000001,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000001 has outstanding rating (4.8) but salary depressed to 124475.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000105,EMPLOYEE,EMP-000002,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000002 has outstanding rating (4.8) but salary depressed to 50536.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000106,EMPLOYEE,EMP-000003,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000003 has outstanding rating (4.8) but salary depressed to 112873.41 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000107,EMPLOYEE,EMP-000006,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000006 has outstanding rating (4.8) but salary depressed to 56485.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000108,EMPLOYEE,EMP-000007,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000007 has outstanding rating (4.8) but salary depressed to 69340.96 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000109,EMPLOYEE,EMP-000008,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000008 has outstanding rating (4.8) but salary depressed to 5057845.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000110,EMPLOYEE,EMP-000009,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000009 has outstanding rating (4.8) but salary depressed to 94797.3 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000111,EMPLOYEE,EMP-000010,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000010 has outstanding rating (4.8) but salary depressed to 103090.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000112,EMPLOYEE,EMP-000012,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000012 has outstanding rating (4.8) but salary depressed to 69752.8 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000113,EMPLOYEE,EMP-000014,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000014 has outstanding rating (4.8) but salary depressed to 11501295.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000114,EMPLOYEE,EMP-000020,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000020 has outstanding rating (4.8) but salary depressed to 79781.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000115,EMPLOYEE,EMP-000021,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000021 has outstanding rating (4.8) but salary depressed to 36034.05 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000116,EMPLOYEE,EMP-000024,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000024 has outstanding rating (4.8) but salary depressed to 13438685.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000117,EMPLOYEE,EMP-000025,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000025 has outstanding rating (4.8) but salary depressed to 70246.8 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000118,EMPLOYEE,EMP-000030,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000030 has outstanding rating (4.8) but salary depressed to 113572.55 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000119,EMPLOYEE,EMP-000033,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000033 has outstanding rating (4.8) but salary depressed to 115744.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000120,EMPLOYEE,EMP-000034,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000034 has outstanding rating (4.8) but salary depressed to 67405.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000121,EMPLOYEE,EMP-000037,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000037 has outstanding rating (4.8) but salary depressed to 72576.4 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000122,EMPLOYEE,EMP-000038,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000038 has outstanding rating (4.8) but salary depressed to 102505.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000123,EMPLOYEE,EMP-000040,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000040 has outstanding rating (4.8) but salary depressed to 66953.25 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000124,EMPLOYEE,EMP-000041,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000041 has outstanding rating (4.8) but salary depressed to 89635.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000125,EMPLOYEE,EMP-000043,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000043 has outstanding rating (4.8) but salary depressed to 58522.1 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000126,EMPLOYEE,EMP-000044,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000044 has outstanding rating (4.8) but salary depressed to 79493.7 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000127,EMPLOYEE,EMP-000047,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000047 has outstanding rating (4.8) but salary depressed to 40717.04 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000128,EMPLOYEE,EMP-000048,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000048 has outstanding rating (4.8) but salary depressed to 121764.5 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000129,EMPLOYEE,EMP-000049,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000049 has outstanding rating (4.8) but salary depressed to 71700.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000130,EMPLOYEE,EMP-000057,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000057 has outstanding rating (4.8) but salary depressed to 66599.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000131,EMPLOYEE,EMP-000060,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000060 has outstanding rating (4.8) but salary depressed to 59939.1 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000132,EMPLOYEE,EMP-000063,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000063 has outstanding rating (4.8) but salary depressed to 96010.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000133,EMPLOYEE,EMP-000064,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000064 has outstanding rating (4.8) but salary depressed to 120445.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000134,EMPLOYEE,EMP-000065,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000065 has outstanding rating (4.8) but salary depressed to 83311.8 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000135,EMPLOYEE,EMP-000067,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000067 has outstanding rating (4.8) but salary depressed to 72904.65 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000136,EMPLOYEE,EMP-000072,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000072 has outstanding rating (4.8) but salary depressed to 76092.9 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000137,EMPLOYEE,EMP-000073,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000073 has outstanding rating (4.8) but salary depressed to 75242.7 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000138,EMPLOYEE,EMP-000074,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000074 has outstanding rating (4.8) but salary depressed to 83461.3 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000139,EMPLOYEE,EMP-000075,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000075 has outstanding rating (4.8) but salary depressed to 130780.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000140,EMPLOYEE,EMP-000078,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000078 has outstanding rating (4.8) but salary depressed to 69645.55 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000141,EMPLOYEE,EMP-000083,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000083 has outstanding rating (4.8) but salary depressed to 62595.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000142,EMPLOYEE,EMP-000084,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000084 has outstanding rating (4.8) but salary depressed to 127257.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000143,EMPLOYEE,EMP-000088,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000088 has outstanding rating (4.8) but salary depressed to 69433.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000144,EMPLOYEE,EMP-000089,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000089 has outstanding rating (4.8) but salary depressed to 70699.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000145,EMPLOYEE,EMP-000099,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000099 has outstanding rating (4.8) but salary depressed to 108680.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000146,EMPLOYEE,EMP-000101,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000101 has outstanding rating (4.8) but salary depressed to 76018.8 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000147,EMPLOYEE,EMP-000105,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000105 has outstanding rating (4.8) but salary depressed to 75788.71 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000148,EMPLOYEE,EMP-000108,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000108 has outstanding rating (4.8) but salary depressed to 100722.96 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000149,EMPLOYEE,EMP-000109,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000109 has outstanding rating (4.8) but salary depressed to 109720.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000150,EMPLOYEE,EMP-000113,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000113 has outstanding rating (4.8) but salary depressed to 92235.0 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000151,EMPLOYEE,EMP-000114,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000114 has outstanding rating (4.8) but salary depressed to 96583.5 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000152,EMPLOYEE,EMP-000115,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000115 has outstanding rating (4.8) but salary depressed to 108581.2 USD (>25% below cohort median).,2026-01-01T00:00:00
-GT-000153,EMPLOYEE,EMP-000117,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000117 has outstanding rating (4.8) but salary depressed to 106380.56 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000104,EMPLOYEE,EMP-000030,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000030 has outstanding rating (4.8) but salary depressed to 113572.55 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000105,EMPLOYEE,EMP-000033,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000033 has outstanding rating (4.8) but salary depressed to 115744.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000106,EMPLOYEE,EMP-000034,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000034 has outstanding rating (4.8) but salary depressed to 67405.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000107,EMPLOYEE,EMP-000037,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000037 has outstanding rating (4.8) but salary depressed to 72576.4 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000108,EMPLOYEE,EMP-000038,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000038 has outstanding rating (4.8) but salary depressed to 102505.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000109,EMPLOYEE,EMP-000040,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000040 has outstanding rating (4.8) but salary depressed to 66953.25 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000110,EMPLOYEE,EMP-000041,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000041 has outstanding rating (4.8) but salary depressed to 89635.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000111,EMPLOYEE,EMP-000043,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000043 has outstanding rating (4.8) but salary depressed to 58522.1 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000112,EMPLOYEE,EMP-000044,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000044 has outstanding rating (4.8) but salary depressed to 79493.7 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000113,EMPLOYEE,EMP-000047,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000047 has outstanding rating (4.8) but salary depressed to 40717.04 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000114,EMPLOYEE,EMP-000048,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000048 has outstanding rating (4.8) but salary depressed to 121764.5 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000115,EMPLOYEE,EMP-000049,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000049 has outstanding rating (4.8) but salary depressed to 71700.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000116,EMPLOYEE,EMP-000057,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000057 has outstanding rating (4.8) but salary depressed to 66599.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000117,EMPLOYEE,EMP-000060,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000060 has outstanding rating (4.8) but salary depressed to 59939.1 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000118,EMPLOYEE,EMP-000063,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000063 has outstanding rating (4.8) but salary depressed to 96010.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000119,EMPLOYEE,EMP-000064,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000064 has outstanding rating (4.8) but salary depressed to 120445.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000120,EMPLOYEE,EMP-000065,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000065 has outstanding rating (4.8) but salary depressed to 83311.8 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000121,EMPLOYEE,EMP-000067,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000067 has outstanding rating (4.8) but salary depressed to 72904.65 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000122,EMPLOYEE,EMP-000072,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000072 has outstanding rating (4.8) but salary depressed to 76092.9 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000123,EMPLOYEE,EMP-000073,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000073 has outstanding rating (4.8) but salary depressed to 75242.7 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000124,EMPLOYEE,EMP-000074,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000074 has outstanding rating (4.8) but salary depressed to 83461.3 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000125,EMPLOYEE,EMP-000075,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000075 has outstanding rating (4.8) but salary depressed to 130780.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000126,EMPLOYEE,EMP-000078,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000078 has outstanding rating (4.8) but salary depressed to 69645.55 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000127,EMPLOYEE,EMP-000083,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000083 has outstanding rating (4.8) but salary depressed to 62595.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000128,EMPLOYEE,EMP-000084,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000084 has outstanding rating (4.8) but salary depressed to 127257.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000129,EMPLOYEE,EMP-000088,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000088 has outstanding rating (4.8) but salary depressed to 69433.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000130,EMPLOYEE,EMP-000089,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000089 has outstanding rating (4.8) but salary depressed to 70699.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000131,EMPLOYEE,EMP-000099,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000099 has outstanding rating (4.8) but salary depressed to 108680.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000132,EMPLOYEE,EMP-000101,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000101 has outstanding rating (4.8) but salary depressed to 76018.8 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000133,EMPLOYEE,EMP-000105,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000105 has outstanding rating (4.8) but salary depressed to 75788.71 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000134,EMPLOYEE,EMP-000108,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000108 has outstanding rating (4.8) but salary depressed to 100722.96 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000135,EMPLOYEE,EMP-000109,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000109 has outstanding rating (4.8) but salary depressed to 109720.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000136,EMPLOYEE,EMP-000113,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000113 has outstanding rating (4.8) but salary depressed to 92235.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000137,EMPLOYEE,EMP-000114,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000114 has outstanding rating (4.8) but salary depressed to 96583.5 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000138,EMPLOYEE,EMP-000115,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000115 has outstanding rating (4.8) but salary depressed to 108581.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000139,EMPLOYEE,EMP-000117,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000117 has outstanding rating (4.8) but salary depressed to 106380.56 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000140,EMPLOYEE,EMP-000122,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000122 has outstanding rating (4.8) but salary depressed to 57715.52 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000141,EMPLOYEE,EMP-000124,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000124 has outstanding rating (4.8) but salary depressed to 75433.8 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000142,EMPLOYEE,EMP-000128,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000128 has outstanding rating (4.8) but salary depressed to 67908.88 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000143,EMPLOYEE,EMP-000129,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000129 has outstanding rating (4.8) but salary depressed to 74100.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000144,EMPLOYEE,EMP-000130,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000130 has outstanding rating (4.8) but salary depressed to 86515.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000145,EMPLOYEE,EMP-000131,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000131 has outstanding rating (4.8) but salary depressed to 82882.8 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000146,EMPLOYEE,EMP-000134,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000134 has outstanding rating (4.8) but salary depressed to 88075.0 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000147,EMPLOYEE,EMP-000135,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000135 has outstanding rating (4.8) but salary depressed to 46898.42 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000148,EMPLOYEE,EMP-000138,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000138 has outstanding rating (4.8) but salary depressed to 89060.4 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000149,EMPLOYEE,EMP-000139,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000139 has outstanding rating (4.8) but salary depressed to 109959.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000150,EMPLOYEE,EMP-000140,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000140 has outstanding rating (4.8) but salary depressed to 71022.25 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000151,EMPLOYEE,EMP-000145,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000145 has outstanding rating (4.8) but salary depressed to 66752.4 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000152,EMPLOYEE,EMP-000146,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000146 has outstanding rating (4.8) but salary depressed to 105791.4 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-000153,EMPLOYEE,EMP-000147,UNEXPLAINED_DISPARITY_LOW,True,DISPARITY_DETECTED,Employee EMP-000147 has outstanding rating (4.8) but salary depressed to 61781.2 USD (>25% below cohort median).,2026-01-01T00:00:00
+GT-BASE-EMP-000001,EMPLOYEE,EMP-000001,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000002,EMPLOYEE,EMP-000002,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000003,EMPLOYEE,EMP-000003,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000004,EMPLOYEE,EMP-000004,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000005,EMPLOYEE,EMP-000005,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000006,EMPLOYEE,EMP-000006,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000007,EMPLOYEE,EMP-000007,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000008,EMPLOYEE,EMP-000008,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000009,EMPLOYEE,EMP-000009,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000010,EMPLOYEE,EMP-000010,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000011,EMPLOYEE,EMP-000011,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000012,EMPLOYEE,EMP-000012,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000013,EMPLOYEE,EMP-000013,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000014,EMPLOYEE,EMP-000014,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000015,EMPLOYEE,EMP-000015,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000016,EMPLOYEE,EMP-000016,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000017,EMPLOYEE,EMP-000017,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000018,EMPLOYEE,EMP-000018,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000019,EMPLOYEE,EMP-000019,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000020,EMPLOYEE,EMP-000020,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000021,EMPLOYEE,EMP-000021,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000022,EMPLOYEE,EMP-000022,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000023,EMPLOYEE,EMP-000023,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000024,EMPLOYEE,EMP-000024,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
+GT-BASE-EMP-000025,EMPLOYEE,EMP-000025,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000026,EMPLOYEE,EMP-000026,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000027,EMPLOYEE,EMP-000027,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000028,EMPLOYEE,EMP-000028,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
@@ -223,32 +237,18 @@ GT-BASE-EMP-000118,EMPLOYEE,EMP-000118,VALID_BASELINE,False,VALID,Valid baseline
 GT-BASE-EMP-000119,EMPLOYEE,EMP-000119,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000120,EMPLOYEE,EMP-000120,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000121,EMPLOYEE,EMP-000121,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000122,EMPLOYEE,EMP-000122,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000123,EMPLOYEE,EMP-000123,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000124,EMPLOYEE,EMP-000124,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000125,EMPLOYEE,EMP-000125,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000126,EMPLOYEE,EMP-000126,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000127,EMPLOYEE,EMP-000127,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000128,EMPLOYEE,EMP-000128,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000129,EMPLOYEE,EMP-000129,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000130,EMPLOYEE,EMP-000130,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000131,EMPLOYEE,EMP-000131,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000132,EMPLOYEE,EMP-000132,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000133,EMPLOYEE,EMP-000133,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000134,EMPLOYEE,EMP-000134,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000135,EMPLOYEE,EMP-000135,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000136,EMPLOYEE,EMP-000136,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000137,EMPLOYEE,EMP-000137,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000138,EMPLOYEE,EMP-000138,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000139,EMPLOYEE,EMP-000139,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000140,EMPLOYEE,EMP-000140,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000141,EMPLOYEE,EMP-000141,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000142,EMPLOYEE,EMP-000142,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000143,EMPLOYEE,EMP-000143,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000144,EMPLOYEE,EMP-000144,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000145,EMPLOYEE,EMP-000145,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000146,EMPLOYEE,EMP-000146,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
-GT-BASE-EMP-000147,EMPLOYEE,EMP-000147,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000148,EMPLOYEE,EMP-000148,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000149,EMPLOYEE,EMP-000149,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00
 GT-BASE-EMP-000150,EMPLOYEE,EMP-000150,VALID_BASELINE,False,VALID,Valid baseline employee record conforming to compensation guidelines.,2026-01-01T00:00:00

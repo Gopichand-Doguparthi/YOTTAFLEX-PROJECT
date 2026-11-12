@@ -34,5 +34,23 @@
     "documented_rationale": "Incomparable roles: Software Engineering and Facilities Coordinator require fundamentally distinct skills and labor markets.",
     "approved_by": "HR Compliance",
     "effective_date": "2024-01-01"
+  },
+  {
+    "mapping_id": "RCR-DS-LOG",
+    "role_id_a": "ROLE-DS",
+    "role_id_b": "ROLE-LOG",
+    "is_comparable": false,
+    "documented_rationale": "Incomparable roles: Data Science and Logistics Coordination belong to separate job families and compensation markets.",
+    "approved_by": "HR Compliance",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "mapping_id": "RCR-PM-REC",
+    "role_id_a": "ROLE-PM",
+    "role_id_b": "ROLE-REC",
+    "is_comparable": false,
+    "documented_rationale": "Incomparable roles: Product Management and Technical Recruiting have distinct responsibilities and market benchmarks.",
+    "approved_by": "HR Compliance",
+    "effective_date": "2024-01-01"
   }
 ]
