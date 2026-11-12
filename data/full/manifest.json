@@ -92,13 +92,13 @@
     },
     "adjustment_proposals.csv": {
       "rows": 250,
-      "sha256": "540b84bf190208ef32d68e9e59a86ee62f4063cd15b92a98dcde92536ea4cc57",
-      "size_bytes": 96213
+      "sha256": "7d010c63f84612b6df261dbb9917f7ba516b6815a8d1117946ad903fdddb600e",
+      "size_bytes": 95813
     },
     "adjustment_proposals.json": {
       "rows": 250,
-      "sha256": "4d99ae674e3038fd60697fffefd576e205a138fc27163196bad69210b393a40e",
-      "size_bytes": 210045
+      "sha256": "c8d296c272ad5cd8fdcefcde6290eb5e0ddf8cc88be17459f84cd74f04164d5b",
+      "size_bytes": 209645
     },
     "approval_events.csv": {
       "rows": 600,
@@ -141,8 +141,8 @@
       "size_bytes": 1880979
     },
     "seed_data.sql": {
-      "sha256": "70667330136c2274d9aa148c12e4365ba06f36611e845bb76d3087e2f1d9ac6f",
-      "size_bytes": 19841221
+      "sha256": "7f5bf7e30d7daa8bac0898ac153eeab4dd16b16b486bb36dc32a936a618ef46f",
+      "size_bytes": 19840821
     }
   },
   "row_counts": {

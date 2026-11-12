@@ -157,10 +157,11 @@ html, body, [class*="css"] {
     outline: none !important;
 }
 
-.nav-section-wrap {
-    display: block;
-    padding: 10px 0 8px 0 !important;
-    margin: 0 !important;
+[data-testid="stSidebar"] div.element-container:has(.nav-section-label),
+[data-testid="stSidebar"] [data-testid="stElementContainer"]:has(.nav-section-label),
+[data-testid="stSidebar"] [data-testid="stMarkdown"]:has(.nav-section-label) {
+    margin-top: 10px !important;
+    margin-bottom: 8px !important;
 }
 
 .nav-section-label {
