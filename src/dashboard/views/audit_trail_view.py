@@ -4,48 +4,190 @@ Displays immutable append-only state mutations, user actors, and chronological e
 Supports download as PDF, CSV, and Excel.
 """
 import io
+from typing import List
 import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import ApprovalEvent
+from src.dashboard.views.helpers import format_actor_name
+
+
+def _pdf_escape(text: str) -> str:
+    """Sanitize and escape text for PDF WinAnsi string literals."""
+    clean = str(text).replace("\r", " ").replace("\n", " ")
+    clean = clean.encode("latin-1", "replace").decode("latin-1")
+    return clean.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+
+
+def _build_pure_pdf(title: str, df: pd.DataFrame) -> bytes:
+    """
+    Generates a valid multi-page Landscape A4 PDF 1.4 document in pure Python
+    without requiring external PDF libraries.
+    """
+    page_w, page_h = 842.0, 595.0
+    margin_l, margin_r, margin_t, margin_b = 24.0, 24.0, 42.0, 28.0
+    usable_w = page_w - margin_l - margin_r
+
+    headers = list(df.columns)
+    # Proportional column widths tailored to audit columns
+    weight_map = {
+        "Event ID": 1.35,
+        "Timestamp": 1.35,
+        "Entity": 1.25,
+        "Entity ID": 1.25,
+        "Event Type": 1.45,
+        "Actor": 1.15,
+        "Actor Role": 0.95,
+        "Notes": 2.25,
+    }
+    weights = [weight_map.get(h, 1.0) for h in headers]
+    total_w = sum(weights)
+    col_widths = [(w / total_w) * usable_w for w in weights]
+
+    font_size = 7.0
+    header_font_size = 7.5
+    row_h = 15.0
+    header_h = 18.0
+    char_w = 3.85  # Approximate average glyph width at 7pt Helvetica
+
+    def fit_text(val: str, width_pt: float) -> str:
+        max_chars = max(4, int((width_pt - 6.0) / char_w))
+        s = str(val).replace("\r", " ").replace("\n", " ").strip()
+        if len(s) > max_chars:
+            return s[: max_chars - 3] + "..."
+        return s
+
+    rows = df.astype(str).values.tolist()
+    start_y_first_page = page_h - margin_t - 34.0
+    start_y_other_page = page_h - margin_t - 10.0
+
+    # Paginate rows
+    pages_rows: List[List[List[str]]] = []
+    idx = 0
+    while idx < len(rows) or not pages_rows:
+        top_y = start_y_first_page if not pages_rows else start_y_other_page
+        avail_h = top_y - margin_b - header_h
+        max_rows = max(1, int(avail_h // row_h))
+        pages_rows.append(rows[idx : idx + max_rows])
+        idx += max_rows
+
+    total_pages = len(pages_rows)
+
+    # Assemble PDF objects
+    objects: List[bytes] = []
+
+    def add_obj(body: bytes) -> int:
+        objects.append(body)
+        return len(objects)
+
+    # 1: Catalog, 2: Pages placeholder (will fill kids after pages), 3: F1, 4: F2
+    catalog_id = add_obj(b"")  # placeholder
+    pages_id = add_obj(b"")    # placeholder
+    f1_id = add_obj(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>")
+    f2_id = add_obj(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>")
+
+    page_obj_ids = []
+    for p_idx, p_rows in enumerate(pages_rows):
+        cmds: List[str] = []
+
+        # Title on first page
+        if p_idx == 0:
+            cmds.append("0.10 0.12 0.21 rg")
+            cmds.append(f"BT /F2 13 Tf {margin_l:.1f} {page_h - margin_t + 8:.1f} Td ({_pdf_escape(title)}) Tj ET")
+            cmds.append("0.35 0.40 0.48 rg")
+            subtitle = f"Total Events: {len(rows):,}   |   Page 1 of {total_pages}"
+            cmds.append(f"BT /F1 8 Tf {margin_l:.1f} {page_h - margin_t - 8:.1f} Td ({_pdf_escape(subtitle)}) Tj ET")
+            table_top = start_y_first_page
+        else:
+            table_top = start_y_other_page
+
+        # Table header background
+        cmds.append("0.10 0.12 0.21 rg")
+        cmds.append(f"{margin_l:.1f} {table_top - header_h:.1f} {usable_w:.1f} {header_h:.1f} re f")
+
+        # Table header text
+        cmds.append("1 1 1 rg")
+        cx = margin_l
+        for h_text, cw in zip(headers, col_widths):
+            tx = cx + 3.0
+            ty = table_top - header_h + 5.5
+            cmds.append(f"BT /F2 {header_font_size:.1f} Tf {tx:.1f} {ty:.1f} Td ({_pdf_escape(fit_text(h_text, cw))}) Tj ET")
+            cx += cw
+
+        # Data rows
+        curr_y = table_top - header_h
+        for r_idx, row in enumerate(p_rows):
+            row_bottom = curr_y - row_h
+            if r_idx % 2 == 1:
+                cmds.append("0.96 0.97 0.99 rg")
+                cmds.append(f"{margin_l:.1f} {row_bottom:.1f} {usable_w:.1f} {row_h:.1f} re f")
+
+            # Bottom row border
+            cmds.append("0.85 0.87 0.91 RG 0.3 w")
+            cmds.append(f"{margin_l:.1f} {row_bottom:.1f} m {margin_l + usable_w:.1f} {row_bottom:.1f} l S")
+
+            cmds.append("0.12 0.14 0.18 rg")
+            cx = margin_l
+            for cell, cw in zip(row, col_widths):
+                tx = cx + 3.0
+                ty = row_bottom + 4.5
+                cmds.append(f"BT /F1 {font_size:.1f} Tf {tx:.1f} {ty:.1f} Td ({_pdf_escape(fit_text(cell, cw))}) Tj ET")
+                cx += cw
+            curr_y = row_bottom
+
+        # Page footer
+        cmds.append("0.45 0.50 0.58 rg")
+        footer = f"CompEquity AI Audit Ledger  —  Page {p_idx + 1} of {total_pages}"
+        cmds.append(f"BT /F1 7 Tf {margin_l:.1f} 12.0 Td ({_pdf_escape(footer)}) Tj ET")
+
+        stream_bytes = "\n".join(cmds).encode("latin-1", "replace")
+        content_id = add_obj(
+            f"<< /Length {len(stream_bytes)} >>\nstream\n".encode("ascii")
+            + stream_bytes
+            + b"\nendstream"
+        )
+        page_id = add_obj(
+            (
+                f"<< /Type /Page /Parent {pages_id} 0 R "
+                f"/MediaBox [0 0 {page_w:.0f} {page_h:.0f}] "
+                f"/Resources << /Font << /F1 {f1_id} 0 R /F2 {f2_id} 0 R >> >> "
+                f"/Contents {content_id} 0 R >>"
+            ).encode("ascii")
+        )
+        page_obj_ids.append(page_id)
+
+    kids_str = " ".join(f"{pid} 0 R" for pid in page_obj_ids)
+    objects[catalog_id - 1] = f"<< /Type /Catalog /Pages {pages_id} 0 R >>".encode("ascii")
+    objects[pages_id - 1] = f"<< /Type /Pages /Kids [{kids_str}] /Count {len(page_obj_ids)} >>".encode("ascii")
+
+    # Serialize with exact xref byte offsets
+    out = io.BytesIO()
+    out.write(b"%PDF-1.4\n%\xe2\xe3\xcf\xd3\n")
+    offsets = [0]
+    for obj_num, body in enumerate(objects, start=1):
+        offsets.append(out.tell())
+        out.write(f"{obj_num} 0 obj\n".encode("ascii"))
+        out.write(body)
+        out.write(b"\nendobj\n")
+
+    xref_start = out.tell()
+    out.write(f"xref\n0 {len(objects) + 1}\n".encode("ascii"))
+    out.write(b"0000000000 65535 f \n")
+    for off in offsets[1:]:
+        out.write(f"{off:010d} 00000 n \n".encode("ascii"))
+
+    out.write(
+        (
+            f"trailer\n<< /Size {len(objects) + 1} /Root {catalog_id} 0 R >>\n"
+            f"startxref\n{xref_start}\n%%EOF\n"
+        ).encode("ascii")
+    )
+    return out.getvalue()
 
 
 def _to_pdf_bytes(df: pd.DataFrame) -> bytes:
-    """Generate a simple PDF from the audit dataframe using reportlab if available, else fallback to text."""
-    try:
-        from reportlab.lib.pagesizes import landscape, A4
-        from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-        from reportlab.lib import colors
-        from reportlab.lib.styles import getSampleStyleSheet
-
-        buffer = io.BytesIO()
-        doc = SimpleDocTemplate(buffer, pagesize=landscape(A4), rightMargin=20, leftMargin=20, topMargin=30, bottomMargin=20)
-        styles = getSampleStyleSheet()
-        elements = []
-
-        elements.append(Paragraph("Audit Trail & Compliance Ledger", styles["Title"]))
-        elements.append(Spacer(1, 12))
-
-        # Table data
-        headers = list(df.columns)
-        rows = [headers] + df.astype(str).values.tolist()
-
-        table = Table(rows, repeatRows=1)
-        table.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1a1f36")),
-            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("FONTSIZE", (0, 0), (-1, 0), 8),
-            ("FONTSIZE", (0, 1), (-1, -1), 7),
-            ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
-            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
-            ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ]))
-        elements.append(table)
-        doc.build(elements)
-        return buffer.getvalue()
-    except ImportError:
-        # Fallback: plain text
-        return df.to_string(index=False).encode("utf-8")
+    """Generate a valid PDF from the audit dataframe."""
+    return _build_pure_pdf("Audit Trail & Compliance Ledger", df)
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -77,9 +219,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Timestamp": str(e.timestamp)[:19],
             "Entity": e.entity_name,
             "Entity ID": e.entity_id,
-            "Event Type": e.event_type,
-            "Actor ID": e.actor_id,
-            "Actor Role": e.actor_role,
+            "Event Type": e.event_type.replace("_", " ").title(),
+            "Actor": format_actor_name(e.actor_id, fallback="System"),
+            "Actor Role": e.actor_role.replace("_", " ").title(),
             "Notes": e.notes or ""
         }
         for e in events
@@ -88,9 +230,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     df_audit = pd.DataFrame(event_data)
 
     st.subheader("Immutable Audit Events Table")
-    st.dataframe(df_audit, use_container_width=True)
+    st.dataframe(df_audit, use_container_width=True, hide_index=True)
 
-    # ── Download options ──
+    # Download options
     st.markdown("---")
     st.subheader("Download Audit History")
     dl_col1, dl_col2, dl_col3 = st.columns(3)

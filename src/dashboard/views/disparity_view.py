@@ -9,7 +9,26 @@ import numpy as np
 from sqlalchemy.orm import Session
 from src.database.models import Employee, SalaryRecord, CompensationBand, PerformanceEvidence, Tenure
 from src.engine.disparity_detector import DisparityDetector
-from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, PLOTLY_CONFIG
+from src.dashboard.views.helpers import (
+    get_role_map, get_level_map, get_location_map,
+    get_currency_normalizer, get_band_usd_amounts,
+    PLOTLY_CONFIG, apply_clean_layout,
+)
+
+
+_STATUS_LABELS = {
+    "UNEXPLAINED_DISPARITY": "Unexplained Disparity",
+    "MANUAL_REVIEW_REQUIRED": "Manual Review Required",
+    "EXPLAINED_VARIATION": "Explained Variation",
+    "INSUFFICIENT_EVIDENCE": "Insufficient Evidence",
+}
+
+_STATUS_COLORS = {
+    "Unexplained Disparity": "#e74c3c",
+    "Manual Review Required": "#f39c12",
+    "Explained Variation": "#2ecc71",
+    "Insufficient Evidence": "#95a5a6",
+}
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -19,10 +38,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     role_map = get_role_map(db)
     level_map = get_level_map(db)
     loc_map = get_location_map(db)
+    curr_norm = get_currency_normalizer(db)
 
     status_filter = st.selectbox(
         "Filter by Disparity Outcome Status:",
-        ["All Outcomes", "UNEXPLAINED_DISPARITY", "MANUAL_REVIEW_REQUIRED", "EXPLAINED_VARIATION", "INSUFFICIENT_EVIDENCE"],
+        ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
         index=0
     )
 
@@ -72,9 +92,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         size = cohort_sizes.get(cohort_key, 1)
 
         band = band_lookup.get((emp.current_role_id, emp.current_level_id, emp.current_location_id))
-        b_min = band.min_salary if band else (med_sal * 0.8)
-        b_mid = band.mid_salary if band else med_sal
-        b_max = band.max_salary if band else (med_sal * 1.2)
+        if band:
+            b_min, b_mid, b_max = get_band_usd_amounts(band, curr_norm)
+        else:
+            b_min, b_mid, b_max = med_sal * 0.8, med_sal, med_sal * 1.2
 
         perf = latest_perf.get(emp.employee_id)
         rating = perf.rating_score if perf else None
@@ -102,15 +123,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Role": role_map.get(emp.current_role_id, emp.current_role_id),
             "Level": level_map.get(emp.current_level_id, emp.current_level_id),
             "Location": loc_map.get(emp.current_location_id, emp.current_location_id),
-            "Salary (USD)": sal.normalized_salary,
-            "Cohort Median": med_sal,
-            "Deviation (%)": res.deviation_from_cohort_median_pct,
-            "Compa-Ratio": res.compa_ratio,
-            "Rating": rating,
-            "Company Tenure (yrs)": c_tenure,
-            "Status": res.status,
+            "Salary (USD)": float(sal.normalized_salary),
+            "Cohort Median": float(med_sal),
+            "Deviation (%)": float(res.deviation_from_cohort_median_pct),
+            "Compa-Ratio": float(res.compa_ratio),
+            "Rating": float(rating) if rating is not None else None,
+            "Company Tenure (yrs)": float(c_tenure),
+            "Status": _STATUS_LABELS.get(res.status, res.status),
             "Primary Reason": res.primary_reason,
-            "Is Disparity": res.is_disparity
+            "Is Disparity": bool(res.is_disparity),
         })
 
     df = pd.DataFrame(findings)
@@ -118,16 +139,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.info("No employee records available for disparity evaluation.")
         return
 
-    unexplained_count = len(df[df["Status"] == "UNEXPLAINED_DISPARITY"])
-    review_count = len(df[df["Status"] == "MANUAL_REVIEW_REQUIRED"])
-    explained_count = len(df[df["Status"] == "EXPLAINED_VARIATION"])
-    insufficient_count = len(df[df["Status"] == "INSUFFICIENT_EVIDENCE"])
+    unexplained_count = len(df[df["Status"] == "Unexplained Disparity"])
+    review_count = len(df[df["Status"] == "Manual Review Required"])
+    explained_count = len(df[df["Status"] == "Explained Variation"])
+    insufficient_count = len(df[df["Status"] == "Insufficient Evidence"])
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Unexplained Disparities", f"{unexplained_count}", delta=f"{unexplained_count} flagged", delta_color="inverse")
-    col2.metric("Manual Review Required", f"{review_count}", "Mixed signals detected")
-    col3.metric("Explained Variations", f"{explained_count}", "Supported by merit or tenure")
-    col4.metric("Insufficient Evidence", f"{insufficient_count}", "Cohort too small to conclude")
+    col1.metric("Unexplained Disparities", f"{unexplained_count:,}", delta=f"{unexplained_count} flagged", delta_color="inverse")
+    col2.metric("Manual Review Required", f"{review_count:,}", "Mixed signals detected")
+    col3.metric("Explained Variations", f"{explained_count:,}", "Supported by merit or tenure")
+    col4.metric("Insufficient Evidence", f"{insufficient_count:,}", "Cohort too small to conclude")
 
     st.markdown("---")
 
@@ -141,34 +162,46 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             values="Count",
             title="Compensation Equity Evaluation Classification",
             color="Status",
-            color_discrete_map={
-                "UNEXPLAINED_DISPARITY": "#e74c3c",
-                "MANUAL_REVIEW_REQUIRED": "#f39c12",
-                "EXPLAINED_VARIATION": "#2ecc71",
-                "INSUFFICIENT_EVIDENCE": "#95a5a6"
-            }
+            color_discrete_map=_STATUS_COLORS,
         )
+        apply_clean_layout(fig_pie, legend_bottom=True, height=450)
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 
     with col_scatter:
+        # Focus scatter y-axis around realistic deviation window [-80%, +150%] so outliers don't flatten the chart
+        df_scatter = df[(df["Deviation (%)"] >= -80.0) & (df["Deviation (%)"] <= 150.0)].copy()
         fig_disp = px.scatter(
-            df,
+            df_scatter,
             x="Rating",
             y="Deviation (%)",
             color="Status",
             hover_data=["Employee ID", "Name", "Salary (USD)"],
             title="Performance Rating vs Cohort Deviation (%)",
-            color_discrete_map={
-                "UNEXPLAINED_DISPARITY": "#e74c3c",
-                "MANUAL_REVIEW_REQUIRED": "#f39c12",
-                "EXPLAINED_VARIATION": "#2ecc71",
-                "INSUFFICIENT_EVIDENCE": "#95a5a6"
-            }
+            color_discrete_map=_STATUS_COLORS,
         )
-        fig_disp.add_hline(y=-15.0, line_dash="dash", line_color="red", annotation_text="Disparity Threshold (-15%)")
-        fig_disp.add_vline(x=3.5, line_dash="dash", line_color="blue", annotation_text="High Performer (3.5+)")
+        fig_disp.add_hline(
+            y=-15.0, line_dash="dash", line_color="#e74c3c",
+            annotation_text="Disparity Threshold (-15%)", annotation_position="bottom right"
+        )
+        fig_disp.add_vline(
+            x=3.5, line_dash="dash", line_color="#3498db",
+            annotation_text="High Performer (3.5+)", annotation_position="top right"
+        )
+        apply_clean_layout(fig_disp, legend_bottom=True, height=450)
         st.plotly_chart(fig_disp, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Disparity Evaluation Findings")
     filtered_df = df if status_filter == "All Outcomes" else df[df["Status"] == status_filter]
-    st.dataframe(filtered_df, use_container_width=True)
+    st.dataframe(
+        filtered_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Salary (USD)": st.column_config.NumberColumn("Salary (USD)", format="$%,.0f"),
+            "Cohort Median": st.column_config.NumberColumn("Cohort Median", format="$%,.0f"),
+            "Deviation (%)": st.column_config.NumberColumn("Deviation (%)", format="%.1f%%"),
+            "Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f"),
+            "Rating": st.column_config.NumberColumn("Rating", format="%.2f"),
+            "Company Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+        },
+    )

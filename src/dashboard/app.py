@@ -16,7 +16,6 @@ import streamlit as st
 # Set page config (must be the first Streamlit call)
 st.set_page_config(
     page_title="Compensation Equity & Disparity System",
-    page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -143,10 +142,10 @@ def main():
         selected_role_label = st.sidebar.selectbox("Filter Role:", role_options, index=0)
         selected_role = role_id_map[selected_role_label]
 
-        # Level filter
-        levels = db.query(Level.level_id, Level.level_name).order_by(Level.rank).all()
-        level_options = ["All"] + [f"{l.level_name} ({l.level_id})" for l in levels]
-        level_id_map  = {**{"All": "All"}, **{f"{l.level_name} ({l.level_id})": l.level_id for l in levels}}
+        # Level filter — show human-readable names without IDs
+        levels = db.query(Level.level_id, Level.level_name, Level.level_code).order_by(Level.rank).all()
+        level_options = ["All"] + [f"{l.level_name} ({l.level_code})" for l in levels]
+        level_id_map  = {**{"All": "All"}, **{f"{l.level_name} ({l.level_code})": l.level_id for l in levels}}
         selected_level_label = st.sidebar.selectbox("Filter Career Level:", level_options, index=0)
         selected_level = level_id_map[selected_level_label]
 

@@ -13,12 +13,36 @@ from src.database.models import (
 from src.engine.currency_normalizer import CurrencyNormalizer
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.engine.exception_detector import ExceptionDetector
-from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, PLOTLY_CONFIG
+from src.dashboard.views.helpers import (
+    get_role_map, get_level_map, get_location_map,
+    PLOTLY_CONFIG, apply_clean_layout,
+)
+
+
+_ISSUE_LABELS = {
+    "EXPIRED_BAND_COMPARISON": "Expired Band Comparison",
+    "FTE_IGNORED_IN_NORMALIZATION": "FTE Ignored in Normalization",
+    "MISSING_CURRENCY_CONVERSION": "Missing Currency Conversion",
+    "UNAPPROVED_ADJUSTMENT_APPLIED": "Unapproved Adjustment Applied",
+    "INCOMPARABLE_ROLE_GROUPING": "Incomparable Role Grouping",
+}
+
+
+def _fmt_val(val) -> str:
+    if val is None or (isinstance(val, float) and pd.isna(val)):
+        return "—"
+    if isinstance(val, (int, float)):
+        return f"{val:,.2f}"
+    return str(val)
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Operational Exceptions & Mandatory Edge Case Diagnostics")
     st.markdown("Dedicated isolation of system exceptions, boundary failures, and compliance anomalies across the 5 mandatory edge cases.")
+
+    role_map = get_role_map(db)
+    loc_map = get_location_map(db)
+    emp_lookup = {e.employee_id: e for e in db.query(Employee).all()}
 
     curr_norm = CurrencyNormalizer()
     curr_norm.load_from_db(db)
@@ -40,6 +64,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     exceptions = []
 
     for sal in salaries:
+        emp = emp_lookup.get(sal.employee_id)
+        if emp:
+            if selected_role != "All" and emp.current_role_id != selected_role:
+                continue
+            if selected_level != "All" and emp.current_level_id != selected_level:
+                continue
+            if selected_location != "All" and emp.current_location_id != selected_location:
+                continue
+
         # Check 1: Expired band
         if sal.benchmark_band_id and sal.benchmark_band_id in bands:
             b = bands[sal.benchmark_band_id]
@@ -111,12 +144,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             exc_grp = detector.check_incomparable_roles_grouped(role_a, role_b)
             if exc_grp:
                 exc_grp["record_id"] = gtr.record_id
-                exc_grp["employee_id"] = "N/A (Group Mapping)"
+                exc_grp["employee_id"] = "Group Mapping"
                 exceptions.append(exc_grp)
 
     df_exc = pd.DataFrame(exceptions)
 
-    # Scorecards for the 5 mandatory edge cases
     counts = {
         "EXPIRED_BAND_COMPARISON": len(df_exc[df_exc["issue_type"] == "EXPIRED_BAND_COMPARISON"]) if not df_exc.empty else 0,
         "FTE_IGNORED_IN_NORMALIZATION": len(df_exc[df_exc["issue_type"] == "FTE_IGNORED_IN_NORMALIZATION"]) if not df_exc.empty else 0,
@@ -135,51 +167,66 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.markdown("---")
 
     if not df_exc.empty:
-        col_bar, col_sev = st.columns(2)
-        with col_bar:
-            issue_summary = df_exc["issue_type"].value_counts().reset_index()
-            issue_summary.columns = ["Issue Type", "Count"]
-            fig_bar = px.bar(
-                issue_summary,
-                x="Issue Type",
-                y="Count",
-                color="Issue Type",
-                title="Exception Incidents by Issue Type"
-            )
-            fig_bar.update_layout(xaxis_tickangle=-30)
-            st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
+        df_exc["Issue Label"] = df_exc["issue_type"].map(lambda x: _ISSUE_LABELS.get(x, x))
 
-        with col_sev:
-            sev_summary = df_exc["severity"].value_counts().reset_index()
-            sev_summary.columns = ["Severity", "Count"]
-            fig_sev = px.pie(
-                sev_summary,
-                names="Severity",
-                values="Count",
-                title="Exception Incidents by Severity Level",
-                color="Severity",
-                color_discrete_map={"CRITICAL": "#e74c3c", "HIGH": "#e67e22", "MEDIUM": "#f1c40f"}
-            )
-            st.plotly_chart(fig_sev, use_container_width=True, config=PLOTLY_CONFIG)
+        # Full-width, larger chart for Exception Incidents by Issue Type (Item 8)
+        st.subheader("Exception Incidents by Issue Type")
+        issue_summary = df_exc["Issue Label"].value_counts().reset_index()
+        issue_summary.columns = ["Issue Type", "Count"]
+        fig_bar = px.bar(
+            issue_summary,
+            x="Issue Type",
+            y="Count",
+            color="Issue Type",
+            text="Count",
+            title="Exception Incidents by Issue Type",
+        )
+        fig_bar.update_traces(textposition="outside", cliponaxis=False)
+        apply_clean_layout(fig_bar, legend_bottom=True, height=520, xaxis_tickangle=-15, extra_bottom_margin=20)
+        st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
 
-        # ── Detailed Exception Diagnostic Logs — identification FIRST ──
+        st.subheader("Exception Incidents by Severity Level")
+        sev_summary = df_exc["severity"].value_counts().reset_index()
+        sev_summary.columns = ["Severity", "Count"]
+        fig_sev = px.pie(
+            sev_summary,
+            names="Severity",
+            values="Count",
+            hole=0.4,
+            title="Exception Incidents by Severity Level",
+            color="Severity",
+            color_discrete_map={"CRITICAL": "#e74c3c", "HIGH": "#e67e22", "MEDIUM": "#f1c40f"}
+        )
+        apply_clean_layout(fig_sev, legend_bottom=True, height=400)
+        st.plotly_chart(fig_sev, use_container_width=True, config=PLOTLY_CONFIG)
+
+        # Detailed Exception Diagnostic Logs — identification FIRST, formatted values
         st.subheader("Detailed Exception Diagnostic Logs")
 
-        # Reorder columns: identifiers first
-        id_cols = ["employee_id", "record_id", "issue_type", "severity", "description",
-                   "detected_value", "expected_value", "recommendation"]
-        present_cols = [c for c in id_cols if c in df_exc.columns]
-        rest_cols = [c for c in df_exc.columns if c not in present_cols]
-        df_display = df_exc[present_cols + rest_cols].rename(columns={
-            "employee_id": "Employee ID",
-            "record_id": "Record ID",
-            "issue_type": "Issue Type",
-            "severity": "Severity",
-            "description": "Description",
-            "detected_value": "Detected Value",
-            "expected_value": "Expected Value",
-            "recommendation": "Recommendation"
-        })
-        st.dataframe(df_display, use_container_width=True)
+        emp_names = []
+        emp_locs = []
+        for eid in df_exc["employee_id"]:
+            e = emp_lookup.get(eid)
+            if e:
+                emp_names.append(f"{e.first_name} {e.last_name}")
+                emp_locs.append(loc_map.get(e.current_location_id, e.current_location_id))
+            else:
+                emp_names.append("—")
+                emp_locs.append("—")
+
+        df_display = pd.DataFrame({
+            "Employee ID": df_exc["employee_id"],
+            "Employee Name": emp_names,
+            "Record ID": df_exc["record_id"],
+            "Location": emp_locs,
+            "Issue Type": df_exc["Issue Label"],
+            "Severity": df_exc["severity"],
+            "Detected Value": df_exc["detected_value"].map(_fmt_val) if "detected_value" in df_exc else "—",
+            "Expected Value": df_exc["expected_value"].map(_fmt_val) if "expected_value" in df_exc else "—",
+            "Description": df_exc["description"],
+            "Recommendation": df_exc["recommendation"],
+        }).sort_values(["Employee ID", "Record ID"])
+
+        st.dataframe(df_display, use_container_width=True, hide_index=True)
     else:
-        st.success("No exceptions detected across the database.")
+        st.success("No exceptions detected across the selected scope.")

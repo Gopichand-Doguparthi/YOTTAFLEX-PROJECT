@@ -51,7 +51,22 @@ class ProposalManager:
     ) -> AdjustmentProposal:
         """Creates a new adjustment proposal and logs creation audit event."""
         year = proposed_effective_date.year if isinstance(proposed_effective_date, date) else 2026
-        proposal_id = custom_id or cls.generate_proposal_id(year)
+        if custom_id:
+            proposal_id = custom_id
+        else:
+            # Sync counter with highest existing ID in DB so restarts never collide
+            prefix = f"ADJ-{year}-"
+            existing_ids = session.query(AdjustmentProposal.proposal_id).filter(
+                AdjustmentProposal.proposal_id.like(f"{prefix}%")
+            ).all()
+            max_seq = 0
+            for (pid,) in existing_ids:
+                suffix = pid[len(prefix):]
+                if suffix.isdigit():
+                    max_seq = max(max_seq, int(suffix))
+            if cls._proposal_counter < max_seq:
+                cls._proposal_counter = max_seq
+            proposal_id = cls.generate_proposal_id(year)
 
         adj_amount = round(proposed_salary - current_salary, 2)
         adj_pct = round((adj_amount / current_salary) * 100.0, 2) if current_salary > 0 else 0.0
@@ -173,7 +188,12 @@ class ProposalManager:
             # Create new historical SalaryRecord
             emp = session.query(Employee).filter_by(employee_id=proposal.employee_id).first()
             if emp:
-                sal_id = f"SAL-{emp.employee_id}-{proposal.proposed_effective_date.year:04d}-{proposal.proposed_effective_date.month:02d}"
+                base_sal_id = f"SAL-{emp.employee_id}-{proposal.proposed_effective_date.year:04d}-{proposal.proposed_effective_date.month:02d}"
+                sal_id = base_sal_id
+                suffix_idx = 2
+                while session.query(SalaryRecord).filter_by(salary_id=sal_id).first() is not None:
+                    sal_id = f"{base_sal_id}-{suffix_idx}"
+                    suffix_idx += 1
                 sal_record = SalaryRecord(
                     salary_id=sal_id,
                     employee_id=emp.employee_id,

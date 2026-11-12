@@ -7,7 +7,10 @@ import plotly.express as px
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import Employee, SalaryRecord, PerformanceEvidence, Tenure, Promotion
-from src.dashboard.views.helpers import get_role_map, get_level_map, get_location_map, PLOTLY_CONFIG
+from src.dashboard.views.helpers import (
+    get_role_map, get_level_map, get_location_map,
+    PLOTLY_CONFIG, apply_clean_layout,
+)
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -29,14 +32,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     if selected_location != "All":
         query = query.filter(Employee.current_location_id == selected_location)
 
-    # Load ALL matching employees (no .limit())
     employees = query.all()
 
     if not employees:
         st.warning("No employees found matching the specified filters.")
         return
 
-    # Build table with human-readable names
     emp_data = []
     for e in employees:
         if search_query:
@@ -52,22 +53,34 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Role": role_map.get(e.current_role_id, e.current_role_id),
             "Level": level_map.get(e.current_level_id, e.current_level_id),
             "Location": loc_map.get(e.current_location_id, e.current_location_id),
-            "Type": e.employment_type,
-            "FTE": e.fte,
+            "Type": e.employment_type.replace("_", " ").title(),
+            "FTE": float(e.fte),
             "Hire Date": str(e.hire_date)
         })
 
     df_emps = pd.DataFrame(emp_data)
     st.caption(f"Showing {len(df_emps):,} employee records")
-    st.dataframe(df_emps, use_container_width=True, height=320)
+    st.dataframe(
+        df_emps,
+        use_container_width=True,
+        height=320,
+        hide_index=True,
+        column_config={
+            "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
+        },
+    )
 
     # Detailed Employee Drill-down
     st.markdown("---")
     st.subheader("Employee Profile & Career Trajectory Drill-Down")
-    selected_emp_id = st.selectbox(
-        "Select an Employee to view comprehensive history:",
-        df_emps["Employee ID"].tolist() if not df_emps.empty else []
-    )
+    if df_emps.empty:
+        st.info("No employees match your search query.")
+        return
+
+    emp_options = [f"{row['Name']} ({row['Employee ID']})" for _, row in df_emps.iterrows()]
+    emp_id_lookup = {f"{row['Name']} ({row['Employee ID']})": row["Employee ID"] for _, row in df_emps.iterrows()}
+    selected_label = st.selectbox("Select an Employee to view comprehensive history:", emp_options)
+    selected_emp_id = emp_id_lookup[selected_label]
 
     if selected_emp_id:
         emp = db.query(Employee).filter(Employee.employee_id == selected_emp_id).first()
@@ -79,7 +92,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         col_a, col_b, col_c = st.columns(3)
         with col_a:
             st.markdown(f"**Employee:** {emp.first_name} {emp.last_name}")
-            st.markdown(f"**Email:** `{emp.email}`")
+            st.markdown(f"**Email:** {emp.email}")
             st.markdown(f"**Department:** {emp.department}")
         with col_b:
             st.markdown(f"**Role:** {role_map.get(emp.current_role_id, emp.current_role_id)}")
@@ -87,19 +100,19 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             st.markdown(f"**Location:** {loc_map.get(emp.current_location_id, emp.current_location_id)}")
         with col_c:
             st.markdown(f"**Hire Date:** {emp.hire_date}")
-            st.markdown(f"**FTE:** {emp.fte} ({emp.employment_type})")
+            st.markdown(f"**FTE:** {emp.fte:.2f} ({emp.employment_type.replace('_', ' ').title()})")
             if tenure:
-                st.markdown(f"**Company Tenure:** {tenure.tenure_in_company_years} yrs (Total experience: {tenure.years_of_experience_total} yrs)")
+                st.markdown(f"**Company Tenure:** {tenure.tenure_in_company_years:.1f} yrs (Total experience: {tenure.years_of_experience_total:.1f} yrs)")
 
         # Salary Trajectory Chart
         if salaries:
             sal_df = pd.DataFrame([
                 {
                     "Effective Date": str(s.effective_date),
-                    "Normalized Salary (USD)": s.normalized_salary,
-                    "Base Salary": s.base_salary,
+                    "Normalized Salary (USD)": float(s.normalized_salary),
+                    "Base Salary": float(s.base_salary),
                     "Currency": s.currency,
-                    "Change Reason": s.change_reason
+                    "Change Reason": s.change_reason.replace("_", " ").title(),
                 }
                 for s in salaries
             ])
@@ -109,29 +122,48 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 x="Effective Date",
                 y="Normalized Salary (USD)",
                 markers=True,
-                text="Normalized Salary (USD)",
-                title=f"Compensation Trajectory — {emp.first_name} {emp.last_name} ({emp.employee_id})"
+                title=f"Compensation Trajectory — {emp.first_name} {emp.last_name}"
             )
-            fig_traj.update_traces(textposition="top center")
+            fig_traj.update_traces(
+                marker=dict(size=9),
+                hovertemplate="Date: %{x}<br>Normalized Salary: $%{y:,.0f}<extra></extra>"
+            )
+            apply_clean_layout(fig_traj, legend_bottom=False, height=380)
             st.plotly_chart(fig_traj, use_container_width=True, config=PLOTLY_CONFIG)
 
             st.write("Historical Compensation Records:")
-            st.dataframe(sal_df, use_container_width=True)
+            st.dataframe(
+                sal_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "Normalized Salary (USD)": st.column_config.NumberColumn("Normalized Salary (USD)", format="$%,.0f"),
+                    "Base Salary": st.column_config.NumberColumn("Base Salary (Local)", format="%,.0f"),
+                },
+            )
 
         if perfs:
             st.write("Performance Evaluation Reviews:")
             perf_df = pd.DataFrame([
                 {
                     "Review Cycle": p.review_cycle,
-                    "Rating Score": p.rating_score,
+                    "Rating Score": float(p.rating_score),
                     "Rating Label": p.rating_label,
-                    "Skills Score": p.documented_skills_score,
-                    "Critical Initiatives": p.critical_initiative_count,
+                    "Skills Score": float(p.documented_skills_score) if p.documented_skills_score is not None else 0.0,
+                    "Critical Initiatives": int(p.critical_initiative_count),
                     "Review Date": str(p.effective_date)
                 }
                 for p in perfs
             ])
-            st.dataframe(perf_df, use_container_width=True)
+            st.dataframe(
+                perf_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "Rating Score": st.column_config.NumberColumn("Rating Score", format="%.2f"),
+                    "Skills Score": st.column_config.NumberColumn("Skills Score", format="%.1f"),
+                },
+            )
 
         if proms:
             st.write("Promotion History:")
@@ -145,4 +177,4 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 }
                 for p in proms
             ])
-            st.dataframe(prom_df, use_container_width=True)
+            st.dataframe(prom_df, use_container_width=True, hide_index=True)
