@@ -230,3 +230,25 @@ def apply_clean_layout(
             )
     fig.update_layout(**layout_kwargs)
     return fig
+
+
+def build_table_column_config(df, overrides: dict = None) -> dict:
+    """
+    Auto-assigns column widths based on column header and max cell text length
+    so values in st.dataframe tables are not cut off prematurely.
+    """
+    cfg = {}
+    large_keywords = ("description", "recommendation", "rationale", "reason", "notes", "details", "location", "role")
+    medium_keywords = ("name", "level", "department", "status", "zone", "issue", "classification", "actor", "entity", "decision")
+
+    for col in df.columns:
+        if overrides and col in overrides:
+            cfg[col] = overrides[col]
+            continue
+        col_lower = col.lower()
+        max_len = int(df[col].astype(str).str.len().max()) if not df.empty else len(col)
+        if any(k in col_lower for k in large_keywords) or max_len > 36:
+            cfg[col] = st.column_config.TextColumn(col, width="large")
+        elif any(k in col_lower for k in medium_keywords) or max_len > 16:
+            cfg[col] = st.column_config.TextColumn(col, width="medium")
+    return cfg

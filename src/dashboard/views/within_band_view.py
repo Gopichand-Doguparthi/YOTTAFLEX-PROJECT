@@ -13,7 +13,7 @@ from src.engine.within_band import WithinBandCalculator
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts,
-    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -27,12 +27,12 @@ _ZONE_LABELS = {
 }
 
 _ZONE_COLORS = {
-    "Green-Circled (< 0%)": "#2ecc71",
-    "Lower Quartile (0%–25%)": "#3498db",
-    "Mid-Lower (25%–50%)": "#1abc9c",
-    "Mid-Upper (50%–75%)": "#6366f1",
-    "Upper Quartile (75%–100%)": "#f39c12",
-    "Red-Circled (> 100%)": "#e74c3c",
+    "Green-Circled (< 0%)": "#22c55e",
+    "Lower Quartile (0%–25%)": "#3b82f6",
+    "Mid-Lower (25%–50%)": "#a855f7",
+    "Mid-Upper (50%–75%)": "#eab308",
+    "Upper Quartile (75%–100%)": "#f97316",
+    "Red-Circled (> 100%)": "#ef4444",
 }
 
 
@@ -162,11 +162,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             zone_counts,
             names="Band Zone",
             values="Count",
+            hole=0.4,
             title="Workforce Placement Across Band Zones",
             color="Band Zone",
             color_discrete_map=_ZONE_COLORS,
             category_orders={"Band Zone": list(_ZONE_COLORS.keys())},
         )
+        fig_pie.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
         apply_clean_layout(fig_pie, legend_bottom=True, height=470, legend_position="bottom")
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 
@@ -192,22 +194,50 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         apply_clean_layout(fig_scatter, legend_bottom=True, height=470)
         st.plotly_chart(fig_scatter, use_container_width=True, config=PLOTLY_CONFIG)
 
-    st.subheader("Range Outliers: Green-Circled & Red-Circled Employees")
-    outliers_raw = df[df["_raw_zone"].isin(["GREEN_CIRCLED", "RED_CIRCLED"])].copy()
-    if outliers_raw.empty:
-        st.success("No Green-Circled or Red-Circled range outliers found under the current filters.")
+    st.subheader("Within-Band & Range Outliers Directory")
+    wf1, wf2 = st.columns([2, 2])
+    with wf1:
+        wb_search = st.text_input("Search by Employee ID or Name:", "", key="wb_search", placeholder="e.g. EMP-000010 or Smith")
+    with wf2:
+        wb_zone_filter = st.selectbox(
+            "Filter by Band Zone:",
+            ["All Outliers (Green & Red Circled)", "All Zones"] + list(_ZONE_COLORS.keys()),
+            index=0,
+        )
+
+    if wb_zone_filter == "All Outliers (Green & Red Circled)":
+        table_raw = df[df["_raw_zone"].isin(["GREEN_CIRCLED", "RED_CIRCLED"])].copy()
+    elif wb_zone_filter == "All Zones":
+        table_raw = df.copy()
     else:
-        st.caption(f"{len(outliers_raw):,} range outlier record(s) found")
+        table_raw = df[df["Band Zone"] == wb_zone_filter].copy()
+
+    if wb_search.strip():
+        q = wb_search.strip().lower()
+        table_raw = table_raw[
+            table_raw["Employee ID"].str.lower().str.contains(q, na=False)
+            | table_raw["Name"].str.lower().str.contains(q, na=False)
+        ]
+
+    if table_raw.empty:
+        st.info("No records match the selected zone and search filters.")
+    else:
+        st.caption(f"Showing {len(table_raw):,} record(s)")
         outliers_disp = pd.DataFrame({
-            "Employee ID": outliers_raw["Employee ID"],
-            "Employee Name": outliers_raw["Name"],
-            "Band Zone": outliers_raw["Band Zone"],
-            "Position (%)": outliers_raw["Position (%)"].map(lambda v: fmt_pct(v, 1)),
-            "Salary (USD)": outliers_raw["Salary (USD)"].map(fmt_usd),
-            "Band Min (USD)": outliers_raw["Band Min (USD)"].map(fmt_usd),
-            "Band Max (USD)": outliers_raw["Band Max (USD)"].map(fmt_usd),
-            "Role": outliers_raw["Role"],
-            "Level": outliers_raw["Level"],
-            "Location": outliers_raw["Location"],
+            "Employee ID": table_raw["Employee ID"],
+            "Employee Name": table_raw["Name"],
+            "Band Zone": table_raw["Band Zone"],
+            "Position (%)": table_raw["Position (%)"].map(lambda v: fmt_pct(v, 1)),
+            "Salary (USD)": table_raw["Salary (USD)"].map(fmt_usd),
+            "Band Min (USD)": table_raw["Band Min (USD)"].map(fmt_usd),
+            "Band Max (USD)": table_raw["Band Max (USD)"].map(fmt_usd),
+            "Role": table_raw["Role"],
+            "Level": table_raw["Level"],
+            "Location": table_raw["Location"],
         })
-        st.dataframe(outliers_disp, use_container_width=True, hide_index=True)
+        st.dataframe(
+            outliers_disp,
+            use_container_width=True,
+            hide_index=True,
+            column_config=build_table_column_config(outliers_disp),
+        )

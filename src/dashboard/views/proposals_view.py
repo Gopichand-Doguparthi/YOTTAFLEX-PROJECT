@@ -1,6 +1,6 @@
 """
 View 9: Adjustment Proposals Management.
-Enables review, filtering, and initiation of compensation remediation proposals.
+Enables unique proposal initiation, comprehensive filtering, and table management.
 """
 import importlib
 from datetime import date, datetime
@@ -12,8 +12,24 @@ from src.database.models import AdjustmentProposal, ApprovalEvent, Employee, Sal
 import src.workflow.audit_logger as audit_logger_mod
 import src.workflow.proposal_manager as proposal_manager_mod
 from src.dashboard.views.helpers import (
-    get_role_map, format_actor_name, fmt_usd, fmt_pct,
+    get_role_map, format_actor_name, fmt_usd, fmt_pct, build_table_column_config,
 )
+
+
+_STANDARD_REASONS = [
+    "Internal Equity",
+    "Market Parity",
+    "Disparity Correction",
+    "Promotion Catchup",
+    "Retention",
+]
+
+_STANDARD_STATUSES = [
+    "Draft",
+    "Pending Review",
+    "Approved",
+    "Rejected",
+]
 
 
 def _next_proposal_id(db: Session, year: int) -> str:
@@ -78,9 +94,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     st.header("Compensation Adjustment Proposals")
     st.markdown("Manages equity adjustment proposals, approval workflows, and remediation actions.")
 
-    if "proposal_created_msg" in st.session_state:
-        st.success(st.session_state.pop("proposal_created_msg"))
-
     emp_choices = _load_employee_choices()
     emp_meta = {e["employee_id"]: e for e in emp_choices}
     label_to_id = {e["label"]: e["employee_id"] for e in emp_choices}
@@ -118,48 +131,76 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             if submitted:
                 emp_id = label_to_id.get(selected_emp_label)
                 if not emp_id:
-                    st.error("Please select a valid employee.")
+                    st.session_state["proposal_feedback"] = ("error", "Please select a valid employee.")
                 else:
-                    latest_sal = (
-                        db.query(SalaryRecord)
-                        .filter(SalaryRecord.employee_id == emp_id)
-                        .order_by(SalaryRecord.effective_date.desc())
+                    # Enforce uniqueness: block duplicate identical proposals (or double-clicks)
+                    duplicate = (
+                        db.query(AdjustmentProposal)
+                        .filter(
+                            AdjustmentProposal.employee_id == emp_id,
+                            AdjustmentProposal.proposed_salary == float(proposed_salary),
+                            AdjustmentProposal.reason_code == reason_code,
+                            AdjustmentProposal.proposed_effective_date == eff_date,
+                        )
                         .first()
                     )
-                    curr_sal = float(latest_sal.normalized_salary) if latest_sal else 100000.0
-
-                    try:
-                        # Reload workflow modules in case Streamlit kept older in-memory module state
-                        importlib.reload(audit_logger_mod)
-                        importlib.reload(proposal_manager_mod)
-                        ProposalManager = proposal_manager_mod.ProposalManager
-                        AuditLogger = audit_logger_mod.AuditLogger
-
-                        next_pid = _next_proposal_id(db, eff_date.year)
-                        _sync_audit_counter(db, AuditLogger)
-
-                        prop = ProposalManager.create_proposal(
-                            session=db,
-                            employee_id=emp_id,
-                            current_salary=curr_sal,
-                            proposed_salary=float(proposed_salary),
-                            reason_code=reason_code,
-                            justification_notes=notes.strip() or "Compensation equity adjustment.",
-                            evidence_summary={"manual_submission": True},
-                            related_disparity_findings={"status": "MANUAL_REMEDIATION"},
-                            proposed_effective_date=eff_date,
-                            created_by=created_by.strip() or "HR Equity Lead",
-                            custom_id=next_pid,
+                    if duplicate is not None:
+                        st.session_state["proposal_feedback"] = (
+                            "warning",
+                            f"Duplicate entry prevented: Proposal {duplicate.proposal_id} already exists for "
+                            f"{emp_meta[emp_id]['name']} ({emp_id}) with identical salary, reason, and effective date."
                         )
-                        db.commit()
-                        st.cache_data.clear()
-                        st.session_state["proposal_created_msg"] = (
-                            f"Proposal {prop.proposal_id} created for {emp_meta[emp_id]['name']} ({emp_id}) in DRAFT status."
+                    else:
+                        latest_sal = (
+                            db.query(SalaryRecord)
+                            .filter(SalaryRecord.employee_id == emp_id)
+                            .order_by(SalaryRecord.effective_date.desc())
+                            .first()
                         )
-                        st.rerun()
-                    except Exception as ex:
-                        db.rollback()
-                        st.error(f"Failed to create proposal: {ex}")
+                        curr_sal = float(latest_sal.normalized_salary) if latest_sal else 100000.0
+
+                        try:
+                            importlib.reload(audit_logger_mod)
+                            importlib.reload(proposal_manager_mod)
+                            ProposalManager = proposal_manager_mod.ProposalManager
+                            AuditLogger = audit_logger_mod.AuditLogger
+
+                            next_pid = _next_proposal_id(db, eff_date.year)
+                            _sync_audit_counter(db, AuditLogger)
+
+                            prop = ProposalManager.create_proposal(
+                                session=db,
+                                employee_id=emp_id,
+                                current_salary=curr_sal,
+                                proposed_salary=float(proposed_salary),
+                                reason_code=reason_code,
+                                justification_notes=notes.strip() or "Compensation equity adjustment.",
+                                evidence_summary={"manual_submission": True},
+                                related_disparity_findings={"status": "MANUAL_REMEDIATION"},
+                                proposed_effective_date=eff_date,
+                                created_by=created_by.strip() or "HR Equity Lead",
+                                custom_id=next_pid,
+                            )
+                            db.commit()
+                            st.cache_data.clear()
+                            st.session_state["proposal_feedback"] = (
+                                "success",
+                                f"Proposal {prop.proposal_id} created for {emp_meta[emp_id]['name']} ({emp_id}) in DRAFT status."
+                            )
+                            st.rerun()
+                        except Exception as ex:
+                            db.rollback()
+                            st.session_state["proposal_feedback"] = ("error", f"Failed to create proposal: {ex}")
+
+    # Feedback displayed BELOW the creation form / submit button
+    if "proposal_feedback" in st.session_state:
+        lvl, msg = st.session_state.pop("proposal_feedback")
+        if lvl == "success":
+            st.success(msg)
+        elif lvl == "warning":
+            st.warning(msg)
+        else:
+            st.error(msg)
 
     st.markdown("---")
 
@@ -196,29 +237,32 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Proposed Effective": str(p.proposed_effective_date),
             "Created By": format_actor_name(p.created_by, fallback="HR Partner"),
             "Reviewed By": reviewer_label,
-            "_eff_date": p.proposed_effective_date,
         })
 
-    # Registry Filters: Status, Reason, Date, Reviewed By
+    # Comprehensive Filters — always keep ALL standard reasons & statuses
     st.subheader("Filter Proposals")
-    fc1, fc2, fc3, fc4 = st.columns(4)
-    status_opts = ["All"] + sorted({r["Status"] for r in all_rows})
-    reason_opts = ["All"] + sorted({r["Reason"] for r in all_rows})
-    reviewer_opts = ["All"] + sorted({r["Reviewed By"] for r in all_rows})
+    fc0, fc1, fc2, fc3, fc4 = st.columns(5)
+    status_opts = ["All"] + sorted(set(_STANDARD_STATUSES) | {r["Status"] for r in all_rows})
+    reason_opts = ["All"] + sorted(set(_STANDARD_REASONS) | {r["Reason"] for r in all_rows})
+    reviewer_opts = ["All"] + sorted({"Pending"} | {r["Reviewed By"] for r in all_rows})
     date_opts = ["All"] + sorted({r["Proposed Effective"] for r in all_rows})
 
+    with fc0:
+        f_emp = st.text_input("Employee Name / ID:", "", placeholder="e.g. EMP-000001")
     with fc1:
         f_status = st.selectbox("Status:", status_opts, index=0)
     with fc2:
         f_reason = st.selectbox("Reason:", reason_opts, index=0)
     with fc3:
-        f_date = st.selectbox("Proposed Effective Date:", date_opts, index=0)
+        f_date = st.selectbox("Effective Date:", date_opts, index=0)
     with fc4:
         f_reviewer = st.selectbox("Reviewed By:", reviewer_opts, index=0)
 
+    q_emp = f_emp.strip().lower()
     filtered_rows = [
         r for r in all_rows
-        if (f_status == "All" or r["Status"] == f_status)
+        if (not q_emp or q_emp in r["Employee ID"].lower() or q_emp in r["Employee Name"].lower() or q_emp in r["Proposal ID"].lower())
+        and (f_status == "All" or r["Status"] == f_status)
         and (f_reason == "All" or r["Reason"] == f_reason)
         and (f_date == "All" or r["Proposed Effective"] == f_date)
         and (f_reviewer == "All" or r["Reviewed By"] == f_reviewer)
@@ -229,5 +273,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.info("No proposals match the selected filters.")
         return
 
-    disp_df = pd.DataFrame(filtered_rows).drop(columns=["_eff_date"])
-    st.dataframe(disp_df, use_container_width=True, hide_index=True)
+    disp_df = pd.DataFrame(filtered_rows)
+    st.dataframe(
+        disp_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config=build_table_column_config(disp_df),
+    )

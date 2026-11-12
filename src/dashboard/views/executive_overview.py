@@ -187,13 +187,14 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 hole=0.45,
                 color="Status",
                 color_discrete_map={
-                    "Pending Review": "#f39c12",
-                    "Approved": "#27ae60",
-                    "Rejected": "#e74c3c",
-                    "Draft": "#7f8c8d"
+                    "Pending Review": "#f59e0b",
+                    "Approved": "#10b981",
+                    "Rejected": "#ef4444",
+                    "Draft": "#3b82f6",
                 },
                 title="Remediation Proposal Status Breakdown"
             )
+            fig_donut.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
             apply_clean_layout(fig_donut, legend_bottom=True, height=450, legend_position="bottom")
             st.plotly_chart(fig_donut, use_container_width=True, config=PLOTLY_CONFIG)
         else:

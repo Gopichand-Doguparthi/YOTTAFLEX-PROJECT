@@ -40,7 +40,12 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* Sidebar nav buttons — full width, strictly left-aligned */
+    /* Effective spacing between sidebar items */
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+        gap: 0.45rem !important;
+    }
+
+    /* Sidebar nav buttons — full width, strictly left-aligned, comfortable spacing */
     [data-testid="stSidebar"] .stButton,
     [data-testid="stSidebar"] .stButton > button,
     [data-testid="stSidebar"] button[data-testid^="stBaseButton"] {
@@ -53,9 +58,9 @@ st.markdown("""
         color: #cbd5e1;
         border: none;
         border-radius: 6px;
-        padding: 0.42rem 0.75rem !important;
-        margin: 1px 0;
-        font-size: 0.875rem;
+        padding: 0.55rem 0.85rem !important;
+        margin: 3px 0 !important;
+        font-size: 0.88rem;
         font-weight: 400;
         letter-spacing: 0.01em;
         transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
@@ -70,12 +75,12 @@ st.markdown("""
         margin: 0 !important;
     }
     [data-testid="stSidebar"] button[data-testid^="stBaseButton"]:hover {
-        background: rgba(99, 102, 241, 0.20) !important;
+        background: rgba(99, 102, 241, 0.22) !important;
         color: #ffffff !important;
-        padding-left: 1.0rem !important;
+        padding-left: 1.15rem !important;
     }
     [data-testid="stSidebar"] button[data-testid="stBaseButton-primary"] {
-        background: rgba(99, 102, 241, 0.34) !important;
+        background: rgba(99, 102, 241, 0.36) !important;
         color: #ffffff !important;
         font-weight: 600 !important;
         border-left: 3px solid #818cf8 !important;
@@ -85,18 +90,18 @@ st.markdown("""
         outline: none;
     }
 
-    /* Highlighted, larger section headings in sidebar */
+    /* Highlighted, larger section headings in sidebar with clear top spacing */
     .nav-section-label {
         font-size: 0.84rem;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: #f1f5f9;
-        background: rgba(99, 102, 241, 0.22);
+        background: rgba(99, 102, 241, 0.24);
         border-left: 3px solid #818cf8;
         border-radius: 4px;
-        padding: 0.34rem 0.75rem;
-        margin: 12px 0 4px 0;
+        padding: 0.44rem 0.85rem;
+        margin: 18px 0 6px 0;
         text-align: left;
     }
 </style>

@@ -13,7 +13,7 @@ from src.engine.disparity_detector import DisparityDetector
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts,
-    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -25,10 +25,10 @@ _STATUS_LABELS = {
 }
 
 _STATUS_COLORS = {
-    "Unexplained Disparity": "#e74c3c",
-    "Manual Review Required": "#f39c12",
-    "Explained Variation": "#2ecc71",
-    "Insufficient Evidence": "#95a5a6",
+    "Unexplained Disparity": "#ef4444",
+    "Manual Review Required": "#f59e0b",
+    "Explained Variation": "#22c55e",
+    "Insufficient Evidence": "#38bdf8",
 }
 
 
@@ -181,6 +181,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         if selected_location != "All":
             df = df[df["_location_id"] == selected_location]
 
+    dept_opts = ["All Departments"] + (sorted(df["Department"].unique().tolist()) if not df.empty else [])
+    dept_filter = st.selectbox("Filter by Department:", dept_opts, index=0)
+    if not df.empty and dept_filter != "All Departments":
+        df = df[df["Department"] == dept_filter]
+
     if df.empty:
         st.info("No employee records available for disparity evaluation.")
         return
@@ -206,10 +211,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             status_dist,
             names="Status",
             values="Count",
+            hole=0.42,
             title="Compensation Equity Evaluation Classification",
             color="Status",
             color_discrete_map=_STATUS_COLORS,
         )
+        fig_pie.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
         apply_clean_layout(fig_pie, legend_bottom=True, height=460, legend_position="bottom")
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 
@@ -290,9 +297,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         disp_table,
         use_container_width=True,
         hide_index=True,
-        column_config={
-            "Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f"),
-            "Rating": st.column_config.NumberColumn("Rating", format="%.2f"),
-            "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
-        },
+        column_config=build_table_column_config(
+            disp_table,
+            overrides={
+                "Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f"),
+                "Rating": st.column_config.NumberColumn("Rating", format="%.2f"),
+                "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+            },
+        ),
     )

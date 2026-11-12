@@ -15,7 +15,7 @@ from src.engine.currency_normalizer import CurrencyNormalizer
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.engine.exception_detector import ExceptionDetector
 from src.dashboard.views.helpers import (
-    get_location_map, PLOTLY_CONFIG, apply_clean_layout,
+    get_location_map, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -218,11 +218,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             sev_summary,
             names="Severity",
             values="Count",
-            hole=0.4,
+            hole=0.42,
             title="Exception Incidents by Severity Level",
             color="Severity",
-            color_discrete_map={"CRITICAL": "#e74c3c", "HIGH": "#e67e22", "MEDIUM": "#f1c40f"}
+            color_discrete_map={"CRITICAL": "#ef4444", "HIGH": "#f97316", "MEDIUM": "#eab308"}
         )
+        fig_sev.update_traces(marker=dict(line=dict(color="#0f172a", width=2)))
         apply_clean_layout(fig_sev, legend_bottom=True, height=420, legend_position="bottom")
         st.plotly_chart(fig_sev, use_container_width=True, config=PLOTLY_CONFIG)
 
@@ -240,6 +241,32 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Recommendation": df_exc["recommendation"],
         }).sort_values(["Employee ID", "Record ID"])
 
-        st.dataframe(df_display, use_container_width=True, hide_index=True)
+        ef1, ef2, ef3 = st.columns([2, 1.5, 1.5])
+        with ef1:
+            exc_search = st.text_input("Search by Employee ID, Name, or Record ID:", "", key="exc_search", placeholder="e.g. EMP-000100 or SAL-")
+        with ef2:
+            exc_issue_opt = st.selectbox("Filter by Issue Type:", ["All Issue Types"] + list(_ISSUE_LABELS.values()), index=0)
+        with ef3:
+            exc_sev_opt = st.selectbox("Filter by Severity:", ["All Severities", "CRITICAL", "HIGH", "MEDIUM"], index=0)
+
+        if exc_search.strip():
+            q = exc_search.strip().lower()
+            df_display = df_display[
+                df_display["Employee ID"].str.lower().str.contains(q, na=False)
+                | df_display["Employee Name"].str.lower().str.contains(q, na=False)
+                | df_display["Record ID"].str.lower().str.contains(q, na=False)
+            ]
+        if exc_issue_opt != "All Issue Types":
+            df_display = df_display[df_display["Issue Type"] == exc_issue_opt]
+        if exc_sev_opt != "All Severities":
+            df_display = df_display[df_display["Severity"] == exc_sev_opt]
+
+        st.caption(f"Showing {len(df_display):,} exception record(s)")
+        st.dataframe(
+            df_display,
+            use_container_width=True,
+            hide_index=True,
+            column_config=build_table_column_config(df_display),
+        )
     else:
         st.success("No exceptions detected across the selected scope.")
