@@ -166,17 +166,17 @@ PLOTLY_CONFIG = {
 def apply_clean_layout(
     fig,
     legend_bottom: bool = True,
-    height: int = 440,
+    height: int = 450,
     xaxis_tickangle: int = 0,
     extra_bottom_margin: int = 0,
     legend_position: str = "top",
 ):
     """
-    Applies smooth-zoom layout settings with balanced, non-overlapping spacing
-    for ModeBar, Title, Legend, and Axis labels.
+    Applies smooth-zoom layout settings with dedicated vertical bands for:
+    ModeBar (0-28px) -> Chart Title (~48px) -> Top Legend (~85px) -> Plot Area (124px+).
     """
-    top_margin = 108 if legend_bottom and legend_position == "top" else 78
-    bottom_margin = (70 if legend_bottom and legend_position == "bottom" else 55) + extra_bottom_margin
+    top_margin = 124 if legend_bottom and legend_position == "top" else 92
+    bottom_margin = (72 if legend_bottom and legend_position == "bottom" else 55) + extra_bottom_margin
     layout_kwargs = dict(
         uirevision="preserve",
         transition={"duration": 0},
@@ -185,7 +185,7 @@ def apply_clean_layout(
         title=dict(
             x=0.0,
             xanchor="left",
-            y=0.95,
+            y=0.89,
             yref="container",
             yanchor="top",
             font=dict(size=15),

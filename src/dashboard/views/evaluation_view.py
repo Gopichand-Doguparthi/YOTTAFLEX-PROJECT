@@ -77,7 +77,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             showscale=True
         )
         fig_cm.update_layout(
-            title=dict(text="Confusion Matrix: Detections vs Ground Truth", x=0.0, y=0.90, yanchor="top"),
+            title=dict(text="Confusion Matrix: Detections vs Ground Truth", x=0.0, y=0.89, yref="container", yanchor="top"),
             xaxis=dict(side="bottom"),
             modebar=dict(orientation="h", bgcolor="rgba(15, 23, 42, 0.78)", color="#cbd5e1", activecolor="#818cf8"),
             margin=dict(t=95, b=60, l=115, r=50),
