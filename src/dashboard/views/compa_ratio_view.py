@@ -232,7 +232,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     with cf2:
         cr_class_filter = st.selectbox(
             "Filter by Classification:",
-            ["Below Target (< 0.80)", "All Classifications", "Target Range (0.80 – 1.20)", "Above Target (> 1.20)"],
+            ["All Classifications", "Below Target (< 0.80)", "Target Range (0.80 – 1.20)", "Above Target (> 1.20)"],
             index=0,
         )
     with cf3:

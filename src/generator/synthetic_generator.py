@@ -582,9 +582,9 @@ class SyntheticDataGenerator:
                 pct_delta = round(self.rng.uniform(0.06, 0.15), 4)
             elif reason_code == "RETENTION":
                 pct_delta = round(self.rng.uniform(0.05, 0.14), 4)
-            else:  # MARKET_PARITY (mostly increases +4%..+13%, with occasional -3%..-6% market-cap adjustment)
-                if i % 10 == 0:
-                    pct_delta = round(-self.rng.uniform(0.03, 0.06), 4)
+            else:  # MARKET_PARITY (mostly increases +4%..+13%, with ~20% downward market-cap adjustments -3%..-8%)
+                if (i // len(reason_codes)) % 5 == 0:
+                    pct_delta = round(-self.rng.uniform(0.03, 0.08), 4)
                 else:
                     pct_delta = round(self.rng.uniform(0.04, 0.13), 4)
 
@@ -615,7 +615,10 @@ class SyntheticDataGenerator:
                     f"to align compensation with comparable peer cohort median."
                 ),
                 "MARKET_PARITY": (
-                    f"Market band calibration ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"Downward market-cap realignment ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"to bring above-ceiling compensation back within the regional band maximum."
+                    if adj_pct < 0
+                    else f"Market band calibration ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
                     f"to maintain competitive positioning against the regional band midpoint."
                 ),
                 "DISPARITY_CORRECTION": (

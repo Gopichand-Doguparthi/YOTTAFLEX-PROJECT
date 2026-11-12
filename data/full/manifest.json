@@ -92,23 +92,23 @@
     },
     "adjustment_proposals.csv": {
       "rows": 250,
-      "sha256": "7364c32cc600ff68125b1c25db33eddb6c08aae807a4abeba62054f534929dcb",
-      "size_bytes": 126910
+      "sha256": "52d90fa46f9dbaea14e6e0a4a58b22987d5cb67656d3a1fce01b7b54dc66d923",
+      "size_bytes": 127035
     },
     "adjustment_proposals.json": {
       "rows": 250,
-      "sha256": "337a514f3be6549d24390682e2e26f794dd1a1ad3c1f433a330ac50eff53d7ab",
-      "size_bytes": 240336
+      "sha256": "3346ac7f832878f7c7d60fcf28cd406271bc91e5bbb8a058992968db010c8d14",
+      "size_bytes": 240461
     },
     "approval_events.csv": {
       "rows": 600,
-      "sha256": "098da4686aa41d5f36cb031c9f79967811fe1a0d41d58aa6ed02c4314bac3204",
-      "size_bytes": 168381
+      "sha256": "8864d8a96c690d68ae9ca9afe928692571ff380f0ea6e72b34b3ea78c4d5afb2",
+      "size_bytes": 168379
     },
     "approval_events.json": {
       "rows": 600,
-      "sha256": "66b5d6f6d4427f54a9661d5984e668e6318a16a9a03678a94ecf3abb83effd80",
-      "size_bytes": 297085
+      "sha256": "81697bee4b36ca7511192947ed1dd70f44d8041e280492fdc06da77b8c4f0b97",
+      "size_bytes": 297083
     },
     "exchange_rates.csv": {
       "rows": 36,
@@ -141,8 +141,8 @@
       "size_bytes": 1880982
     },
     "seed_data.sql": {
-      "sha256": "348942b26afcc8088615354da740696812ba4b4ebf2ca303899b6a425c7d49e3",
-      "size_bytes": 19898028
+      "sha256": "07bfb9fef91d9b8a9814d057523be26f70ad6bb0463ea741d73f7a21ccdd9533",
+      "size_bytes": 19898151
     }
   },
   "row_counts": {

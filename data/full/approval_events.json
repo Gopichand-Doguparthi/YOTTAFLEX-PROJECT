@@ -43,7 +43,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 57408.51, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 52490.89, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-000682 (Learning & Development Specialist).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -763,7 +763,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 92319.96, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 80298.56, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-002451 (Growth Product Manager).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -1483,7 +1483,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 235821.66, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 211666.05, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-000806 (Data Scientist).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2203,7 +2203,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101312.28, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 87957.44, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-002642 (Product Manager).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -2923,7 +2923,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 100632.71, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 91741.85, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-001959 (Visual Designer).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -3643,7 +3643,7 @@
     "actor_id": "hr.apac@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 124456.73, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 111327.79, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-000105 (DevOps Engineer).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -4363,7 +4363,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 175675.15, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 163254.53, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-000610 (Technical Support Specialist).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5083,7 +5083,7 @@
     "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 269992.3, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 223021.4, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-004604 (Full Stack Engineer).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -5803,7 +5803,7 @@
     "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 202059.8, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 169737.52, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-003685 (AI Research Scientist).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -6523,7 +6523,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 105878.38, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 92512.81, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-001255 (Security Engineer).",
     "timestamp": "2026-02-15T09:30:00"
   },
