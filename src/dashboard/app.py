@@ -101,7 +101,7 @@ def main():
     for key, label, section in NAV_ITEMS:
         if section != current_section:
             st.sidebar.markdown(
-                f'<div class="nav-section-wrap"><div class="nav-section-label">{section}</div></div>',
+                f'<div class="nav-section-label">{section}</div><div style="height:10px;"></div>',
                 unsafe_allow_html=True,
             )
             current_section = section
