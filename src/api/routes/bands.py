@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from src.database.session import get_db
 from src.database.models import CompensationBand, Role, Level, Location
 from src.api.schemas import CompensationBandSchema, BandCreateRequest, BandUpdateRequest
+from src.api.auth import require_roles
 from src.workflow.audit_logger import AuditLogger
 
 router = APIRouter(prefix="/bands", tags=["Compensation Bands"])
@@ -38,7 +39,11 @@ def list_compensation_bands(
 
 
 @router.post("", response_model=CompensationBandSchema, status_code=201)
-def create_compensation_band(req: BandCreateRequest, db: Session = Depends(get_db)):
+def create_compensation_band(
+    req: BandCreateRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "SYSTEM_ADMIN", "COMP_COMMITTEE")),
+):
     """Creates a new effective-dated compensation band with spread and overlap validation."""
     if db.query(CompensationBand).filter(CompensationBand.band_id == req.band_id).first():
         raise HTTPException(status_code=409, detail=f"Band ID '{req.band_id}' already exists.")
@@ -76,8 +81,8 @@ def create_compensation_band(req: BandCreateRequest, db: Session = Depends(get_d
         entity_name="CompensationBand",
         entity_id=band.band_id,
         event_type="BAND_CREATED",
-        actor_id="HR_API",
-        actor_role="HR_PARTNER",
+        actor_id=current_user["sub"],
+        actor_role=current_user["role"],
         new_state={"min": band.min_salary, "mid": band.mid_salary, "max": band.max_salary, "status": band.status},
     )
     db.commit()
@@ -86,7 +91,12 @@ def create_compensation_band(req: BandCreateRequest, db: Session = Depends(get_d
 
 
 @router.patch("/{band_id}", response_model=CompensationBandSchema)
-def update_compensation_band(band_id: str, req: BandUpdateRequest, db: Session = Depends(get_db)):
+def update_compensation_band(
+    band_id: str,
+    req: BandUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "SYSTEM_ADMIN", "COMP_COMMITTEE")),
+):
     """Updates an existing compensation band's spread or lifecycle status with audit logging."""
     band = db.query(CompensationBand).filter(CompensationBand.band_id == band_id).first()
     if not band:
@@ -108,8 +118,8 @@ def update_compensation_band(band_id: str, req: BandUpdateRequest, db: Session =
         entity_name="CompensationBand",
         entity_id=band.band_id,
         event_type="BAND_UPDATED",
-        actor_id="HR_API",
-        actor_role="HR_PARTNER",
+        actor_id=current_user["sub"],
+        actor_role=current_user["role"],
         old_state=old_state,
         new_state=updates,
     )

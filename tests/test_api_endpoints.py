@@ -53,6 +53,10 @@ def test_api_proposal_creation_and_review(client, sample_master_data, db_session
     db_session.add(emp)
     db_session.flush()
 
+    from src.api.auth import create_access_token
+    hr_headers = {"Authorization": f"Bearer {create_access_token('hr.lead@company.org', 'HR_PARTNER')}"}
+    mgr_headers = {"Authorization": f"Bearer {create_access_token('director@company.org', 'MANAGER')}"}
+
     # Create proposal
     payload = {
         "employee_id": "EMP-API001",
@@ -62,14 +66,14 @@ def test_api_proposal_creation_and_review(client, sample_master_data, db_session
         "proposed_effective_date": "2026-04-01",
         "created_by": "hr.lead@company.org"
     }
-    create_res = client.post("/proposals", json=payload)
+    create_res = client.post("/proposals", json=payload, headers=hr_headers)
     assert create_res.status_code == 200
     prop_data = create_res.json()
     assert prop_data["approval_status"] == "DRAFT"
     proposal_id = prop_data["proposal_id"]
 
     # Submit for review
-    sub_res = client.post(f"/proposals/{proposal_id}/submit")
+    sub_res = client.post(f"/proposals/{proposal_id}/submit", headers=hr_headers)
     assert sub_res.status_code == 200
     assert sub_res.json()["approval_status"] == "PENDING_REVIEW"
 
@@ -79,6 +83,6 @@ def test_api_proposal_creation_and_review(client, sample_master_data, db_session
         "decision": "APPROVED",
         "review_notes": "Approved."
     }
-    rev_res = client.post(f"/proposals/{proposal_id}/review", json=rev_payload)
+    rev_res = client.post(f"/proposals/{proposal_id}/review", json=rev_payload, headers=mgr_headers)
     assert rev_res.status_code == 200
     assert rev_res.json()["approval_status"] == "APPROVED"

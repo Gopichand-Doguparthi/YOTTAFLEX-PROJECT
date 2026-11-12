@@ -346,6 +346,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Proposed Effective": str(p.proposed_effective_date),
             "Created By": format_actor_name(p.created_by, fallback="HR Partner"),
             "Reviewed By": reviewer_label,
+            "_adj_amt": float(p.adjustment_amount),
         })
 
     # Comprehensive Filters — always keep ALL standard reasons & statuses
@@ -375,7 +376,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         if (not q_emp or q_emp in r["Employee ID"].lower() or q_emp in r["Employee Name"].lower() or q_emp in r["Proposal ID"].lower())
         and (f_status == "All" or r["Status"] == f_status)
         and (f_reason == "All" or r["Reason"] == f_reason)
-        and (f_dir == "All" or (f_dir == "Increment (+)" and not str(r["Adjustment (USD)"]).startswith("-") and str(r["Adjustment (USD)"]) != "$0") or (f_dir == "Decrement (-)" and str(r["Adjustment (USD)"]).startswith("-")))
+        and (f_dir == "All" or (f_dir == "Increment (+)" and r["_adj_amt"] > 0) or (f_dir == "Decrement (-)" and r["_adj_amt"] < 0))
         and (f_date == "All" or r["Proposed Effective"] == f_date)
         and (f_reviewer == "All" or r["Reviewed By"] == f_reviewer)
     ]
@@ -385,7 +386,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.info("No proposals match the selected filters.")
         return
 
-    disp_df = pd.DataFrame(filtered_rows)
+    disp_df = pd.DataFrame(filtered_rows).drop(columns=["_adj_amt"], errors="ignore")
     st.dataframe(
         disp_df,
         use_container_width=True,

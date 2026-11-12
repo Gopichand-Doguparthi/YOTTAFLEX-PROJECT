@@ -229,6 +229,9 @@ class EvaluationEngine:
             is_detected = False
             if issue in ["UNEXPLAINED_DISPARITY_LOW", "UNEXPLAINED_DISPARITY_HIGH"]:
                 is_detected = (record_id in detected_disparities)
+            elif issue == "VALID_BASELINE":
+                # Baseline employees are evaluated for false-positive disparity flags
+                is_detected = (record_id in detected_disparities)
             else:
                 is_detected = (record_id in detected_exceptions and issue in detected_exceptions[record_id])
 

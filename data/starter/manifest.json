@@ -52,13 +52,13 @@
     },
     "salary_records.csv": {
       "rows": 302,
-      "sha256": "3ebf3b67247746c67e4e71c72a1104dfe17b2e47c451c0788b66218dc600b937",
-      "size_bytes": 38248
+      "sha256": "f21906ee689562bc5b9a988c343509f71aca3aee5e5c1dcf1d03719bee6a8bec",
+      "size_bytes": 47976
     },
     "salary_records.json": {
       "rows": 302,
-      "sha256": "53cb1179d562ccf4edc5cef2b36023b84388bbc661c3c5229df4b9343a0bb085",
-      "size_bytes": 123606
+      "sha256": "ae8c177f6bef8a3f56ff581ab87986ec3329a9e743561823064fd28ecf2c1a11",
+      "size_bytes": 142244
     },
     "performance_evidence.csv": {
       "rows": 393,
@@ -141,8 +141,8 @@
       "size_bytes": 42989
     },
     "seed_data.sql": {
-      "sha256": "aca2bb8f77660f487e35b104c05d65ea242d42b7ec01f1a9e1dde6a81b24ee99",
-      "size_bytes": 3230972
+      "sha256": "90878f41688f1351f7271cf0ced9469c4a602afec99d09568a9defd4a7085839",
+      "size_bytes": 3247747
     }
   },
   "row_counts": {

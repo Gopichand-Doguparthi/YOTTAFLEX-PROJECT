@@ -266,7 +266,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         )
 
     from src.database.models import ReviewCase as _ReviewCase
-    _ReviewCase.__table__.create(bind=db.get_bind(), checkfirst=True)
     _case_map = {c.employee_id: c.status for c in db.query(_ReviewCase).all()}
     df["Review Case Status"] = df["Employee ID"].map(lambda eid: _case_map.get(eid, "OPEN"))
 
@@ -368,7 +367,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.info("Note: A disparity flag is a statistical indicator requesting human review — never automatic proof of discrimination.")
         from src.database.models import ReviewCase
         from src.workflow.audit_logger import AuditLogger
-        ReviewCase.__table__.create(bind=db.get_bind(), checkfirst=True)
 
         flagged_ids = flagged_rows["Employee ID"].tolist()
         if not flagged_ids:

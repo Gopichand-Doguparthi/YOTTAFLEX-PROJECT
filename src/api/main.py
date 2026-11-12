@@ -5,9 +5,10 @@ Provides RESTful APIs for the Compensation Equity and Disparity Analysis System.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.api import auth
 from src.api.routes import (
     analytics, employees, bands, disparities,
-    exceptions, proposals, evaluation, validation
+    exceptions, proposals, evaluation, validation, review_cases
 )
 
 app = FastAPI(
@@ -33,10 +34,12 @@ app.add_middleware(
 )
 
 # Register route modules
+app.include_router(auth.router)
 app.include_router(analytics.router)
 app.include_router(employees.router)
 app.include_router(bands.router)
 app.include_router(disparities.router)
+app.include_router(review_cases.router)
 app.include_router(exceptions.router)
 app.include_router(proposals.router)
 app.include_router(evaluation.router)

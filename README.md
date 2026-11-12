@@ -69,9 +69,14 @@ streamlit run src/dashboard/app.py --server.port 8501
 Dashboard URL: `http://127.0.0.1:8501`
 
 ### Docker Compose (PostgreSQL + API + Dashboard)
+Ensure `.env` defines `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, and `JWT_SECRET_KEY` (see `.env.example`), then run:
 ```bash
 docker-compose up --build
 ```
+
+### API Authentication (JWT Bearer)
+Mutating and governance endpoints (`/employees` writes, `/bands` writes, `/proposals` writes, `/review-cases`) require a signed `Authorization: Bearer <token>` header.
+For local development, set `DEV_AUTH_PASSWORD` and `JWT_SECRET_KEY` in `.env` and request a token via `POST /auth/token` using any configured dev user (`hr.partner@company.org`, `manager.lead@company.org`, `sys.admin@company.org`, `employee.user@company.org`).
 
 ---
 

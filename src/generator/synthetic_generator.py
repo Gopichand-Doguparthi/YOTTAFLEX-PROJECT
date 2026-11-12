@@ -370,6 +370,7 @@ class SyntheticDataGenerator:
                     "effective_date": eff_date,
                     "end_date": end_date,
                     "change_reason": reason,
+                    "benchmark_band_id": band["band_id"] if band else None,
                     "created_at": f"{eff_date}T09:00:00"
                 })
 

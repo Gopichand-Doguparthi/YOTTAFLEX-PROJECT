@@ -164,7 +164,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             "Decision": p.approval_status.title(),
             "Reviewed By": format_actor_name(p.reviewed_by, fallback="Pending"),
             "Decision Date": str(p.reviewed_at)[:19] if p.reviewed_at else "N/A",
-            "Reviewer Notes": p.review_notes or ""
+            "Reviewer Notes": p.review_notes or "",
+            "_adj_amt": float(p.adjustment_amount),
         })
 
     st.subheader("Historical Decision Ledger")
@@ -191,12 +192,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     if ah_dec != "All Decisions":
         df_hist = df_hist[df_hist["Decision"] == ah_dec]
     if ah_dir == "Increment (+)":
-        df_hist = df_hist[~df_hist["Adjustment (USD)"].astype(str).str.startswith("-") & (df_hist["Adjustment (USD)"].astype(str) != "$0")]
+        df_hist = df_hist[df_hist["_adj_amt"] > 0]
     elif ah_dir == "Decrement (-)":
-        df_hist = df_hist[df_hist["Adjustment (USD)"].astype(str).str.startswith("-")]
+        df_hist = df_hist[df_hist["_adj_amt"] < 0]
     if ah_rev != "All Reviewers":
         df_hist = df_hist[df_hist["Reviewed By"] == ah_rev]
 
+    df_hist = df_hist.drop(columns=["_adj_amt"], errors="ignore")
     st.caption(f"Showing {len(df_hist):,} decision record(s)")
     st.dataframe(
         df_hist,

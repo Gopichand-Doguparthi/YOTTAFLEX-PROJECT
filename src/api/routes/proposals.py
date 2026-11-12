@@ -10,6 +10,7 @@ from src.database.models import AdjustmentProposal, Employee, SalaryRecord, Appr
 from src.api.schemas import (
     AdjustmentProposalSchema, ProposalCreateRequest, ProposalReviewRequest
 )
+from src.api.auth import require_roles
 from src.workflow.proposal_manager import ProposalManager, UnauthorizedApprovalException
 
 router = APIRouter(prefix="/proposals", tags=["Adjustment Proposals"])
@@ -34,8 +35,12 @@ def list_proposals(
 
 
 @router.post("", response_model=AdjustmentProposalSchema)
-def create_proposal(req: ProposalCreateRequest, db: Session = Depends(get_db)):
-    """Creates a new adjustment proposal in DRAFT status."""
+def create_proposal(
+    req: ProposalCreateRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "MANAGER", "SYSTEM_ADMIN")),
+):
+    """Creates a new adjustment proposal in DRAFT status using server-verified actor identity."""
     emp = db.query(Employee).filter(Employee.employee_id == req.employee_id).first()
     if not emp:
         raise HTTPException(status_code=404, detail=f"Employee '{req.employee_id}' not found.")
@@ -55,7 +60,8 @@ def create_proposal(req: ProposalCreateRequest, db: Session = Depends(get_db)):
         evidence_summary={"manual_submission": True},
         related_disparity_findings={"status": "MANUAL_PROPOSAL"},
         proposed_effective_date=req.proposed_effective_date,
-        created_by=req.created_by
+        created_by=current_user["sub"],
+        actor_role=current_user["role"],
     )
     db.commit()
     db.refresh(proposal)
@@ -63,10 +69,19 @@ def create_proposal(req: ProposalCreateRequest, db: Session = Depends(get_db)):
 
 
 @router.post("/{proposal_id}/submit", response_model=AdjustmentProposalSchema)
-def submit_proposal_for_review(proposal_id: str, submitted_by: str = "hr.partner@company.org", db: Session = Depends(get_db)):
+def submit_proposal_for_review(
+    proposal_id: str,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "MANAGER", "SYSTEM_ADMIN")),
+):
     """Submits a proposal from DRAFT -> PENDING_REVIEW."""
     try:
-        prop = ProposalManager.submit_for_review(db, proposal_id, submitted_by=submitted_by)
+        prop = ProposalManager.submit_for_review(
+            db,
+            proposal_id,
+            submitted_by=current_user["sub"],
+            actor_role=current_user["role"],
+        )
         db.commit()
         db.refresh(prop)
         return prop
@@ -76,15 +91,20 @@ def submit_proposal_for_review(proposal_id: str, submitted_by: str = "hr.partner
 
 
 @router.post("/{proposal_id}/review", response_model=AdjustmentProposalSchema)
-def review_proposal(proposal_id: str, req: ProposalReviewRequest, db: Session = Depends(get_db)):
-    """Approves or rejects a proposal (PENDING_REVIEW -> APPROVED / REJECTED)."""
+def review_proposal(
+    proposal_id: str,
+    req: ProposalReviewRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("MANAGER", "HR_PARTNER", "SYSTEM_ADMIN", "COMP_COMMITTEE")),
+):
+    """Approves or rejects a proposal (PENDING_REVIEW -> APPROVED / REJECTED) using server-verified JWT identity & role."""
     try:
         if req.decision == "APPROVED":
             prop = ProposalManager.approve_proposal(
                 session=db,
                 proposal_id=proposal_id,
-                reviewed_by=req.reviewed_by,
-                actor_role=req.actor_role,
+                reviewed_by=current_user["sub"],
+                actor_role=current_user["role"],
                 review_notes=req.review_notes,
                 apply_salary_update=True
             )
@@ -92,8 +112,8 @@ def review_proposal(proposal_id: str, req: ProposalReviewRequest, db: Session = 
             prop = ProposalManager.reject_proposal(
                 session=db,
                 proposal_id=proposal_id,
-                reviewed_by=req.reviewed_by,
-                actor_role=req.actor_role,
+                reviewed_by=current_user["sub"],
+                actor_role=current_user["role"],
                 review_notes=req.review_notes
             )
         db.commit()

@@ -185,10 +185,20 @@ def test_approval_rbac_and_self_approval_blocked(db_session, sample_master_data)
 
     app.dependency_overrides[get_db] = lambda: db_session
     try:
+        from src.api.auth import create_access_token
         client = TestClient(app)
+        # Unauthenticated -> 401
+        assert client.post(
+            f"/proposals/{prop.proposal_id}/review",
+            json={"reviewed_by": "hr.creator@company.org", "decision": "APPROVED"},
+        ).status_code == 401
+
+        # Self-approval even with valid MANAGER JWT -> 403
+        self_mgr_headers = {"Authorization": f"Bearer {create_access_token('hr.creator@company.org', 'MANAGER')}"}
         resp_403 = client.post(
             f"/proposals/{prop.proposal_id}/review",
-            json={"reviewed_by": "hr.creator@company.org", "decision": "APPROVED", "actor_role": "MANAGER"},
+            json={"reviewed_by": "hr.creator@company.org", "decision": "APPROVED"},
+            headers=self_mgr_headers,
         )
         assert resp_403.status_code == 403
     finally:
@@ -247,6 +257,8 @@ def test_validator_detects_arithmetic_and_duplicate_violations(db_session, sampl
 
 def test_employee_and_band_crud_api_and_validation(db_session, sample_master_data):
     """Verify Employee & Band POST/PATCH endpoints enforce duplicates, spread, and overlap rules."""
+    from src.api.auth import create_access_token
+    hr_headers = {"Authorization": f"Bearer {create_access_token('hr.admin@company.org', 'HR_PARTNER')}"}
     app.dependency_overrides[get_db] = lambda: db_session
     try:
         client = TestClient(app)
@@ -263,7 +275,7 @@ def test_employee_and_band_crud_api_and_validation(db_session, sample_master_dat
             "hire_date": "2026-01-01",
             "employment_type": "FULL_TIME",
             "fte": 1.0,
-        })
+        }, headers=hr_headers)
         assert r_emp.status_code == 201
         # Duplicate employee -> 409
         r_dup = client.post("/employees", json={
@@ -276,16 +288,16 @@ def test_employee_and_band_crud_api_and_validation(db_session, sample_master_dat
             "current_level_id": "LVL-L3",
             "current_location_id": "LOC-NYC",
             "hire_date": "2026-01-01",
-        })
+        }, headers=hr_headers)
         assert r_dup.status_code == 409
 
         # Deactivate employee
-        r_upd = client.patch("/employees/EMP-777001", json={"is_active": False})
+        r_upd = client.patch("/employees/EMP-777001", json={"is_active": False}, headers=hr_headers)
         assert r_upd.status_code == 200
         assert r_upd.json()["is_active"] is False
 
         # Delete employee (must log AuditEvent with new_state without TypeError)
-        r_del = client.delete("/employees/EMP-777001")
+        r_del = client.delete("/employees/EMP-777001", headers=hr_headers)
         assert r_del.status_code == 200
         assert r_del.json()["status"] == "deleted"
 
@@ -302,7 +314,7 @@ def test_employee_and_band_crud_api_and_validation(db_session, sample_master_dat
             "effective_start_date": "2027-01-01",
             "effective_end_date": "2027-12-31",
             "status": "ACTIVE",
-        })
+        }, headers=hr_headers)
         assert r_bad_band.status_code == 400
 
         # Valid 2027 band -> 201
@@ -318,7 +330,7 @@ def test_employee_and_band_crud_api_and_validation(db_session, sample_master_dat
             "effective_start_date": "2027-01-01",
             "effective_end_date": "2027-12-31",
             "status": "ACTIVE",
-        })
+        }, headers=hr_headers)
         assert r_ok_band.status_code == 201
     finally:
         app.dependency_overrides.clear()

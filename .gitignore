@@ -45,3 +45,10 @@ htmlcov/
 Thumbs.db
 .idea/
 .vscode/
+
+*.db-shm
+*.db-wal
+
+
+*.db-shm
+*.db-wal

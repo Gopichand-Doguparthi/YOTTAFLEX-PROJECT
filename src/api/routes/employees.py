@@ -10,6 +10,7 @@ from src.database.models import Employee, SalaryRecord, CompensationBand, Role, 
 from src.api.schemas import (
     EmployeeSchema, EmployeeDetailSchema, EmployeeCreateRequest, EmployeeUpdateRequest
 )
+from src.api.auth import require_roles
 from src.workflow.audit_logger import AuditLogger
 from src.engine.compa_ratio import CompaRatioCalculator
 from src.engine.within_band import WithinBandCalculator
@@ -97,7 +98,11 @@ def get_employee_detail(employee_id: str, db: Session = Depends(get_db)):
 
 
 @router.post("", response_model=EmployeeSchema, status_code=201)
-def create_employee(req: EmployeeCreateRequest, db: Session = Depends(get_db)):
+def create_employee(
+    req: EmployeeCreateRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "SYSTEM_ADMIN")),
+):
     """Creates a new employee with duplicate ID/email and foreign-key validation."""
     if db.query(Employee).filter(Employee.employee_id == req.employee_id).first():
         raise HTTPException(status_code=409, detail=f"Employee ID '{req.employee_id}' already exists.")
@@ -117,8 +122,8 @@ def create_employee(req: EmployeeCreateRequest, db: Session = Depends(get_db)):
         entity_name="Employee",
         entity_id=emp.employee_id,
         event_type="EMPLOYEE_CREATED",
-        actor_id="HR_API",
-        actor_role="HR_PARTNER",
+        actor_id=current_user["sub"],
+        actor_role=current_user["role"],
         new_state={"role_id": emp.current_role_id, "level_id": emp.current_level_id, "fte": emp.fte},
     )
     db.commit()
@@ -127,7 +132,12 @@ def create_employee(req: EmployeeCreateRequest, db: Session = Depends(get_db)):
 
 
 @router.patch("/{employee_id}", response_model=EmployeeSchema)
-def update_employee(employee_id: str, req: EmployeeUpdateRequest, db: Session = Depends(get_db)):
+def update_employee(
+    employee_id: str,
+    req: EmployeeUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "SYSTEM_ADMIN")),
+):
     """Updates employee attributes or deactivates an employee with audit trail logging."""
     emp = db.query(Employee).filter(Employee.employee_id == employee_id).first()
     if not emp:
@@ -157,8 +167,8 @@ def update_employee(employee_id: str, req: EmployeeUpdateRequest, db: Session = 
         entity_name="Employee",
         entity_id=emp.employee_id,
         event_type="EMPLOYEE_UPDATED",
-        actor_id="HR_API",
-        actor_role="HR_PARTNER",
+        actor_id=current_user["sub"],
+        actor_role=current_user["role"],
         old_state=old_state,
         new_state=updates,
     )
@@ -168,7 +178,11 @@ def update_employee(employee_id: str, req: EmployeeUpdateRequest, db: Session = 
 
 
 @router.delete("/{employee_id}")
-def delete_employee(employee_id: str, db: Session = Depends(get_db)):
+def delete_employee(
+    employee_id: str,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_roles("HR_PARTNER", "SYSTEM_ADMIN")),
+):
     """Deletes an employee record and logs an immutable audit event."""
     emp = db.query(Employee).filter(Employee.employee_id == employee_id).first()
     if not emp:
@@ -187,8 +201,8 @@ def delete_employee(employee_id: str, db: Session = Depends(get_db)):
         entity_name="Employee",
         entity_id=employee_id,
         event_type="EMPLOYEE_DELETED",
-        actor_id="HR_API",
-        actor_role="HR_PARTNER",
+        actor_id=current_user["sub"],
+        actor_role=current_user["role"],
         old_state=old_state,
         new_state={"deleted": True},
         notes=f"Employee {employee_id} permanently deleted.",

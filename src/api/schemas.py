@@ -212,3 +212,29 @@ class BandUpdateRequest(BaseModel):
     max_salary: Optional[float] = Field(None, gt=0.0)
     effective_end_date: Optional[date] = None
     status: Optional[str] = Field(None, pattern="^(ACTIVE|EXPIRED|DRAFT)$")
+
+
+# Review Case Schemas
+class ReviewCaseCreateRequest(BaseModel):
+    employee_id: str
+    assigned_to: Optional[str] = None
+    comments: Optional[str] = None
+
+
+class ReviewCaseUpdateRequest(BaseModel):
+    status: Optional[str] = Field(None, pattern="^(OPEN|IN_REVIEW|ESCALATED|RESOLVED|REOPENED)$")
+    assigned_to: Optional[str] = None
+    comments: Optional[str] = None
+
+
+class ReviewCaseSchema(BaseModel):
+    case_id: str
+    employee_id: str
+    status: str
+    assigned_to: Optional[str] = None
+    comments: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True

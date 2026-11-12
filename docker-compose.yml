@@ -6,9 +6,9 @@ services:
     container_name: comp_equity_postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword
-      POSTGRES_DB: compensation_equity
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-compensation_equity}
     ports:
       - "5432:5432"
     volumes:
@@ -26,7 +26,7 @@ services:
     container_name: comp_equity_api
     restart: always
     environment:
-      DATABASE_URL: postgresql://postgres:postgrespassword@db:5432/compensation_equity
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-compensation_equity}
       REPORTING_CURRENCY: USD
       RANDOM_SEED: 20261022
       ENVIRONMENT: production
@@ -47,7 +47,7 @@ services:
     restart: always
     environment:
       API_BASE_URL: http://backend:8000
-      DATABASE_URL: postgresql://postgres:postgrespassword@db:5432/compensation_equity
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-compensation_equity}
     ports:
       - "8501:8501"
     command: streamlit run src/dashboard/app.py --server.port 8501 --server.address 0.0.0.0
