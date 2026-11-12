@@ -145,6 +145,31 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             unsafe_allow_html=True,
         )
 
+    # Band Zone Range & Count Summary Table
+    total_n = len(df)
+    zone_meta = [
+        ("Green-Circled (< 0%)", "< 0%", "< 0.80", "Paid below band minimum (underpayment risk)"),
+        ("Lower Quartile (0%–25%)", "0% – 25%", "0.80 – 0.90", "Entry / new-in-role / developing placement"),
+        ("Mid-Lower (25%–50%)", "25% – 50%", "0.90 – 1.00", "Progressing toward full market midpoint"),
+        ("Mid-Upper (50%–75%)", "50% – 75%", "1.00 – 1.10", "Proficient contributor above market midpoint"),
+        ("Upper Quartile (75%–100%)", "75% – 100%", "1.10 – 1.20", "Mastery / sustained high performer near ceiling"),
+        ("Red-Circled (> 100%)", "> 100%", "> 1.20", "Paid above band maximum ceiling"),
+    ]
+    zone_summary_rows = []
+    for z_name, wb_rng, cr_rng, meaning in zone_meta:
+        cnt = int((df["Band Zone"] == z_name).sum())
+        zone_summary_rows.append({
+            "Band Zone": z_name.split(" (")[0],
+            "Within-Band Range": wb_rng,
+            "Compa-Ratio Range": cr_rng,
+            "Employees": f"{cnt:,}",
+            "Share (%)": fmt_pct((cnt / total_n) * 100.0 if total_n else 0.0, 1),
+            "Meaning": meaning,
+        })
+    with st.expander("Band Zone Ranges & Workforce Breakdown", expanded=True):
+        z_df = pd.DataFrame(zone_summary_rows)
+        st.dataframe(z_df, use_container_width=True, hide_index=True, column_config=build_table_column_config(z_df))
+
     st.markdown("---")
 
     df_chart = df[(df["Position (%)"] >= -100.0) & (df["Position (%)"] <= 200.0)].copy()

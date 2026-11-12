@@ -116,11 +116,32 @@ def fmt_pct(val: Optional[float], decimals: int = 1, signed: bool = False) -> st
     return f"{val:.{decimals}f}%"
 
 
-_ACRONYMS = {"hr", "vp", "ceo", "cfo", "cto", "coo", "ai", "ml", "it", "id"}
+_ACRONYMS = {"hr", "vp", "ceo", "cfo", "cto", "coo", "ai", "ml", "it", "id", "americas", "emea", "apac"}
+
+CURRENCY_NAMES = {
+    "USD": "US Dollar",
+    "GBP": "British Pound",
+    "EUR": "Euro",
+    "INR": "Indian Rupee",
+    "JPY": "Japanese Yen",
+    "SGD": "Singapore Dollar",
+    "AUD": "Australian Dollar",
+    "CAD": "Canadian Dollar",
+    "AED": "UAE Dirham",
+    "BRL": "Brazilian Real",
+    "PLN": "Polish Zloty",
+    "KRW": "South Korean Won",
+}
+
+
+def format_currency_label(code: str) -> str:
+    """Returns 'CODE — Full Currency Name' for dropdowns."""
+    name = CURRENCY_NAMES.get(code)
+    return f"{code} — {name}" if name else code
 
 
 def format_actor_name(actor: Optional[str], fallback: str = "Pending") -> str:
-    """Formats an actor email or ID (e.g. 'jane.doe.vp@company.org') into a readable name."""
+    """Formats an actor email or ID (e.g. 'james.smith.000123@company.org') into a readable name."""
     if not actor or not str(actor).strip():
         return fallback
     raw = str(actor).strip()
@@ -130,6 +151,10 @@ def format_actor_name(actor: Optional[str], fallback: str = "Pending") -> str:
     tokens = [t for t in local.replace("_", ".").replace("-", ".").split(".") if t]
     if not tokens:
         return raw
+
+    # Strip trailing numeric employee-ID suffix (e.g. '000123')
+    if len(tokens) >= 2 and tokens[-1].isdigit():
+        tokens = tokens[:-1]
 
     title_suffix = ""
     if len(tokens) >= 3 and tokens[-1].lower() in {"vp", "ceo", "cfo", "cto", "coo"}:

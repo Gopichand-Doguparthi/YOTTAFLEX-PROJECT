@@ -8,11 +8,13 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.session import SessionLocal
-from src.database.models import AdjustmentProposal, ApprovalEvent, Employee, SalaryRecord
+from src.database.models import AdjustmentProposal, ApprovalEvent, Employee, SalaryRecord, CompensationBand, PerformanceEvidence, Tenure
 import src.workflow.audit_logger as audit_logger_mod
 import src.workflow.proposal_manager as proposal_manager_mod
 from src.dashboard.views.helpers import (
-    get_role_map, format_actor_name, fmt_usd, fmt_pct, build_table_column_config,
+    get_role_map, get_level_map, get_location_map,
+    get_currency_normalizer, get_band_usd_amounts,
+    format_actor_name, fmt_usd, fmt_pct, build_table_column_config,
 )
 
 
@@ -100,36 +102,149 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     # Proposal creation form
     with st.expander("Initiate New Compensation Adjustment Proposal", expanded=False):
+        selected_emp_label = st.selectbox(
+            "Select Employee (search by ID or name):",
+            [e["label"] for e in emp_choices],
+            index=0,
+            key="proposal_emp_selector",
+        )
+        emp_id = label_to_id.get(selected_emp_label)
+
+        # Load live compensation & equity context for the selected employee
+        ctx_curr_sal = 100000.0
+        ctx_band_str = "N/A"
+        ctx_cohort_med = None
+        ctx_rating = None
+        ctx_tenure = None
+        ctx_status = "N/A"
+        rec_salary = 125000.0
+        rec_reason_idx = 0
+        role_map = get_role_map(db)
+        level_map = get_level_map(db)
+        loc_map = get_location_map(db)
+
+        if emp_id and emp_id in emp_meta:
+            em = emp_meta[emp_id]
+            latest_sal = (
+                db.query(SalaryRecord)
+                .filter(SalaryRecord.employee_id == emp_id)
+                .order_by(SalaryRecord.effective_date.desc())
+                .first()
+            )
+            if latest_sal:
+                ctx_curr_sal = float(latest_sal.normalized_salary)
+
+            band = (
+                db.query(CompensationBand)
+                .filter_by(
+                    role_id=em["role_id"],
+                    level_id=em["level_id"],
+                    location_id=em["location_id"],
+                    status="ACTIVE",
+                )
+                .first()
+            )
+            band_mid_usd = None
+            if band:
+                curr_norm = get_currency_normalizer(db)
+                b_min, b_mid, b_max = get_band_usd_amounts(band, curr_norm)
+                band_mid_usd = b_mid
+                ctx_band_str = f"{fmt_usd(b_min)} – {fmt_usd(b_mid)} – {fmt_usd(b_max)}"
+
+            # Peer cohort median (2026)
+            peer_sals = [
+                float(r[0])
+                for r in db.query(SalaryRecord.normalized_salary)
+                .join(Employee, Employee.employee_id == SalaryRecord.employee_id)
+                .filter(
+                    Employee.current_role_id == em["role_id"],
+                    Employee.current_level_id == em["level_id"],
+                    Employee.current_location_id == em["location_id"],
+                    SalaryRecord.effective_date >= "2026-01-01",
+                )
+                .all()
+            ]
+            if peer_sals:
+                peer_sals.sort()
+                mid_i = len(peer_sals) // 2
+                ctx_cohort_med = peer_sals[mid_i] if len(peer_sals) % 2 == 1 else (peer_sals[mid_i - 1] + peer_sals[mid_i]) / 2.0
+
+            perf = (
+                db.query(PerformanceEvidence)
+                .filter(PerformanceEvidence.employee_id == emp_id)
+                .order_by(PerformanceEvidence.effective_date.desc())
+                .first()
+            )
+            if perf:
+                ctx_rating = float(perf.rating_score)
+
+            ten = db.query(Tenure).filter(Tenure.employee_id == emp_id).first()
+            if ten:
+                ctx_tenure = float(ten.tenure_in_company_years)
+
+            # Determine disparity status & recommended target salary
+            target_ref = ctx_cohort_med or band_mid_usd or round(ctx_curr_sal * 1.10, 0)
+            dev_pct = ((ctx_curr_sal - ctx_cohort_med) / ctx_cohort_med * 100.0) if ctx_cohort_med else 0.0
+            cr_val = (ctx_curr_sal / band_mid_usd) if band_mid_usd else 1.0
+            if (dev_pct < -15.0 or cr_val < 0.80) and (ctx_rating or 0) >= 3.5 and (ctx_tenure or 0) >= 1.0:
+                ctx_status = "Unexplained Disparity (Flagged)"
+                rec_reason_idx = 2  # DISPARITY_CORRECTION
+                rec_salary = round(max(target_ref, ctx_curr_sal * 1.10), -2)
+            elif cr_val < 0.80:
+                ctx_status = "Below Band Target (< 0.80 CR)"
+                rec_reason_idx = 1  # MARKET_PARITY
+                rec_salary = round(max(band_mid_usd or ctx_curr_sal * 1.10, ctx_curr_sal * 1.08), -2)
+            elif cr_val > 1.20:
+                ctx_status = "Above Band Ceiling (> 1.20 CR)"
+                rec_reason_idx = 1  # MARKET_PARITY
+                rec_salary = round(ctx_curr_sal, -2)
+            else:
+                ctx_status = "In Target Range"
+                rec_reason_idx = 0  # INTERNAL_EQUITY
+                rec_salary = round(max(target_ref, ctx_curr_sal * 1.06), -2)
+
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Current Salary (USD)", fmt_usd(ctx_curr_sal))
+            c2.metric("Peer Cohort Median", fmt_usd(ctx_cohort_med) if ctx_cohort_med else "N/A")
+            c3.metric("Performance / Tenure", f"{ctx_rating:.2f}/5" if ctx_rating else "N/A", f"{ctx_tenure:.1f} yrs" if ctx_tenure else None)
+            c4.metric("Equity Status", ctx_status.split(" (")[0])
+            st.caption(
+                f"**Role:** {role_map.get(em['role_id'], em['role_id'])}  |  "
+                f"**Level:** {level_map.get(em['level_id'], em['level_id'])}  |  "
+                f"**Location:** {loc_map.get(em['location_id'], em['location_id'])}  |  "
+                f"**Band (Min–Mid–Max):** {ctx_band_str}"
+            )
+
+        reason_codes = ["INTERNAL_EQUITY", "MARKET_PARITY", "DISPARITY_CORRECTION", "PROMOTION_CATCHUP", "RETENTION"]
+
         with st.form("new_proposal_form", clear_on_submit=False):
             col_f1, col_f2 = st.columns(2)
             with col_f1:
-                selected_emp_label = st.selectbox(
-                    "Select Employee (search by ID or name):",
-                    [e["label"] for e in emp_choices],
-                    index=0,
-                )
                 proposed_salary = st.number_input(
                     "Proposed Normalized Salary (USD):",
                     min_value=1000.0,
                     max_value=5000000.0,
-                    value=125000.0,
+                    value=float(max(1000.0, rec_salary)),
                     step=1000.0,
+                    key=f"prop_sal_{emp_id}",
                 )
                 reason_code = st.selectbox(
                     "Remediation Reason Code:",
-                    ["INTERNAL_EQUITY", "MARKET_PARITY", "DISPARITY_CORRECTION", "PROMOTION_CATCHUP", "RETENTION"],
+                    reason_codes,
+                    index=rec_reason_idx,
+                    key=f"prop_reason_{emp_id}",
                 )
             with col_f2:
                 eff_date = st.date_input("Proposed Effective Date:", value=date(2026, 4, 1))
                 created_by = st.text_input("Proposing Actor Name / Email:", "HR Equity Lead")
                 notes = st.text_area(
                     "Justification & Context:",
-                    "Adjustment to correct documented market disparity against cohort median.",
+                    f"Adjustment for {emp_meta[emp_id]['name']} ({role_map.get(emp_meta[emp_id]['role_id'], '')}) based on {ctx_status.lower()} against peer cohort and band benchmarks.",
+                    key=f"prop_notes_{emp_id}",
                 )
 
             submitted = st.form_submit_button("Submit Draft Proposal", type="primary")
             if submitted:
-                emp_id = label_to_id.get(selected_emp_label)
                 if not emp_id:
                     st.session_state["proposal_feedback"] = ("error", "Please select a valid employee.")
                 else:
@@ -151,13 +266,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                             f"{emp_meta[emp_id]['name']} ({emp_id}) with identical salary, reason, and effective date."
                         )
                     else:
-                        latest_sal = (
-                            db.query(SalaryRecord)
-                            .filter(SalaryRecord.employee_id == emp_id)
-                            .order_by(SalaryRecord.effective_date.desc())
-                            .first()
-                        )
-                        curr_sal = float(latest_sal.normalized_salary) if latest_sal else 100000.0
+                        curr_sal = ctx_curr_sal
 
                         try:
                             importlib.reload(audit_logger_mod)

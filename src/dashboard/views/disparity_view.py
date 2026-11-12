@@ -164,30 +164,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         if selected_location != "All":
             df = df[df["_location_id"] == selected_location]
 
-    dept_opts = ["All Departments"] + (sorted(df["Department"].unique().tolist()) if not df.empty else [])
-
-    f_col1, f_col2, f_col3, f_col4 = st.columns([2, 1.8, 1.5, 1.3])
-    with f_col1:
-        emp_search = st.text_input(
-            "Filter by Employee ID or Name:",
-            "",
-            placeholder="e.g. EMP-000093 or Jane Smith",
-        )
-    with f_col2:
-        status_filter = st.selectbox(
-            "Disparity Outcome Status:",
-            ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
-            index=0
-        )
-    with f_col3:
-        dept_filter = st.selectbox("Department:", dept_opts, index=0)
-    with f_col4:
-        flagged_only = st.checkbox("Flagged Only", value=False)
-        include_peers = st.checkbox("Include Cohort Peers", value=False)
-
-    if not df.empty and dept_filter != "All Departments":
-        df = df[df["Department"] == dept_filter]
-
     if df.empty:
         st.info("No employee records available for disparity evaluation.")
         return
@@ -248,8 +224,68 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         st.plotly_chart(fig_disp, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Disparity Evaluation Findings")
+
+    # Table filters placed directly above Disparity Evaluation Findings
+    flagged_rows = df[df["Is Disparity"] == "Yes"]
+    flagged_opts = ["None (Use Search / Filters Below)"] + [
+        f"{r['Employee ID']} — {r['Name']} ({r['Role']} · {r['Level']} · {r['Location']})"
+        for _, r in flagged_rows.iterrows()
+    ]
+    flagged_id_map = {
+        f"{r['Employee ID']} — {r['Name']} ({r['Role']} · {r['Level']} · {r['Location']})": r["Employee ID"]
+        for _, r in flagged_rows.iterrows()
+    }
+
+    selected_flagged_label = st.selectbox(
+        "Quick Compare — Select a Flagged Employee to Compare with Cohort Peers:",
+        flagged_opts,
+        index=0,
+    )
+
+    dept_opts = ["All Departments"] + sorted(df["Department"].unique().tolist())
+    f_col1, f_col2, f_col3, f_col4 = st.columns([2, 1.8, 1.5, 1.3])
+    with f_col1:
+        emp_search = st.text_input(
+            "Filter by Employee ID or Name:",
+            "",
+            placeholder="e.g. EMP-000093 or Jane Smith",
+        )
+    with f_col2:
+        status_filter = st.selectbox(
+            "Disparity Outcome Status:",
+            ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
+            index=0
+        )
+    with f_col3:
+        dept_filter = st.selectbox("Department:", dept_opts, index=0)
+    with f_col4:
+        flagged_only = st.checkbox("Flagged Only", value=False)
+        include_peers = st.checkbox(
+            "Include Cohort Peers",
+            value=(selected_flagged_label != "None (Use Search / Filters Below)"),
+        )
+
     filtered = df.copy()
-    if emp_search.strip():
+    if dept_filter != "All Departments":
+        filtered = filtered[filtered["Department"] == dept_filter]
+
+    if selected_flagged_label != "None (Use Search / Filters Below)":
+        target_id = flagged_id_map[selected_flagged_label]
+        match_mask = filtered["Employee ID"] == target_id
+        if include_peers and match_mask.any():
+            cohort_pairs = set(zip(
+                filtered.loc[match_mask, "_role_id"],
+                filtered.loc[match_mask, "_level_id"],
+                filtered.loc[match_mask, "_location_id"],
+            ))
+            peer_mask = filtered.apply(
+                lambda r: (r["_role_id"], r["_level_id"], r["_location_id"]) in cohort_pairs,
+                axis=1,
+            )
+            filtered = filtered[peer_mask]
+        else:
+            filtered = filtered[match_mask]
+    elif emp_search.strip():
         q = emp_search.strip().lower()
         match_mask = (
             filtered["Employee ID"].str.lower().str.contains(q, na=False)

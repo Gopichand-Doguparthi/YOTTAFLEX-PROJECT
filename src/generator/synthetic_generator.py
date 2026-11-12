@@ -116,7 +116,14 @@ class SyntheticDataGenerator:
         promotions = self._generate_promotions(employees, levels, roles)
 
         # 8. Adjustment proposals & Approval events
-        proposals, approval_events = self._generate_proposals_and_events(employees, salary_records)
+        proposals, approval_events = self._generate_proposals_and_events(
+            employees,
+            salary_records,
+            compensation_bands=compensation_bands,
+            roles=roles,
+            levels=levels,
+            locations=locations,
+        )
 
         # 9. Inject 5 Mandatory Edge Cases + Deliberate Disparities & generate Ground Truth
         (
@@ -489,34 +496,147 @@ class SyntheticDataGenerator:
     def _generate_proposals_and_events(
         self,
         employees: List[Dict],
-        salary_records: List[Dict]
+        salary_records: List[Dict],
+        compensation_bands: List[Dict] = None,
+        roles: List[Dict] = None,
+        levels: List[Dict] = None,
+        locations: List[Dict] = None,
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-        """Generates adjustment proposals with lifecycle statuses and audit trail events."""
+        """Generates adjustment proposals with L6 reviewers, varied cycles, varied % adjustments, and all 5 reasons."""
         proposals = []
         approval_events = []
         event_counter = 0
 
-        # Create proposals for a subset of employees (e.g. 5% to 8%)
+        role_titles = {r["role_id"]: r["role_title"] for r in (roles or [])}
+        level_names = {l["level_id"]: l["level_name"] for l in (levels or [])}
+        loc_names = {loc["location_id"]: loc["location_name"] for loc in (locations or [])}
+
+        # Index L6 Directors/Executives by (department, location) and by department for realistic reviewer assignment
+        l6_all = [e for e in employees if e["current_level_id"] == "LVL-L6"]
+        l6_by_dept_loc: Dict[Tuple[str, str], List[str]] = {}
+        l6_by_dept: Dict[str, List[str]] = {}
+        for mgr in l6_all:
+            l6_by_dept_loc.setdefault((mgr["department"], mgr["current_location_id"]), []).append(mgr["email"])
+            l6_by_dept.setdefault(mgr["department"], []).append(mgr["email"])
+        fallback_reviewers = [m["email"] for m in l6_all] or ["jane.doe.vp@company.org"]
+
+        # Index latest 2026 normalized salary per employee
+        latest_sal_by_emp: Dict[str, float] = {}
+        for s in salary_records:
+            latest_sal_by_emp[s["employee_id"]] = float(s["normalized_salary"])
+
+        # Create proposals for 5% of employees
         proposal_count = max(5, int(len(employees) * 0.05))
         sample_employees = self.rng.sample(employees, proposal_count)
 
         statuses = ["APPROVED", "APPROVED", "PENDING_REVIEW", "REJECTED", "DRAFT"]
+        reason_codes = [
+            "INTERNAL_EQUITY",
+            "MARKET_PARITY",
+            "DISPARITY_CORRECTION",
+            "PROMOTION_CATCHUP",
+            "RETENTION",
+        ]
+        # Varied effective dates & cycle timelines (created_date, submitted_date, reviewed_date, effective_date)
+        cycles = [
+            ("2025-08-18", "2025-08-20", "2025-09-02", "2025-10-01"),
+            ("2025-11-12", "2025-11-14", "2025-11-28", "2026-01-01"),
+            ("2026-02-15", "2026-02-17", "2026-02-28", "2026-04-01"),
+            ("2026-05-14", "2026-05-16", "2026-05-29", "2026-07-01"),
+            ("2026-08-19", "2026-08-21", "2026-09-04", "2026-10-01"),
+        ]
+        hr_creators = {
+            "LOC-NYC": "hr.americas@company.org",
+            "LOC-SFO": "hr.americas@company.org",
+            "LOC-TOR": "hr.americas@company.org",
+            "LOC-SAO": "hr.americas@company.org",
+            "LOC-LON": "hr.emea@company.org",
+            "LOC-BER": "hr.emea@company.org",
+            "LOC-AMS": "hr.emea@company.org",
+            "LOC-WAR": "hr.emea@company.org",
+            "LOC-DXB": "hr.emea@company.org",
+            "LOC-BLR": "hr.apac@company.org",
+            "LOC-TYO": "hr.apac@company.org",
+            "LOC-SIN": "hr.apac@company.org",
+            "LOC-SYD": "hr.apac@company.org",
+            "LOC-SEO": "hr.apac@company.org",
+        }
 
         for i, emp in enumerate(sample_employees, 1):
             prop_id = f"ADJ-2026-{i:06d}"
             emp_id = emp["employee_id"]
+            dept = emp["department"]
+            r_title = role_titles.get(emp["current_role_id"], emp["current_role_id"])
+            l_name = level_names.get(emp["current_level_id"], emp["current_level_id"])
+            c_name = loc_names.get(emp["current_location_id"], emp["current_location_id"])
 
-            # Current salary
-            emp_sals = [s for s in salary_records if s["employee_id"] == emp_id]
-            curr_sal = emp_sals[-1]["normalized_salary"] if emp_sals else 100000.0
-            prop_sal = round(curr_sal * 1.12, 2)
+            curr_sal = latest_sal_by_emp.get(emp_id, 100000.0)
+            reason_code = reason_codes[(i - 1) % len(reason_codes)]
+
+            # Varied, realistic adjustment % by reason (including occasional market cap -3%..-5%)
+            if reason_code == "DISPARITY_CORRECTION":
+                pct_delta = round(self.rng.uniform(0.12, 0.22), 4)
+            elif reason_code == "PROMOTION_CATCHUP":
+                pct_delta = round(self.rng.uniform(0.09, 0.18), 4)
+            elif reason_code == "INTERNAL_EQUITY":
+                pct_delta = round(self.rng.uniform(0.06, 0.15), 4)
+            elif reason_code == "RETENTION":
+                pct_delta = round(self.rng.uniform(0.05, 0.14), 4)
+            else:  # MARKET_PARITY (mostly increases +4%..+13%, with occasional -3%..-6% market-cap adjustment)
+                if i % 10 == 0:
+                    pct_delta = round(-self.rng.uniform(0.03, 0.06), 4)
+                else:
+                    pct_delta = round(self.rng.uniform(0.04, 0.13), 4)
+
+            prop_sal = round(curr_sal * (1.0 + pct_delta), 2)
             adj_amt = round(prop_sal - curr_sal, 2)
-            adj_pct = round((adj_amt / curr_sal) * 100.0, 2)
+            adj_pct = round((adj_amt / curr_sal) * 100.0, 2) if curr_sal > 0 else 0.0
 
             status = statuses[i % len(statuses)]
-            created_dt = "2026-02-15T09:30:00"
-            rev_dt = "2026-02-28T14:15:00" if status in ["APPROVED", "REJECTED"] else None
-            reviewer = "jane.doe.vp@company.org" if status in ["APPROVED", "REJECTED"] else None
+            c_date, s_date, r_date, eff_date = cycles[i % len(cycles)]
+            created_dt = f"{c_date}T09:30:00"
+            submitted_dt = f"{s_date}T11:00:00"
+            rev_dt = f"{r_date}T14:15:00" if status in ["APPROVED", "REJECTED"] else None
+
+            # Select reviewer from L6 Directors/Executives (matched by department+location, then department)
+            pool = (
+                l6_by_dept_loc.get((dept, emp["current_location_id"]))
+                or l6_by_dept.get(dept)
+                or fallback_reviewers
+            )
+            # Avoid self-review if the employee is L6
+            eligible_pool = [m for m in pool if m != emp["email"]] or fallback_reviewers
+            reviewer = self.rng.choice(eligible_pool) if status in ["APPROVED", "REJECTED"] else None
+            creator = hr_creators.get(emp["current_location_id"], "hr.partner@company.org")
+
+            justification_map = {
+                "INTERNAL_EQUITY": (
+                    f"Internal peer parity adjustment ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"to align compensation with comparable peer cohort median."
+                ),
+                "MARKET_PARITY": (
+                    f"Market band calibration ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"to maintain competitive positioning against the regional band midpoint."
+                ),
+                "DISPARITY_CORRECTION": (
+                    f"Equity disparity remediation ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"following strong performance reviews and established tenure."
+                ),
+                "PROMOTION_CATCHUP": (
+                    f"Post-promotion band catch-up ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"to move compensation out of the entry quartile of the new level."
+                ),
+                "RETENTION": (
+                    f"Critical talent retention adjustment ({adj_pct:+.1f}%) for {r_title} ({l_name}) in {c_name} "
+                    f"recognizing sustained high performance and critical initiative delivery."
+                ),
+            }
+            if status == "APPROVED":
+                rev_note = f"Approved by {dept} L6 leadership for {eff_date} payroll cycle after cohort and budget validation."
+            elif status == "REJECTED":
+                rev_note = f"Deferred by {dept} L6 leadership pending next performance cycle and regional budget allocation."
+            else:
+                rev_note = None
 
             proposals.append({
                 "proposal_id": prop_id,
@@ -525,31 +645,31 @@ class SyntheticDataGenerator:
                 "proposed_salary": prop_sal,
                 "adjustment_amount": adj_amt,
                 "adjustment_percentage": adj_pct,
-                "reason_code": "INTERNAL_EQUITY",
-                "justification_notes": f"Proactive parity adjustment to align with cohort benchmark for {emp['current_role_id']}.",
-                "evidence_summary": json.dumps({"performance_rating": 4.2, "tenure_years": 3.5}),
-                "related_disparity_findings": json.dumps({"compa_ratio": 0.82, "cohort_deviation": -16.5}),
-                "proposed_effective_date": "2026-04-01",
+                "reason_code": reason_code,
+                "justification_notes": justification_map[reason_code],
+                "evidence_summary": json.dumps({"performance_rating": round(self.rng.uniform(3.4, 4.9), 2), "tenure_years": round(self.rng.uniform(1.2, 8.5), 1)}),
+                "related_disparity_findings": json.dumps({"compa_ratio": round(self.rng.uniform(0.74, 1.05), 2), "cohort_deviation": round(self.rng.uniform(-22.0, 5.0), 1)}),
+                "proposed_effective_date": eff_date,
                 "approval_status": status,
-                "created_by": "hr.partner@company.org",
+                "created_by": creator,
                 "created_at": created_dt,
                 "reviewed_by": reviewer,
                 "reviewed_at": rev_dt,
-                "review_notes": f"Decision: {status} based on budget and committee review." if reviewer else None
+                "review_notes": rev_note,
             })
 
             # Audit event 1: CREATED
             event_counter += 1
             approval_events.append({
-                "event_id": f"EVT-20260215-{event_counter:06d}",
+                "event_id": f"EVT-{c_date.replace('-', '')}-{event_counter:06d}",
                 "entity_name": "AdjustmentProposal",
                 "entity_id": prop_id,
                 "event_type": "PROPOSAL_CREATED",
-                "actor_id": "hr.partner@company.org",
+                "actor_id": creator,
                 "actor_role": "HR_PARTNER",
                 "old_state": None,
-                "new_state": json.dumps({"status": "DRAFT", "proposed_salary": prop_sal}),
-                "notes": f"Initial proposal drafted for {emp_id}.",
+                "new_state": json.dumps({"status": "DRAFT", "proposed_salary": prop_sal, "reason": reason_code}),
+                "notes": f"Initial {reason_code.replace('_', ' ').title()} proposal drafted for {emp_id} ({r_title}).",
                 "timestamp": created_dt
             })
 
@@ -557,23 +677,23 @@ class SyntheticDataGenerator:
             if status != "DRAFT":
                 event_counter += 1
                 approval_events.append({
-                    "event_id": f"EVT-20260216-{event_counter:06d}",
+                    "event_id": f"EVT-{s_date.replace('-', '')}-{event_counter:06d}",
                     "entity_name": "AdjustmentProposal",
                     "entity_id": prop_id,
                     "event_type": "SUBMITTED_FOR_REVIEW",
-                    "actor_id": "hr.partner@company.org",
+                    "actor_id": creator,
                     "actor_role": "HR_PARTNER",
                     "old_state": json.dumps({"status": "DRAFT"}),
                     "new_state": json.dumps({"status": "PENDING_REVIEW"}),
-                    "notes": "Submitted for executive compensation committee approval.",
-                    "timestamp": "2026-02-16T11:00:00"
+                    "notes": f"Submitted for {dept} executive compensation review.",
+                    "timestamp": submitted_dt
                 })
 
             # Audit event 3: REVIEW DECISION
             if status in ["APPROVED", "REJECTED"]:
                 event_counter += 1
                 approval_events.append({
-                    "event_id": f"EVT-20260228-{event_counter:06d}",
+                    "event_id": f"EVT-{r_date.replace('-', '')}-{event_counter:06d}",
                     "entity_name": "AdjustmentProposal",
                     "entity_id": prop_id,
                     "event_type": f"PROPOSAL_{status}",
@@ -581,7 +701,7 @@ class SyntheticDataGenerator:
                     "actor_role": "MANAGER",
                     "old_state": json.dumps({"status": "PENDING_REVIEW"}),
                     "new_state": json.dumps({"status": status}),
-                    "notes": f"Adjustment proposal formally {status.lower()}.",
+                    "notes": rev_note,
                     "timestamp": rev_dt
                 })
 

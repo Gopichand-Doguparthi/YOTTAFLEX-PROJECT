@@ -12,7 +12,8 @@ from src.database.models import CompensationBand
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts, load_reference_catalogs,
-    fmt_usd, fmt_num, fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
+    fmt_usd, fmt_num, fmt_pct, format_currency_label,
+    PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -71,8 +72,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     all_bands = _load_bands_for_year(year_filter)
     with bf1:
-        curr_opts = ["All Currencies"] + sorted({b["currency"] for b in all_bands})
-        curr_filter = st.selectbox("Filter by Local Currency:", curr_opts, index=0)
+        curr_codes = sorted({b["currency"] for b in all_bands})
+        curr_label_map = {format_currency_label(c): c for c in curr_codes}
+        curr_opts = ["All Currencies"] + list(curr_label_map.keys())
+        curr_filter_label = st.selectbox("Filter by Local Currency:", curr_opts, index=0)
+        curr_filter = "All Currencies" if curr_filter_label == "All Currencies" else curr_label_map[curr_filter_label]
     with bf2:
         band_status_filter = st.selectbox("Filter by Band Status:", ["All Statuses", "Active", "Expired"], index=0)
 

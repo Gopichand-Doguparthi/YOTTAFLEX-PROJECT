@@ -13,7 +13,7 @@ from src.engine.compa_ratio import CompaRatioCalculator
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts,
-    fmt_usd, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
+    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout, build_table_column_config,
 )
 
 
@@ -128,16 +128,28 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     col3.metric("Below Target (< 0.80)", f"{below_target:,}", delta=f"-{below_target}", delta_color="inverse")
     col4.metric("Above Target (> 1.20)", f"{above_target:,}", delta=f"+{above_target}")
 
+    # Compact Compa-Ratio Range Summary
+    total_n = len(df)
+    cr_summary_df = pd.DataFrame([
+        {"Classification": "Below Target", "Compa-Ratio Range": "< 0.80", "Within-Band Equivalent": "< 0% (Green-Circled)", "Employees": f"{below_target:,}", "Share (%)": fmt_pct(below_target / total_n * 100, 1)},
+        {"Classification": "In Target Range", "Compa-Ratio Range": "0.80 – 1.20", "Within-Band Equivalent": "0% – 100%", "Employees": f"{in_target:,}", "Share (%)": fmt_pct(in_target / total_n * 100, 1)},
+        {"Classification": "Above Target", "Compa-Ratio Range": "> 1.20", "Within-Band Equivalent": "> 100% (Red-Circled)", "Employees": f"{above_target:,}", "Share (%)": fmt_pct(above_target / total_n * 100, 1)},
+    ])
+    with st.expander("Compa-Ratio Range Breakdown", expanded=False):
+        st.dataframe(cr_summary_df, use_container_width=True, hide_index=True, column_config=build_table_column_config(cr_summary_df))
+
     st.markdown("---")
 
     df_chart = df[df["Compa-Ratio"] <= 2.0].copy()
     extreme_count = len(df) - len(df_chart)
     if extreme_count > 0:
         st.caption(
-            f"Chart range focused on 0.00 – 2.00 for readability ({extreme_count} extreme exception record(s) > 2.00 are included in metrics and tables)."
+            f"Charts focused on Compa-Ratio 0.00 – 2.00 for readability ({extreme_count} extreme exception record(s) > 2.00 are included in metrics and tables)."
         )
 
-    col_hist, col_bar = st.columns(2)
+    use_log_y = st.checkbox("Use Log Scale on Distribution Y-Axis (highlights small outlier bars)", value=False)
+
+    col_hist, col_scatter = st.columns(2)
     with col_hist:
         fig_hist = px.histogram(
             df_chart,
@@ -146,6 +158,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             nbins=20,
             barmode="stack",
             text_auto=True,
+            log_y=use_log_y,
             title="Workforce Compa-Ratio Distribution",
             color_discrete_map=_CLASS_COLORS,
             category_orders={"Classification": list(_CLASS_COLORS.keys())},
@@ -162,38 +175,55 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             x=1.20, line_dash="dash", line_color="#f39c12",
             annotation_text="Max (1.20)", annotation_position="top right", annotation_yshift=-6
         )
-        fig_hist.update_layout(yaxis_title="Employee Count", xaxis_title="Compa-Ratio")
+        fig_hist.update_layout(yaxis_title="Employee Count" + (" (Log)" if use_log_y else ""), xaxis_title="Compa-Ratio")
         apply_clean_layout(fig_hist, legend_bottom=True, height=470)
         st.plotly_chart(fig_hist, use_container_width=True, config=PLOTLY_CONFIG)
 
-    with col_bar:
-        dept_cr = (
-            df_chart.groupby("Department")["Compa-Ratio"]
-            .agg(Average="mean", Median="median")
-            .reset_index()
-            .melt(id_vars="Department", value_vars=["Average", "Median"], var_name="Metric", value_name="Compa-Ratio")
+    with col_scatter:
+        fig_scatter = px.scatter(
+            df_chart,
+            x="Compa-Ratio",
+            y="Salary (USD)",
+            color="Classification",
+            hover_data=["Employee ID", "Name", "Role", "Level", "Location"],
+            title="Compa-Ratio vs. Salary (Outlier View)",
+            color_discrete_map=_CLASS_COLORS,
+            category_orders={"Classification": list(_CLASS_COLORS.keys())},
         )
-        max_cr_val = float(dept_cr["Compa-Ratio"].max()) if not dept_cr.empty else 1.5
-        dept_cr["Label"] = dept_cr["Compa-Ratio"].map(lambda v: f"{v:.2f}")
-        fig_dept = px.bar(
-            dept_cr,
-            x="Department",
-            y="Compa-Ratio",
-            color="Metric",
-            barmode="group",
-            text="Label",
-            title="Average vs. Median Compa-Ratio by Department",
-            color_discrete_map={"Average": "#6366f1", "Median": "#22c55e"},
-        )
-        fig_dept.add_hline(y=1.0, line_dash="dash", line_color="#22c55e", annotation_text="Market Parity (1.00)", annotation_position="top right")
-        fig_dept.update_traces(
-            textposition="outside",
-            cliponaxis=False,
-            hovertemplate="%{x}<br>%{fullData.name}: %{y:.3f}<extra></extra>",
-        )
-        fig_dept.update_layout(yaxis=dict(range=[0, max_cr_val * 1.22]))
-        apply_clean_layout(fig_dept, legend_bottom=True, height=470, xaxis_tickangle=-25)
-        st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
+        fig_scatter.add_vline(x=0.80, line_dash="dash", line_color="#e74c3c", annotation_text="0.80", annotation_position="top left")
+        fig_scatter.add_vline(x=1.00, line_dash="solid", line_color="#2ecc71", annotation_text="1.00", annotation_position="top")
+        fig_scatter.add_vline(x=1.20, line_dash="dash", line_color="#f39c12", annotation_text="1.20", annotation_position="top right")
+        apply_clean_layout(fig_scatter, legend_bottom=True, height=470)
+        st.plotly_chart(fig_scatter, use_container_width=True, config=PLOTLY_CONFIG)
+
+    # Department Comparison Bar Chart (full width below)
+    dept_cr = (
+        df_chart.groupby("Department")["Compa-Ratio"]
+        .agg(Average="mean", Median="median")
+        .reset_index()
+        .melt(id_vars="Department", value_vars=["Average", "Median"], var_name="Metric", value_name="Compa-Ratio")
+    )
+    max_cr_val = float(dept_cr["Compa-Ratio"].max()) if not dept_cr.empty else 1.5
+    dept_cr["Label"] = dept_cr["Compa-Ratio"].map(lambda v: f"{v:.2f}")
+    fig_dept = px.bar(
+        dept_cr,
+        x="Department",
+        y="Compa-Ratio",
+        color="Metric",
+        barmode="group",
+        text="Label",
+        title="Average vs. Median Compa-Ratio by Department",
+        color_discrete_map={"Average": "#6366f1", "Median": "#22c55e"},
+    )
+    fig_dept.add_hline(y=1.0, line_dash="dash", line_color="#22c55e", annotation_text="Market Parity (1.00)", annotation_position="top right")
+    fig_dept.update_traces(
+        textposition="outside",
+        cliponaxis=False,
+        hovertemplate="%{x}<br>%{fullData.name}: %{y:.3f}<extra></extra>",
+    )
+    fig_dept.update_layout(yaxis=dict(range=[0, max_cr_val * 1.22]))
+    apply_clean_layout(fig_dept, legend_bottom=True, height=430, xaxis_tickangle=-20)
+    st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Compa-Ratio Employees Directory")
     cf1, cf2, cf3 = st.columns([2, 1.5, 1.5])
