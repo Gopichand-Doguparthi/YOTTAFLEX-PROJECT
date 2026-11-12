@@ -100,7 +100,10 @@ def main():
     current_section = None
     for key, label, section in NAV_ITEMS:
         if section != current_section:
-            st.sidebar.markdown(f'<div class="nav-section-label">{section}</div>', unsafe_allow_html=True)
+            st.sidebar.markdown(
+                f'<div class="nav-section-wrap"><div class="nav-section-label">{section}</div></div>',
+                unsafe_allow_html=True,
+            )
             current_section = section
 
         btn_type = "primary" if st.session_state.active_view == key else "secondary"
