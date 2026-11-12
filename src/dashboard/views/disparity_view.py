@@ -7,12 +7,13 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.database.models import Employee, SalaryRecord, CompensationBand, PerformanceEvidence, Tenure
 from src.engine.disparity_detector import DisparityDetector
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     get_currency_normalizer, get_band_usd_amounts,
-    PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, fmt_pct, PLOTLY_CONFIG, apply_clean_layout,
 )
 
 
@@ -31,118 +32,163 @@ _STATUS_COLORS = {
 }
 
 
+@st.cache_data(ttl=120, show_spinner=False)
+def _load_disparity_findings() -> pd.DataFrame:
+    """Computes and caches multi-factor disparity findings across all employees."""
+    db = SessionLocal()
+    try:
+        role_map = get_role_map(db)
+        level_map = get_level_map(db)
+        loc_map = get_location_map(db)
+        curr_norm = get_currency_normalizer(db)
+        detector = DisparityDetector()
+
+        employees = db.query(
+            Employee.employee_id,
+            Employee.first_name,
+            Employee.last_name,
+            Employee.department,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            Employee.current_location_id,
+        ).all()
+
+        latest_sals = {
+            r[0]: float(r[1])
+            for r in db.query(SalaryRecord.employee_id, SalaryRecord.normalized_salary)
+            .filter(SalaryRecord.effective_date >= "2026-01-01")
+            .all()
+        }
+
+        band_lookup = {
+            (b.role_id, b.level_id, b.location_id): b
+            for b in db.query(CompensationBand).filter(CompensationBand.status == "ACTIVE").all()
+        }
+
+        cohort_salaries = {}
+        for eid, _, _, _, r_id, l_id, loc_id in employees:
+            sal = latest_sals.get(eid)
+            if sal is not None:
+                key = f"{r_id}::{l_id}::{loc_id}"
+                cohort_salaries.setdefault(key, []).append(sal)
+
+        cohort_medians = {k: float(np.median(v)) for k, v in cohort_salaries.items()}
+        cohort_sizes = {k: len(v) for k, v in cohort_salaries.items()}
+
+        latest_perf = {}
+        for eid, rating, eff_date in db.query(
+            PerformanceEvidence.employee_id,
+            PerformanceEvidence.rating_score,
+            PerformanceEvidence.effective_date,
+        ).all():
+            if eid not in latest_perf or eff_date > latest_perf[eid][1]:
+                latest_perf[eid] = (float(rating), eff_date)
+
+        tenures = {
+            t[0]: (float(t[1]), float(t[2]))
+            for t in db.query(
+                Tenure.employee_id,
+                Tenure.tenure_in_company_years,
+                Tenure.tenure_in_role_years,
+            ).all()
+        }
+
+        findings = []
+        for eid, fn, ln, dept, r_id, l_id, loc_id in employees:
+            sal = latest_sals.get(eid)
+            if sal is None:
+                continue
+
+            cohort_key = f"{r_id}::{l_id}::{loc_id}"
+            med_sal = cohort_medians.get(cohort_key, sal)
+            size = cohort_sizes.get(cohort_key, 1)
+
+            band = band_lookup.get((r_id, l_id, loc_id))
+            if band:
+                b_min, b_mid, b_max = get_band_usd_amounts(band, curr_norm)
+            else:
+                b_min, b_mid, b_max = med_sal * 0.8, med_sal, med_sal * 1.2
+
+            rating = latest_perf[eid][0] if eid in latest_perf else None
+            c_tenure, r_tenure = tenures.get(eid, (1.0, 1.0))
+
+            res = detector.evaluate_employee(
+                employee_id=eid,
+                normalized_salary=sal,
+                band_min=b_min,
+                band_mid=b_mid,
+                band_max=b_max,
+                cohort_median_salary=med_sal,
+                cohort_size=size,
+                performance_rating=rating,
+                tenure_in_role_years=r_tenure,
+                tenure_in_company_years=c_tenure
+            )
+
+            findings.append({
+                "Employee ID": eid,
+                "Name": f"{fn} {ln}",
+                "Department": dept,
+                "Role": role_map.get(r_id, r_id),
+                "Level": level_map.get(l_id, l_id),
+                "Location": loc_map.get(loc_id, loc_id),
+                "Salary (USD)": sal,
+                "Cohort Median": med_sal,
+                "Deviation (%)": float(res.deviation_from_cohort_median_pct),
+                "Compa-Ratio": float(res.compa_ratio),
+                "Rating": rating,
+                "Company Tenure (yrs)": round(c_tenure, 1),
+                "Status": _STATUS_LABELS.get(res.status, res.status),
+                "Primary Reason": res.primary_reason,
+                "Is Disparity": "Yes" if res.is_disparity else "No",
+                "_role_id": r_id,
+                "_level_id": l_id,
+                "_location_id": loc_id,
+            })
+
+        return pd.DataFrame(findings)
+    finally:
+        db.close()
+
+
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Multi-Factor Disparity Detection & Evidence Analysis")
     st.markdown("Identifies unexplained compensation disparities benchmarked against peer cohort medians, documented performance ratings, and tenure.")
 
-    role_map = get_role_map(db)
-    level_map = get_level_map(db)
-    loc_map = get_location_map(db)
-    curr_norm = get_currency_normalizer(db)
-
-    status_filter = st.selectbox(
-        "Filter by Disparity Outcome Status:",
-        ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
-        index=0
-    )
-
-    detector = DisparityDetector()
-
-    emp_query = db.query(Employee)
-    if selected_role != "All":
-        emp_query = emp_query.filter(Employee.current_role_id == selected_role)
-    if selected_level != "All":
-        emp_query = emp_query.filter(Employee.current_level_id == selected_level)
-    if selected_location != "All":
-        emp_query = emp_query.filter(Employee.current_location_id == selected_location)
-    employees = emp_query.all()
-
-    salaries = db.query(SalaryRecord).filter(SalaryRecord.effective_date >= "2026-01-01").all()
-    latest_sals = {s.employee_id: s for s in salaries}
-
-    bands = db.query(CompensationBand).filter(CompensationBand.status == "ACTIVE").all()
-    band_lookup = {(b.role_id, b.level_id, b.location_id): b for b in bands}
-
-    cohort_salaries = {}
-    for emp in employees:
-        sal = latest_sals.get(emp.employee_id)
-        if sal:
-            key = f"{emp.current_role_id}::{emp.current_level_id}::{emp.current_location_id}"
-            cohort_salaries.setdefault(key, []).append(sal.normalized_salary)
-
-    cohort_medians = {k: float(np.median(v)) for k, v in cohort_salaries.items()}
-    cohort_sizes = {k: len(v) for k, v in cohort_salaries.items()}
-
-    perfs = db.query(PerformanceEvidence).all()
-    latest_perf = {}
-    for p in perfs:
-        if p.employee_id not in latest_perf or p.effective_date > latest_perf[p.employee_id].effective_date:
-            latest_perf[p.employee_id] = p
-
-    tenures = {t.employee_id: t for t in db.query(Tenure).all()}
-
-    findings = []
-    for emp in employees:
-        sal = latest_sals.get(emp.employee_id)
-        if not sal:
-            continue
-
-        cohort_key = f"{emp.current_role_id}::{emp.current_level_id}::{emp.current_location_id}"
-        med_sal = cohort_medians.get(cohort_key, sal.normalized_salary)
-        size = cohort_sizes.get(cohort_key, 1)
-
-        band = band_lookup.get((emp.current_role_id, emp.current_level_id, emp.current_location_id))
-        if band:
-            b_min, b_mid, b_max = get_band_usd_amounts(band, curr_norm)
-        else:
-            b_min, b_mid, b_max = med_sal * 0.8, med_sal, med_sal * 1.2
-
-        perf = latest_perf.get(emp.employee_id)
-        rating = perf.rating_score if perf else None
-        tenure_rec = tenures.get(emp.employee_id)
-        c_tenure = tenure_rec.tenure_in_company_years if tenure_rec else 1.0
-        r_tenure = tenure_rec.tenure_in_role_years if tenure_rec else 1.0
-
-        res = detector.evaluate_employee(
-            employee_id=emp.employee_id,
-            normalized_salary=sal.normalized_salary,
-            band_min=b_min,
-            band_mid=b_mid,
-            band_max=b_max,
-            cohort_median_salary=med_sal,
-            cohort_size=size,
-            performance_rating=rating,
-            tenure_in_role_years=r_tenure,
-            tenure_in_company_years=c_tenure
+    f_col1, f_col2, f_col3 = st.columns([2, 2, 1.5])
+    with f_col1:
+        emp_search = st.text_input(
+            "Filter by Employee ID or Name:",
+            "",
+            placeholder="e.g. EMP-000093 or Jane Smith",
         )
+    with f_col2:
+        status_filter = st.selectbox(
+            "Filter by Disparity Outcome Status:",
+            ["All Outcomes", "Unexplained Disparity", "Manual Review Required", "Explained Variation", "Insufficient Evidence"],
+            index=0
+        )
+    with f_col3:
+        flagged_only = st.checkbox("Flagged Only", value=False)
+        include_peers = st.checkbox("Include Cohort Peers", value=False)
 
-        findings.append({
-            "Employee ID": emp.employee_id,
-            "Name": f"{emp.first_name} {emp.last_name}",
-            "Department": emp.department,
-            "Role": role_map.get(emp.current_role_id, emp.current_role_id),
-            "Level": level_map.get(emp.current_level_id, emp.current_level_id),
-            "Location": loc_map.get(emp.current_location_id, emp.current_location_id),
-            "Salary (USD)": float(sal.normalized_salary),
-            "Cohort Median": float(med_sal),
-            "Deviation (%)": float(res.deviation_from_cohort_median_pct),
-            "Compa-Ratio": float(res.compa_ratio),
-            "Rating": float(rating) if rating is not None else None,
-            "Company Tenure (yrs)": float(c_tenure),
-            "Status": _STATUS_LABELS.get(res.status, res.status),
-            "Primary Reason": res.primary_reason,
-            "Is Disparity": bool(res.is_disparity),
-        })
+    df = _load_disparity_findings()
+    if not df.empty:
+        if selected_role != "All":
+            df = df[df["_role_id"] == selected_role]
+        if selected_level != "All":
+            df = df[df["_level_id"] == selected_level]
+        if selected_location != "All":
+            df = df[df["_location_id"] == selected_location]
 
-    df = pd.DataFrame(findings)
     if df.empty:
         st.info("No employee records available for disparity evaluation.")
         return
 
-    unexplained_count = len(df[df["Status"] == "Unexplained Disparity"])
-    review_count = len(df[df["Status"] == "Manual Review Required"])
-    explained_count = len(df[df["Status"] == "Explained Variation"])
-    insufficient_count = len(df[df["Status"] == "Insufficient Evidence"])
+    unexplained_count = int((df["Status"] == "Unexplained Disparity").sum())
+    review_count = int((df["Status"] == "Manual Review Required").sum())
+    explained_count = int((df["Status"] == "Explained Variation").sum())
+    insufficient_count = int((df["Status"] == "Insufficient Evidence").sum())
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Unexplained Disparities", f"{unexplained_count:,}", delta=f"{unexplained_count} flagged", delta_color="inverse")
@@ -164,11 +210,10 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             color="Status",
             color_discrete_map=_STATUS_COLORS,
         )
-        apply_clean_layout(fig_pie, legend_bottom=True, height=450)
+        apply_clean_layout(fig_pie, legend_bottom=True, height=460, legend_position="bottom")
         st.plotly_chart(fig_pie, use_container_width=True, config=PLOTLY_CONFIG)
 
     with col_scatter:
-        # Focus scatter y-axis around realistic deviation window [-80%, +150%] so outliers don't flatten the chart
         df_scatter = df[(df["Deviation (%)"] >= -80.0) & (df["Deviation (%)"] <= 150.0)].copy()
         fig_disp = px.scatter(
             df_scatter,
@@ -185,23 +230,69 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         )
         fig_disp.add_vline(
             x=3.5, line_dash="dash", line_color="#3498db",
-            annotation_text="High Performer (3.5+)", annotation_position="top right"
+            annotation_text="High Performer (3.5+)", annotation_position="top right", annotation_yshift=-6
         )
-        apply_clean_layout(fig_disp, legend_bottom=True, height=450)
+        apply_clean_layout(fig_disp, legend_bottom=True, height=460)
         st.plotly_chart(fig_disp, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Disparity Evaluation Findings")
-    filtered_df = df if status_filter == "All Outcomes" else df[df["Status"] == status_filter]
+    filtered = df.copy()
+    if emp_search.strip():
+        q = emp_search.strip().lower()
+        match_mask = (
+            filtered["Employee ID"].str.lower().str.contains(q, na=False)
+            | filtered["Name"].str.lower().str.contains(q, na=False)
+        )
+        if include_peers and match_mask.any():
+            cohort_pairs = set(
+                zip(
+                    filtered.loc[match_mask, "_role_id"],
+                    filtered.loc[match_mask, "_level_id"],
+                    filtered.loc[match_mask, "_location_id"],
+                )
+            )
+            peer_mask = filtered.apply(
+                lambda r: (r["_role_id"], r["_level_id"], r["_location_id"]) in cohort_pairs,
+                axis=1,
+            )
+            filtered = filtered[peer_mask]
+        else:
+            filtered = filtered[match_mask]
+
+    if status_filter != "All Outcomes":
+        filtered = filtered[filtered["Status"] == status_filter]
+    if flagged_only:
+        filtered = filtered[filtered["Is Disparity"] == "Yes"]
+
+    if filtered.empty:
+        st.info("No employee disparity records match the current filters.")
+        return
+
+    st.caption(f"Showing {len(filtered):,} employee record(s)")
+    disp_table = pd.DataFrame({
+        "Employee ID": filtered["Employee ID"],
+        "Name": filtered["Name"],
+        "Department": filtered["Department"],
+        "Role": filtered["Role"],
+        "Level": filtered["Level"],
+        "Location": filtered["Location"],
+        "Salary (USD)": filtered["Salary (USD)"].map(fmt_usd),
+        "Cohort Median": filtered["Cohort Median"].map(fmt_usd),
+        "Deviation (%)": filtered["Deviation (%)"].map(lambda v: fmt_pct(v, 1, signed=True)),
+        "Compa-Ratio": filtered["Compa-Ratio"],
+        "Rating": filtered["Rating"],
+        "Tenure (yrs)": filtered["Company Tenure (yrs)"],
+        "Status": filtered["Status"],
+        "Is Disparity": filtered["Is Disparity"],
+        "Primary Reason": filtered["Primary Reason"],
+    })
     st.dataframe(
-        filtered_df,
+        disp_table,
         use_container_width=True,
         hide_index=True,
         column_config={
-            "Salary (USD)": st.column_config.NumberColumn("Salary (USD)", format="$%,.0f"),
-            "Cohort Median": st.column_config.NumberColumn("Cohort Median", format="$%,.0f"),
-            "Deviation (%)": st.column_config.NumberColumn("Deviation (%)", format="%.1f%%"),
             "Compa-Ratio": st.column_config.NumberColumn("Compa-Ratio", format="%.2f"),
             "Rating": st.column_config.NumberColumn("Rating", format="%.2f"),
-            "Company Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+            "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
         },
     )

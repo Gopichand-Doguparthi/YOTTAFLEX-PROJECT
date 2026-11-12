@@ -37,6 +37,17 @@ class AuditLogger:
     ) -> ApprovalEvent:
         """Creates and persists an immutable audit event."""
         event_time = timestamp or datetime.utcnow()
+        prefix = f"EVT-{event_time.strftime('%Y%m%d')}-"
+        existing_ids = session.query(ApprovalEvent.event_id).filter(
+            ApprovalEvent.event_id.like(f"{prefix}%")
+        ).all()
+        max_seq = 0
+        for (eid,) in existing_ids:
+            suffix = eid[len(prefix):]
+            if suffix.isdigit():
+                max_seq = max(max_seq, int(suffix))
+        if cls._counter < max_seq:
+            cls._counter = max_seq
         event_id = cls.generate_event_id(event_time)
 
         old_str = json.dumps(old_state) if isinstance(old_state, (dict, list)) else (str(old_state) if old_state is not None else None)

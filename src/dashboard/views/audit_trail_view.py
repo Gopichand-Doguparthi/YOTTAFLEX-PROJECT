@@ -8,8 +8,8 @@ from typing import List
 import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
-from src.database.models import ApprovalEvent
-from src.dashboard.views.helpers import format_actor_name
+from src.database.models import ApprovalEvent, AdjustmentProposal, Employee
+from src.dashboard.views.helpers import format_actor_name, fmt_usd
 
 
 def _pdf_escape(text: str) -> str:
@@ -192,44 +192,92 @@ def _to_pdf_bytes(df: pd.DataFrame) -> bytes:
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Append-Only Audit Trail & Compliance Ledger")
-    st.markdown("Chronological, immutable record of state mutations, proposal lifecycles, and salary application events.")
+    st.markdown("Chronological, immutable record of state mutations, proposal lifecycles, pending adjustments, and salary application events.")
 
     event_type_filter = st.selectbox(
-        "Filter by Event Type:",
-        ["All Events", "PROPOSAL_CREATED", "SUBMITTED_FOR_REVIEW", "PROPOSAL_APPROVED", "PROPOSAL_REJECTED", "SALARY_UPDATED"],
+        "Filter by Event / Record Type:",
+        [
+            "All Events & Pending Adjustments",
+            "Pending Adjustments (Awaiting Approval)",
+            "All Logged Events",
+            "PROPOSAL_CREATED",
+            "SUBMITTED_FOR_REVIEW",
+            "PROPOSAL_APPROVED",
+            "PROPOSAL_REJECTED",
+            "SALARY_UPDATED",
+        ],
         index=0
     )
 
-    query = db.query(ApprovalEvent).order_by(ApprovalEvent.timestamp.desc())
-    if event_type_filter != "All Events":
-        query = query.filter(ApprovalEvent.event_type == event_type_filter)
+    emp_lookup = {
+        e[0]: f"{e[1]} {e[2]}"
+        for e in db.query(Employee.employee_id, Employee.first_name, Employee.last_name).all()
+    }
 
-    events = query.all()
+    pending_props = (
+        db.query(AdjustmentProposal)
+        .filter(AdjustmentProposal.approval_status.in_(["PENDING_REVIEW", "DRAFT"]))
+        .order_by(AdjustmentProposal.created_at.desc())
+        .all()
+    )
 
-    if not events:
-        st.info("No audit events recorded.")
-        return
-
-    st.metric("Total Logged Events In Query", f"{len(events):,}")
-    st.markdown("---")
-
-    event_data = [
+    pending_rows = [
         {
-            "Event ID": e.event_id,
-            "Timestamp": str(e.timestamp)[:19],
-            "Entity": e.entity_name,
-            "Entity ID": e.entity_id,
-            "Event Type": e.event_type.replace("_", " ").title(),
-            "Actor": format_actor_name(e.actor_id, fallback="System"),
-            "Actor Role": e.actor_role.replace("_", " ").title(),
-            "Notes": e.notes or ""
+            "Event ID": f"PEND-{p.proposal_id}",
+            "Timestamp": str(p.created_at)[:19] if p.created_at else str(p.proposed_effective_date),
+            "Entity": "Pending Adjustment",
+            "Entity ID": p.proposal_id,
+            "Event Type": f"Pending ({p.approval_status.replace('_', ' ').title()})",
+            "Actor": format_actor_name(p.created_by, fallback="HR Partner"),
+            "Actor Role": "Pending Review",
+            "Notes": (
+                f"{emp_lookup.get(p.employee_id, p.employee_id)} ({p.employee_id}) — "
+                f"{fmt_usd(p.current_salary)} -> {fmt_usd(p.proposed_salary)} "
+                f"({p.reason_code.replace('_', ' ').title()}, Eff: {p.proposed_effective_date})"
+            ),
         }
-        for e in events
+        for p in pending_props
     ]
 
-    df_audit = pd.DataFrame(event_data)
+    if event_type_filter == "Pending Adjustments (Awaiting Approval)":
+        event_rows = []
+        combined_rows = pending_rows
+    else:
+        query = db.query(ApprovalEvent).order_by(ApprovalEvent.timestamp.desc())
+        if event_type_filter not in ("All Events & Pending Adjustments", "All Logged Events"):
+            query = query.filter(ApprovalEvent.event_type == event_type_filter)
+        events = query.all()
+        event_rows = [
+            {
+                "Event ID": e.event_id,
+                "Timestamp": str(e.timestamp)[:19],
+                "Entity": e.entity_name,
+                "Entity ID": e.entity_id,
+                "Event Type": e.event_type.replace("_", " ").title(),
+                "Actor": format_actor_name(e.actor_id, fallback="System"),
+                "Actor Role": e.actor_role.replace("_", " ").title(),
+                "Notes": e.notes or ""
+            }
+            for e in events
+        ]
+        if event_type_filter == "All Events & Pending Adjustments":
+            combined_rows = pending_rows + event_rows
+        else:
+            combined_rows = event_rows
 
-    st.subheader("Immutable Audit Events Table")
+    if not combined_rows:
+        st.info("No audit events or pending adjustments match the selected filter.")
+        return
+
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Records in View", f"{len(combined_rows):,}")
+    m2.metric("Logged Audit Events", f"{len(event_rows):,}")
+    m3.metric("Pending Adjustments", f"{len(pending_rows):,}")
+    st.markdown("---")
+
+    df_audit = pd.DataFrame(combined_rows)
+
+    st.subheader("Audit Trail & Pending Adjustments Ledger")
     st.dataframe(df_audit, use_container_width=True, hide_index=True)
 
     # Download options

@@ -6,14 +6,24 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.models import AdjustmentProposal, Employee
-from src.dashboard.views.helpers import format_actor_name
+from src.dashboard.views.helpers import format_actor_name, fmt_usd, fmt_pct
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Executive Approval & Decision History")
     st.markdown("Detailed audit of approved and rejected compensation adjustments, executive rationale, and review timestamps.")
 
-    emp_lookup = {e.employee_id: e for e in db.query(Employee).all()}
+    emp_lookup = {
+        e[0]: (f"{e[1]} {e[2]}", e[3], e[4], e[5])
+        for e in db.query(
+            Employee.employee_id,
+            Employee.first_name,
+            Employee.last_name,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            Employee.current_location_id,
+        ).all()
+    }
 
     proposals = db.query(AdjustmentProposal).filter(
         AdjustmentProposal.approval_status.in_(["APPROVED", "REJECTED"])
@@ -21,13 +31,14 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     filtered_props = []
     for p in proposals:
-        emp = emp_lookup.get(p.employee_id)
-        if emp:
-            if selected_role != "All" and emp.current_role_id != selected_role:
+        info = emp_lookup.get(p.employee_id)
+        if info:
+            _, r_id, l_id, loc_id = info
+            if selected_role != "All" and r_id != selected_role:
                 continue
-            if selected_level != "All" and emp.current_level_id != selected_level:
+            if selected_level != "All" and l_id != selected_level:
                 continue
-            if selected_location != "All" and emp.current_location_id != selected_location:
+            if selected_location != "All" and loc_id != selected_location:
                 continue
         filtered_props.append(p)
 
@@ -48,32 +59,21 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     hist_data = []
     for p in filtered_props:
-        emp = emp_lookup.get(p.employee_id)
-        emp_name = f"{emp.first_name} {emp.last_name}" if emp else "Unknown"
+        info = emp_lookup.get(p.employee_id)
+        emp_name = info[0] if info else "Unknown"
         hist_data.append({
             "Proposal ID": p.proposal_id,
             "Employee ID": p.employee_id,
             "Employee Name": emp_name,
-            "Current ($)": float(p.current_salary),
-            "Proposed ($)": float(p.proposed_salary),
-            "Adjustment ($)": float(p.adjustment_amount),
-            "Increase (%)": float(p.adjustment_percentage),
+            "Current (USD)": fmt_usd(p.current_salary),
+            "Proposed (USD)": fmt_usd(p.proposed_salary),
+            "Adjustment (USD)": fmt_usd(p.adjustment_amount),
+            "Increase (%)": fmt_pct(p.adjustment_percentage, 1, signed=True),
             "Decision": p.approval_status.title(),
             "Reviewed By": format_actor_name(p.reviewed_by, fallback="Pending"),
             "Decision Date": str(p.reviewed_at)[:19] if p.reviewed_at else "N/A",
             "Reviewer Notes": p.review_notes or ""
         })
-    df_hist = pd.DataFrame(hist_data)
 
     st.subheader("Historical Decision Ledger")
-    st.dataframe(
-        df_hist,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "Current ($)": st.column_config.NumberColumn("Current ($)", format="$%,.0f"),
-            "Proposed ($)": st.column_config.NumberColumn("Proposed ($)", format="$%,.0f"),
-            "Adjustment ($)": st.column_config.NumberColumn("Adjustment ($)", format="$%,.0f"),
-            "Increase (%)": st.column_config.NumberColumn("Increase (%)", format="%.1f%%"),
-        },
-    )
+    st.dataframe(pd.DataFrame(hist_data), use_container_width=True, hide_index=True)

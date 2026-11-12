@@ -5,8 +5,18 @@ Audits database for referential integrity, primary-key uniqueness, arithmetic, a
 import streamlit as st
 import pandas as pd
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.validation.data_validator import DataValidator
 from src.validation.reproducibility import ReproducibilityVerifier
+
+
+@st.cache_data(ttl=120, show_spinner=False)
+def _run_cached_validation() -> dict:
+    db = SessionLocal()
+    try:
+        return DataValidator.run_all_checks(db)
+    finally:
+        db.close()
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -16,7 +26,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     if st.button("Re-run Data Integrity Audit", type="primary"):
         st.cache_data.clear()
 
-    res = DataValidator.run_all_checks(db)
+    res = _run_cached_validation()
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Validation Pass Rate", f"{res['pass_rate_pct']}%")
@@ -36,7 +46,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         }
         for d in res["details"]
     ]
-    st.dataframe(pd.DataFrame(detail_data), use_container_width=True)
+    st.dataframe(pd.DataFrame(detail_data), use_container_width=True, hide_index=True)
 
     st.markdown("---")
     st.subheader("Synthetic Generator Reproducibility Verification")
@@ -59,4 +69,4 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 }
                 for k, v in repro["table_results"].items()
             ])
-            st.dataframe(repro_df, use_container_width=True)
+            st.dataframe(repro_df, use_container_width=True, hide_index=True)

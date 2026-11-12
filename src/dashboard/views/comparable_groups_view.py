@@ -6,12 +6,53 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.database.models import Employee, SalaryRecord, RoleComparabilityRationale
 from src.engine.comparable_groups import ComparableGroupEngine
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
-    PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, PLOTLY_CONFIG, apply_clean_layout,
 )
+
+
+@st.cache_data(ttl=120, show_spinner=False)
+def _load_cohort_and_rationales():
+    db = SessionLocal()
+    try:
+        rows = db.query(
+            Employee.employee_id,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            Employee.current_location_id,
+            SalaryRecord.normalized_salary
+        ).join(SalaryRecord, Employee.employee_id == SalaryRecord.employee_id).filter(
+            SalaryRecord.effective_date >= "2026-01-01"
+        ).all()
+        records = [
+            {
+                "employee_id": r[0],
+                "role_id": r[1],
+                "level_id": r[2],
+                "location_id": r[3],
+                "normalized_salary": float(r[4]),
+            }
+            for r in rows
+        ]
+        rationales = [
+            {
+                "mapping_id": r.mapping_id,
+                "role_id_a": r.role_id_a,
+                "role_id_b": r.role_id_b,
+                "is_comparable": bool(r.is_comparable),
+                "documented_rationale": r.documented_rationale,
+                "approved_by": r.approved_by,
+                "effective_date": str(r.effective_date),
+            }
+            for r in db.query(RoleComparabilityRationale).all()
+        ]
+        return records, rationales
+    finally:
+        db.close()
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -22,37 +63,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     level_map = get_level_map(db)
     loc_map = get_location_map(db)
 
-    group_engine = ComparableGroupEngine()
-    group_engine.load_rationales_from_db(db)
-
-    query = db.query(
-        Employee.employee_id,
-        Employee.current_role_id,
-        Employee.current_level_id,
-        Employee.current_location_id,
-        SalaryRecord.normalized_salary
-    ).join(SalaryRecord, Employee.employee_id == SalaryRecord.employee_id).filter(
-        SalaryRecord.effective_date >= "2026-01-01"
-    )
-
-    if selected_role != "All":
-        query = query.filter(Employee.current_role_id == selected_role)
-    if selected_level != "All":
-        query = query.filter(Employee.current_level_id == selected_level)
-    if selected_location != "All":
-        query = query.filter(Employee.current_location_id == selected_location)
+    all_records, rationales = _load_cohort_and_rationales()
 
     records = [
-        {
-            "employee_id": r[0],
-            "role_id": r[1],
-            "level_id": r[2],
-            "location_id": r[3],
-            "normalized_salary": r[4]
-        }
-        for r in query.all()
+        r for r in all_records
+        if (selected_role == "All" or r["role_id"] == selected_role)
+        and (selected_level == "All" or r["level_id"] == selected_level)
+        and (selected_location == "All" or r["location_id"] == selected_location)
     ]
 
+    group_engine = ComparableGroupEngine(rationales=rationales)
     stats = group_engine.compute_cohort_statistics(records, min_cohort_size=3)
 
     if not stats:
@@ -61,7 +81,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     raw_df = pd.DataFrame(list(stats.values()))
 
-    # Parse cohort_key into human-readable Role, Level, Location
     roles_col, levels_col, locs_col = [], [], []
     for k in raw_df["cohort_key"]:
         parts = str(k).split("::")
@@ -77,11 +96,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         "Level": levels_col,
         "Location": locs_col,
         "Members": raw_df["count"],
-        "Median Salary (USD)": raw_df["median_salary"],
-        "Mean Salary (USD)": raw_df["mean_salary"],
-        "Min Salary (USD)": raw_df["min_salary"],
-        "Max Salary (USD)": raw_df["max_salary"],
-        "Std Dev (USD)": raw_df["std_salary"],
+        "Median Salary (USD)": raw_df["median_salary"].map(fmt_usd),
+        "Mean Salary (USD)": raw_df["mean_salary"].map(fmt_usd),
+        "Min Salary (USD)": raw_df["min_salary"].map(fmt_usd),
+        "Max Salary (USD)": raw_df["max_salary"].map(fmt_usd),
+        "Std Dev (USD)": raw_df["std_salary"].map(fmt_usd),
         "Status": raw_df["status"].map({"SUFFICIENT": "Sufficient (N >= 3)", "INSUFFICIENT_EVIDENCE": "Insufficient (N < 3)"}).fillna(raw_df["status"]),
         "is_sufficient": raw_df["is_sufficient"],
     })
@@ -112,38 +131,25 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     )
     fig_hist.add_vline(
         x=3, line_dash="dash", line_color="#e74c3c",
-        annotation_text="Minimum Threshold (N=3)", annotation_position="top right"
+        annotation_text="Minimum Threshold (N=3)", annotation_position="top right", annotation_yshift=-6
     )
-    apply_clean_layout(fig_hist, legend_bottom=True, height=430)
+    apply_clean_layout(fig_hist, legend_bottom=True, height=440)
     st.plotly_chart(fig_hist, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Peer Cohort Benchmarks & Metrics")
-    display_cohort_df = cohort_df.drop(columns=["is_sufficient"])
-    st.dataframe(
-        display_cohort_df,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "Median Salary (USD)": st.column_config.NumberColumn("Median Salary", format="$%,.0f"),
-            "Mean Salary (USD)": st.column_config.NumberColumn("Mean Salary", format="$%,.0f"),
-            "Min Salary (USD)": st.column_config.NumberColumn("Min Salary", format="$%,.0f"),
-            "Max Salary (USD)": st.column_config.NumberColumn("Max Salary", format="$%,.0f"),
-            "Std Dev (USD)": st.column_config.NumberColumn("Std Dev", format="$%,.0f"),
-        },
-    )
+    st.dataframe(cohort_df.drop(columns=["is_sufficient"]), use_container_width=True, hide_index=True)
 
     st.markdown("---")
     st.subheader("Approved Cross-Role Comparability Rationales")
-    rationales = db.query(RoleComparabilityRationale).all()
     rat_df = pd.DataFrame([
         {
-            "Mapping ID": r.mapping_id,
-            "Role A": role_map.get(r.role_id_a, r.role_id_a),
-            "Role B": role_map.get(r.role_id_b, r.role_id_b),
-            "Comparable": "Yes" if r.is_comparable else "No",
-            "Documented Rationale": r.documented_rationale,
-            "Approved By": r.approved_by,
-            "Effective Date": str(r.effective_date)
+            "Mapping ID": r["mapping_id"],
+            "Role A": role_map.get(r["role_id_a"], r["role_id_a"]),
+            "Role B": role_map.get(r["role_id_b"], r["role_id_b"]),
+            "Comparable": "Yes" if r["is_comparable"] else "No",
+            "Documented Rationale": r["documented_rationale"],
+            "Approved By": r["approved_by"],
+            "Effective Date": r["effective_date"]
         }
         for r in rationales
     ])

@@ -1,17 +1,68 @@
 """
 View 1: Executive Overview Dashboard.
 Displays enterprise-wide totals, a dedicated filtered-selection KPI section,
-and interactive compensation & proposal distributions.
+and bar/donut visualizations.
 """
 import streamlit as st
 import plotly.express as px
 import pandas as pd
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.database.models import Employee, SalaryRecord, AdjustmentProposal
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
     PLOTLY_CONFIG, apply_clean_layout,
 )
+
+
+@st.cache_data(ttl=120, show_spinner=False)
+def _load_overview_data():
+    """Fetches lightweight tuples once and caches them for fast tab switching."""
+    db = SessionLocal()
+    try:
+        total_employees = db.query(Employee).count()
+        total_salary_records = db.query(SalaryRecord).count()
+
+        salaries_2026 = db.query(
+            Employee.employee_id,
+            Employee.department,
+            Employee.current_location_id,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            SalaryRecord.normalized_salary,
+        ).join(SalaryRecord, Employee.employee_id == SalaryRecord.employee_id).filter(
+            SalaryRecord.effective_date >= "2026-01-01"
+        ).all()
+
+        sal_counts_by_emp = dict(
+            db.query(
+                SalaryRecord.employee_id,
+                __import__("sqlalchemy").func.count(SalaryRecord.salary_id),
+            ).group_by(SalaryRecord.employee_id).all()
+        )
+
+        emp_rows = db.query(
+            Employee.employee_id,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            Employee.current_location_id,
+        ).all()
+
+        prop_rows = db.query(
+            AdjustmentProposal.employee_id,
+            AdjustmentProposal.approval_status,
+        ).all()
+
+        return {
+            "total_employees": total_employees,
+            "total_salary_records": total_salary_records,
+            "salaries_2026": [tuple(r) for r in salaries_2026],
+            "sal_counts_by_emp": sal_counts_by_emp,
+            "emp_rows": [tuple(r) for r in emp_rows],
+            "prop_rows": [tuple(r) for r in prop_rows],
+        }
+    finally:
+        db.close()
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
@@ -22,83 +73,51 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     level_map = get_level_map(db)
     loc_map = get_location_map(db)
 
-    # ── 1. Enterprise-Wide Unfiltered Totals ──
-    total_employees = db.query(Employee).count()
-    total_salary_records = db.query(SalaryRecord).count()
-    total_proposals = db.query(AdjustmentProposal).count()
-    pending_proposals = db.query(AdjustmentProposal).filter_by(approval_status="PENDING_REVIEW").count()
-    approved_proposals = db.query(AdjustmentProposal).filter_by(approval_status="APPROVED").count()
-    rejected_proposals = db.query(AdjustmentProposal).filter_by(approval_status="REJECTED").count()
+    snap = _load_overview_data()
+
+    # 1. Enterprise-Wide Unfiltered Totals
+    all_props = snap["prop_rows"]
+    total_proposals = len(all_props)
+    pending_proposals = sum(1 for _, st_val in all_props if st_val == "PENDING_REVIEW")
 
     st.subheader("Enterprise-Wide Totals (All Workforce)")
     e_col1, e_col2, e_col3, e_col4 = st.columns(4)
-    e_col1.metric("Enterprise Workforce", f"{total_employees:,}")
-    e_col2.metric("Total Salary Records", f"{total_salary_records:,}")
+    e_col1.metric("Enterprise Workforce", f"{snap['total_employees']:,}")
+    e_col2.metric("Total Salary Records", f"{snap['total_salary_records']:,}")
     e_col3.metric("Total Proposals", f"{total_proposals:,}")
     e_col4.metric("Pending Review Proposals", f"{pending_proposals:,}")
 
     st.markdown("---")
 
-    # ── 2. Filtered Selection Metrics ──
-    emp_query = db.query(Employee.employee_id)
-    if selected_role != "All":
-        emp_query = emp_query.filter(Employee.current_role_id == selected_role)
-    if selected_level != "All":
-        emp_query = emp_query.filter(Employee.current_level_id == selected_level)
-    if selected_location != "All":
-        emp_query = emp_query.filter(Employee.current_location_id == selected_location)
+    # 2. Filtered Selection Metrics
+    filtered_emp_ids = {
+        eid
+        for eid, rid, lid, loc_id in snap["emp_rows"]
+        if (selected_role == "All" or rid == selected_role)
+        and (selected_level == "All" or lid == selected_level)
+        and (selected_location == "All" or loc_id == selected_location)
+    }
 
-    filtered_emp_ids = [r[0] for r in emp_query.all()]
     filtered_workforce = len(filtered_emp_ids)
+    sal_counts_by_emp = snap["sal_counts_by_emp"]
+    filtered_sal_count = sum(sal_counts_by_emp.get(eid, 0) for eid in filtered_emp_ids)
 
-    if filtered_emp_ids:
-        filtered_sal_count = db.query(SalaryRecord).filter(
-            SalaryRecord.employee_id.in_(filtered_emp_ids)
-        ).count()
-        filtered_prop_total = db.query(AdjustmentProposal).filter(
-            AdjustmentProposal.employee_id.in_(filtered_emp_ids)
-        ).count()
-        filtered_prop_pending = db.query(AdjustmentProposal).filter(
-            AdjustmentProposal.employee_id.in_(filtered_emp_ids),
-            AdjustmentProposal.approval_status == "PENDING_REVIEW"
-        ).count()
-        filtered_prop_approved = db.query(AdjustmentProposal).filter(
-            AdjustmentProposal.employee_id.in_(filtered_emp_ids),
-            AdjustmentProposal.approval_status == "APPROVED"
-        ).count()
-        filtered_prop_rejected = db.query(AdjustmentProposal).filter(
-            AdjustmentProposal.employee_id.in_(filtered_emp_ids),
-            AdjustmentProposal.approval_status == "REJECTED"
-        ).count()
-    else:
-        filtered_sal_count = 0
-        filtered_prop_total = 0
-        filtered_prop_pending = 0
-        filtered_prop_approved = 0
-        filtered_prop_rejected = 0
-
-    # Latest 2026 salaries for filtered scope
-    salaries_q = db.query(
-        Employee.employee_id,
-        Employee.department,
-        Employee.current_location_id,
-        Employee.current_role_id,
-        Employee.current_level_id,
-        SalaryRecord.normalized_salary
-    ).join(SalaryRecord, Employee.employee_id == SalaryRecord.employee_id).filter(
-        SalaryRecord.effective_date >= "2026-01-01"
-    )
-    if selected_role != "All":
-        salaries_q = salaries_q.filter(Employee.current_role_id == selected_role)
-    if selected_level != "All":
-        salaries_q = salaries_q.filter(Employee.current_level_id == selected_level)
-    if selected_location != "All":
-        salaries_q = salaries_q.filter(Employee.current_location_id == selected_location)
+    filtered_props = [st_val for eid, st_val in all_props if eid in filtered_emp_ids]
+    filtered_prop_total = len(filtered_props)
+    filtered_prop_pending = sum(1 for s in filtered_props if s == "PENDING_REVIEW")
+    filtered_prop_approved = sum(1 for s in filtered_props if s == "APPROVED")
+    filtered_prop_rejected = sum(1 for s in filtered_props if s == "REJECTED")
 
     df_sal = pd.DataFrame(
-        salaries_q.all(),
-        columns=["employee_id", "department", "location_id", "role_id", "level_id", "normalized_salary"]
+        snap["salaries_2026"],
+        columns=["employee_id", "department", "location_id", "role_id", "level_id", "normalized_salary"],
     )
+    if selected_role != "All":
+        df_sal = df_sal[df_sal["role_id"] == selected_role]
+    if selected_level != "All":
+        df_sal = df_sal[df_sal["level_id"] == selected_level]
+    if selected_location != "All":
+        df_sal = df_sal[df_sal["location_id"] == selected_location]
 
     avg_salary = df_sal["normalized_salary"].mean() if not df_sal.empty else 0.0
     median_salary = df_sal["normalized_salary"].median() if not df_sal.empty else 0.0
@@ -120,27 +139,33 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
     st.markdown("---")
 
-    # Resolve IDs to full names
     if not df_sal.empty:
+        df_sal = df_sal.copy()
         df_sal["Location"] = df_sal["location_id"].map(lambda x: loc_map.get(x, x))
-        df_sal["Role"] = df_sal["role_id"].map(lambda x: role_map.get(x, x))
 
     col_chart1, col_chart2 = st.columns(2)
 
     with col_chart1:
-        st.subheader("Salary Distribution by Department")
+        st.subheader("Salary Benchmarks by Department")
         if not df_sal.empty:
-            fig_dept = px.box(
-                df_sal,
-                x="department",
-                y="normalized_salary",
-                color="department",
-                points="outliers",
-                labels={"normalized_salary": "Normalized Salary (USD)", "department": "Department"},
-                title="Normalized Compensation Spread by Department"
+            dept_summary = (
+                df_sal.groupby("department")["normalized_salary"]
+                .agg(Average="mean", Median="median")
+                .reset_index()
+                .melt(id_vars="department", value_vars=["Average", "Median"], var_name="Metric", value_name="Salary (USD)")
             )
-            apply_clean_layout(fig_dept, legend_bottom=False, height=440, xaxis_tickangle=-25)
-            fig_dept.update_layout(showlegend=False)
+            fig_dept = px.bar(
+                dept_summary,
+                x="department",
+                y="Salary (USD)",
+                color="Metric",
+                barmode="group",
+                labels={"department": "Department", "Salary (USD)": "Normalized Salary (USD)"},
+                title="Average vs. Median Annual Salary by Department",
+                color_discrete_map={"Average": "#6366f1", "Median": "#2ecc71"},
+            )
+            fig_dept.update_traces(hovertemplate="%{x}<br>%{fullData.name}: $%{y:,.0f}<extra></extra>")
+            apply_clean_layout(fig_dept, legend_bottom=True, height=450, xaxis_tickangle=-25)
             st.plotly_chart(fig_dept, use_container_width=True, config=PLOTLY_CONFIG)
         else:
             st.info("No records match the current filter selection.")
@@ -169,12 +194,11 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 },
                 title="Remediation Proposal Status Breakdown"
             )
-            apply_clean_layout(fig_donut, legend_bottom=True, height=440)
+            apply_clean_layout(fig_donut, legend_bottom=True, height=450, legend_position="bottom")
             st.plotly_chart(fig_donut, use_container_width=True, config=PLOTLY_CONFIG)
         else:
             st.info("No proposals found for the active filter selection.")
 
-    # Location Spend — full city names, clean colorbar placement
     st.subheader("Location Benchmarks & Workforce Distribution")
     if not df_sal.empty:
         loc_summary = df_sal.groupby("Location").agg(
@@ -194,12 +218,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             color_continuous_scale="Viridis"
         )
         fig_bar.update_traces(textposition="outside", cliponaxis=False)
-        apply_clean_layout(fig_bar, legend_bottom=False, height=480, xaxis_tickangle=-30, extra_bottom_margin=20)
+        apply_clean_layout(fig_bar, legend_bottom=False, height=500, xaxis_tickangle=-30, extra_bottom_margin=25)
         fig_bar.update_layout(
             coloraxis_colorbar=dict(
                 title="Avg Salary (USD)",
                 y=0.45,
-                len=0.75,
+                len=0.72,
                 yanchor="middle",
             )
         )

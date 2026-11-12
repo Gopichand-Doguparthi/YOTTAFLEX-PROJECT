@@ -6,7 +6,7 @@ edge case diagnostics, proposal workflows, audit trails, and ground-truth evalua
 import sys
 from pathlib import Path
 
-# ── Ensure project root is on sys.path before any src.* imports ──────────────
+# Ensure project root is on sys.path before any src.* imports
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -20,15 +20,16 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+
 def load_css():
     css_path = Path(__file__).parent / "static" / "custom.css"
     with open(css_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+
 load_css()
 
-# Inject nav-button styles + page chrome
+# Sidebar navigation & layout styling
 st.markdown("""
 <style>
     .main .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
@@ -39,56 +40,70 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* ── Sidebar nav buttons — left-aligned, icon + text ── */
-    div[data-testid="stSidebar"] .stButton > button {
-        width: 100%;
-        text-align: left !important;
-        justify-content: flex-start !important;
+    /* Sidebar nav buttons — full width, strictly left-aligned */
+    [data-testid="stSidebar"] .stButton,
+    [data-testid="stSidebar"] .stButton > button,
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] {
+        width: 100% !important;
         display: flex !important;
+        justify-content: flex-start !important;
         align-items: center !important;
+        text-align: left !important;
         background: transparent;
         color: #cbd5e1;
         border: none;
         border-radius: 6px;
-        padding: 0.40rem 0.75rem;
+        padding: 0.42rem 0.75rem !important;
         margin: 1px 0;
         font-size: 0.875rem;
         font-weight: 400;
         letter-spacing: 0.01em;
         transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
         cursor: pointer;
-        gap: 0.5rem;
     }
-    div[data-testid="stSidebar"] .stButton > button p {
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] > div,
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] [data-testid="stMarkdownContainer"],
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"] p {
+        width: 100% !important;
         text-align: left !important;
+        justify-content: flex-start !important;
         margin: 0 !important;
     }
-    div[data-testid="stSidebar"] .stButton > button:hover {
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"]:hover {
         background: rgba(99, 102, 241, 0.20) !important;
         color: #ffffff !important;
         padding-left: 1.0rem !important;
     }
-    div[data-testid="stSidebar"] .stButton > button:focus {
+    [data-testid="stSidebar"] button[data-testid="stBaseButton-primary"] {
+        background: rgba(99, 102, 241, 0.34) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        border-left: 3px solid #818cf8 !important;
+    }
+    [data-testid="stSidebar"] button[data-testid^="stBaseButton"]:focus {
         box-shadow: none;
         outline: none;
     }
 
-    /* ── Section dividers in sidebar ── */
+    /* Highlighted, larger section headings in sidebar */
     .nav-section-label {
-        font-size: 0.68rem;
+        font-size: 0.84rem;
         font-weight: 700;
-        letter-spacing: 0.09em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #475569;
-        padding: 0.65rem 0.75rem 0.15rem 0.75rem;
-        margin-top: 6px;
+        color: #f1f5f9;
+        background: rgba(99, 102, 241, 0.22);
+        border-left: 3px solid #818cf8;
+        border-radius: 4px;
+        padding: 0.34rem 0.75rem;
+        margin: 12px 0 4px 0;
+        text-align: left;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# ── View imports ──────────────────────────────────────────────────────────────
 from src.database.session import SessionLocal
-from src.database.models import Role, Level, Location
+from src.dashboard.views.helpers import load_reference_catalogs
 from src.dashboard.views import (
     executive_overview,
     employee_analytics,
@@ -105,76 +120,70 @@ from src.dashboard.views import (
     evaluation_view,
 )
 
-# ── Nav items definition ──────────────────────────────────────────────────────
+# Nav items definition (clean left-aligned text, no icons)
 NAV_ITEMS = [
-    # (key, label, icon, section)
-    ("overview",     "Executive Overview",          "▣", "Overview"),
-    ("employee",     "Employee & Salary Analytics", "◈", "Analytics"),
-    ("band",         "Compensation Band Analysis",  "▤", "Analytics"),
-    ("compa",        "Compa-Ratio Analysis",        "◎", "Analytics"),
-    ("within",       "Within-Band Position",        "◉", "Analytics"),
-    ("disparity",    "Disparity Detection",         "◆", "Disparity & Proposals"),
-    ("comparable",   "Comparable Employee Groups",  "◇", "Disparity & Proposals"),
-    ("exceptions",   "Exceptions & Edge Cases",     "▲", "Disparity & Proposals"),
-    ("proposals",    "Adjustment Proposals",        "▶", "Disparity & Proposals"),
-    ("approvals",    "Approval History",            "✔", "Disparity & Proposals"),
-    ("audit",        "Audit Trail Ledger",          "▦", "Governance"),
-    ("validation",   "Data Quality & Validation",   "◐", "Governance"),
-    ("evaluation",   "Ground-Truth Evaluation",     "★", "Governance"),
+    ("overview",     "Executive Overview",          "Overview"),
+    ("employee",     "Employee & Salary Analytics", "Analytics"),
+    ("band",         "Compensation Band Analysis",  "Analytics"),
+    ("compa",        "Compa-Ratio Analysis",        "Analytics"),
+    ("within",       "Within-Band Position",        "Analytics"),
+    ("disparity",    "Disparity Detection",         "Disparity & Proposals"),
+    ("comparable",   "Comparable Employee Groups",  "Disparity & Proposals"),
+    ("exceptions",   "Exceptions & Edge Cases",     "Disparity & Proposals"),
+    ("proposals",    "Adjustment Proposals",        "Disparity & Proposals"),
+    ("approvals",    "Approval History",            "Disparity & Proposals"),
+    ("audit",        "Audit Trail Ledger",          "Governance"),
+    ("validation",   "Data Quality & Validation",   "Governance"),
+    ("evaluation",   "Ground-Truth Evaluation",     "Governance"),
 ]
 
-# ── Main app ──────────────────────────────────────────────────────────────────
+
 def main():
+    catalog = load_reference_catalogs()
+
+    # Sidebar Header
+    st.sidebar.title("CompEquity AI")
+    st.sidebar.markdown("**Disparity Analysis & Remediation**")
+    st.sidebar.markdown("---")
+
+    # Global Filters (cached catalogs)
+    st.sidebar.subheader("Filters")
+
+    role_options = ["All"] + [title for _, title in catalog["roles_list"]]
+    role_id_map = {**{"All": "All"}, **{title: rid for rid, title in catalog["roles_list"]}}
+    selected_role_label = st.sidebar.selectbox("Filter Role:", role_options, index=0)
+    selected_role = role_id_map[selected_role_label]
+
+    level_options = ["All"] + [f"{name} ({code})" for _, name, code, _ in catalog["levels_list"]]
+    level_id_map = {**{"All": "All"}, **{f"{name} ({code})": lid for lid, name, code, _ in catalog["levels_list"]}}
+    selected_level_label = st.sidebar.selectbox("Filter Career Level:", level_options, index=0)
+    selected_level = level_id_map[selected_level_label]
+
+    loc_options = ["All"] + [name for _, name in catalog["locs_list"]]
+    loc_id_map = {**{"All": "All"}, **{name: loc_id for loc_id, name in catalog["locs_list"]}}
+    selected_loc_label = st.sidebar.selectbox("Filter Location:", loc_options, index=0)
+    selected_location = loc_id_map[selected_loc_label]
+
+    st.sidebar.markdown("---")
+
+    # Navigation
+    if "active_view" not in st.session_state:
+        st.session_state.active_view = "overview"
+
+    current_section = None
+    for key, label, section in NAV_ITEMS:
+        if section != current_section:
+            st.sidebar.markdown(f'<div class="nav-section-label">{section}</div>', unsafe_allow_html=True)
+            current_section = section
+
+        btn_type = "primary" if st.session_state.active_view == key else "secondary"
+        if st.sidebar.button(label, key=f"nav_{key}", type=btn_type, use_container_width=True):
+            st.session_state.active_view = key
+            st.rerun()
+
+    # Route to active view
     db = SessionLocal()
     try:
-        # ── Sidebar ──
-        st.sidebar.title("CompEquity AI")
-        st.sidebar.markdown("**Disparity Analysis & Remediation**")
-        st.sidebar.markdown("---")
-
-        # ── Global Filters ──
-        st.sidebar.subheader("Filters")
-
-        # Role filter — show human-readable titles
-        all_roles = db.query(Role.role_id, Role.role_title).order_by(Role.role_title).all()
-        role_options = ["All"] + [f"{r.role_title}" for r in all_roles]
-        role_id_map  = {**{"All": "All"}, **{r.role_title: r.role_id for r in all_roles}}
-        selected_role_label = st.sidebar.selectbox("Filter Role:", role_options, index=0)
-        selected_role = role_id_map[selected_role_label]
-
-        # Level filter — show human-readable names without IDs
-        levels = db.query(Level.level_id, Level.level_name, Level.level_code).order_by(Level.rank).all()
-        level_options = ["All"] + [f"{l.level_name} ({l.level_code})" for l in levels]
-        level_id_map  = {**{"All": "All"}, **{f"{l.level_name} ({l.level_code})": l.level_id for l in levels}}
-        selected_level_label = st.sidebar.selectbox("Filter Career Level:", level_options, index=0)
-        selected_level = level_id_map[selected_level_label]
-
-        # Location filter — show full city names
-        locs = db.query(Location.location_id, Location.location_name).order_by(Location.location_name).all()
-        loc_options = ["All"] + [f"{loc.location_name}" for loc in locs]
-        loc_id_map  = {**{"All": "All"}, **{loc.location_name: loc.location_id for loc in locs}}
-        selected_loc_label = st.sidebar.selectbox("Filter Location:", loc_options, index=0)
-        selected_location = loc_id_map[selected_loc_label]
-
-        st.sidebar.markdown("---")
-
-        # ── Navigation ──
-        if "active_view" not in st.session_state:
-            st.session_state.active_view = "overview"
-
-        st.sidebar.markdown("**Navigation**")
-
-        current_section = None
-        for key, label, icon, section in NAV_ITEMS:
-            # Print section header when section changes
-            if section != current_section:
-                st.sidebar.markdown(f'<div class="nav-section-label">{section}</div>', unsafe_allow_html=True)
-                current_section = section
-
-            if st.sidebar.button(f"{icon}  {label}", key=f"nav_{key}"):
-                st.session_state.active_view = key
-
-        # ── Route to active view ──
         view = st.session_state.active_view
         dispatch = {
             "overview":    lambda: executive_overview.render(db, selected_role, selected_level, selected_location),
@@ -192,7 +201,6 @@ def main():
             "evaluation":  lambda: evaluation_view.render(db, selected_role, selected_level, selected_location),
         }
         dispatch.get(view, dispatch["overview"])()
-
     finally:
         db.close()
 

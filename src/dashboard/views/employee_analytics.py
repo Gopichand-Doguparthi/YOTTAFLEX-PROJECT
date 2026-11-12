@@ -1,71 +1,119 @@
 """
 View 2: Employee and Salary Analytics.
-Provides directory exploration, compensation progression tracking, and profile drill-downs.
+Provides directory exploration (including tenure), compensation progression tracking, and profile drill-downs.
 """
 import streamlit as st
 import plotly.express as px
 import pandas as pd
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.database.models import Employee, SalaryRecord, PerformanceEvidence, Tenure, Promotion
 from src.dashboard.views.helpers import (
     get_role_map, get_level_map, get_location_map,
-    PLOTLY_CONFIG, apply_clean_layout,
+    fmt_usd, fmt_num, PLOTLY_CONFIG, apply_clean_layout,
 )
+
+
+@st.cache_data(ttl=120, show_spinner=False)
+def _load_employee_directory() -> list:
+    """Fetches lightweight employee + tenure tuples once and caches them."""
+    db = SessionLocal()
+    try:
+        tenures = {
+            t.employee_id: (float(t.tenure_in_company_years), float(t.years_of_experience_total))
+            for t in db.query(Tenure.employee_id, Tenure.tenure_in_company_years, Tenure.years_of_experience_total).all()
+        }
+        rows = db.query(
+            Employee.employee_id,
+            Employee.first_name,
+            Employee.last_name,
+            Employee.email,
+            Employee.department,
+            Employee.current_role_id,
+            Employee.current_level_id,
+            Employee.current_location_id,
+            Employee.employment_type,
+            Employee.fte,
+            Employee.hire_date,
+        ).all()
+
+        result = []
+        for r in rows:
+            c_ten, tot_exp = tenures.get(r[0], (0.0, 0.0))
+            result.append({
+                "employee_id": r[0],
+                "first_name": r[1],
+                "last_name": r[2],
+                "email": r[3],
+                "department": r[4],
+                "role_id": r[5],
+                "level_id": r[6],
+                "location_id": r[7],
+                "employment_type": r[8],
+                "fte": float(r[9]),
+                "hire_date": str(r[10]),
+                "company_tenure": round(c_ten, 1),
+                "total_exp": round(tot_exp, 1),
+            })
+        return result
+    finally:
+        db.close()
 
 
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Employee & Salary History Analytics")
-    st.markdown("Detailed breakdown of workforce demographics, historical compensation events, and individual employee progression.")
+    st.markdown("Detailed breakdown of workforce demographics, tenure, historical compensation events, and individual employee progression.")
 
     role_map = get_role_map(db)
     level_map = get_level_map(db)
     loc_map = get_location_map(db)
 
-    # Search & Filters
     search_query = st.text_input("Search by Employee ID, Name, or Email:", "")
+    term = search_query.strip().lower()
 
-    query = db.query(Employee)
-    if selected_role != "All":
-        query = query.filter(Employee.current_role_id == selected_role)
-    if selected_level != "All":
-        query = query.filter(Employee.current_level_id == selected_level)
-    if selected_location != "All":
-        query = query.filter(Employee.current_location_id == selected_location)
-
-    employees = query.all()
-
-    if not employees:
-        st.warning("No employees found matching the specified filters.")
-        return
+    all_rows = _load_employee_directory()
 
     emp_data = []
-    for e in employees:
-        if search_query:
-            term = search_query.lower()
-            if not (term in e.employee_id.lower() or term in e.first_name.lower()
-                    or term in e.last_name.lower() or term in e.email.lower()):
+    for e in all_rows:
+        if selected_role != "All" and e["role_id"] != selected_role:
+            continue
+        if selected_level != "All" and e["level_id"] != selected_level:
+            continue
+        if selected_location != "All" and e["location_id"] != selected_location:
+            continue
+        if term:
+            if not (term in e["employee_id"].lower() or term in e["first_name"].lower()
+                    or term in e["last_name"].lower() or term in e["email"].lower()):
                 continue
 
         emp_data.append({
-            "Employee ID": e.employee_id,
-            "Name": f"{e.first_name} {e.last_name}",
-            "Department": e.department,
-            "Role": role_map.get(e.current_role_id, e.current_role_id),
-            "Level": level_map.get(e.current_level_id, e.current_level_id),
-            "Location": loc_map.get(e.current_location_id, e.current_location_id),
-            "Type": e.employment_type.replace("_", " ").title(),
-            "FTE": float(e.fte),
-            "Hire Date": str(e.hire_date)
+            "Employee ID": e["employee_id"],
+            "Name": f"{e['first_name']} {e['last_name']}",
+            "Department": e["department"],
+            "Role": role_map.get(e["role_id"], e["role_id"]),
+            "Level": level_map.get(e["level_id"], e["level_id"]),
+            "Location": loc_map.get(e["location_id"], e["location_id"]),
+            "Tenure (yrs)": e["company_tenure"],
+            "Total Exp (yrs)": e["total_exp"],
+            "Type": e["employment_type"].replace("_", " ").title(),
+            "FTE": e["fte"],
+            "Hire Date": e["hire_date"],
         })
+
+    if not emp_data:
+        st.warning("No employees found matching the specified filters.")
+        return
 
     df_emps = pd.DataFrame(emp_data)
     st.caption(f"Showing {len(df_emps):,} employee records")
     st.dataframe(
         df_emps,
         use_container_width=True,
-        height=320,
+        height=340,
         hide_index=True,
         column_config={
+            "Tenure (yrs)": st.column_config.NumberColumn("Tenure (yrs)", format="%.1f"),
+            "Total Exp (yrs)": st.column_config.NumberColumn("Total Exp (yrs)", format="%.1f"),
             "FTE": st.column_config.NumberColumn("FTE", format="%.2f"),
         },
     )
@@ -73,9 +121,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     # Detailed Employee Drill-down
     st.markdown("---")
     st.subheader("Employee Profile & Career Trajectory Drill-Down")
-    if df_emps.empty:
-        st.info("No employees match your search query.")
-        return
 
     emp_options = [f"{row['Name']} ({row['Employee ID']})" for _, row in df_emps.iterrows()]
     emp_id_lookup = {f"{row['Name']} ({row['Employee ID']})": row["Employee ID"] for _, row in df_emps.iterrows()}
@@ -104,21 +149,16 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             if tenure:
                 st.markdown(f"**Company Tenure:** {tenure.tenure_in_company_years:.1f} yrs (Total experience: {tenure.years_of_experience_total:.1f} yrs)")
 
-        # Salary Trajectory Chart
         if salaries:
-            sal_df = pd.DataFrame([
+            chart_df = pd.DataFrame([
                 {
                     "Effective Date": str(s.effective_date),
                     "Normalized Salary (USD)": float(s.normalized_salary),
-                    "Base Salary": float(s.base_salary),
-                    "Currency": s.currency,
-                    "Change Reason": s.change_reason.replace("_", " ").title(),
                 }
                 for s in salaries
             ])
-
             fig_traj = px.line(
-                sal_df,
+                chart_df,
                 x="Effective Date",
                 y="Normalized Salary (USD)",
                 markers=True,
@@ -128,19 +168,21 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 marker=dict(size=9),
                 hovertemplate="Date: %{x}<br>Normalized Salary: $%{y:,.0f}<extra></extra>"
             )
-            apply_clean_layout(fig_traj, legend_bottom=False, height=380)
+            apply_clean_layout(fig_traj, legend_bottom=False, height=400)
             st.plotly_chart(fig_traj, use_container_width=True, config=PLOTLY_CONFIG)
 
+            sal_table_df = pd.DataFrame([
+                {
+                    "Effective Date": str(s.effective_date),
+                    "Normalized Salary (USD)": fmt_usd(s.normalized_salary),
+                    "Base Salary (Local)": fmt_num(s.base_salary, 0),
+                    "Currency": s.currency,
+                    "Change Reason": s.change_reason.replace("_", " ").title(),
+                }
+                for s in salaries
+            ])
             st.write("Historical Compensation Records:")
-            st.dataframe(
-                sal_df,
-                use_container_width=True,
-                hide_index=True,
-                column_config={
-                    "Normalized Salary (USD)": st.column_config.NumberColumn("Normalized Salary (USD)", format="$%,.0f"),
-                    "Base Salary": st.column_config.NumberColumn("Base Salary (Local)", format="%,.0f"),
-                },
-            )
+            st.dataframe(sal_table_df, use_container_width=True, hide_index=True)
 
         if perfs:
             st.write("Performance Evaluation Reviews:")

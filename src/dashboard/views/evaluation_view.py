@@ -7,8 +7,9 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import pandas as pd
 from sqlalchemy.orm import Session
+from src.database.session import SessionLocal
 from src.evaluation.evaluator import EvaluationEngine
-from src.dashboard.views.helpers import PLOTLY_CONFIG, apply_clean_layout
+from src.dashboard.views.helpers import fmt_pct, PLOTLY_CONFIG, apply_clean_layout
 
 
 _ISSUE_LABELS = {
@@ -21,11 +22,20 @@ _ISSUE_LABELS = {
 }
 
 
+@st.cache_data(ttl=120, show_spinner=False)
+def _run_cached_evaluation() -> dict:
+    db = SessionLocal()
+    try:
+        return EvaluationEngine.evaluate(db)
+    finally:
+        db.close()
+
+
 def render(db: Session, selected_role: str, selected_level: str, selected_location: str):
     st.header("Ground-Truth Evaluation & Model Diagnostics")
     st.markdown("Compares analytical detection results against the isolated, independent ground-truth evaluation dataset.")
 
-    eval_results = EvaluationEngine.evaluate(db)
+    eval_results = _run_cached_evaluation()
     om = eval_results["overall_metrics"]
     cm = om["confusion_matrix"]
 
@@ -67,12 +77,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             showscale=True
         )
         fig_cm.update_layout(
-            title="Confusion Matrix: Detections vs Ground Truth",
+            title=dict(text="Confusion Matrix: Detections vs Ground Truth", x=0.0, y=0.90, yanchor="top"),
             xaxis=dict(side="bottom"),
-            margin=dict(t=70, b=60, l=115, r=50),
+            modebar=dict(orientation="h", bgcolor="rgba(15, 23, 42, 0.78)", color="#cbd5e1", activecolor="#818cf8"),
+            margin=dict(t=95, b=60, l=115, r=50),
             uirevision="preserve",
             transition={"duration": 0},
-            height=430,
+            height=450,
         )
         st.plotly_chart(fig_cm, use_container_width=True, config=PLOTLY_CONFIG)
 
@@ -107,23 +118,22 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             title="Detection Recall Coverage Across Mandatory Edge Cases"
         )
         fig_bar.update_traces(texttemplate="%{text:.1f}%", textposition="outside", cliponaxis=False)
-        apply_clean_layout(fig_bar, legend_bottom=False, height=430, xaxis_tickangle=-25, extra_bottom_margin=25)
+        apply_clean_layout(fig_bar, legend_bottom=False, height=450, xaxis_tickangle=-25, extra_bottom_margin=25)
         fig_bar.update_layout(
             coloraxis_colorbar=dict(
                 title="Coverage (%)",
                 y=0.45,
-                len=0.75,
+                len=0.72,
                 yanchor="middle",
             )
         )
         st.plotly_chart(fig_bar, use_container_width=True, config=PLOTLY_CONFIG)
 
     st.subheader("Per-Issue Detailed Metric Breakdown")
-    st.dataframe(
-        df_issue,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "Coverage (%)": st.column_config.NumberColumn("Coverage (%)", format="%.1f%%"),
-        },
-    )
+    df_issue_table = pd.DataFrame({
+        "Issue Type": df_issue["Issue Type"],
+        "Coverage (%)": df_issue["Coverage (%)"].map(lambda v: fmt_pct(v, 1)),
+        "Detected": df_issue["Detected"],
+        "Ground Truth Total": df_issue["Ground Truth Total"],
+    })
+    st.dataframe(df_issue_table, use_container_width=True, hide_index=True)
