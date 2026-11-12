@@ -157,6 +157,11 @@ html, body, [class*="css"] {
     outline: none !important;
 }
 
+[data-testid="stSidebar"] [data-testid="stElementContainer"]:has(.nav-section-label) {
+    margin-top: 12px !important;
+    margin-bottom: 8px !important;
+}
+
 .nav-section-label {
     display: block;
     font-size: 0.80rem;
@@ -167,8 +172,8 @@ html, body, [class*="css"] {
     background: rgba(99, 102, 241, 0.20);
     border-left: 3px solid var(--accent-border);
     border-radius: 4px;
-    padding: 0.38rem 0.78rem;
-    margin: 14px 0 6px 0;
+    padding: 0.40rem 0.78rem;
+    margin: 0 !important;
     text-align: left;
 }
 
