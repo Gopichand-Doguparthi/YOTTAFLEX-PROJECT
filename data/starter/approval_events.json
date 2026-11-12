@@ -7,7 +7,7 @@
     "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 210745.75, \"reason\": \"INTERNAL_EQUITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 205498.65, \"reason\": \"INTERNAL_EQUITY\"}",
     "notes": "Initial Internal Equity proposal drafted for EMP-000001 (Visual Designer).",
     "timestamp": "2025-11-12T09:30:00"
   },
@@ -43,7 +43,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 101404.41, \"reason\": \"MARKET_PARITY\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 119797.08, \"reason\": \"MARKET_PARITY\"}",
     "notes": "Initial Market Parity proposal drafted for EMP-000089 (Product Designer).",
     "timestamp": "2026-02-15T09:30:00"
   },
@@ -67,7 +67,7 @@
     "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 151814.23, \"reason\": \"DISPARITY_CORRECTION\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 142959.86, \"reason\": \"DISPARITY_CORRECTION\"}",
     "notes": "Initial Disparity Correction proposal drafted for EMP-000031 (Learning & Development Specialist).",
     "timestamp": "2026-05-14T09:30:00"
   },
@@ -103,7 +103,7 @@
     "actor_id": "hr.emea@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 198937.57, \"reason\": \"PROMOTION_CATCHUP\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 204297.42, \"reason\": \"PROMOTION_CATCHUP\"}",
     "notes": "Initial Promotion Catchup proposal drafted for EMP-000033 (DevOps Engineer).",
     "timestamp": "2026-08-19T09:30:00"
   },
@@ -115,7 +115,7 @@
     "actor_id": "hr.americas@company.org",
     "actor_role": "HR_PARTNER",
     "old_state": null,
-    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 228583.32, \"reason\": \"RETENTION\"}",
+    "new_state": "{\"status\": \"DRAFT\", \"proposed_salary\": 228704.04, \"reason\": \"RETENTION\"}",
     "notes": "Initial Retention proposal drafted for EMP-000075 (Full Stack Engineer).",
     "timestamp": "2025-08-18T09:30:00"
   },

@@ -305,14 +305,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         tab_create, tab_manage = st.tabs(["Create New Employee", "Deactivate / Delete Employee"])
 
         with tab_create:
+            dept_choices = sorted({"Engineering", "Data & AI", "Product", "Design", "Operations", "Finance", "Human Resources", "Sales", "Legal"} | {e["department"] for e in all_rows if e.get("department")})
             with st.form("create_employee_form"):
                 ce1, ce2, ce3 = st.columns(3)
                 with ce1:
-                    new_emp_id = st.text_input("Employee ID *:", placeholder="EMP-900001")
-                    new_fname = st.text_input("First Name *:")
-                    new_lname = st.text_input("Last Name *:")
-                    new_email = st.text_input("Email *:")
-                    new_dept = st.text_input("Department *:", "Engineering")
+                    new_emp_id = st.text_input("Employee ID *:", placeholder="e.g. EMP-900001")
+                    new_fname = st.text_input("First Name *:", placeholder="e.g. Jane")
+                    new_lname = st.text_input("Last Name *:", placeholder="e.g. Doe")
+                    new_email = st.text_input("Email *:", placeholder="e.g. jane.doe@company.org")
+                    new_dept = st.selectbox("Department *:", dept_choices, index=0, key="ce_dept")
                 with ce2:
                     new_role = st.selectbox("Role ID *:", sorted(role_map.keys()), key="ce_role")
                     new_lvl = st.selectbox("Level ID *:", sorted(level_map.keys()), key="ce_lvl")
@@ -326,6 +327,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     new_freq = st.selectbox("Pay Frequency *:", ["ANNUAL", "MONTHLY"], index=0, key="ce_freq")
                     new_exp = st.number_input("Total Experience (yrs) *:", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
                     new_rating = st.number_input("Initial Performance Rating (1.0-5.0) *:", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
+
+                if fb:
+                    fb_level, fb_msg = fb
+                    if fb_level == "success":
+                        st.success(fb_msg)
+                    elif fb_level == "warning":
+                        st.warning(fb_msg)
+                    else:
+                        st.error(fb_msg)
 
                 if st.form_submit_button("Create Employee with Initial Compensation"):
                     st.session_state["emp_manage_open"] = True

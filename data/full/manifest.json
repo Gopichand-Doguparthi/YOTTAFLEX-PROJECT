@@ -52,13 +52,13 @@
     },
     "salary_records.csv": {
       "rows": 15025,
-      "sha256": "6329c64a789787f2b0083326cc02715f87836f49651888e41fe3956b0495ab94",
-      "size_bytes": 1894710
+      "sha256": "3a9753bf29761e9c4c30c94224e40680c457f283b597d2a042a384c8b5bf5a92",
+      "size_bytes": 1894712
     },
     "salary_records.json": {
       "rows": 15025,
-      "sha256": "631a8235e1d629d9583548bfc75ee63899f8f86093f4064f23de0789baaa2672",
-      "size_bytes": 6143196
+      "sha256": "ac8c1320f18c13577efd5bcafc42293e66fc559874d87fe57937318c751fe01f",
+      "size_bytes": 6143198
     },
     "performance_evidence.csv": {
       "rows": 19721,
@@ -92,23 +92,23 @@
     },
     "adjustment_proposals.csv": {
       "rows": 250,
-      "sha256": "52d90fa46f9dbaea14e6e0a4a58b22987d5cb67656d3a1fce01b7b54dc66d923",
+      "sha256": "d7284b2426d8be717c054ed6ad8817e357c25d3d32a667f436683fe7372f3717",
       "size_bytes": 127035
     },
     "adjustment_proposals.json": {
       "rows": 250,
-      "sha256": "3346ac7f832878f7c7d60fcf28cd406271bc91e5bbb8a058992968db010c8d14",
+      "sha256": "cb22349e31ecd6d1fd0d180453923d5c3abf61e7f48644d1b18a0f7ce5ae4d71",
       "size_bytes": 240461
     },
     "approval_events.csv": {
       "rows": 600,
-      "sha256": "8864d8a96c690d68ae9ca9afe928692571ff380f0ea6e72b34b3ea78c4d5afb2",
-      "size_bytes": 168379
+      "sha256": "139b9a89297ad5b2619fdc7c3aa50442b93b318214102aa82c7014cc80ee94fc",
+      "size_bytes": 168360
     },
     "approval_events.json": {
       "rows": 600,
-      "sha256": "81697bee4b36ca7511192947ed1dd70f44d8041e280492fdc06da77b8c4f0b97",
-      "size_bytes": 297083
+      "sha256": "f260bf69714393d35632ca365724e08c9c23100b610be8888179dc4af45b7da6",
+      "size_bytes": 297064
     },
     "exchange_rates.csv": {
       "rows": 36,
@@ -132,17 +132,17 @@
     },
     "ground_truth_records.csv": {
       "rows": 5103,
-      "sha256": "66e37df78068d130bef3636620856f3ac1293e805b5e580920ca5beba61a2a91",
-      "size_bytes": 814609
+      "sha256": "28a3995412f6e230b1cffbdc38929f93c7ff3f9e7ebba954c59f306155ae45cb",
+      "size_bytes": 814610
     },
     "ground_truth_records.json": {
       "rows": 5103,
-      "sha256": "6e56ed2b4a91738d0e13da9c2174cf8918cb27227ca7e5197ad9c2673b218eeb",
-      "size_bytes": 1880974
+      "sha256": "bc0357b16b8c3b0789da64790f15f7211cb123b2e389a7fc2500942b0625e784",
+      "size_bytes": 1880975
     },
     "seed_data.sql": {
-      "sha256": "0d849c39dacf3e734cccc92f8eb9c6a86de4b92c9c13b93459bbdbb9989ba347",
-      "size_bytes": 19898886
+      "sha256": "ca5a2af35dce4bf81dc9b8950865f0fe14cf47e052249e8e92a8b83177e7b9c5",
+      "size_bytes": 19898870
     }
   },
   "row_counts": {

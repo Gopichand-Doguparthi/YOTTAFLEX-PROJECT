@@ -756,7 +756,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001263-2026-99 applied equity correction of 228548.92 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001263-2026-99 applied equity correction of 246315.62 despite proposal ADJ-2026-000003 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -766,7 +766,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001252-2026-99 applied equity correction of 170293.52 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001252-2026-99 applied equity correction of 169891.53 despite proposal ADJ-2026-000004 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -776,7 +776,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003267-2026-99 applied equity correction of 79888.17 despite proposal ADJ-2026-000008 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003267-2026-99 applied equity correction of 82796.38 despite proposal ADJ-2026-000008 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -786,7 +786,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004813-2026-99 applied equity correction of 166399.52 despite proposal ADJ-2026-000009 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004813-2026-99 applied equity correction of 159194.16 despite proposal ADJ-2026-000009 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -796,7 +796,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002001-2026-99 applied equity correction of 152945.03 despite proposal ADJ-2026-000013 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002001-2026-99 applied equity correction of 147225.73 despite proposal ADJ-2026-000013 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -806,7 +806,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003283-2026-99 applied equity correction of 227771.03 despite proposal ADJ-2026-000014 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003283-2026-99 applied equity correction of 212466.26 despite proposal ADJ-2026-000014 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -816,7 +816,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004455-2026-99 applied equity correction of 192076.53 despite proposal ADJ-2026-000018 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004455-2026-99 applied equity correction of 188488.47 despite proposal ADJ-2026-000018 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -826,7 +826,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002768-2026-99 applied equity correction of 120915.12 despite proposal ADJ-2026-000019 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002768-2026-99 applied equity correction of 121824.41 despite proposal ADJ-2026-000019 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -836,7 +836,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001377-2026-99 applied equity correction of 165379.0 despite proposal ADJ-2026-000023 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001377-2026-99 applied equity correction of 164031.69 despite proposal ADJ-2026-000023 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -846,7 +846,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004396-2026-99 applied equity correction of 127465.29 despite proposal ADJ-2026-000024 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004396-2026-99 applied equity correction of 124882.83 despite proposal ADJ-2026-000024 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -856,7 +856,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001559-2026-99 applied equity correction of 121479.98 despite proposal ADJ-2026-000028 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001559-2026-99 applied equity correction of 128927.43 despite proposal ADJ-2026-000028 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -866,7 +866,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000274-2026-99 applied equity correction of 89487.97 despite proposal ADJ-2026-000029 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000274-2026-99 applied equity correction of 90060.2 despite proposal ADJ-2026-000029 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -876,7 +876,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000282-2026-99 applied equity correction of 140287.91 despite proposal ADJ-2026-000033 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000282-2026-99 applied equity correction of 139473.95 despite proposal ADJ-2026-000033 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -886,7 +886,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-002552-2026-99 applied equity correction of 125919.07 despite proposal ADJ-2026-000034 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-002552-2026-99 applied equity correction of 128746.51 despite proposal ADJ-2026-000034 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -896,7 +896,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003579-2026-99 applied equity correction of 144783.83 despite proposal ADJ-2026-000038 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003579-2026-99 applied equity correction of 142527.79 despite proposal ADJ-2026-000038 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -906,7 +906,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004911-2026-99 applied equity correction of 185376.3 despite proposal ADJ-2026-000039 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004911-2026-99 applied equity correction of 193911.0 despite proposal ADJ-2026-000039 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -916,7 +916,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000691-2026-99 applied equity correction of 113651.39 despite proposal ADJ-2026-000043 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000691-2026-99 applied equity correction of 120914.07 despite proposal ADJ-2026-000043 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -926,7 +926,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000955-2026-99 applied equity correction of 119704.15 despite proposal ADJ-2026-000044 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000955-2026-99 applied equity correction of 126721.55 despite proposal ADJ-2026-000044 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -936,7 +936,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003144-2026-99 applied equity correction of 145767.5 despite proposal ADJ-2026-000048 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003144-2026-99 applied equity correction of 143063.09 despite proposal ADJ-2026-000048 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -946,7 +946,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000863-2026-99 applied equity correction of 117885.12 despite proposal ADJ-2026-000049 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000863-2026-99 applied equity correction of 115021.9 despite proposal ADJ-2026-000049 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -956,7 +956,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004944-2026-99 applied equity correction of 110409.09 despite proposal ADJ-2026-000053 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004944-2026-99 applied equity correction of 101479.95 despite proposal ADJ-2026-000053 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -966,7 +966,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-000236-2026-99 applied equity correction of 102618.08 despite proposal ADJ-2026-000054 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-000236-2026-99 applied equity correction of 103947.58 despite proposal ADJ-2026-000054 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -976,7 +976,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-004616-2026-99 applied equity correction of 69907.0 despite proposal ADJ-2026-000058 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-004616-2026-99 applied equity correction of 68613.19 despite proposal ADJ-2026-000058 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -986,7 +986,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-001292-2026-99 applied equity correction of 105409.78 despite proposal ADJ-2026-000059 having status DRAFT with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-001292-2026-99 applied equity correction of 109192.47 despite proposal ADJ-2026-000059 having status DRAFT with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {
@@ -996,7 +996,7 @@
     "issue_type": "UNAPPROVED_ADJUSTMENT_APPLIED",
     "is_anomaly": true,
     "expected_detection": "EXCEPTION_FLAGGED",
-    "root_cause_explanation": "Salary record SAL-EMP-003224-2026-99 applied equity correction of 263475.64 despite proposal ADJ-2026-000063 having status REJECTED with no approval event.",
+    "root_cause_explanation": "Salary record SAL-EMP-003224-2026-99 applied equity correction of 286459.03 despite proposal ADJ-2026-000063 having status REJECTED with no approval event.",
     "injected_at": "2026-01-01T00:00:00"
   },
   {

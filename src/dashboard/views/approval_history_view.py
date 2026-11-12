@@ -168,7 +168,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         })
 
     st.subheader("Historical Decision Ledger")
-    st.caption("Note: All 250 seeded proposals in the benchmark dataset are positive equity increments. Any decrement proposals created via the Proposals form (`Proposed < Current`) also appear here.")
+    st.caption("Includes both positive increment and downward market-cap decrement decisions rendered by authorized leadership.")
     ah1, ah2, ah3, ah4 = st.columns([2, 1.3, 1.3, 1.4])
     with ah1:
         ah_search = st.text_input("Search by Proposal ID, Employee ID, or Name:", "", key="ah_search", placeholder="e.g. ADJ-2026 or EMP-")

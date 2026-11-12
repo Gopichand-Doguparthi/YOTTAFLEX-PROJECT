@@ -573,20 +573,23 @@ class SyntheticDataGenerator:
             curr_sal = latest_sal_by_emp.get(emp_id, 100000.0)
             reason_code = reason_codes[(i - 1) % len(reason_codes)]
 
-            # Varied, realistic adjustment % by reason (including occasional market cap -3%..-5%)
+            # Varied, realistic adjustment % by reason (including downward market-cap / red-circle alignments across all statuses)
             if reason_code == "DISPARITY_CORRECTION":
-                pct_delta = round(self.rng.uniform(0.12, 0.22), 4)
+                pct_delta = round(self.rng.uniform(0.10, 0.24), 4)
             elif reason_code == "PROMOTION_CATCHUP":
-                pct_delta = round(self.rng.uniform(0.09, 0.18), 4)
+                pct_delta = round(self.rng.uniform(0.08, 0.19), 4)
             elif reason_code == "INTERNAL_EQUITY":
-                pct_delta = round(self.rng.uniform(0.06, 0.15), 4)
-            elif reason_code == "RETENTION":
-                pct_delta = round(self.rng.uniform(0.05, 0.14), 4)
-            else:  # MARKET_PARITY (mostly increases +4%..+13%, with ~20% downward market-cap adjustments -3%..-8%)
-                if (i // len(reason_codes)) % 5 == 0:
-                    pct_delta = round(-self.rng.uniform(0.03, 0.08), 4)
+                if self.rng.random() < 0.18:
+                    pct_delta = round(-self.rng.uniform(0.02, 0.07), 4)
                 else:
-                    pct_delta = round(self.rng.uniform(0.04, 0.13), 4)
+                    pct_delta = round(self.rng.uniform(0.05, 0.16), 4)
+            elif reason_code == "RETENTION":
+                pct_delta = round(self.rng.uniform(0.04, 0.15), 4)
+            else:  # MARKET_PARITY (mix of upward calibrations +4%..+14% and downward market-cap alignments -2%..-10%)
+                if self.rng.random() < 0.35:
+                    pct_delta = round(-self.rng.uniform(0.02, 0.10), 4)
+                else:
+                    pct_delta = round(self.rng.uniform(0.04, 0.14), 4)
 
             prop_sal = round(curr_sal * (1.0 + pct_delta), 2)
             adj_amt = round(prop_sal - curr_sal, 2)
