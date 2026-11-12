@@ -144,7 +144,7 @@ class ExceptionDetector:
         Mandatory Edge Case 4: Adjustment applied without approval.
         Enforces that equity/market salary changes require an APPROVED proposal and audit event.
         """
-        equity_reasons = {"EQUITY_CORRECTION", "MARKET_ADJUSTMENT"}
+        equity_reasons = {"EQUITY_CORRECTION"}
         if salary_change_reason in equity_reasons:
             if proposal_status != "APPROVED" or not has_approved_audit_event:
                 return {

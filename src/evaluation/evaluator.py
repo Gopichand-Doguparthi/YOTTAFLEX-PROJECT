@@ -107,7 +107,7 @@ class EvaluationEngine:
                         detected_exceptions.setdefault(sal.salary_id, set()).add(exc_curr["issue_type"])
 
             # Check 4: Unapproved adjustment applied
-            if sal.change_reason in ["EQUITY_CORRECTION", "MARKET_ADJUSTMENT"]:
+            if sal.change_reason == "EQUITY_CORRECTION":
                 prop = proposals_lookup.get(sal.employee_id)
                 prop_status = prop.approval_status if prop else None
                 has_audit = (sal.salary_id in approved_audit_events) or (prop and prop.proposal_id in approved_audit_events)

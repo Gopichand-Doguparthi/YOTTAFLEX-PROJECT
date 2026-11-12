@@ -347,3 +347,62 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             },
         ),
     )
+
+    st.markdown("---")
+    with st.expander("Review Case Management (Human Review Workflow)", expanded=False):
+        st.info("Note: A disparity flag is a statistical indicator requesting human review — never automatic proof of discrimination.")
+        from src.database.models import ReviewCase
+        from src.workflow.audit_logger import AuditLogger
+        ReviewCase.__table__.create(bind=db.get_bind(), checkfirst=True)
+
+        flagged_ids = flagged_rows["Employee ID"].tolist()
+        if not flagged_ids:
+            st.write("No flagged employees in current filter.")
+        else:
+            rc_emp = st.selectbox("Select Flagged Employee for Case Action:", flagged_ids, key="rc_emp_sel")
+            existing_case = db.query(ReviewCase).filter(ReviewCase.employee_id == rc_emp).first()
+            cur_status = existing_case.status if existing_case else "OPEN"
+            st.caption(f"Current Case Status: **{cur_status}** | Assigned To: **{existing_case.assigned_to if existing_case and existing_case.assigned_to else 'Unassigned'}**")
+
+            rc1, rc2 = st.columns(2)
+            with rc1:
+                new_status = st.selectbox(
+                    "Transition Case Status:",
+                    ["OPEN", "IN_REVIEW", "ESCALATED", "RESOLVED", "REOPENED"],
+                    index=["OPEN", "IN_REVIEW", "ESCALATED", "RESOLVED", "REOPENED"].index(cur_status) if cur_status in ["OPEN", "IN_REVIEW", "ESCALATED", "RESOLVED", "REOPENED"] else 0,
+                    key="rc_status_sel",
+                )
+                assignee = st.text_input("Assign / Escalate To:", value=(existing_case.assigned_to or "hr.partner@company.org") if existing_case else "hr.partner@company.org", key="rc_assignee")
+            with rc2:
+                comments = st.text_area("Reviewer Investigation Comments:", value=(existing_case.comments or "") if existing_case else "", key="rc_comments")
+
+            if st.button("Save Review Case Update", key="rc_save_btn", type="primary"):
+                case_id = f"CASE-{rc_emp}"
+                if not existing_case:
+                    existing_case = ReviewCase(
+                        case_id=case_id,
+                        employee_id=rc_emp,
+                        status=new_status,
+                        assigned_to=assignee.strip() or None,
+                        comments=comments.strip() or None,
+                    )
+                    db.add(existing_case)
+                    old_s = None
+                else:
+                    old_s = existing_case.status
+                    existing_case.status = new_status
+                    existing_case.assigned_to = assignee.strip() or None
+                    existing_case.comments = comments.strip() or None
+                AuditLogger.log_event(
+                    session=db,
+                    entity_name="ReviewCase",
+                    entity_id=case_id,
+                    event_type="REVIEW_CASE_UPDATED",
+                    actor_id=assignee.strip() or "HR_REVIEWER",
+                    actor_role="HR_PARTNER",
+                    old_state={"status": old_s} if old_s else None,
+                    new_state={"status": new_status, "assigned_to": assignee},
+                    notes=comments.strip() or "Updated review case.",
+                )
+                db.commit()
+                st.success(f"Review case {case_id} updated to {new_status} and logged to audit history.")

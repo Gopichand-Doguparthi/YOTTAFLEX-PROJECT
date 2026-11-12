@@ -4,7 +4,6 @@ Evaluates engine detections against the independent ground-truth dataset.
 """
 import streamlit as st
 import plotly.express as px
-import plotly.figure_factory as ff
 import pandas as pd
 from sqlalchemy.orm import Session
 from src.database.session import SessionLocal
@@ -69,13 +68,15 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         x = ["Predicted Normal", "Predicted Anomaly"]
         y = ["Actual Normal", "Actual Anomaly"]
 
-        fig_cm = ff.create_annotated_heatmap(
+        fig_cm = px.imshow(
             z,
             x=x,
             y=y,
-            colorscale="Blues",
-            showscale=True
+            text_auto=True,
+            color_continuous_scale="Blues",
+            aspect="auto",
         )
+        fig_cm.update_traces(texttemplate="%{z:,}")
         fig_cm.update_layout(
             title=dict(text="Confusion Matrix: Detections vs Ground Truth", x=0.0, y=0.89, yref="container", yanchor="top"),
             xaxis=dict(side="bottom"),

@@ -249,3 +249,61 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                 hide_index=True,
                 column_config=build_table_column_config(prom_df),
             )
+
+    st.markdown("---")
+    with st.expander("Create / Manage Employee", expanded=False):
+        from datetime import date as _date
+        from src.workflow.audit_logger import AuditLogger
+
+        with st.form("create_employee_form"):
+            ce1, ce2, ce3 = st.columns(3)
+            with ce1:
+                new_emp_id = st.text_input("Employee ID:", placeholder="EMP-900001")
+                new_fname = st.text_input("First Name:")
+                new_lname = st.text_input("Last Name:")
+                new_email = st.text_input("Email:")
+            with ce2:
+                new_dept = st.text_input("Department:", "Engineering")
+                new_role = st.selectbox("Role ID:", sorted(role_map.keys()), key="ce_role")
+                new_lvl = st.selectbox("Level ID:", sorted(level_map.keys()), key="ce_lvl")
+            with ce3:
+                new_loc = st.selectbox("Location ID:", sorted(loc_map.keys()), key="ce_loc")
+                new_type = st.selectbox("Employment Type:", ["FULL_TIME", "PART_TIME", "CONTRACT"], key="ce_type")
+                new_fte = st.number_input("FTE:", min_value=0.1, max_value=1.0, value=1.0, step=0.1)
+                new_hire = st.date_input("Hire Date:", value=_date(2026, 1, 1))
+
+            if st.form_submit_button("Create Employee"):
+                if not new_emp_id.strip() or not new_fname.strip() or not new_lname.strip() or "@" not in new_email:
+                    st.error("All required fields (Employee ID, First/Last Name, valid Email) must be provided.")
+                elif db.query(Employee).filter(Employee.employee_id == new_emp_id.strip()).first():
+                    st.error(f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
+                elif db.query(Employee).filter(Employee.email == new_email.strip()).first():
+                    st.error(f"Duplicate Email '{new_email.strip()}' already exists.")
+                else:
+                    emp_obj = Employee(
+                        employee_id=new_emp_id.strip(),
+                        first_name=new_fname.strip(),
+                        last_name=new_lname.strip(),
+                        email=new_email.strip(),
+                        department=new_dept.strip() or "Engineering",
+                        current_role_id=new_role,
+                        current_level_id=new_lvl,
+                        current_location_id=new_loc,
+                        hire_date=new_hire,
+                        employment_type=new_type,
+                        fte=float(new_fte),
+                        is_active=True,
+                    )
+                    db.add(emp_obj)
+                    AuditLogger.log_event(
+                        session=db,
+                        entity_name="Employee",
+                        entity_id=emp_obj.employee_id,
+                        event_type="EMPLOYEE_CREATED",
+                        actor_id="HR_DASHBOARD",
+                        actor_role="HR_PARTNER",
+                        new_state={"role_id": new_role, "level_id": new_lvl, "fte": float(new_fte)},
+                    )
+                    db.commit()
+                    st.cache_data.clear()
+                    st.success(f"Created employee {emp_obj.employee_id} and logged audit event.")

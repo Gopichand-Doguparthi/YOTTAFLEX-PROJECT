@@ -243,3 +243,91 @@ def test_validator_detects_arithmetic_and_duplicate_violations(db_session, sampl
     dups = DataValidator.check_duplicate_records(db_session)
     assert dups["passed"] is False
     assert dups["violations_count"] >= 1
+
+
+def test_employee_and_band_crud_api_and_validation(db_session, sample_master_data):
+    """Verify Employee & Band POST/PATCH endpoints enforce duplicates, spread, and overlap rules."""
+    app.dependency_overrides[get_db] = lambda: db_session
+    try:
+        client = TestClient(app)
+        # Create employee
+        r_emp = client.post("/employees", json={
+            "employee_id": "EMP-777001",
+            "first_name": "Maya",
+            "last_name": "Lin",
+            "email": "maya.lin@company.org",
+            "department": "Engineering",
+            "current_role_id": "ROLE-SWE",
+            "current_level_id": "LVL-L3",
+            "current_location_id": "LOC-NYC",
+            "hire_date": "2026-01-01",
+            "employment_type": "FULL_TIME",
+            "fte": 1.0,
+        })
+        assert r_emp.status_code == 201
+        # Duplicate employee -> 409
+        r_dup = client.post("/employees", json={
+            "employee_id": "EMP-777001",
+            "first_name": "Maya",
+            "last_name": "Lin",
+            "email": "maya.dup@company.org",
+            "department": "Engineering",
+            "current_role_id": "ROLE-SWE",
+            "current_level_id": "LVL-L3",
+            "current_location_id": "LOC-NYC",
+            "hire_date": "2026-01-01",
+        })
+        assert r_dup.status_code == 409
+
+        # Deactivate employee
+        r_upd = client.patch("/employees/EMP-777001", json={"is_active": False})
+        assert r_upd.status_code == 200
+        assert r_upd.json()["is_active"] is False
+
+        # Invalid band spread -> 400
+        r_bad_band = client.post("/bands", json={
+            "band_id": "BAND-BAD-2027",
+            "role_id": "ROLE-SWE",
+            "level_id": "LVL-L3",
+            "location_id": "LOC-NYC",
+            "currency": "USD",
+            "min_salary": 150000.0,
+            "mid_salary": 120000.0,
+            "max_salary": 180000.0,
+            "effective_start_date": "2027-01-01",
+            "effective_end_date": "2027-12-31",
+            "status": "ACTIVE",
+        })
+        assert r_bad_band.status_code == 400
+
+        # Valid 2027 band -> 201
+        r_ok_band = client.post("/bands", json={
+            "band_id": "BAND-ROLE-SWE-LVL-L3-LOC-NYC-2027",
+            "role_id": "ROLE-SWE",
+            "level_id": "LVL-L3",
+            "location_id": "LOC-NYC",
+            "currency": "USD",
+            "min_salary": 130000.0,
+            "mid_salary": 160000.0,
+            "max_salary": 190000.0,
+            "effective_start_date": "2027-01-01",
+            "effective_end_date": "2027-12-31",
+            "status": "ACTIVE",
+        })
+        assert r_ok_band.status_code == 201
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_audit_and_evaluation_views_render_without_exception():
+    """Verify Audit Trail Ledger and Ground-Truth Evaluation Streamlit views render with 0 exceptions."""
+    from streamlit.testing.v1 import AppTest
+    at = AppTest.from_file("src/dashboard/app.py", default_timeout=60)
+    at.run()
+    assert len(at.exception) == 0
+
+    [b for b in at.sidebar.button if b.key == "nav_audit"][0].click().run()
+    assert len(at.exception) == 0
+
+    [b for b in at.sidebar.button if b.key == "nav_evaluation"][0].click().run()
+    assert len(at.exception) == 0

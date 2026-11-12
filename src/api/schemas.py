@@ -165,3 +165,50 @@ class EvaluationSummarySchema(BaseModel):
     total_exceptions_detected: int
     total_disparities_detected: int
     total_ground_truth_samples: int
+
+
+# Employee & Band CRUD Schemas
+class EmployeeCreateRequest(BaseModel):
+    employee_id: str = Field(..., min_length=3, max_length=32)
+    first_name: str = Field(..., min_length=1, max_length=64)
+    last_name: str = Field(..., min_length=1, max_length=64)
+    email: str = Field(..., min_length=3, max_length=128)
+    department: str = Field(..., min_length=1, max_length=64)
+    current_role_id: str
+    current_level_id: str
+    current_location_id: str
+    hire_date: date
+    employment_type: str = Field("FULL_TIME", pattern="^(FULL_TIME|PART_TIME|CONTRACT)$")
+    fte: float = Field(1.0, gt=0.0, le=1.0)
+
+
+class EmployeeUpdateRequest(BaseModel):
+    department: Optional[str] = None
+    current_role_id: Optional[str] = None
+    current_level_id: Optional[str] = None
+    current_location_id: Optional[str] = None
+    employment_type: Optional[str] = Field(None, pattern="^(FULL_TIME|PART_TIME|CONTRACT)$")
+    fte: Optional[float] = Field(None, gt=0.0, le=1.0)
+    is_active: Optional[bool] = None
+
+
+class BandCreateRequest(BaseModel):
+    band_id: str = Field(..., min_length=3, max_length=128)
+    role_id: str
+    level_id: str
+    location_id: str
+    currency: str = Field(..., min_length=3, max_length=3)
+    min_salary: float = Field(..., gt=0.0)
+    mid_salary: float = Field(..., gt=0.0)
+    max_salary: float = Field(..., gt=0.0)
+    effective_start_date: date
+    effective_end_date: Optional[date] = None
+    status: str = Field("ACTIVE", pattern="^(ACTIVE|EXPIRED|DRAFT)$")
+
+
+class BandUpdateRequest(BaseModel):
+    min_salary: Optional[float] = Field(None, gt=0.0)
+    mid_salary: Optional[float] = Field(None, gt=0.0)
+    max_salary: Optional[float] = Field(None, gt=0.0)
+    effective_end_date: Optional[date] = None
+    status: Optional[str] = Field(None, pattern="^(ACTIVE|EXPIRED|DRAFT)$")

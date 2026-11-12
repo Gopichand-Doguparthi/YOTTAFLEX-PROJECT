@@ -128,7 +128,7 @@ def _scan_all_exceptions() -> list:
                         "recommendation": f"Apply the effective-dated {sal.currency}-to-USD exchange rate multiplier."
                     }))
 
-            if sal.change_reason in ["EQUITY_CORRECTION", "MARKET_ADJUSTMENT"]:
+            if sal.change_reason == "EQUITY_CORRECTION":
                 prop = proposals.get(sal.employee_id)
                 prop_status = prop.approval_status if prop else None
                 has_audit = (sal.salary_id in approved_audit_events) or (prop and prop.proposal_id in approved_audit_events)

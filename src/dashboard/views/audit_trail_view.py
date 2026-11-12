@@ -319,16 +319,19 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         )
 
     with dl_col2:
-        excel_buf = io.BytesIO()
-        with pd.ExcelWriter(excel_buf, engine="openpyxl") as writer:
-            df_audit.to_excel(writer, index=False, sheet_name="Audit Trail")
-        st.download_button(
-            label="Download as Excel",
-            data=excel_buf.getvalue(),
-            file_name="audit_trail.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            use_container_width=True,
-        )
+        try:
+            excel_buf = io.BytesIO()
+            with pd.ExcelWriter(excel_buf, engine="openpyxl") as writer:
+                df_audit.to_excel(writer, index=False, sheet_name="Audit Trail")
+            st.download_button(
+                label="Download as Excel",
+                data=excel_buf.getvalue(),
+                file_name="audit_trail.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
+            )
+        except ImportError:
+            st.info("Install `openpyxl` to enable Excel (.xlsx) export.")
 
     with dl_col3:
         pdf_bytes = _to_pdf_bytes(df_audit)

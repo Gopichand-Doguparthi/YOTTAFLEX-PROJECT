@@ -1,0 +1,7 @@
+{
+  "reporting_currency": "USD",
+  "compa_ratio_min": 0.8,
+  "compa_ratio_max": 1.2,
+  "disparity_threshold_percent": 15.0,
+  "performance_exemplary_rating": 3.5
+}

@@ -90,3 +90,35 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             for tbl, info in res["table_results"].items()
         ]
         st.dataframe(pd.DataFrame(tbl_rows), use_container_width=True, hide_index=True)
+
+    st.markdown("---")
+    st.subheader("Import & Validate Dataset File (CSV / JSON)")
+    imp_target = st.selectbox("Target Entity Schema:", ["employees", "salary_records"], key="dm_imp_target")
+    uploaded = st.file_uploader("Upload CSV or JSON file for schema & integrity validation:", type=["csv", "json"], key="dm_uploader")
+    if uploaded is not None:
+        try:
+            if uploaded.name.lower().endswith(".csv"):
+                df_up = pd.read_csv(uploaded)
+            else:
+                df_up = pd.DataFrame(json.load(uploaded))
+
+            required_cols = (
+                {"employee_id", "first_name", "last_name", "email", "current_role_id", "current_level_id", "current_location_id", "fte"}
+                if imp_target == "employees"
+                else {"salary_id", "employee_id", "base_salary", "currency", "fte", "effective_date"}
+            )
+            missing_cols = sorted(required_cols - set(df_up.columns))
+            if missing_cols:
+                st.error(f"Validation failed — missing required columns: {missing_cols}")
+            elif df_up.empty:
+                st.error("Validation failed — uploaded file contains 0 rows.")
+            else:
+                pk_col = "employee_id" if imp_target == "employees" else "salary_id"
+                dups = int(df_up[pk_col].duplicated().sum())
+                bad_fte = int(((pd.to_numeric(df_up["fte"], errors="coerce").fillna(-1) <= 0) | (pd.to_numeric(df_up["fte"], errors="coerce").fillna(99) > 1.0)).sum())
+                if dups > 0 or bad_fte > 0:
+                    st.error(f"Validation failed — {dups} duplicate {pk_col}(s), {bad_fte} invalid FTE value(s) outside (0.0, 1.0].")
+                else:
+                    st.success(f"Schema & integrity validation passed for {len(df_up):,} `{imp_target}` row(s)!")
+        except Exception as exc:
+            st.error(f"Rejected invalid file: {exc}")

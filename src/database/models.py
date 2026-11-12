@@ -318,3 +318,20 @@ class GroundTruthRecord(Base):
         Index("idx_gt_issue", "issue_type"),
         Index("idx_gt_record", "record_type", "record_id"),
     )
+
+
+class ReviewCase(Base):
+    """Human review case for flagged compensation disparity requiring investigation (not automatic proof)."""
+    __tablename__ = "review_cases"
+
+    case_id = Column(String(64), primary_key=True)  # CASE-EMP-000001
+    employee_id = Column(String(32), ForeignKey("employees.employee_id", ondelete="CASCADE"), nullable=False, unique=True)
+    status = Column(String(24), nullable=False, default="OPEN")  # OPEN, IN_REVIEW, ESCALATED, RESOLVED, REOPENED
+    assigned_to = Column(String(128), nullable=True)
+    comments = Column(Text, nullable=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    __table_args__ = (
+        Index("idx_case_status", "status"),
+    )

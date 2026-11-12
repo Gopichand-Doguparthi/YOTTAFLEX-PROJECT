@@ -224,3 +224,61 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         hide_index=True,
         column_config=build_table_column_config(band_disp_df),
     )
+
+    st.markdown("---")
+    with st.expander("Create / Version Compensation Band", expanded=False):
+        from datetime import date as _date
+        from src.database.models import CompensationBand
+        from src.workflow.audit_logger import AuditLogger
+
+        with st.form("create_band_form"):
+            bc1, bc2, bc3 = st.columns(3)
+            with bc1:
+                b_role = st.selectbox("Role ID:", sorted(role_map.keys()), key="cb_role")
+                b_level = st.selectbox("Level ID:", sorted(level_map.keys()), key="cb_level")
+                b_loc = st.selectbox("Location ID:", sorted(loc_map.keys()), key="cb_loc")
+            with bc2:
+                b_curr = st.text_input("Currency (3-letter ISO):", "USD", max_chars=3)
+                b_min = st.number_input("Min Salary (Local):", min_value=100.0, value=100000.0, step=1000.0)
+                b_mid = st.number_input("Midpoint Salary (Local):", min_value=100.0, value=130000.0, step=1000.0)
+            with bc3:
+                b_max = st.number_input("Max Salary (Local):", min_value=100.0, value=160000.0, step=1000.0)
+                b_start = st.date_input("Effective Start Date:", value=_date(2027, 1, 1))
+                b_end = st.date_input("Effective End Date:", value=_date(2027, 12, 31))
+
+            if st.form_submit_button("Create Compensation Band"):
+                if not (b_min < b_mid < b_max):
+                    st.error("Invalid band spread: must satisfy Min < Midpoint < Max.")
+                elif b_start > b_end:
+                    st.error("Effective start date cannot be after end date.")
+                else:
+                    band_id = f"BAND-{b_role}-{b_level}-{b_loc}-{b_start.year}"
+                    if db.query(CompensationBand).filter(CompensationBand.band_id == band_id).first():
+                        st.error(f"Band '{band_id}' already exists.")
+                    else:
+                        new_band = CompensationBand(
+                            band_id=band_id,
+                            role_id=b_role,
+                            level_id=b_level,
+                            location_id=b_loc,
+                            currency=b_curr.upper(),
+                            min_salary=b_min,
+                            mid_salary=b_mid,
+                            max_salary=b_max,
+                            effective_start_date=b_start,
+                            effective_end_date=b_end,
+                            status="ACTIVE",
+                        )
+                        db.add(new_band)
+                        AuditLogger.log_event(
+                            session=db,
+                            entity_name="CompensationBand",
+                            entity_id=band_id,
+                            event_type="BAND_CREATED",
+                            actor_id="HR_DASHBOARD",
+                            actor_role="HR_PARTNER",
+                            new_state={"min": b_min, "mid": b_mid, "max": b_max},
+                        )
+                        db.commit()
+                        st.cache_data.clear()
+                        st.success(f"Created band {band_id} and logged audit event.")
