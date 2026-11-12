@@ -120,12 +120,12 @@ def test_non_usd_band_conversion_in_api(db_session, sample_master_data):
 def test_exceptions_endpoint_does_not_leak_ground_truth(db_session, sample_master_data):
     """Adding a GroundTruthRecord alone must NOT appear in /exceptions output."""
     gt_only = GroundTruthRecord(
-        gt_id="GT-LEAK-TEST",
+        ground_truth_id="GT-LEAK-TEST",
         record_type="COMPARABLE_GROUP",
         record_id="GRP-ROLE-PM-ROLE-REC",
         issue_type="INCOMPARABLE_ROLE_GROUPING",
         expected_detection="EXCEPTION_FLAGGED",
-        explanation="Ground truth only record.",
+        root_cause_explanation="Ground truth only record.",
     )
     db_session.add(gt_only)
     db_session.flush()
