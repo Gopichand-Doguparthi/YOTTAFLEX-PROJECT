@@ -72,6 +72,7 @@ NAV_ITEMS = [
 ]
 
 
+@st.cache_resource(show_spinner="Initializing compensation database (5,000 records)...")
 def ensure_database_ready():
     """Auto-initializes tables and loads full dataset (5,000 employees) if deploying to an environment without an existing DB."""
     try:
@@ -83,9 +84,11 @@ def ensure_database_ready():
         if not inspector.has_table("roles"):
             init_db()
         db = SessionLocal()
-        role_count = db.query(Role).count()
-        emp_count = db.query(Employee).count() if inspector.has_table("employees") else 0
-        db.close()
+        try:
+            role_count = db.query(Role).count()
+            emp_count = db.query(Employee).count() if inspector.has_table("employees") else 0
+        finally:
+            db.close()
 
         target_scale = os.getenv("DATASET_SCALE", "full")
 
@@ -96,8 +99,11 @@ def ensure_database_ready():
             from src.config import RANDOM_SEED
             data = SyntheticDataGenerator(seed=RANDOM_SEED, scale=target_scale).generate_all()
             load_dataset_into_db(data)
+            st.cache_data.clear()
+        return True
     except Exception as e:
-        st.warning(f"Database readiness notice: {e}")
+        st.error(f"Database readiness notice: {e}")
+        return False
 
 
 def main():
@@ -126,6 +132,11 @@ def main():
     loc_id_map = {**{"All": "All"}, **{name: loc_id for loc_id, name in catalog["locs_list"]}}
     selected_loc_label = st.sidebar.selectbox("Filter Location:", loc_options, index=0)
     selected_location = loc_id_map[selected_loc_label]
+
+    if st.sidebar.button("🔄 Refresh Data & Cache", key="btn_refresh_cache", use_container_width=True):
+        st.cache_data.clear()
+        st.cache_resource.clear()
+        st.rerun()
 
     st.sidebar.markdown("---")
 

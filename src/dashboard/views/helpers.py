@@ -197,22 +197,22 @@ def apply_clean_layout(
     legend_position: str = "top",
 ):
     """
-    Applies smooth-zoom layout settings with dedicated vertical bands for:
-    ModeBar (0-28px) -> Chart Title (~48px) -> Top Legend (~85px) -> Plot Area (124px+).
+    Applies clean layout settings without title/canvas collision.
+    Supports both Cartesian (bar/line/scatter) and polar/pie figures.
     """
-    top_margin = 124 if legend_bottom and legend_position == "top" else 92
-    bottom_margin = (72 if legend_bottom and legend_position == "bottom" else 55) + extra_bottom_margin
+    top_margin = 85 if legend_bottom and legend_position == "top" else 65
+    bottom_margin = (75 if legend_bottom and legend_position == "bottom" else 55) + extra_bottom_margin
+
+    is_pie = bool(fig.data and getattr(fig.data[0], "type", "") == "pie")
+
     layout_kwargs = dict(
         uirevision="preserve",
         transition={"duration": 0},
-        hovermode="closest",
+        hovermode="closest" if not is_pie else False,
         height=height,
         title=dict(
             x=0.0,
             xanchor="left",
-            y=0.89,
-            yref="container",
-            yanchor="top",
             font=dict(size=15),
         ),
         modebar=dict(
@@ -221,18 +221,20 @@ def apply_clean_layout(
             color="#cbd5e1",
             activecolor="#818cf8",
         ),
-        xaxis=dict(
+        margin=dict(t=top_margin, b=bottom_margin, l=60, r=30),
+    )
+    if not is_pie:
+        layout_kwargs["xaxis"] = dict(
             automargin=True,
             title_standoff=14,
             tickfont=dict(size=12),
             tickangle=xaxis_tickangle,
-        ),
-        yaxis=dict(
+        )
+        layout_kwargs["yaxis"] = dict(
             automargin=True,
             title_standoff=10,
-        ),
-        margin=dict(t=top_margin, b=bottom_margin, l=60, r=30),
-    )
+        )
+
     if legend_bottom:
         if legend_position == "top":
             layout_kwargs["legend"] = dict(
@@ -249,7 +251,7 @@ def apply_clean_layout(
                 title_text="",
                 orientation="h",
                 yanchor="top",
-                y=-0.06,
+                y=-0.12,
                 xanchor="center",
                 x=0.5,
                 font=dict(size=12),
