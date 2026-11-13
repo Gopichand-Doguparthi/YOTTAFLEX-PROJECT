@@ -2,6 +2,8 @@
 
 An auditable compensation benchmarking, multi-factor disparity detection, exception diagnostics, and adjustment-proposal governance system built with **Python**, **SQLAlchemy 2.0**, **FastAPI**, **Streamlit**, and **Plotly**.
 
+**Live Deployed Application:** [https://gopichand-doguparthi-yottaflex-project-srcdashboardapp-duzdsi.streamlit.app/](https://gopichand-doguparthi-yottaflex-project-srcdashboardapp-duzdsi.streamlit.app/)
+
 ---
 
 ## Key Capabilities
@@ -63,10 +65,12 @@ uvicorn src.api.main:app --host 127.0.0.1 --port 8000 --reload
 Interactive API docs: `http://127.0.0.1:8000/docs`
 
 ### Streamlit Dashboard
+- **Live Cloud Deployment**: [https://gopichand-doguparthi-yottaflex-project-srcdashboardapp-duzdsi.streamlit.app/](https://gopichand-doguparthi-yottaflex-project-srcdashboardapp-duzdsi.streamlit.app/)
+- **Local Run**:
 ```bash
 streamlit run src/dashboard/app.py --server.port 8501
 ```
-Dashboard URL: `http://127.0.0.1:8501`
+Local Dashboard URL: `http://127.0.0.1:8501`
 
 ### Docker Compose (PostgreSQL + API + Dashboard)
 Ensure `.env` defines `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, and `JWT_SECRET_KEY` (see `.env.example`), then run:

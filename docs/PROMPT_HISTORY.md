@@ -158,6 +158,6 @@
 
 **Conversation 20**
 
-**Me:** How do I verify that the full project is production-ready?
+**Me:** How do I verify that the full project is production-ready and deployed?
 
-**Claude AI:** Run the decoupled ground-truth evaluation script to verify 100% precision and recall across all 5,000 records, confirm all 52 Pytest tests pass, and test the Streamlit dashboard end to end.
+**Claude AI:** Run the decoupled ground-truth evaluation script to verify 100% precision and recall across all 5,000 records, confirm all 52 Pytest tests pass, and test the deployed Streamlit cloud dashboard at https://gopichand-doguparthi-yottaflex-project-srcdashboardapp-duzdsi.streamlit.app/.

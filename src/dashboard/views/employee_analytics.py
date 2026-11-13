@@ -296,7 +296,18 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             st.warning(fb_msg)
         else:
             st.error(fb_msg)
-    with st.expander("Create / Manage / Delete Employee", expanded=st.session_state.get("emp_manage_open", False)):
+
+    # Keep expander open if user is actively creating or managing/deleting employees
+    manage_in_use = (
+        st.session_state.get("emp_manage_open", False)
+        or bool(st.session_state.get("del_search_name"))
+        or bool(st.session_state.get("del_emp_pick"))
+        or bool(st.session_state.get("del_emp_id"))
+        or bool(st.session_state.get("del_emp_confirm"))
+        or (st.session_state.get("del_dept_filter") not in (None, "All Departments"))
+        or (st.session_state.get("del_status_filter") not in (None, "All"))
+    )
+    with st.expander("Create / Manage / Delete Employee", expanded=manage_in_use):
         from datetime import date as _date
         from src.workflow.audit_logger import AuditLogger
         from src.engine.currency_normalizer import CurrencyNormalizer, MissingCurrencyConversionException
@@ -437,14 +448,94 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                             st.rerun()
 
         with tab_manage:
-            manage_id = st.text_input("Enter Employee ID to Deactivate or Delete:", placeholder="e.g. EMP-900001", key="del_emp_id")
-            confirm_del = st.checkbox("Confirm permanent deletion (cannot be undone)", value=False, key="del_emp_confirm")
+            st.markdown("##### Filter & Search Employee to Deactivate or Delete")
+            st.caption("Filter by department and active status, or search by name / employee ID to select an employee.")
+
+            f_col1, f_col2, f_col3 = st.columns([1.5, 1.5, 2])
+            with f_col1:
+                manage_dept_choices = ["All Departments"] + sorted({e["department"] for e in all_rows if e.get("department")})
+                manage_dept = st.selectbox("Filter by Department:", manage_dept_choices, index=0, key="del_dept_filter")
+            with f_col2:
+                manage_status = st.selectbox("Filter by Status:", ["All", "Active Only", "Inactive Only"], index=0, key="del_status_filter")
+            with f_col3:
+                name_search = st.text_input("Search by Name or Employee ID:", placeholder="e.g. John or EMP-000120", key="del_search_name")
+
+            # Filter candidates from cached directory
+            candidates = all_rows
+            if manage_dept != "All Departments":
+                candidates = [e for e in candidates if e.get("department") == manage_dept]
+            if manage_status == "Active Only":
+                candidates = [e for e in candidates if e.get("is_active")]
+            elif manage_status == "Inactive Only":
+                candidates = [e for e in candidates if not e.get("is_active")]
+
+            search_val = (name_search or "").strip().lower()
+            if search_val:
+                candidates = [
+                    e for e in candidates
+                    if search_val in e.get("employee_id", "").lower()
+                    or search_val in f"{e.get('first_name', '')} {e.get('last_name', '')}".lower()
+                    or search_val in e.get("email", "").lower()
+                ]
+
+            candidate_options = ["-- Select an employee from search results --"] + [
+                f"{e['employee_id']} | {e['first_name']} {e['last_name']} ({e['department']} - {e.get('role_id', '')})"
+                for e in candidates[:300]
+            ]
+
+            selected_candidate_str = st.selectbox(
+                f"Matching Employees ({len(candidates)} found):",
+                candidate_options,
+                index=0,
+                key="del_emp_pick",
+            )
+
+            picked_id = ""
+            if selected_candidate_str != "-- Select an employee from search results --":
+                picked_id = selected_candidate_str.split(" | ")[0].strip()
+
+            manual_id = st.text_input(
+                "Selected / Manual Employee ID:",
+                value=picked_id,
+                placeholder="e.g. EMP-000001",
+                key="del_emp_id",
+            )
+
+            target_id = manual_id.strip() if manual_id else picked_id
+
+            target_emp = None
+            if target_id:
+                target_emp = db.query(Employee).filter(Employee.employee_id == target_id).first()
+                if target_emp:
+                    status_badge = "🟢 Active" if target_emp.is_active else "🔴 Inactive"
+                    role_title = role_map.get(target_emp.current_role_id, target_emp.current_role_id)
+                    lvl_title = level_map.get(target_emp.current_level_id, target_emp.current_level_id)
+                    loc_title = loc_map.get(target_emp.current_location_id, target_emp.current_location_id)
+
+                    st.info(
+                        f"**Employee to Manage:**\n\n"
+                        f"- **ID**: `{target_emp.employee_id}` | **Name**: **{target_emp.first_name} {target_emp.last_name}** | **Email**: `{target_emp.email}`\n"
+                        f"- **Department**: {target_emp.department} | **Status**: {status_badge}\n"
+                        f"- **Role**: {role_title} (`{target_emp.current_role_id}`) | **Level**: {lvl_title} (`{target_emp.current_level_id}`) | **Location**: {loc_title}\n"
+                        f"- **FTE**: {target_emp.fte} | **Employment**: {target_emp.employment_type} | **Hire Date**: {target_emp.hire_date}"
+                    )
+                else:
+                    st.warning(f"Employee ID `{target_id}` was not found in the database.")
+
+            st.write("---")
+            confirm_del = st.checkbox(
+                "Confirm permanent deletion (cannot be undone)",
+                value=st.session_state.get("del_emp_confirm", False),
+                key="del_emp_confirm",
+            )
+
             mc1, mc2 = st.columns(2)
-            if mc1.button("Deactivate Employee", key="btn_deact_emp"):
+            if mc1.button("Deactivate Employee", key="btn_deact_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
-                target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
-                if not target_emp:
-                    st.session_state["emp_manage_feedback"] = ("error", f"Employee '{manage_id.strip()}' not found.")
+                if not target_id:
+                    st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
+                elif not target_emp:
+                    st.session_state["emp_manage_feedback"] = ("error", f"Employee '{target_id}' not found.")
                 else:
                     target_emp.is_active = False
                     AuditLogger.log_event(
@@ -459,35 +550,44 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     )
                     db.commit()
                     st.cache_data.clear()
-                    st.session_state["emp_manage_feedback"] = ("warning", f"Employee {target_emp.employee_id} deactivated.")
+                    st.session_state["emp_manage_feedback"] = ("warning", f"Employee {target_emp.employee_id} ({target_emp.first_name} {target_emp.last_name}) has been deactivated.")
                 st.rerun()
-            if mc2.button("Delete Employee Permanently", key="btn_del_emp"):
+
+            if mc2.button("Delete Employee Permanently", key="btn_del_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
-                if not confirm_del:
+                if not target_id:
+                    st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
+                elif not confirm_del:
                     st.session_state["emp_manage_feedback"] = ("error", "Please check the permanent deletion confirmation box first.")
+                elif not target_emp:
+                    st.session_state["emp_manage_feedback"] = ("error", f"Employee '{target_id}' not found.")
                 else:
-                    target_emp = db.query(Employee).filter(Employee.employee_id == manage_id.strip()).first()
-                    if not target_emp:
-                        st.session_state["emp_manage_feedback"] = ("error", f"Employee '{manage_id.strip()}' not found.")
-                    else:
-                        eid_del = target_emp.employee_id
-                        old_del_state = {
-                            "name": f"{target_emp.first_name} {target_emp.last_name}",
-                            "department": target_emp.department,
-                        }
-                        db.delete(target_emp)
-                        AuditLogger.log_event(
-                            session=db,
-                            entity_name="Employee",
-                            entity_id=eid_del,
-                            event_type="EMPLOYEE_DELETED",
-                            actor_id="HR_DASHBOARD",
-                            actor_role="HR_PARTNER",
-                            old_state=old_del_state,
-                            new_state={"deleted": True},
-                            notes=f"Employee {eid_del} deleted via dashboard.",
-                        )
-                        db.commit()
-                        st.cache_data.clear()
-                        st.session_state["emp_manage_feedback"] = ("success", f"Employee {eid_del} permanently deleted and audit event logged.")
+                    eid_del = target_emp.employee_id
+                    emp_name = f"{target_emp.first_name} {target_emp.last_name}"
+                    old_del_state = {
+                        "name": emp_name,
+                        "department": target_emp.department,
+                        "role_id": target_emp.current_role_id,
+                    }
+                    from src.database.models import ReviewCase
+                    db.query(ReviewCase).filter(ReviewCase.employee_id == eid_del).delete()
+                    db.query(PerformanceEvidence).filter(PerformanceEvidence.reviewer_id == eid_del).update({"reviewer_id": None})
+                    db.delete(target_emp)
+                    AuditLogger.log_event(
+                        session=db,
+                        entity_name="Employee",
+                        entity_id=eid_del,
+                        event_type="EMPLOYEE_DELETED",
+                        actor_id="HR_DASHBOARD",
+                        actor_role="HR_PARTNER",
+                        old_state=old_del_state,
+                        new_state={"deleted": True},
+                        notes=f"Employee {eid_del} ({emp_name}) permanently deleted via dashboard.",
+                    )
+                    db.commit()
+                    st.cache_data.clear()
+                    st.session_state.pop("del_emp_pick", None)
+                    st.session_state.pop("del_emp_id", None)
+                    st.session_state["del_emp_confirm"] = False
+                    st.session_state["emp_manage_feedback"] = ("success", f"Employee {eid_del} ({emp_name}) was permanently deleted and logged in the audit trail.")
                 st.rerun()
