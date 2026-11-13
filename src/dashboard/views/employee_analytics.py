@@ -287,15 +287,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             )
 
     st.markdown("---")
-    fb = st.session_state.pop("emp_manage_feedback", None)
-    if fb:
-        fb_level, fb_msg = fb
-        if fb_level == "success":
-            st.success(fb_msg)
-        elif fb_level == "warning":
-            st.warning(fb_msg)
-        else:
-            st.error(fb_msg)
 
     # If an employee was deleted, clear the deletion widget values before they are instantiated
     if st.session_state.pop("del_emp_reset_needed", False):
@@ -306,6 +297,8 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
     # Keep expander open if user is actively creating or managing/deleting employees
     manage_in_use = (
         st.session_state.get("emp_manage_open", False)
+        or bool(st.session_state.get("emp_manage_feedback"))
+        or bool(st.session_state.get("emp_create_feedback"))
         or bool(st.session_state.get("del_search_name"))
         or bool(st.session_state.get("del_emp_pick"))
         or bool(st.session_state.get("del_emp_id"))
@@ -319,9 +312,22 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         from src.engine.currency_normalizer import CurrencyNormalizer, MissingCurrencyConversionException
         from src.engine.fte_normalizer import FTENormalizer
 
-        tab_create, tab_manage = st.tabs(["Create New Employee", "Deactivate / Delete Employee"])
+        TAB_CREATE = "➕ Create New Employee"
+        TAB_MANAGE = "🗑️ Deactivate / Delete Employee"
 
-        with tab_create:
+        if "emp_mgmt_tab" not in st.session_state:
+            st.session_state["emp_mgmt_tab"] = TAB_CREATE
+
+        selected_tab = st.radio(
+            "Employee Management Mode:",
+            options=[TAB_CREATE, TAB_MANAGE],
+            horizontal=True,
+            key="emp_mgmt_tab",
+            label_visibility="collapsed",
+        )
+        st.write("")
+
+        if selected_tab == TAB_CREATE:
             dept_choices = sorted({"Engineering", "Data & AI", "Product", "Design", "Operations", "Finance", "Human Resources", "Sales", "Legal"} | {e["department"] for e in all_rows if e.get("department")})
             with st.form("create_employee_form"):
                 ce1, ce2, ce3 = st.columns(3)
@@ -345,8 +351,9 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     new_exp = st.number_input("Total Experience (yrs) *:", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
                     new_rating = st.number_input("Initial Performance Rating (1.0-5.0) *:", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
 
-                if fb:
-                    fb_level, fb_msg = fb
+                create_fb = st.session_state.pop("emp_create_feedback", None)
+                if create_fb:
+                    fb_level, fb_msg = create_fb
                     if fb_level == "success":
                         st.success(fb_msg)
                     elif fb_level == "warning":
@@ -356,6 +363,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
                 if st.form_submit_button("Create Employee with Initial Compensation"):
                     st.session_state["emp_manage_open"] = True
+                    st.session_state["emp_mgmt_tab"] = TAB_CREATE
                     if (
                         not new_emp_id.strip()
                         or not new_fname.strip()
@@ -363,13 +371,13 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                         or "@" not in new_email
                         or not new_dept.strip()
                     ):
-                        st.session_state["emp_manage_feedback"] = ("error", "All required fields (*: Employee ID, First/Last Name, valid Email, Department) must be provided.")
+                        st.session_state["emp_create_feedback"] = ("error", "All required fields (*: Employee ID, First/Last Name, valid Email, Department) must be provided.")
                         st.rerun()
                     elif db.query(Employee).filter(Employee.employee_id == new_emp_id.strip()).first():
-                        st.session_state["emp_manage_feedback"] = ("error", f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
+                        st.session_state["emp_create_feedback"] = ("error", f"Duplicate Employee ID '{new_emp_id.strip()}' already exists.")
                         st.rerun()
                     elif db.query(Employee).filter(Employee.email == new_email.strip()).first():
-                        st.session_state["emp_manage_feedback"] = ("error", f"Duplicate Email '{new_email.strip()}' already exists.")
+                        st.session_state["emp_create_feedback"] = ("error", f"Duplicate Email '{new_email.strip()}' already exists.")
                         st.rerun()
                     else:
                         curr_norm = CurrencyNormalizer()
@@ -377,7 +385,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                         try:
                             fx_rate = curr_norm.get_rate(new_curr, "USD", new_hire)
                         except MissingCurrencyConversionException as exc:
-                            st.session_state["emp_manage_feedback"] = ("error", f"Cannot create salary record: {exc}")
+                            st.session_state["emp_create_feedback"] = ("error", f"Cannot create salary record: {exc}")
                             fx_rate = None
                             st.rerun()
 
@@ -446,14 +454,23 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                                     "level_id": new_lvl,
                                     "fte": float(new_fte),
                                     "normalized_salary_usd": norm_sal,
-                                },
+                                    },
                             )
                             db.commit()
                             st.cache_data.clear()
-                            st.session_state["emp_manage_feedback"] = ("success", f"Created employee {eid} with initial salary (${norm_sal:,.2f} USD), tenure, and performance record.")
+                            st.session_state["emp_create_feedback"] = ("success", f"Created employee {eid} with initial salary (${norm_sal:,.2f} USD), tenure, and performance record.")
                             st.rerun()
 
-        with tab_manage:
+        elif selected_tab == TAB_MANAGE:
+            manage_fb = st.session_state.pop("emp_manage_feedback", None)
+            if manage_fb:
+                fb_level, fb_msg = manage_fb
+                if fb_level == "success":
+                    st.success(fb_msg)
+                elif fb_level == "warning":
+                    st.warning(fb_msg)
+                else:
+                    st.error(fb_msg)
             st.markdown("##### Filter & Search Employee to Deactivate or Delete")
             st.caption("Filter by department and active status, or search by name / employee ID to select an employee.")
 
@@ -537,6 +554,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             mc1, mc2 = st.columns(2)
             if mc1.button("Deactivate Employee", key="btn_deact_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
+                st.session_state["emp_mgmt_tab"] = TAB_MANAGE
                 if not target_id:
                     st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
                 elif not target_emp:
@@ -560,6 +578,7 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
             if mc2.button("Delete Employee Permanently", key="btn_del_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
+                st.session_state["emp_mgmt_tab"] = TAB_MANAGE
                 if not target_id:
                     st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
                 elif not confirm_del:
