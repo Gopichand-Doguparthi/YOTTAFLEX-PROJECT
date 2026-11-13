@@ -363,7 +363,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
                 if st.form_submit_button("Create Employee with Initial Compensation"):
                     st.session_state["emp_manage_open"] = True
-                    st.session_state["emp_mgmt_tab"] = TAB_CREATE
                     if (
                         not new_emp_id.strip()
                         or not new_fname.strip()
@@ -554,7 +553,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             mc1, mc2 = st.columns(2)
             if mc1.button("Deactivate Employee", key="btn_deact_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
-                st.session_state["emp_mgmt_tab"] = TAB_MANAGE
                 if not target_id:
                     st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
                 elif not target_emp:
@@ -578,7 +576,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
 
             if mc2.button("Delete Employee Permanently", key="btn_del_emp", use_container_width=True):
                 st.session_state["emp_manage_open"] = True
-                st.session_state["emp_mgmt_tab"] = TAB_MANAGE
                 if not target_id:
                     st.session_state["emp_manage_feedback"] = ("error", "Please search, select, or enter an Employee ID first.")
                 elif not confirm_del:
