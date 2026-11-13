@@ -73,22 +73,28 @@ NAV_ITEMS = [
 
 
 def ensure_database_ready():
-    """Auto-initializes tables and loads starter data if deploying to an environment without an existing DB."""
+    """Auto-initializes tables and loads full dataset (5,000 employees) if deploying to an environment without an existing DB."""
     try:
+        import os
         from sqlalchemy import inspect
         from src.database.session import engine, init_db, SessionLocal
-        from src.database.models import Role
+        from src.database.models import Role, Employee
         inspector = inspect(engine)
         if not inspector.has_table("roles"):
             init_db()
         db = SessionLocal()
         role_count = db.query(Role).count()
+        emp_count = db.query(Employee).count() if inspector.has_table("employees") else 0
         db.close()
-        if role_count == 0:
+
+        target_scale = os.getenv("DATASET_SCALE", "full")
+
+        # If empty or if currently only has starter dataset (100) and target is full (5,000)
+        if role_count == 0 or (target_scale == "full" and emp_count < 5000):
             from src.generator.synthetic_generator import SyntheticDataGenerator
             from scripts.run_generator import load_dataset_into_db
             from src.config import RANDOM_SEED
-            data = SyntheticDataGenerator(seed=RANDOM_SEED, scale="starter").generate_all()
+            data = SyntheticDataGenerator(seed=RANDOM_SEED, scale=target_scale).generate_all()
             load_dataset_into_db(data)
     except Exception as e:
         st.warning(f"Database readiness notice: {e}")
