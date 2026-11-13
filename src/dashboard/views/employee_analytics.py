@@ -297,6 +297,12 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
         else:
             st.error(fb_msg)
 
+    # If an employee was deleted, clear the deletion widget values before they are instantiated
+    if st.session_state.pop("del_emp_reset_needed", False):
+        st.session_state.pop("del_emp_pick", None)
+        st.session_state.pop("del_emp_id", None)
+        st.session_state.pop("del_emp_confirm", None)
+
     # Keep expander open if user is actively creating or managing/deleting employees
     manage_in_use = (
         st.session_state.get("emp_manage_open", False)
@@ -525,7 +531,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
             st.write("---")
             confirm_del = st.checkbox(
                 "Confirm permanent deletion (cannot be undone)",
-                value=st.session_state.get("del_emp_confirm", False),
                 key="del_emp_confirm",
             )
 
@@ -586,8 +591,6 @@ def render(db: Session, selected_role: str, selected_level: str, selected_locati
                     )
                     db.commit()
                     st.cache_data.clear()
-                    st.session_state.pop("del_emp_pick", None)
-                    st.session_state.pop("del_emp_id", None)
-                    st.session_state["del_emp_confirm"] = False
+                    st.session_state["del_emp_reset_needed"] = True
                     st.session_state["emp_manage_feedback"] = ("success", f"Employee {eid_del} ({emp_name}) was permanently deleted and logged in the audit trail.")
                 st.rerun()
