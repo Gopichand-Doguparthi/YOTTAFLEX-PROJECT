@@ -72,7 +72,30 @@ NAV_ITEMS = [
 ]
 
 
+def ensure_database_ready():
+    """Auto-initializes tables and loads starter data if deploying to an environment without an existing DB."""
+    try:
+        from sqlalchemy import inspect
+        from src.database.session import engine, init_db, SessionLocal
+        from src.database.models import Role
+        inspector = inspect(engine)
+        if not inspector.has_table("roles"):
+            init_db()
+        db = SessionLocal()
+        role_count = db.query(Role).count()
+        db.close()
+        if role_count == 0:
+            from src.generator.synthetic_generator import SyntheticDataGenerator
+            from scripts.run_generator import load_dataset_into_db
+            from src.config import RANDOM_SEED
+            data = SyntheticDataGenerator(seed=RANDOM_SEED, scale="starter").generate_all()
+            load_dataset_into_db(data)
+    except Exception as e:
+        st.warning(f"Database readiness notice: {e}")
+
+
 def main():
+    ensure_database_ready()
     catalog = load_reference_catalogs()
 
     # Sidebar Header
